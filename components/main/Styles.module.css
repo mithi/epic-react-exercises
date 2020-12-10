@@ -7,10 +7,6 @@
     padding: 10px;
 }
 
-.main {
-    flex-grow: 1;
-}
-
 .notesLayout {
     flex-grow: 0;
     display: grid;
@@ -64,6 +60,7 @@
 }
 
 .nav {
+    flex-shrink: 0;
     width: 70px;
     margin-right: 10px;
     display: flex;
@@ -71,6 +68,10 @@
     flex-wrap: wrap;
     padding: 0px;
     composes: common;
+}
+
+.main {
+    flex-grow: 1;
 }
 
 .navButtonsContainer {
@@ -141,7 +142,7 @@
 
     .notesLayout {
         grid-template-columns: 1fr;
-        grid-template-rows: repeat(3, 1fr);
+        grid-template-rows: auto;
         grid-column-gap: 10px;
         grid-row-gap: 10px;
     }

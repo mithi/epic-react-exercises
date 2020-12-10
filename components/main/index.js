@@ -15,8 +15,8 @@ const NotesSection = ({ div1, div2, div3 }) => {
 
 const Home = ({
     div1 = <div>Notes</div>,
-    div2 = <div>preview</div>,
-    div3 = <div>snippet</div>,
+    div2 = <div>Code Snippet</div>,
+    div3 = <div>Preview</div>,
 } = {}) => {
     let [show, setShow] = useState("notes")
     function toggleReactMenu() {
