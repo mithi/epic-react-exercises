@@ -3,11 +3,16 @@ import { GoOctoface } from "react-icons/go"
 import { MdSettings } from "react-icons/md"
 import { BsThreeDots } from "react-icons/bs"
 import { BiCoffeeTogo } from "react-icons/bi"
-
-const Nav = () => (
+import { useState } from "react"
+import { FaTimesCircle } from "react-icons/fa"
+const Nav = ({ toggleReactMenu }) => (
     <nav className={styles.nav}>
         <div className={styles.navButtonsContainer}>
-            <button className={styles.buttonIcon}>
+            <button
+                className={styles.buttonIcon}
+                onClick={toggleReactMenu}
+                onMouseEnter={toggleReactMenu}
+            >
                 <BsThreeDots />
             </button>
             <button className={styles.buttonIcon}>
@@ -27,7 +32,7 @@ const NotesSection = () => {
     return (
         <>
             <section className={styles.div2}>
-                Preview<p class={styles.paragraph}>There is no preview to display</p>
+                Preview<p className={styles.paragraph}>There is no preview to display</p>
             </section>
             <section className={styles.div3}>
                 Code Snippet<p>There is no code snippet to display</p>
@@ -37,17 +42,16 @@ const NotesSection = () => {
     )
 }
 
-const MainMenu = () => (
-    <section
-        className={styles.div1}
-        style={{
-            position: "absolute",
-            top: 0,
-            left: "70px",
-            background: "rgba(0, 0, 0, 0)",
-            zIndex: 1,
-        }}
-    >
+const MainMenu = ({ style, toggleReactMenu }) => (
+    <section className={styles.mainReactMenu} style={{ paddingRight: "30px", ...style }}>
+        <button
+            onClick={toggleReactMenu}
+            className={styles.buttonIcon}
+            style={{ margin: 0 }}
+        >
+            <FaTimesCircle />
+        </button>
+        <br />
         <button className={styles.buttonText}>1. React Fundamentals </button>
         <br />
         <button className={styles.buttonText}>2. React Hooks </button> <br />
@@ -66,12 +70,23 @@ const MainMenu = () => (
 )
 
 const Home = () => {
+    let [show, setShow] = useState("notes")
+    function toggleReactMenu() {
+        setShow(show === "notes" ? "reactMenu" : "notes")
+    }
+
     return (
         <div className={styles.grid}>
-            <Nav />
+            <Nav {...{ toggleReactMenu }} />
             <main className={styles.main}>
-                <MainMenu />
-                <div className={styles.notesLayout} style={{ opacity: 0.0 }}>
+                <MainMenu
+                    style={{ opacity: show === "reactMenu" ? 1 : 0 }}
+                    {...{ toggleReactMenu }}
+                />
+                <div
+                    className={styles.notesLayout}
+                    style={{ opacity: show === "notes" ? 1 : 0.3 }}
+                >
                     <NotesSection />
                 </div>
             </main>
