@@ -1,10 +1,10 @@
 import styles from "./Styles.module.css"
 import { GoOctoface } from "react-icons/go"
 import { MdSettings } from "react-icons/md"
-import { BsThreeDots } from "react-icons/bs"
+// import { BsThreeDots } from "react-icons/bs"
 import { BiCoffeeTogo } from "react-icons/bi"
 import { useState } from "react"
-import { FaTimesCircle } from "react-icons/fa"
+import { FaTimesCircle, FaReact } from "react-icons/fa"
 import Link from "next/link"
 
 const Nav = ({ toggleReactMenu }) => (
@@ -15,7 +15,7 @@ const Nav = ({ toggleReactMenu }) => (
                 onClick={toggleReactMenu}
                 onMouseEnter={toggleReactMenu}
             >
-                <BsThreeDots />
+                <FaReact />
             </button>
             <button className={styles.buttonIcon}>
                 <MdSettings />
