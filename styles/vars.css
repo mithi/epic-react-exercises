@@ -7,6 +7,8 @@
     --gray-01-dark: #202124;
     --gray-02-transparent: rgba(191, 191, 191, 0.05);
     --gray-03-transparent-2: rgba(0, 0, 0, 0.2);
+    --gray-04-medium: rgba(39, 40, 43, 1);
+
     --header-font-00: "Kanit";
     --text-font-00: "Baloo 2";
 }

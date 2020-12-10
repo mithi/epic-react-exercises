@@ -50,6 +50,14 @@
     composes: common;
 }
 
+.mainReactMenu {
+    position: absolute;
+    top: -5px;
+    left: 75px;
+    background: rgba(0, 0, 0, 0);
+    z-index: 1;
+    composes: div1;
+}
 .nav {
     width: 70px;
     margin-right: 10px;
@@ -65,7 +73,7 @@
 }
 
 .button {
-    background-color: var(--gray-02-transparent);
+    background-color: var(--gray-04-medium);
     color: var(--gray-00-light);
     border-style: none;
     outline-color: var(--green-0);
