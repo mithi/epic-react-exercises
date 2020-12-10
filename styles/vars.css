@@ -1,0 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Baloo+2&family=Kanit:wght@900&display=swap");
+
+:root {
+    --pink-0: #e84393;
+    --green-0: #31c48d;
+    --gray-00-light: rgba(191, 191, 191, 1);
+    --gray-01-dark: #202124;
+    --gray-02-transparent: rgba(191, 191, 191, 0.05);
+    --gray-03-transparent-2: rgba(0, 0, 0, 0.2);
+    --header-font-00: "Kanit";
+    --text-font-00: "Baloo 2";
+}
