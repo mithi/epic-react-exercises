@@ -4,7 +4,7 @@ const Home = () => {
         <Main
             notes={
                 <h1 style={{ fontFamily: "kanit", fontSize: "30px" }}>
-                    React Fundamentals
+                    Building an Epic React App
                 </h1>
             }
         ></Main>

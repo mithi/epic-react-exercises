@@ -3,9 +3,7 @@ const Home = () => {
     return (
         <Main
             notes={
-                <h1 style={{ fontFamily: "kanit", fontSize: "30px" }}>
-                    React Fundamentals
-                </h1>
+                <h1 style={{ fontFamily: "kanit", fontSize: "30px" }}>React testing</h1>
             }
         ></Main>
     )

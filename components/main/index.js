@@ -40,6 +40,17 @@ const NotesSection = ({ preview, snippet, notes }) => {
     )
 }
 
+const ReactMenuButton = ({ text, page }) => (
+    <>
+        <Link href={`/react/${page}`}>
+            <a>
+                <button className={styles.buttonText}>{text}</button>
+            </a>
+        </Link>
+        <br />
+    </>
+)
+
 const MainMenu = ({ style, toggleReactMenu }) => (
     <section className={styles.mainReactMenu} style={{ paddingRight: "30px", ...style }}>
         <button
@@ -50,24 +61,14 @@ const MainMenu = ({ style, toggleReactMenu }) => (
             <FaTimesCircle />
         </button>
         <br />
-        <Link href={`/react/fundamentals`}>
-            <a>
-                <button className={styles.buttonText}>1. React Fundamentals</button>
-            </a>
-        </Link>
-        <br />
-        <button className={styles.buttonText}>2. React Hooks </button> <br />
-        <button className={styles.buttonText}>3. Advanced React Hooks</button>
-        <br />
-        <button className={styles.buttonText}>4. Advanced React Patterns</button>
-        <br />
-        <button className={styles.buttonText}>5. React Performance </button>
-        <br />
-        <button className={styles.buttonText}>6. Testing React Apps </button>
-        <br />
-        <button className={styles.buttonText}>7. React Suspense </button> <br />
-        <button className={styles.buttonText}>8. Build an Epic React App </button>
-        <br />
+        <ReactMenuButton page="fundamentals" text="1. React Fundamentals" />
+        <ReactMenuButton page="hooks" text="2. React Hooks" />
+        <ReactMenuButton page="patterns" text="3. Advanced React Patterns" />
+        <ReactMenuButton page="advanced-hooks" text="4. Advanced Hooks" />
+        <ReactMenuButton page="performance" text="5. React Performance" />
+        <ReactMenuButton page="testing" text="6. Testing React Apps" />
+        <ReactMenuButton page="suspense" text="7. React Suspense" />
+        <ReactMenuButton page="app" text="8. Building an Epic React App" />
     </section>
 )
 
@@ -91,7 +92,7 @@ const Home = ({
                 />
                 <div
                     className={styles.notesLayout}
-                    style={{ opacity: show === "notes" ? 1 : 0.3 }}
+                    style={{ opacity: show === "notes" ? 1 : 0.1 }}
                 >
                     <NotesSection {...{ preview, notes, snippet }} />
                 </div>
