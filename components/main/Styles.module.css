@@ -35,18 +35,18 @@
     align-items: center;
 }
 
-.notes {
-    grid-area: 1 / 2 / 3 / 3;
+.div1 {
+    grid-area: 1 / 1 / 3 / 2;
     composes: common;
 }
 
-.preview {
-    grid-area: 1 / 1 / 2 / 2;
+.div2 {
+    grid-area: 1 / 2 / 2 / 3;
     composes: common;
 }
 
-.snippet {
-    grid-area: 2 / 1 / 3 / 2;
+.div3 {
+    grid-area: 2 / 2 / 3 / 3;
     composes: common;
 }
 
@@ -69,20 +69,40 @@
     color: var(--gray-00-light);
     border-style: none;
     outline-color: var(--green-0);
-    border-radius: 25%;
     margin: 10px;
+    font-family: var(--text-font-00);
 }
 
 .buttonIcon {
     width: 50px;
     height: 50px;
     font-size: 20px;
+    border-radius: 25%;
     composes: flexCenter button;
 }
 
 .buttonIcon:hover {
     background-color: var(--green-0);
     color: var(--gray-01-dark);
+}
+
+.buttonText {
+    composes: button;
+    padding: 15px;
+    border-radius: 15px;
+    word-spacing: 5px;
+    letter-spacing: 1px;
+    font-size: 20px;
+    font-family: var(--header-font-00);
+}
+
+.buttonText:hover {
+    background-color: var(--green-0);
+    color: var(--gray-01-dark);
+}
+
+.paragraph {
+    margin: 10px;
 }
 
 @media (max-width: 800px) {
@@ -113,15 +133,15 @@
         grid-row-gap: 10px;
     }
 
-    .snippet {
+    .div1 {
         grid-area: 3 / 1 / 4 / 2;
     }
 
-    .preview {
+    .div2 {
         grid-area: 2 / 1 / 3 / 2;
     }
 
-    .notes {
+    .div3 {
         grid-area: 1 / 1 / 2 / 2;
     }
 
