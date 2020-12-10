@@ -5,6 +5,8 @@ import { BsThreeDots } from "react-icons/bs"
 import { BiCoffeeTogo } from "react-icons/bi"
 import { useState } from "react"
 import { FaTimesCircle } from "react-icons/fa"
+import Link from "next/link"
+
 const Nav = ({ toggleReactMenu }) => (
     <nav className={styles.nav}>
         <div className={styles.navButtonsContainer}>
@@ -28,16 +30,12 @@ const Nav = ({ toggleReactMenu }) => (
     </nav>
 )
 
-const NotesSection = () => {
+const NotesSection = ({ preview, snippet, notes }) => {
     return (
         <>
-            <section className={styles.div2}>
-                Preview<p className={styles.paragraph}>There is no preview to display</p>
-            </section>
-            <section className={styles.div3}>
-                Code Snippet<p>There is no code snippet to display</p>
-            </section>
-            <section className={styles.div1}>Notes</section>
+            <section className={styles.div2}>{preview}</section>
+            <section className={styles.div3}>{snippet}</section>
+            <section className={styles.div1}>{notes}</section>
         </>
     )
 }
@@ -52,7 +50,11 @@ const MainMenu = ({ style, toggleReactMenu }) => (
             <FaTimesCircle />
         </button>
         <br />
-        <button className={styles.buttonText}>1. React Fundamentals </button>
+        <Link href={`/react/fundamentals`}>
+            <a>
+                <button className={styles.buttonText}>1. React Fundamentals</button>
+            </a>
+        </Link>
         <br />
         <button className={styles.buttonText}>2. React Hooks </button> <br />
         <button className={styles.buttonText}>3. Advanced React Hooks</button>
@@ -69,7 +71,11 @@ const MainMenu = ({ style, toggleReactMenu }) => (
     </section>
 )
 
-const Home = () => {
+const Home = ({
+    preview = <div>preview</div>,
+    notes = <div>Notes</div>,
+    snippet = <div>snippet</div>,
+} = {}) => {
     let [show, setShow] = useState("notes")
     function toggleReactMenu() {
         setShow(show === "notes" ? "reactMenu" : "notes")
@@ -87,7 +93,7 @@ const Home = () => {
                     className={styles.notesLayout}
                     style={{ opacity: show === "notes" ? 1 : 0.3 }}
                 >
-                    <NotesSection />
+                    <NotesSection {...{ preview, notes, snippet }} />
                 </div>
             </main>
         </div>
