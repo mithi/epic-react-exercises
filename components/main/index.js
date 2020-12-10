@@ -25,12 +25,16 @@ const Nav = () => (
 
 const Home = () => {
     return (
-        <main className={styles.grid}>
+        <div className={styles.grid}>
             <Nav />
-            <section className={styles.preview}>Preview</section>
-            <section className={styles.snippet}>Code Snippet</section>
-            <section className={styles.notes}>Notes</section>
-        </main>
+            <main className={styles.main}>
+                <div className={styles.notesLayout}>
+                    <section className={styles.preview}>Preview</section>
+                    <section className={styles.snippet}>Code Snippet</section>
+                    <section className={styles.notes}>Notes</section>
+                </div>
+            </main>
+        </div>
     )
 }
 export default Home
