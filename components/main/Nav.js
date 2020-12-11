@@ -4,28 +4,22 @@ import { MdSettings } from "react-icons/md"
 // import { BsThreeDots } from "react-icons/bs"
 import { BiCoffeeTogo } from "react-icons/bi"
 import { FaReact } from "react-icons/fa"
-
-const Nav = ({ toggleReactMenu }) => (
-    <nav className={styles.nav}>
-        <div className={styles.navButtonsContainer}>
-            <button
-                className={styles.buttonIcon}
-                onClick={toggleReactMenu}
-                onMouseEnter={toggleReactMenu}
-            >
-                <FaReact />
-            </button>
-            <button className={styles.buttonIcon}>
-                <MdSettings />
-            </button>
-            <button className={styles.buttonIcon}>
-                <GoOctoface />
-            </button>
-            <button className={styles.buttonIcon}>
-                <BiCoffeeTogo />
-            </button>
-        </div>
-    </nav>
-)
+import { IconButton } from "../button"
+const Nav = ({ toggleReactMenu }) => {
+    return (
+        <nav className={styles.nav}>
+            <div className={styles.navButtonsContainer}>
+                <IconButton
+                    onClick={toggleReactMenu}
+                    onMouseEnter={toggleReactMenu}
+                    children={<FaReact />}
+                />
+                <IconButton children={<MdSettings />} />
+                <IconButton children={<GoOctoface />} />
+                <IconButton children={<BiCoffeeTogo />} />
+            </div>
+        </nav>
+    )
+}
 
 export default Nav

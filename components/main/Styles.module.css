@@ -78,43 +78,6 @@
     height: auto;
 }
 
-.button {
-    background-color: var(--gray-04-medium);
-    color: var(--gray-00-light);
-    border-style: none;
-    outline-color: var(--green-0);
-    font-family: var(--text-font-00);
-}
-
-.buttonIcon {
-    margin: 10px;
-    width: 50px;
-    height: 50px;
-    font-size: 20px;
-    border-radius: 25%;
-    composes: flexCenter button;
-}
-
-.buttonIcon:hover {
-    background-color: var(--green-0);
-    color: var(--gray-01-dark);
-}
-
-.buttonText {
-    composes: button;
-    padding: 11px;
-    border-radius: 15px;
-    word-spacing: 5px;
-    letter-spacing: 1px;
-    font-size: 20px;
-    font-family: var(--header-font-00);
-}
-
-.buttonText:hover {
-    background-color: var(--green-0);
-    color: var(--gray-01-dark);
-}
-
 .paragraph {
     margin: 10px;
 }

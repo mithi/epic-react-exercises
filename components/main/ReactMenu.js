@@ -1,37 +1,37 @@
 import styles from "./Styles.module.css"
 import { FaTimesCircle } from "react-icons/fa"
-import Link from "next/link"
+import { LinkButton, IconButton } from "../button"
 
-const ReactMenuButton = ({ text, page }) => (
+const Button = ({
+    text,
+    page,
+    style = {
+        fontSize: "1.25rem",
+        fontFamily: "var(--header-font-00)",
+        borderRadius: "15px",
+        padding: "10px",
+    },
+} = {}) => (
     <>
-        <Link href={`/react/${page}`}>
-            <a>
-                <button className={styles.buttonText}>{text}</button>
-            </a>
-        </Link>
-        <br />
+        <LinkButton {...{ text, page: `/react/${page}`, style }} /> <br />
     </>
 )
 
-const ReactMenu = ({ style, toggleReactMenu }) => (
+const Menu = ({ toggleReactMenu, style } = {}) => (
     <section className={styles.mainReactMenu} style={{ paddingRight: "30px", ...style }}>
-        <button
-            onClick={toggleReactMenu}
-            className={styles.buttonIcon}
-            style={{ margin: 0 }}
-        >
+        <IconButton onClick={toggleReactMenu} style={{ margin: 0 }}>
             <FaTimesCircle />
-        </button>
+        </IconButton>
         <br />
-        <ReactMenuButton page="fundamentals" text="1. React Fundamentals" />
-        <ReactMenuButton page="hooks" text="2. React Hooks" />
-        <ReactMenuButton page="patterns" text="3. Advanced React Patterns" />
-        <ReactMenuButton page="advanced-hooks" text="4. Advanced Hooks" />
-        <ReactMenuButton page="performance" text="5. React Performance" />
-        <ReactMenuButton page="testing" text="6. Testing React Apps" />
-        <ReactMenuButton page="suspense" text="7. React Suspense" />
-        <ReactMenuButton page="app" text="8. Building an Epic React App" />
+        <Button page="fundamentals" text="1. React Fundamentals" />
+        <Button page="hooks" text="2. React Hooks" />
+        <Button page="patterns" text="3. Advanced React Patterns" />
+        <Button page="advanced-hooks" text="4. Advanced Hooks" />
+        <Button page="performance" text="5. React Performance" />
+        <Button page="testing" text="6. Testing React Apps" />
+        <Button page="suspense" text="7. React Suspense" />
+        <Button page="app" text="8. Building an Epic React App" />
     </section>
 )
 
-export default ReactMenu
+export default Menu
