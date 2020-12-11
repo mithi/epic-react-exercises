@@ -2,41 +2,13 @@ import Main from "../../../components/main"
 import Code from "../../../components/code"
 import { IconButton } from "../../../components/button"
 import { RiArrowLeftRightLine } from "react-icons/ri"
-import useStickyState from "../../../hooks/useStickyState"
+import { useContext } from "react"
+import { ThemeContext } from "../../../providers/theme/"
+import code1 from "./sample-code/001"
 
-const CODE_STRING = `import React from "react";
-import uniquePropHOC from "./lib/unique-prop-hoc";
-
-// this comment is here to demonstrate an extremely long line length, well beyond what you should probably allow in your own code, though sometimes you'll be highlighting code you can't refactor, which is unfortunate but should be handled gracefully
-
-class Expire extends React.Component {
-
-    constructor(props) {
-        super(props);
-        this.state = { component: props.children }
-    }
-
-    componentDidMount() {
-        setTimeout(() => {
-            this.setState({
-                component: null
-            });
-        }, this.props.time || this.props.seconds * 1000);
-    }
-
-    render() {
-        return this.state.component;
-    }
-}
-`
-
-const Home = () => {
-    let [primarySection, setPrimarySection] = useStickyState("notes", "mode")
-    const togglePrimarySection = () => {
-        setPrimarySection(primarySection === "notes" ? "code" : "notes", "mode")
-    }
-
-    const notes = (
+const Header = () => {
+    const { togglePrimarySection } = useContext(ThemeContext)
+    return (
         <div
             style={{
                 display: "flex",
@@ -48,19 +20,20 @@ const Home = () => {
                 React <br /> Fundamentals
             </h1>
             <div>
-                <IconButton
-                    page="/react/hooks"
-                    onClick={togglePrimarySection}
-                    style={{ margin: 0 }}
-                >
+                <IconButton onClick={togglePrimarySection} style={{ margin: 0 }}>
                     <RiArrowLeftRightLine />
                 </IconButton>
             </div>
         </div>
     )
+}
 
-    const div1 = primarySection === "notes" ? notes : <Code children={CODE_STRING} />
-    const div2 = primarySection === "notes" ? <Code children={CODE_STRING} /> : notes
+const Notes = () => <Header />
+
+const Home = () => {
+    const { primarySection } = useContext(ThemeContext)
+    const div1 = primarySection === "notes" ? <Notes /> : <Code children={code1} />
+    const div2 = primarySection === "notes" ? <Code children={code1} /> : <Notes />
 
     return <Main {...{ div1, div2 }}></Main>
 }
