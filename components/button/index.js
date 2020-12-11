@@ -1,19 +1,16 @@
 import styles from "./Styles.module.css"
 import Link from "next/link"
+import { useContext } from "react"
+import { ThemeContext } from "../../providers/theme/"
 
 const LinkButton = ({ text, page, style = {}, classNames = [] } = {}) => {
+    const { buttonClassNames } = useContext(ThemeContext)
+    const className = [styles.button, ...buttonClassNames, ...classNames].join(" ")
     return (
         <>
             <Link href={page}>
                 <a>
-                    <button
-                        className={[styles.button, styles.redOnHover, ...classNames].join(
-                            " "
-                        )}
-                        {...{ style }}
-                    >
-                        {text}
-                    </button>
+                    <button {...{ className, style }}>{text}</button>
                 </a>
             </Link>
         </>
@@ -22,13 +19,13 @@ const LinkButton = ({ text, page, style = {}, classNames = [] } = {}) => {
 
 const LinkIconButton = props => {
     const { children, page, ...otherprops } = props
+    const { buttonClassNames } = useContext(ThemeContext)
+    const className = [...buttonClassNames, styles.button, styles.buttonIcon].join(" ")
+
     return (
         <Link href={page}>
             <a>
-                <button
-                    className={[styles.button, styles.buttonIcon].join(" ")}
-                    {...otherprops}
-                >
+                <button className={className} {...otherprops}>
                     {children}
                 </button>
             </a>
@@ -38,8 +35,11 @@ const LinkIconButton = props => {
 
 const IconButton = props => {
     const { children, ...otherprops } = props
+    const { buttonClassNames } = useContext(ThemeContext)
+    const className = [...buttonClassNames, styles.button, styles.buttonIcon].join(" ")
+
     return (
-        <button className={styles.buttonIcon} {...otherprops}>
+        <button className={className} {...otherprops}>
             {children}
         </button>
     )

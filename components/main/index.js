@@ -1,14 +1,20 @@
 import styles from "./Styles.module.css"
-import { useState } from "react"
 import Nav from "./Nav"
 import ReactMenu from "./ReactMenu"
+import { useContext, useState } from "react"
+import { ThemeContext } from "../../providers/theme/"
 
 const NotesSection = ({ div1, div2, div3 }) => {
+    const { sectionClassNames } = useContext(ThemeContext)
+    const div1Styles = [styles.div1, ...sectionClassNames].join(" ")
+    const div2Styles = [styles.div2, ...sectionClassNames].join(" ")
+    const div3Styles = [styles.div3, ...sectionClassNames].join(" ")
+
     return (
         <>
-            <section className={styles.div1}>{div1}</section>
-            <section className={styles.div2}>{div2}</section>
-            <section className={styles.div3}>{div3}</section>
+            <section className={div1Styles}>{div1}</section>
+            <section className={div2Styles}>{div2}</section>
+            <section className={div3Styles}>{div3}</section>
         </>
     )
 }
@@ -19,12 +25,14 @@ const Home = ({
     div3 = <div>Preview</div>,
 } = {}) => {
     let [show, setShow] = useState("notes")
+    const { bodyClassNames } = useContext(ThemeContext)
+
     function toggleReactMenu() {
         setShow(show === "notes" ? "reactMenu" : "notes")
     }
 
     return (
-        <div className={styles.grid}>
+        <div className={[styles.grid, ...bodyClassNames].join(" ")}>
             <Nav {...{ toggleReactMenu }} />
             <main className={styles.main}>
                 {show === "reactMenu" ? <ReactMenu {...{ toggleReactMenu }} /> : null}

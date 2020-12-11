@@ -5,9 +5,14 @@ import { MdSettings } from "react-icons/md"
 import { BiCoffeeTogo } from "react-icons/bi"
 import { FaReact } from "react-icons/fa"
 import { IconButton } from "../button"
+import { useContext } from "react"
+import { ThemeContext } from "../../providers/theme/"
+
 const Nav = ({ toggleReactMenu }) => {
+    const { sectionClassNames } = useContext(ThemeContext)
+
     return (
-        <nav className={styles.nav}>
+        <nav className={[styles.nav, sectionClassNames].join(" ")}>
             <div className={styles.navButtonsContainer}>
                 <IconButton
                     onClick={toggleReactMenu}
