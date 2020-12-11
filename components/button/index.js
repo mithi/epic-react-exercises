@@ -15,6 +15,22 @@ const LinkButton = ({ text, page, style = {} } = {}) => {
     )
 }
 
+const LinkIconButton = props => {
+    const { children, page, ...otherprops } = props
+    return (
+        <Link href={page}>
+            <a>
+                <button
+                    className={[styles.button, styles.buttonIcon].join(" ")}
+                    {...otherprops}
+                >
+                    {children}
+                </button>
+            </a>
+        </Link>
+    )
+}
+
 const IconButton = props => {
     const { children, ...otherprops } = props
     return (
@@ -24,4 +40,4 @@ const IconButton = props => {
     )
 }
 
-export { LinkButton, IconButton }
+export { LinkButton, LinkIconButton, IconButton }
