@@ -1,12 +1,17 @@
 import styles from "./Styles.module.css"
 import Link from "next/link"
 
-const LinkButton = ({ text, page, style = {} } = {}) => {
+const LinkButton = ({ text, page, style = {}, classNames = [] } = {}) => {
     return (
         <>
             <Link href={page}>
                 <a>
-                    <button className={styles.button} {...{ style }}>
+                    <button
+                        className={[styles.button, styles.redOnHover, ...classNames].join(
+                            " "
+                        )}
+                        {...{ style }}
+                    >
                         {text}
                     </button>
                 </a>

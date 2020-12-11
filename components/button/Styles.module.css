@@ -17,6 +17,11 @@
     color: var(--gray-01-dark);
 }
 
+.redOnHover:hover {
+    background-color: #ff0000;
+    color: var(--gray-01-dark);
+}
+
 .buttonIcon {
     margin: 10px;
     width: 50px;
