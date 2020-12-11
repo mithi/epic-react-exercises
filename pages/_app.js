@@ -1,4 +1,4 @@
-import "../styles/globals.css"
+import "../styles/reset.css"
 import "../styles/vars.css"
 
 function MyApp({ Component, pageProps }) {
