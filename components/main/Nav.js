@@ -4,7 +4,7 @@ import { MdSettings } from "react-icons/md"
 // import { BsThreeDots } from "react-icons/bs"
 import { BiCoffeeTogo } from "react-icons/bi"
 import { FaReact } from "react-icons/fa"
-import { IconButton } from "../button"
+import { IconButton, LinkAwayIconButton } from "../button"
 import { useContext } from "react"
 import { ThemeContext } from "../../providers/theme/"
 
@@ -20,8 +20,14 @@ const Nav = ({ toggleReactMenu }) => {
                     children={<FaReact />}
                 />
                 <IconButton children={<MdSettings />} />
-                <IconButton children={<GoOctoface />} />
-                <IconButton children={<BiCoffeeTogo />} />
+                <LinkAwayIconButton
+                    page="https://github.com/mithi"
+                    children={<GoOctoface />}
+                />
+                <LinkAwayIconButton
+                    page="https://ko-fi.com/minimithi"
+                    children={<BiCoffeeTogo />}
+                />
             </div>
         </nav>
     )
