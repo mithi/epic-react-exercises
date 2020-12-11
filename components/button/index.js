@@ -3,14 +3,14 @@ import Link from "next/link"
 import { useContext } from "react"
 import { ThemeContext } from "../../providers/theme/"
 
-const LinkButton = ({ text, page, style = {}, classNames = [] } = {}) => {
+const LinkButton = ({ children, page, style = {}, classNames = [] } = {}) => {
     const { buttonClassNames } = useContext(ThemeContext)
     const className = [styles.button, ...buttonClassNames, ...classNames].join(" ")
     return (
         <>
             <Link href={page}>
                 <a>
-                    <button {...{ className, style }}>{text}</button>
+                    <button {...{ className, style }}>{children}</button>
                 </a>
             </Link>
         </>
