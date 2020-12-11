@@ -1,7 +1,9 @@
-import { useContext } from "react"
 import { IconButton, LinkButton } from "../button"
 import { RiArrowLeftRightLine } from "react-icons/ri"
-import { ThemeContext } from "../../providers/theme/"
+import { ThemeContext } from "../../providers/theme"
+import { useContext, useState, useEffect } from "react"
+import Main from "../main"
+import Code from "../code"
 
 const PageButton = ({ children, style }) => {
     return (
@@ -78,4 +80,40 @@ const Header = ({ children }) => {
     )
 }
 
-export { Pagination, Header }
+const PageLayout = ({ title, page, code, notes, numberOfPages }) => {
+    const { primarySection } = useContext(ThemeContext)
+    const [currentPage, setCurrentPage] = useState(1)
+
+    useEffect(() => {
+        setCurrentPage(Math.max(1, Math.min(Number(page) || 1, numberOfPages - 1)))
+    }, [page])
+
+    const heading = (
+        <>
+            <Header children={title} />
+            <Pagination {...{ numberOfPages, currentPage }} />
+        </>
+    )
+
+    let div1 = (
+        <>
+            {heading}
+            {notes}
+        </>
+    )
+    let div2 = code
+
+    if (primarySection === "code") {
+        div2 = notes
+        div1 = (
+            <>
+                {heading}
+                {code}
+            </>
+        )
+    }
+
+    return <Main {...{ div1, div2 }}></Main>
+}
+
+export default PageLayout
