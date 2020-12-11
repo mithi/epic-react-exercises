@@ -1,9 +1,6 @@
 .grid {
     display: flex;
     height: 100vh;
-    font-family: var(--text-font-00);
-    background-color: var(--gray-01-dark);
-    color: var(--gray-00-light);
     padding: 10px;
 }
 
@@ -22,7 +19,6 @@
     border-radius: 10px;
     padding: 15px;
     overflow: scroll;
-    background-color: var(--gray-06-dark-2);
 }
 
 .flexCenter {
@@ -50,7 +46,6 @@
     position: absolute;
     top: 5px;
     left: 85px;
-    background: rgba(0, 0, 0, 0);
     z-index: 1;
     composes: div1;
     display: flex;
@@ -138,7 +133,6 @@
         width: 100%;
         top: 80px;
         left: 0px;
-        background: var(--gray-01-dark);
         z-index: 1;
         composes: div1;
     }
