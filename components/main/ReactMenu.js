@@ -9,7 +9,8 @@ const Button = ({
         fontSize: "1.25rem",
         fontFamily: "var(--header-font-00)",
         borderRadius: "15px",
-        padding: "10px",
+        padding: "15px",
+        margin: "0",
     },
 } = {}) => (
     <>

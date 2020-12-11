@@ -29,7 +29,12 @@ const ThemeProvider = ({ children }) => {
 
     const bodyClassNames = [styles.darkBody, styles.textFont0]
     const sectionClassNames = [styles.darkSection]
-    const buttonClassNames = [styles.darkBody, styles.darkButton, styles.greenBgOnHover]
+    const buttonClassNames = [
+        styles.darkBody,
+        styles.darkButton,
+        styles.greenBgOnHover,
+        styles.greenColor,
+    ]
     const fontHeaderClassNames = [styles.headerFont0]
 
     return (

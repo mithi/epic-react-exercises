@@ -1,8 +1,8 @@
-@import url("https://fonts.googleapis.com/css2?family=Baloo+2&family=Kanit:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Quattrocento&family=Kanit:wght@700&display=swap");
 
 :root {
     --pink-0: #e84393;
-    --green-0: #31c48d;
+    --green-0: #5de294;
     --gray-00-light: rgb(223, 223, 223);
     --gray-01-dark: #202124;
     --gray-02-transparent: rgba(191, 191, 191, 0.05);
@@ -11,5 +11,5 @@
     --gray-05-transparent-3: rgba(26, 26, 29, 0.9);
     --gray-06-dark-2: #1a1a1e;
     --header-font-00: "Kanit";
-    --text-font-00: "Baloo 2";
+    --text-font-00: "Quattrocento";
 }

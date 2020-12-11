@@ -38,17 +38,14 @@ const Pagination = ({ numberOfPages, currentPage, pathname }) => {
         >
             {Array.from(Array(numberOfPages).keys()).map(i => {
                 const page = i + 1
-                const backgroundColor =
-                    page === currentPage ? "var(--gray-00-light)" : null
-                const color = page === currentPage ? "var(--gray-05-transparent-3)" : null
-                const opacity = page === currentPage ? 0.25 : 1.0
+                const border = page === currentPage ? "2px solid var(--green-0)" : null
 
                 return (
                     <PageButton
                         key={`fundamentals-${page}`}
                         children={page}
                         pathname={pathname}
-                        style={{ backgroundColor, color, opacity }}
+                        style={{ border }}
                     />
                 )
             })}
@@ -65,7 +62,7 @@ const Header = ({ children }) => {
                     display: "flex",
                     justifyContent: "space-between",
                     flexWrap: "wrap-reverse",
-                    fontFamily: "kanit",
+                    fontFamily: "var(--header-font-00)",
                     fontSize: "40px",
                 }}
             >
@@ -95,16 +92,29 @@ const PageLayout = ({ title, page, code, notes, numberOfPages, pathname }) => {
         </>
     )
 
+    let styledNotes = (
+        <span
+            style={{
+                lineHeight: "1.5",
+                letterSpacing: "0px",
+                wordSpacing: "7px",
+                fontSize: "18px",
+            }}
+        >
+            {notes}
+        </span>
+    )
     let div1 = (
         <>
             {heading}
-            {notes}
+            {styledNotes}
         </>
     )
     let div2 = code
 
     if (primarySection === "code") {
-        div2 = notes
+        div2 = styledNotes
+
         div1 = (
             <>
                 {heading}
