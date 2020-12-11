@@ -1,6 +1,5 @@
 import Main from "../../../components/main"
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
-import { atomDark } from "react-syntax-highlighter/dist/cjs/styles/prism"
+import Code from "../../../components/code"
 import { IconButton } from "../../../components/button"
 import { RiArrowLeftRightLine } from "react-icons/ri"
 import useStickyState from "../../../hooks/useStickyState"
@@ -30,29 +29,6 @@ class Expire extends React.Component {
     }
 }
 `
-const Code = () => {
-    return (
-        <div style={{ fontSize: "12px" }}>
-            <SyntaxHighlighter
-                language="javascript"
-                style={atomDark}
-                showLineNumbers={true}
-                wrapLongLines={true}
-                lineNumberStyle={{
-                    minWidth: "25px",
-                    width: "25px",
-                    paddingRight: "10px",
-                    paddingLeft: "0",
-                    borderRight: "1px solid red",
-                    marginRight: "20px",
-                    marginLeft: 0,
-                }}
-            >
-                {CODE_STRING}
-            </SyntaxHighlighter>
-        </div>
-    )
-}
 
 const Home = () => {
     let [primarySection, setPrimarySection] = useStickyState("notes", "mode")
@@ -83,8 +59,8 @@ const Home = () => {
         </div>
     )
 
-    const div1 = primarySection === "notes" ? notes : <Code />
-    const div2 = primarySection === "notes" ? <Code /> : notes
+    const div1 = primarySection === "notes" ? notes : <Code children={CODE_STRING} />
+    const div2 = primarySection === "notes" ? <Code children={CODE_STRING} /> : notes
 
     return <Main {...{ div1, div2 }}></Main>
 }
