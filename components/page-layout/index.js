@@ -3,9 +3,8 @@ import { RiArrowLeftRightLine } from "react-icons/ri"
 import { ThemeContext } from "../../providers/theme"
 import { useContext, useState, useEffect } from "react"
 import Main from "../main"
-import Code from "../code"
 
-const PageButton = ({ children, style }) => {
+const PageButton = ({ children, style, pathname }) => {
     return (
         <LinkButton
             style={{
@@ -18,7 +17,7 @@ const PageButton = ({ children, style }) => {
                 ...style,
             }}
             page={{
-                pathname: "/react/fundamentals",
+                pathname,
                 query: { page: children },
             }}
             {...{ children }}
@@ -26,13 +25,13 @@ const PageButton = ({ children, style }) => {
     )
 }
 
-const Pagination = ({ numberOfPages, currentPage }) => {
+const Pagination = ({ numberOfPages, currentPage, pathname }) => {
     return (
         <div
             style={{
                 display: "flex",
                 justifyContent: "flex-start",
-                flexWrap: "wrap-reverse",
+                flexWrap: "wrap",
                 alignItems: "center",
                 marginBottom: "20px",
             }}
@@ -48,6 +47,7 @@ const Pagination = ({ numberOfPages, currentPage }) => {
                     <PageButton
                         key={`fundamentals-${page}`}
                         children={page}
+                        pathname={pathname}
                         style={{ backgroundColor, color, opacity }}
                     />
                 )
@@ -80,18 +80,18 @@ const Header = ({ children }) => {
     )
 }
 
-const PageLayout = ({ title, page, code, notes, numberOfPages }) => {
+const PageLayout = ({ title, page, code, notes, numberOfPages, pathname }) => {
     const { primarySection } = useContext(ThemeContext)
     const [currentPage, setCurrentPage] = useState(1)
 
     useEffect(() => {
-        setCurrentPage(Math.max(1, Math.min(Number(page) || 1, numberOfPages - 1)))
+        setCurrentPage(Math.max(1, Math.min(Number(page) || 1, numberOfPages)))
     }, [page])
 
     const heading = (
         <>
             <Header children={title} />
-            <Pagination {...{ numberOfPages, currentPage }} />
+            <Pagination {...{ numberOfPages, currentPage, pathname }} />
         </>
     )
 

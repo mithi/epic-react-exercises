@@ -11,7 +11,7 @@ const title = (
 )
 
 const numberOfPages = 5
-
+const pathname = "/react/fundamentals"
 const Home = () => {
     const {
         query: { page },
@@ -20,6 +20,6 @@ const Home = () => {
     const notes = <Notes00 {...{ currentPage: page }} />
     const code = <Code children={codeString00} />
 
-    return <PageLayout {...{ title, page, code, notes, numberOfPages }} />
+    return <PageLayout {...{ title, page, code, notes, numberOfPages, pathname }} />
 }
 export default Home
