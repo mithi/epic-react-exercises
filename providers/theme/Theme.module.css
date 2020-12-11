@@ -1,0 +1,50 @@
+.headerFont0 {
+    font-family: var(--header-font-00);
+}
+
+.textFont0 {
+    font-family: var(--text-font-00);
+}
+
+/***************
+    COLORS
+ ***************/
+
+.greenBgOnHover:hover {
+    background-color: var(--green-0);
+}
+
+.greenColor {
+    color: var(--green-0);
+}
+
+.redBgOnHover:hover {
+    background-color: #ff0000;
+}
+
+.redColor {
+    color: #ff0000;
+}
+
+/***************
+    DARK THEME
+ ***************/
+
+.darkBody {
+    background-color: var(--gray-01-dark);
+    color: var(--gray-00-light);
+}
+
+.darkSection {
+    background-color: var(--gray-06-dark-2);
+}
+
+.darkButton {
+    background-color: var(--gray-04-medium);
+    color: var(--gray-00-light);
+    outline-color: rgba(0, 0, 0, 0.1);
+}
+
+.darkButton:hover {
+    color: var(--gray-01-dark);
+}
