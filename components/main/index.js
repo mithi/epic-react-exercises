@@ -27,10 +27,7 @@ const Home = ({
         <div className={styles.grid}>
             <Nav {...{ toggleReactMenu }} />
             <main className={styles.main}>
-                <ReactMenu
-                    style={{ opacity: show === "reactMenu" ? 1 : 0 }}
-                    {...{ toggleReactMenu }}
-                />
+                {show === "reactMenu" ? <ReactMenu {...{ toggleReactMenu }} /> : null}
                 <div
                     className={styles.notesLayout}
                     style={{ opacity: show === "notes" ? 1 : 0.1 }}
