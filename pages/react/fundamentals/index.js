@@ -3,7 +3,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import { atomDark } from "react-syntax-highlighter/dist/cjs/styles/prism"
 import { IconButton } from "../../../components/button"
 import { RiArrowLeftRightLine } from "react-icons/ri"
-import { useState } from "react"
+import useStickyState from "../../../hooks/useStickyState"
 
 const CODE_STRING = `import React from "react";
 import uniquePropHOC from "./lib/unique-prop-hoc";
@@ -55,9 +55,9 @@ const Code = () => {
 }
 
 const Home = () => {
-    let [primarySection, setPrimarySection] = useState("notes")
+    let [primarySection, setPrimarySection] = useStickyState("notes", "mode")
     const togglePrimarySection = () => {
-        setPrimarySection(primarySection === "notes" ? "code" : "notes")
+        setPrimarySection(primarySection === "notes" ? "code" : "notes", "mode")
     }
 
     const notes = (
