@@ -1,8 +1,9 @@
 import Main from "../../../components/main"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import { atomDark } from "react-syntax-highlighter/dist/cjs/styles/prism"
-import { LinkIconButton } from "../../../components/button"
+import { IconButton } from "../../../components/button"
 import { RiArrowLeftRightLine } from "react-icons/ri"
+import { useState } from "react"
 
 const CODE_STRING = `import React from "react";
 import uniquePropHOC from "./lib/unique-prop-hoc";
@@ -54,30 +55,37 @@ const Code = () => {
 }
 
 const Home = () => {
-    return (
-        <Main
-            div1={
-                <div
-                    style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        flexWrap: "wrap-reverse",
-                    }}
+    let [primarySection, setPrimarySection] = useState("notes")
+    const togglePrimarySection = () => {
+        setPrimarySection(primarySection === "notes" ? "code" : "notes")
+    }
+
+    const notes = (
+        <div
+            style={{
+                display: "flex",
+                justifyContent: "space-between",
+                flexWrap: "wrap-reverse",
+            }}
+        >
+            <h1 style={{ fontFamily: "kanit", fontSize: "40px" }}>
+                React <br /> Fundamentals
+            </h1>
+            <div>
+                <IconButton
+                    page="/react/hooks"
+                    onClick={togglePrimarySection}
+                    style={{ margin: 0 }}
                 >
-                    <div>
-                        <h1 style={{ fontFamily: "kanit", fontSize: "40px" }}>
-                            React <br /> Fundamentals
-                        </h1>
-                    </div>
-                    <div>
-                        <LinkIconButton page="/react/hooks" style={{ margin: 0 }}>
-                            <RiArrowLeftRightLine />
-                        </LinkIconButton>
-                    </div>
-                </div>
-            }
-            div2={<Code />}
-        ></Main>
+                    <RiArrowLeftRightLine />
+                </IconButton>
+            </div>
+        </div>
     )
+
+    const div1 = primarySection === "notes" ? notes : <Code />
+    const div2 = primarySection === "notes" ? <Code /> : notes
+
+    return <Main {...{ div1, div2 }}></Main>
 }
 export default Home
