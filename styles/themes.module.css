@@ -32,7 +32,7 @@
 }
 
 .darkButton {
-    background-color: var(--gray-04-medium);
+    background-color: var(--gray-01-dark);
     color: var(--gray-00-light);
     border-style: none;
     outline-color: rgba(0, 0, 0, 0.1);
