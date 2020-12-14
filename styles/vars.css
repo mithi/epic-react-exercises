@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Quattrocento&family=Kanit:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito&family=Kanit:wght@700&display=swap");
 
 :root {
     --pink-0: #e84393;
@@ -11,5 +11,5 @@
     --gray-05-transparent-3: rgba(26, 26, 29, 0.9);
     --gray-06-dark-2: #1a1a1e;
     --header-font-00: "Kanit";
-    --text-font-00: "Quattrocento";
+    --text-font-00: "Nunito";
 }

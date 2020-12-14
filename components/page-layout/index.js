@@ -62,8 +62,6 @@ const Header = ({ children }) => {
                     display: "flex",
                     justifyContent: "space-between",
                     flexWrap: "wrap-reverse",
-                    fontFamily: "var(--header-font-00)",
-                    fontSize: "40px",
                 }}
             >
                 <h1>{children}</h1>

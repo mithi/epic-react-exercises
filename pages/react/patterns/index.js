@@ -1,13 +1,22 @@
-import Main from "../../../components/main"
+import { useRouter } from "next/router"
+import PageLayout from "../../../components/page-layout"
+
+const title = (
+    <>
+        Advanced <br /> React Patterns
+    </>
+)
+
+const numberOfPages = 5
+const pathname = "/react/patterns"
 const Home = () => {
-    return (
-        <Main
-            div1={
-                <h1 style={{ fontFamily: "kanit", fontSize: "30px" }}>
-                    Advanced React Patterns
-                </h1>
-            }
-        ></Main>
-    )
+    const {
+        query: { page },
+    } = useRouter()
+
+    const notes = "Notes"
+    const code = "Code"
+
+    return <PageLayout {...{ title, page, code, notes, numberOfPages, pathname }} />
 }
 export default Home
