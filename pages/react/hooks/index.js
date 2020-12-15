@@ -1,7 +1,7 @@
 import { useRouter } from "next/router"
 import Code from "../../../components/code"
 import PageLayout from "../../../components/page-layout"
-import notes00 from "../../../content/react/hooks/notes-js/note-00"
+import markdown from "../../../content/react/hooks/md/note-00.md"
 import codeString00 from "../../../content/react/hooks/code-js/code-00"
 
 const title = (
@@ -18,7 +18,7 @@ const Home = () => {
         query: { page },
     } = useRouter()
 
-    const notes = notes00
+    const notes = <pre>{markdown}</pre>
     const code = <Code children={codeString00} />
 
     return <PageLayout {...{ title, page, code, notes, numberOfPages, pathname }} />
