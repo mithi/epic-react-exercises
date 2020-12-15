@@ -1,9 +1,9 @@
-import ReactMarkdown from "react-markdown"
 import { useRouter } from "next/router"
-import Code from "../../../components/code"
 import PageLayout from "../../../components/page-layout"
-import markdown from "../../../content/react/hooks/md/note-00.md"
-import codeString00 from "../../../content/react/hooks/code-js/code-00"
+import MarkdownRender from "../../../components/markdown-render"
+
+import note00 from "../../../content/react/hooks/note/note-00.md"
+import code00 from "../../../content/react/hooks/code/code-00.md"
 
 const title = (
     <>
@@ -19,8 +19,8 @@ const Home = () => {
         query: { page },
     } = useRouter()
 
-    const notes = <ReactMarkdown children={markdown} />
-    const code = <Code children={codeString00} />
+    const notes = <MarkdownRender children={note00} />
+    const code = <MarkdownRender children={code00} />
 
     return <PageLayout {...{ title, page, code, notes, numberOfPages, pathname }} />
 }
