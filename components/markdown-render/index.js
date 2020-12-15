@@ -1,3 +1,4 @@
+import ReactMarkdown from "react-markdown"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import { atomDark } from "react-syntax-highlighter/dist/cjs/styles/prism"
 
@@ -11,11 +12,11 @@ const LINE_NUMBER_STYLE = {
     marginLeft: 0,
 }
 
-const Code = ({ children }) => {
+const Code = ({ children, language }) => {
     return (
         <div style={{ fontSize: "12px" }}>
             <SyntaxHighlighter
-                language="javascript"
+                language={language}
                 style={atomDark}
                 showLineNumbers={true}
                 wrapLongLines={true}
@@ -27,4 +28,12 @@ const Code = ({ children }) => {
     )
 }
 
-export default Code
+const renderers = {
+    code: ({ language, value }) => {
+        return <Code children={value} language={language} />
+    },
+}
+
+const MarkdownRender = ({ children }) => <ReactMarkdown {...{ renderers, children }} />
+
+export default MarkdownRender

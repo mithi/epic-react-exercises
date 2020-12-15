@@ -1,8 +1,9 @@
 import { useRouter } from "next/router"
-import Code from "../../../components/code"
 import PageLayout from "../../../components/page-layout"
-import notes00 from "../../../content/react/hooks/notes-js/note-00"
-import codeString00 from "../../../content/react/hooks/code-js/code-00"
+import MarkdownRender from "../../../components/markdown-render"
+
+import note00 from "../../../content/react/hooks/note/note-00.md"
+import code00 from "../../../content/react/hooks/code/code-00.md"
 
 const title = (
     <>
@@ -18,8 +19,8 @@ const Home = () => {
         query: { page },
     } = useRouter()
 
-    const notes = notes00
-    const code = <Code children={codeString00} />
+    const notes = <MarkdownRender children={note00} />
+    const code = <MarkdownRender children={code00} />
 
     return <PageLayout {...{ title, page, code, notes, numberOfPages, pathname }} />
 }
