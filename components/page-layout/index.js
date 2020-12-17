@@ -4,28 +4,7 @@ import { ThemeContext } from "../../providers/theme"
 import { useContext, useState, useEffect } from "react"
 import Main from "../main"
 
-const PageButton = ({ children, style, pathname }) => {
-    return (
-        <LinkButton
-            style={{
-                fontFamily: "var(--header-font-00)",
-                margin: "3px",
-                width: "30px",
-                height: "30px",
-                marginTop: "10px",
-                borderRadius: "25%",
-                ...style,
-            }}
-            page={{
-                pathname,
-                query: { page: children },
-            }}
-            {...{ children }}
-        />
-    )
-}
-
-const Pagination = ({ numberOfPages, currentPage, pathname }) => {
+const Pagination = ({ numberOfPages, currentPageId, pathname }) => {
     return (
         <div
             style={{
@@ -37,15 +16,26 @@ const Pagination = ({ numberOfPages, currentPage, pathname }) => {
             }}
         >
             {Array.from(Array(numberOfPages).keys()).map(i => {
-                const page = i + 1
-                const border = page === currentPage ? "2px solid var(--green-0)" : null
-
+                const pageId = i + 1
+                const border =
+                    pageId === currentPageId ? "2px solid var(--green-0)" : null
+                const buttonPathname = `${pathname}/${pageId}`
                 return (
-                    <PageButton
-                        key={`fundamentals-${page}`}
-                        children={page}
-                        pathname={pathname}
-                        style={{ border }}
+                    <LinkButton
+                        key={buttonPathname}
+                        style={{
+                            fontFamily: "var(--header-font-00)",
+                            margin: "3px",
+                            width: "30px",
+                            height: "30px",
+                            marginTop: "10px",
+                            borderRadius: "25%",
+                            border,
+                        }}
+                        page={{
+                            pathname: buttonPathname,
+                        }}
+                        children={pageId}
                     />
                 )
             })}
@@ -75,18 +65,18 @@ const Header = ({ children }) => {
     )
 }
 
-const PageLayout = ({ title, page, code, notes, numberOfPages, pathname }) => {
+const PageLayout = ({ title, pageId, code, notes, numberOfPages, pathname }) => {
     const { primarySection } = useContext(ThemeContext)
-    const [currentPage, setCurrentPage] = useState(1)
+    const [currentPageId, setCurrentPageId] = useState(1)
 
     useEffect(() => {
-        setCurrentPage(Math.max(1, Math.min(Number(page) || 1, numberOfPages)))
-    }, [page])
+        setCurrentPageId(Math.max(1, Math.min(Number(pageId) || 1, numberOfPages)))
+    }, [pageId])
 
     const heading = (
         <>
             <Header children={title} />
-            <Pagination {...{ numberOfPages, currentPage, pathname }} />
+            <Pagination {...{ numberOfPages, currentPageId, pathname }} />
         </>
     )
 
