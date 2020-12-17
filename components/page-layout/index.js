@@ -32,9 +32,7 @@ const Pagination = ({ numberOfPages, currentPageId, pathname }) => {
                             borderRadius: "25%",
                             border,
                         }}
-                        page={{
-                            pathname: buttonPathname,
-                        }}
+                        page={buttonPathname}
                         children={pageId}
                     />
                 )

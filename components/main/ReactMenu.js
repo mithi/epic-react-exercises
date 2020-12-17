@@ -11,19 +11,20 @@ const Button = ({
         borderRadius: "15px",
         padding: "15px",
         margin: "0",
+        marginBottom: "15px",
     },
 } = {}) => (
-    <>
-        <LinkButton {...{ children, page: `/react/${page}`, style }} /> <br />
-    </>
+    <div>
+        <LinkButton {...{ children, page: `/react/${page}/1`, style }} /> <br />
+    </div>
 )
 
 const Menu = ({ toggleReactMenu, style } = {}) => (
-    <section className={styles.mainReactMenu} style={{ paddingRight: "30px", ...style }}>
-        <IconButton onClick={toggleReactMenu} style={{ margin: 0 }}>
-            <FaTimesCircle />
-        </IconButton>
-        <br />
+    <section
+        onClick={toggleReactMenu}
+        className={styles.mainReactMenu}
+        style={{ paddingRight: "30px", width: "100%", ...style }}
+    >
         <Button page="fundamentals" children="1. React Fundamentals" />
         <Button page="hooks" children="2. React Hooks" />
         <Button page="patterns" children="3. Advanced React Patterns" />
