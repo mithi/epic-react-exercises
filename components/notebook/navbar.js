@@ -6,11 +6,11 @@ import { BiCoffeeTogo } from "react-icons/bi"
 import { FaReact } from "react-icons/fa"
 import { IconButton, LinkAwayIconButton } from "../button"
 import { useContext } from "react"
-import { ThemeContext } from "../../providers/theme"
+import { GlobalStateContext } from "../../providers/global-state"
 import ReactMenu from "./react-menu"
 
 const Nav = () => {
-    const { sectionClassNames, flipFaded, showReactMenu } = useContext(ThemeContext)
+    const { sectionClassNames, flipFaded, showReactMenu } = useContext(GlobalStateContext)
 
     return (
         <nav className={[styles.nav, sectionClassNames].join(" ")}>

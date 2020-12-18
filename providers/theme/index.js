@@ -13,25 +13,6 @@ const ThemeContext = createContext({})
 
 const ThemeProvider = ({ children }) => {
     const [theme, setTheme] = useStickyState("theme", "dark")
-    let [primarySection, setPrimarySection] = useStickyState("notes", "mode")
-    let [fadeMain, setFadeMain] = useStickyState("false", "fadeMain")
-    let [showReactMenu, setShowReactMenu] = useStickyState("false", "showReactMenu")
-
-    const togglePrimarySection = () => {
-        setPrimarySection(primarySection === "notes" ? "code" : "notes", "mode")
-    }
-
-    const flipFaded = () => {
-        if (showReactMenu === "true") {
-            setFadeMain("false")
-            setShowReactMenu("false")
-        }
-
-        if (showReactMenu === "false") {
-            setFadeMain("true")
-            setShowReactMenu("true")
-        }
-    }
 
     // const [primaryColor, setPrimaryColor] = useStickyState(theme, "green")
     // const headerFont
@@ -57,11 +38,6 @@ const ThemeProvider = ({ children }) => {
             value={{
                 theme,
                 toggleTheme,
-                primarySection,
-                togglePrimarySection,
-                fadeMain,
-                showReactMenu,
-                flipFaded,
                 bodyClassNames,
                 sectionClassNames,
                 buttonClassNames,

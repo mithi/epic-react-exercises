@@ -1,6 +1,6 @@
 import styles from "./Styles.module.css"
 import { LinkButton } from "../button"
-import { ThemeContext } from "../../providers/theme"
+import { GlobalStateContext } from "../../providers/global-state"
 import { useContext } from "react"
 
 const BUTTON_STYLE = {
@@ -18,7 +18,7 @@ const Button = ({ children, section, style = BUTTON_STYLE } = {}) => (
 )
 
 const Menu = ({ style } = {}) => {
-    const { flipFaded } = useContext(ThemeContext)
+    const { flipFaded } = useContext(GlobalStateContext)
 
     return (
         <section

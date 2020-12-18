@@ -4,16 +4,19 @@ import "../styles/default.css"
 import Head from "next/head"
 
 import { ThemeProvider } from "../providers/theme"
+import { GlobalStateProvider } from "../providers/global-state"
 
 function MyApp({ Component, pageProps }) {
     return (
-        <ThemeProvider>
-            <Head>
-                <title>🌷 Mithi's Epic React Notes</title>
-                <link rel="icon" href="/favicon.ico" />
-            </Head>
-            <Component {...pageProps} />
-        </ThemeProvider>
+        <GlobalStateProvider>
+            <ThemeProvider>
+                <Head>
+                    <title>🌷 Mithi's Epic Notes</title>
+                    <link rel="icon" href="/favicon.ico" />
+                </Head>
+                <Component {...pageProps} />
+            </ThemeProvider>
+        </GlobalStateProvider>
     )
 }
 

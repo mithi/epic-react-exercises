@@ -1,7 +1,7 @@
 import styles from "./Styles.module.css"
 import { IconButton, LinkButton } from "../button"
 import { RiArrowLeftRightLine } from "react-icons/ri"
-import { ThemeContext } from "../../providers/theme"
+import { GlobalStateContext } from "../../providers/global-state"
 import { useContext } from "react"
 import Main from "."
 import NotesSection from "./notes-section"
@@ -56,7 +56,7 @@ const HEADER_STYLE = {
 }
 
 const Header = ({ children }) => {
-    const { togglePrimarySection } = useContext(ThemeContext)
+    const { togglePrimarySection } = useContext(GlobalStateContext)
     return (
         <div style={HEADER_STYLE}>
             <h1>{children}</h1>
@@ -77,7 +77,7 @@ const NOTES_STYLE = {
 }
 
 const PageLayout = ({ title, pageId, code, notes, numberOfPages, pathname }) => {
-    const { primarySection, fadeMain } = useContext(ThemeContext)
+    const { primarySection, fadeMain } = useContext(GlobalStateContext)
     const currentPageId = Math.max(1, Math.min(Number(pageId) || 1, numberOfPages))
     const styledNotes = <span style={NOTES_STYLE}>{notes}</span>
 
