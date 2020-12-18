@@ -1,21 +1,17 @@
 import styles from "./Styles.module.css"
-import { FaTimesCircle } from "react-icons/fa"
-import { LinkButton, IconButton } from "../button"
+import { LinkButton } from "../button"
 
-const Button = ({
-    children,
-    page,
-    style = {
-        fontSize: "1.25rem",
-        fontFamily: "var(--header-font-00)",
-        borderRadius: "15px",
-        padding: "15px",
-        margin: "0",
-        marginBottom: "15px",
-    },
-} = {}) => (
+const BUTTON_STYLE = {
+    fontSize: "1.25rem",
+    fontFamily: "var(--header-font-00)",
+    borderRadius: "15px",
+    padding: "15px",
+    margin: "0",
+    marginBottom: "15px",
+}
+const Button = ({ children, section, style = BUTTON_STYLE } = {}) => (
     <div>
-        <LinkButton {...{ children, page: `/react/${page}/1`, style }} /> <br />
+        <LinkButton {...{ children, page: `/react/${section}`, style }} /> <br />
     </div>
 )
 
@@ -25,14 +21,14 @@ const Menu = ({ toggleReactMenu, style } = {}) => (
         className={styles.mainReactMenu}
         style={{ paddingRight: "30px", width: "100%", ...style }}
     >
-        <Button page="fundamentals" children="1. React Fundamentals" />
-        <Button page="hooks" children="2. React Hooks" />
-        <Button page="patterns" children="3. Advanced React Patterns" />
-        <Button page="advanced-hooks" children="4. Advanced Hooks" />
-        <Button page="performance" children="5. React Performance" />
-        <Button page="testing" children="6. Testing React Apps" />
-        <Button page="suspense" children="7. React Suspense" />
-        <Button page="app" children="8. Building an Epic React App" />
+        <Button section="fundamentals" children="1. React Fundamentals" />
+        <Button section="hooks" children="2. React Hooks" />
+        <Button section="patterns" children="3. Advanced React Patterns" />
+        <Button section="advanced-hooks" children="4. Advanced Hooks" />
+        <Button section="performance" children="5. React Performance" />
+        <Button section="testing" children="6. Testing React Apps" />
+        <Button section="suspense" children="7. React Suspense" />
+        <Button section="app" children="8. Building an Epic React App" />
     </section>
 )
 
