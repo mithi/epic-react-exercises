@@ -1,4 +1,4 @@
-import PageLayout from "../../../components/page-layout"
+import PageLayout from "../../../components/notebook/notebook-layout"
 import MarkdownRender from "../../../components/markdown-render"
 import { sectionProperties, pageContents } from "../../../utils"
 

@@ -6,17 +6,19 @@ import { BiCoffeeTogo } from "react-icons/bi"
 import { FaReact } from "react-icons/fa"
 import { IconButton, LinkAwayIconButton } from "../button"
 import { useContext } from "react"
-import { ThemeContext } from "../../providers/theme/"
+import { ThemeContext } from "../../providers/theme"
+import ReactMenu from "./react-menu"
 
-const Nav = ({ toggleReactMenu }) => {
-    const { sectionClassNames } = useContext(ThemeContext)
+const Nav = () => {
+    const { sectionClassNames, flipFaded, showReactMenu } = useContext(ThemeContext)
 
     return (
         <nav className={[styles.nav, sectionClassNames].join(" ")}>
+            {showReactMenu === "true" ? <ReactMenu /> : null}
             <div className={styles.navButtonsContainer}>
                 <IconButton
-                    onClick={toggleReactMenu}
-                    onMouseEnter={toggleReactMenu}
+                    onClick={flipFaded}
+                    onMouseEnter={flipFaded}
                     children={<FaReact />}
                 />
                 <IconButton children={<MdSettings />} />
