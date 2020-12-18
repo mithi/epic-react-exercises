@@ -3,7 +3,7 @@ import { ThemeContext } from "../../providers/theme"
 import { GlobalStateContext } from "../../providers/global-state"
 import { useContext } from "react"
 
-const NotesSection = ({ div1, div2, div3 }) => {
+const ThreeSections = ({ div1, div2, div3 }) => {
     const { sectionClassNames } = useContext(ThemeContext)
     const { fadeMain } = useContext(GlobalStateContext)
 
@@ -13,7 +13,7 @@ const NotesSection = ({ div1, div2, div3 }) => {
 
     return (
         <div
-            className={styles.notesLayout}
+            className={styles.threeSectionsLayout}
             style={{ opacity: fadeMain === "true" ? 0.1 : 1.0 }}
         >
             <section className={div1Styles}>{div1}</section>
@@ -23,4 +23,4 @@ const NotesSection = ({ div1, div2, div3 }) => {
     )
 }
 
-export default NotesSection
+export default ThreeSections
