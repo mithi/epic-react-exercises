@@ -1,6 +1,5 @@
 import styles from "./Styles.module.css"
 import Nav from "./navbar"
-import ReactMenu from "./react-menu"
 import { useContext } from "react"
 import { ThemeContext } from "../../providers/theme/"
 

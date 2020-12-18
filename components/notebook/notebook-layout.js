@@ -1,4 +1,3 @@
-import styles from "./Styles.module.css"
 import { IconButton, LinkButton } from "../button"
 import { RiArrowLeftRightLine } from "react-icons/ri"
 import { GlobalStateContext } from "../../providers/global-state"
@@ -77,7 +76,7 @@ const NOTES_STYLE = {
 }
 
 const PageLayout = ({ title, pageId, code, notes, numberOfPages, pathname }) => {
-    const { primarySection, fadeMain } = useContext(GlobalStateContext)
+    const { primarySection } = useContext(GlobalStateContext)
     const currentPageId = Math.max(1, Math.min(Number(pageId) || 1, numberOfPages))
     const styledNotes = <span style={NOTES_STYLE}>{notes}</span>
 
@@ -92,12 +91,7 @@ const PageLayout = ({ title, pageId, code, notes, numberOfPages, pathname }) => 
     const div3 = <div>preview</div>
     return (
         <Main>
-            <div
-                className={styles.notesLayout}
-                style={{ opacity: fadeMain === "true" ? 0.1 : 1.0 }}
-            >
-                <NotesSection {...{ div1, div2, div3 }} />
-            </div>
+            <NotesSection {...{ div1, div2, div3 }} />
         </Main>
     )
 }
