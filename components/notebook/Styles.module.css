@@ -1,0 +1,43 @@
+.pagination {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.linkButton {
+    font-family: var(--header-font-00);
+    margin: 3px;
+    width: 30px;
+    height: 30px;
+    margin-top: 3px;
+    border-radius: 25%;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap-reverse;
+}
+
+.notesText {
+    line-height: 1.5;
+    letter-spacing: 0px;
+    word-spacing: 7px;
+    font-size: 18px;
+}
+
+.linkAwayIcon {
+    margin: 3px 3px;
+    width: 30px;
+    height: 30px;
+    font-size: 15px;
+    padding: 0;
+}
+
+@media (max-width: 850px) {
+    .absentOnMobile {
+        display: none;
+    }
+}
