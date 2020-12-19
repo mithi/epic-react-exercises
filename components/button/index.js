@@ -11,7 +11,6 @@ const TextButton = ({ children, classNames = [], ...otherprops } = {}) => {
 
 const LinkButton = ({ children, page, style = {}, classNames = [] } = {}) => {
     const { buttonClassNames } = useContext(ThemeContext)
-
     const className = [styles.button, ...buttonClassNames, ...classNames].join(" ")
     return (
         <>

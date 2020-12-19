@@ -1,5 +1,5 @@
 import Head from "next/head"
-import Main from "../components/main"
+import Nav from "../components/main/navbar"
 
 export default function Home() {
     return (
@@ -8,8 +8,7 @@ export default function Home() {
                 <title>Epic React Notes</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-
-            <Main />
+            <Nav />
         </div>
     )
 }

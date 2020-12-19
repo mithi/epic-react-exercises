@@ -13,10 +13,6 @@ const ThemeContext = createContext({})
 
 const ThemeProvider = ({ children }) => {
     const [theme, setTheme] = useStickyState("theme", "dark")
-    let [primarySection, setPrimarySection] = useStickyState("notes", "mode")
-    const togglePrimarySection = () => {
-        setPrimarySection(primarySection === "notes" ? "code" : "notes", "mode")
-    }
 
     // const [primaryColor, setPrimaryColor] = useStickyState(theme, "green")
     // const headerFont
@@ -42,8 +38,6 @@ const ThemeProvider = ({ children }) => {
             value={{
                 theme,
                 toggleTheme,
-                primarySection,
-                togglePrimarySection,
                 bodyClassNames,
                 sectionClassNames,
                 buttonClassNames,
