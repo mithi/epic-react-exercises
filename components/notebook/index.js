@@ -1,30 +1,16 @@
-import { IconButton, LinkButton } from "../button"
+import { IconButton, LinkButton, LinkAwayIconButton } from "../button"
 import { RiArrowLeftRightLine } from "react-icons/ri"
+import { FiGithub } from "react-icons/fi"
+import { BiRocket } from "react-icons/bi"
 import { GlobalStateContext } from "../../providers/global-state"
 import { useContext } from "react"
 import Main from "../main"
 import NotebookLayout from "../main/three-sections"
-
-const PAGINATION_STYLE = {
-    display: "flex",
-    justifyContent: "flex-start",
-    flexWrap: "wrap",
-    alignItems: "center",
-    marginBottom: "20px",
-}
-
-const LINK_BUTTON_STYLE = {
-    fontFamily: "var(--header-font-00)",
-    margin: "3px",
-    width: "30px",
-    height: "30px",
-    marginTop: "10px",
-    borderRadius: "25%",
-}
+import styles from "./Styles.module.css"
 
 const Pagination = ({ numberOfPages, currentPageId, pathname }) => {
     return (
-        <div style={PAGINATION_STYLE}>
+        <div className={styles.pagination}>
             {Array.from(Array(numberOfPages).keys()).map(i => {
                 const pageId = i + 1
                 const buttonPathname = `${pathname}/${pageId === 1 ? "" : pageId}`
@@ -34,8 +20,8 @@ const Pagination = ({ numberOfPages, currentPageId, pathname }) => {
                 return (
                     <LinkButton
                         key={buttonPathname}
+                        classNames={[styles.linkButton]}
                         style={{
-                            ...LINK_BUTTON_STYLE,
                             border,
                         }}
                         page={buttonPathname}
@@ -47,43 +33,40 @@ const Pagination = ({ numberOfPages, currentPageId, pathname }) => {
     )
 }
 
-const HEADER_STYLE = {
-    display: "flex",
-    justifyContent: "space-between",
-    flexWrap: "nowrap",
-    marginLeft: "10px",
-}
-
-const Header = ({ children }) => {
+const Header = ({ title, deployedSite, repository }) => {
     const { togglePrimarySection } = useContext(GlobalStateContext)
     return (
-        <div style={HEADER_STYLE}>
-            <h1 style={{ paddingRight: "10px" }}>{children}</h1>
-            <div>
-                <IconButton onClick={togglePrimarySection} style={{ margin: 0 }}>
+        <div className={styles.header}>
+            <h1>{title}</h1>
+            <div style={{ display: "flex", justifyContent: "flex-start" }}>
+                <IconButton
+                    onClick={togglePrimarySection}
+                    className={styles.linkAwayIcon}
+                >
                     <RiArrowLeftRightLine />
                 </IconButton>
+                <LinkAwayIconButton page={repository} className={styles.linkAwayIcon}>
+                    <FiGithub />
+                </LinkAwayIconButton>
+                <LinkAwayIconButton page={deployedSite} className={styles.linkAwayIcon}>
+                    <BiRocket />
+                </LinkAwayIconButton>
             </div>
         </div>
     )
 }
 
-const NOTES_STYLE = {
-    lineHeight: "1.5",
-    letterSpacing: "0px",
-    wordSpacing: "7px",
-    fontSize: "18px",
-}
-
 const PageLayout = ({ properties, pageId, code, notes, numberOfPages, pathname }) => {
     const { primarySection } = useContext(GlobalStateContext)
     const currentPageId = Math.max(1, Math.min(Number(pageId) || 1, numberOfPages))
-    const styledNotes = <span style={NOTES_STYLE}>{notes}</span>
-
+    const styledNotes = <span className={styles.notesText}>{notes}</span>
+    const { deployedSite, repository, title } = properties
     const div1 = (
         <>
-            <Header children={properties.title} />
-            <Pagination {...{ numberOfPages, currentPageId, pathname }} />
+            <Header {...{ title, deployedSite, repository }} />
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <Pagination {...{ numberOfPages, currentPageId, pathname }} />
+            </div>
             {primarySection === "code" ? code : styledNotes}
         </>
     )
