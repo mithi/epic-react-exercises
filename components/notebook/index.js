@@ -75,14 +75,14 @@ const NOTES_STYLE = {
     fontSize: "18px",
 }
 
-const PageLayout = ({ title, pageId, code, notes, numberOfPages, pathname }) => {
+const PageLayout = ({ properties, pageId, code, notes, numberOfPages, pathname }) => {
     const { primarySection } = useContext(GlobalStateContext)
     const currentPageId = Math.max(1, Math.min(Number(pageId) || 1, numberOfPages))
     const styledNotes = <span style={NOTES_STYLE}>{notes}</span>
 
     const div1 = (
         <>
-            <Header children={title} />
+            <Header children={properties.title} />
             <Pagination {...{ numberOfPages, currentPageId, pathname }} />
             {primarySection === "code" ? code : styledNotes}
         </>
