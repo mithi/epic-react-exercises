@@ -7,8 +7,7 @@
 2.  What are React hooks?
 
     -   Special functions that can store data (like state) or perform functions (side effects) among other things
-    -   Can only be called inside react function component or other hooks.
-    -   Name must start with `use`
+    -   Can only be called inside react function component or other hooks. Name must start with `use`.
     -   Common hooks: `useState`, `useEffect`, `useLayoutEffect`, `useRef`, `useContext`, `useReducer`, `useCallback`, `useMemo`
 
 3.  [Hooks flow diagram](https://github.com/donavon/hook-flow)
@@ -30,52 +29,12 @@
     -   The `render` method has no access to the dom node by itself, it only creates and returns react elements
     -   To access the dom, use a special prop called `ref`
     -   A component that has rendered is is said to be `mounted`. That's when `useEffect` callback is called, by that point`ref.current` set to the dom node which you can directly do interactions, manipulations
-    -   IMPORTANT: Clean up event handlers you have setup when your component is unmounted. We don't want
-        event handlers dangling around on DOM nodes that are no longer in the document. (memory leak)
-
-    ```js
-    const myDivRef = React.useRef()
-
-    React.useEffect(() => {
-        const myDiv = myDivRef.current
-        // myDiv is the div DOM node!
-        console.log(myDiv)
-    }, [])
-
-    return <div ref={myDivRef}>hi</div>
-    }
-    ```
 
 7.  HTTP Requests
 
     -   IMPORTANT: React batches state updates (`setState`)
     -   [Does React batch state update functions when using hooks?](https://stackoverflow.com/questions/53048495/does-react-batch-state-update-functions-when-using-hooks) (StackOverflow #53048495)
     -   If the state changes are triggered asynchronously (like wrapped in a promise), they will not be batched; if they are triggered directly, they will be batched.
-    -   You cannot return anything other than the cleanup function in `useEffect`, this means you can NOT use `async/await` for that cleanup function since that returns a promise
-
-    ```js
-    // case 1: this does not work, don't do this:
-    useEffect(async () => {
-        const result = await doSomeAsyncThing()
-        // do something with the result
-    })
-
-    // case 2: You can do this instead
-    useEffect(() => {
-        async function effect() {
-            const result = await doSomeAsyncThing()
-            // do something with the result
-        }
-        effect()
-    })
-
-    // case 3: Or even better
-    useEffect(() => {
-        doSomeAsyncThing().then(result => {
-            // do something with the result
-        })
-    })
-    ```
 
 ## Exercises
 
