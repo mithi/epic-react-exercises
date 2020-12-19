@@ -1,3 +1,5 @@
 {
-    "title": "React Fundamentals"
+    "title": "React Fundamentals",
+    "repository": "https://github.com/kentcdodds/react-fundamentals",
+    "deployedSite": "https://react-fundamentals.netlify.app/"
 }

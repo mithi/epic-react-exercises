@@ -1,3 +1,5 @@
 {
-    "title": "Advanced React Patterns"
+    "title": "Advanced React Patterns",
+    "repository": "https://react-suspense.netlify.app/",
+    "deployedSite": "https://advanced-react-patterns.netlify.app/"
 }

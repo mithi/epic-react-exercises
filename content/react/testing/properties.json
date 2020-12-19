@@ -1,3 +1,5 @@
 {
-    "title": "Testing React Apps"
+    "title": "Testing React Apps",
+    "repository": "https://github.com/kentcdodds/testing-react-apps",
+    "deployedSite": "https://testing-react-apps.netlify.app/"
 }
