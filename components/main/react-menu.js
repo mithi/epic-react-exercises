@@ -11,6 +11,7 @@ const BUTTON_STYLE = {
     margin: "0",
     marginBottom: "15px",
 }
+
 const Button = ({ children, section, style = BUTTON_STYLE } = {}) => (
     <div>
         <LinkButton {...{ children, page: `/react/${section}`, style }} /> <br />
@@ -24,7 +25,7 @@ const Menu = ({ style } = {}) => {
         <section
             onClick={flipFaded}
             className={styles.mainReactMenu}
-            style={{ paddingRight: "30px", width: "100%", ...style }}
+            style={{ paddingRight: "30px", ...style }}
         >
             <Button section="fundamentals" children="1. React Fundamentals" />
             <Button section="hooks" children="2. React Hooks" />

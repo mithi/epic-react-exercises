@@ -20,6 +20,7 @@ const Code = ({ children, language }) => {
                 style={atomDark}
                 showLineNumbers={true}
                 wrapLongLines={true}
+                wrapLines={true}
                 lineNumberStyle={LINE_NUMBER_STYLE}
             >
                 {children}

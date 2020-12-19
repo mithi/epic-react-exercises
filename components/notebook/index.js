@@ -58,7 +58,7 @@ const Header = ({ children }) => {
     const { togglePrimarySection } = useContext(GlobalStateContext)
     return (
         <div style={HEADER_STYLE}>
-            <h1>{children}</h1>
+            <h1 style={{ paddingRight: "10px" }}>{children}</h1>
             <div>
                 <IconButton onClick={togglePrimarySection} style={{ margin: 0 }}>
                     <RiArrowLeftRightLine />

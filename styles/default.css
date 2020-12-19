@@ -1,23 +1,29 @@
 ol {
     list-style-type: decimal;
-    margin-left: 30px;
+    margin-left: 20px;
+    padding-left: 20px;
+    padding-bottom: 0px;
 }
 
 ol li {
     font-size: 20px;
-    padding: 10px;
+    padding: 5px;
+    padding-bottom: 0px;
     letter-spacing: 1px;
     word-spacing: 5px;
+}
+
+ol p {
+    margin: 5px;
 }
 
 ul li {
     font-size: 15px;
     line-height: 1.25;
-    padding: 10px;
+    padding: 10px 0px;
 }
 
 a {
-    color: var(--green-0);
     text-decoration: none;
 }
 
@@ -27,26 +33,49 @@ a:hover {
 
 ul {
     list-style-type: square;
-    margin-left: 10px;
+    margin-left: 5px;
+}
+
+pre,
+code {
+    opacity: 1;
+    border-radius: 5px;
+    padding: 3px;
+    font-size: 12px;
+}
+
+h1 {
+    font-size: 45px;
+}
+
+h2 {
+    font-size: 30px;
+}
+
+h1,
+h2 {
+    margin-left: 0;
+    padding-left: 0;
+}
+
+p {
+    line-height: 1.5;
+    margin: 10px;
+}
+
+a {
+    color: var(--green-0);
+}
+
+h1,
+h2 {
+    font-family: var(--header-font-00);
 }
 
 pre,
 code {
     font-family: Monaco, Menlo, "Courier New", Courier, monospace;
     background-color: var(--gray-04-medium);
-    opacity: 1;
-    border-radius: 5px;
-    padding: 3px;
     color: rgb(209, 248, 194);
-    font-size: 12px;
-}
-
-h1 {
-    font-size: 45px;
-    font-family: var(--header-font-00);
-}
-
-h2 {
-    font-size: 30px;
-    font-family: var(--header-font-00);
+    min-width: 0;
 }
