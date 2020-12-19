@@ -1,3 +1,5 @@
 {
-    "title": "React Suspense"
+    "title": "React Suspense",
+    "repository": "https://github.com/kentcdodds/react-suspense",
+    "deployedSite": "https://react-suspense.netlify.app/"
 }

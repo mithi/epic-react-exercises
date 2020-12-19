@@ -1,3 +1,5 @@
 {
-    "title": "Advanced React Hooks"
+    "title": "Advanced React Hooks",
+    "repository": "https://github.com/kentcdodds/advanced-react-hooks",
+    "deployedSite": "https://advanced-react-hooks.netlify.app/"
 }

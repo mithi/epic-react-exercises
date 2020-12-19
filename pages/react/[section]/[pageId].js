@@ -17,10 +17,12 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
     const { section, pageId } = params
-    const { numberOfPages, title } = sectionProperties("react")[section]
+    const { numberOfPages, properties } = sectionProperties("react")[section]
     const { notesString, codeString } = pageContents("react", section, pageId)
 
-    return { props: { codeString, notesString, section, pageId, numberOfPages, title } }
+    return {
+        props: { codeString, notesString, section, pageId, numberOfPages, properties },
+    }
 }
 
 const Home = props => {

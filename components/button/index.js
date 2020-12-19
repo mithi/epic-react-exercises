@@ -38,13 +38,18 @@ const LinkIconButton = props => {
 }
 
 const LinkAwayIconButton = props => {
-    const { children, page, ...otherprops } = props
+    const { children, page, className, ...otherprops } = props
     const { buttonClassNames } = useContext(ThemeContext)
-    const className = [...buttonClassNames, styles.button, styles.buttonIcon].join(" ")
+    const classNameString = [
+        ...buttonClassNames,
+        styles.button,
+        styles.buttonIcon,
+        className,
+    ].join(" ")
 
     return (
         <a href={page} target="_blank" rel="noopener noreferrer">
-            <button className={className} {...otherprops}>
+            <button className={classNameString} {...otherprops}>
                 {children}
             </button>
         </a>
@@ -52,12 +57,17 @@ const LinkAwayIconButton = props => {
 }
 
 const IconButton = props => {
-    const { children, ...otherprops } = props
+    const { children, className, ...otherprops } = props
     const { buttonClassNames } = useContext(ThemeContext)
-    const className = [...buttonClassNames, styles.button, styles.buttonIcon].join(" ")
+    const classNameString = [
+        ...buttonClassNames,
+        styles.button,
+        styles.buttonIcon,
+        className,
+    ].join(" ")
 
     return (
-        <button className={className} {...otherprops}>
+        <button className={classNameString} {...otherprops}>
             {children}
         </button>
     )

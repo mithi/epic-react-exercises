@@ -1,3 +1,5 @@
 {
-    "title": "React Hooks"
+    "title": "React Hooks",
+    "repository": "https://github.com/kentcdodds/react-hooks",
+    "deployedSite": "https://react-hooks.netlify.app/"
 }

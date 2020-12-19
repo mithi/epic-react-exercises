@@ -43,7 +43,7 @@ export function sectionProperties(topic) {
             ...result,
             [section]: {
                 numberOfPages,
-                title: JSON.parse(propertiesContent).title,
+                properties: JSON.parse(propertiesContent),
             },
         }
     }
