@@ -3,37 +3,19 @@ import Link from "next/link"
 import { useContext } from "react"
 import { ThemeContext } from "../../providers/theme/"
 
-const LinkButton = ({ children, page, style = {}, classNames = [] } = {}) => {
+const LinkButton = ({ children, page, classNames = [], ...otherProps } = {}) => {
     const { buttonClassNames } = useContext(ThemeContext)
     const classNameString = [styles.button, ...buttonClassNames, ...classNames].join(" ")
     return (
         <>
             <Link href={page}>
                 <a>
-                    <button className={classNameString} {...{ style }}>
+                    <button className={classNameString} {...otherProps}>
                         {children}
                     </button>
                 </a>
             </Link>
         </>
-    )
-}
-
-const LinkIconButton = props => {
-    const { children, page, ...otherprops } = props
-    const { buttonClassNames } = useContext(ThemeContext)
-    const classNameString = [...buttonClassNames, styles.button, styles.buttonIcon].join(
-        " "
-    )
-
-    return (
-        <Link href={page}>
-            <a>
-                <button {...otherprops} className={classNameString}>
-                    {children}
-                </button>
-            </a>
-        </Link>
     )
 }
 
@@ -73,4 +55,4 @@ const IconButton = props => {
     )
 }
 
-export { LinkButton, LinkAwayIconButton, LinkIconButton, IconButton }
+export { LinkButton, LinkAwayIconButton, IconButton }
