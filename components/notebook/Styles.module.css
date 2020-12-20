@@ -18,7 +18,7 @@
 .header {
     display: flex;
     justify-content: space-between;
-    flex-wrap: wrap-reverse;
+    flex-wrap: nowrap;
 }
 
 .notesText {
@@ -39,5 +39,9 @@
 @media (max-width: 850px) {
     .absentOnMobile {
         display: none;
+    }
+
+    .header {
+        flex-wrap: wrap-reverse;
     }
 }
