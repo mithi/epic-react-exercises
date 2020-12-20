@@ -59,7 +59,7 @@ const Header = ({ title, deployedSite, repository }) => {
 const PageLayout = ({ properties, pageId, code, notes, numberOfPages, pathname }) => {
     const { primarySection } = useContext(GlobalStateContext)
     const currentPageId = Math.max(1, Math.min(Number(pageId) || 1, numberOfPages))
-    const styledNotes = <span className={styles.notesText}>{notes}</span>
+    const styledNotes = <span>{notes}</span>
     const { deployedSite, repository, title } = properties
     const div1 = (
         <>
