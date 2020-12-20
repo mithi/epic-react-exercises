@@ -20,7 +20,7 @@ const Pagination = ({ numberOfPages, currentPageId, pathname }) => {
                 return (
                     <LinkButton
                         key={buttonPathname}
-                        classNames={[styles.linkButton]}
+                        className={styles.linkButton}
                         style={{
                             border,
                         }}
