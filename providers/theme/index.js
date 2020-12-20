@@ -1,19 +1,21 @@
-import { createContext } from "react"
+import { createContext, useEffect } from "react"
 import useStickyState from "../../hooks/useStickyState"
 import styles from "./Theme.module.css"
 
 export const NUMBER_OF_BODY_FONTS = 5
+export const NUMBER_OF_HEADER_FONTS = 5
 
 export const COLORS = ["pink", "green", "blue", "purple", "orange"]
 export const NUMBER_OF_COLORS = COLORS.length
 
-const colored = colorName => {
+const colored = id => {
     return {
-        onHover: styles[`pinkBgOnHover`],
-        classColor: styles[`${colorName}Color`],
-        var: `var(--${colorName}-0)`,
+        onHover: styles[`${COLORS[id]}BgOnHover`],
+        classColor: styles[`${COLORS[id]}Color`],
+        var: `var(--${COLORS[id]}-0)`,
     }
 }
+
 /*
 export const NUMBER_OF_THEMES = 3
 export const THEMES = {
@@ -27,31 +29,42 @@ const DEFAULT = {
     bodyFont: "var(--body-font-02)",
     headerFont: "var(--header-font-01)",
     primaryColor: colored(COLORS[0]).var,
-    bodyClassNames: [styles.darkBody],
 }
 
 const ThemeContext = createContext(DEFAULT)
 
 const ThemeProvider = ({ children }) => {
     //const [theme, setTheme] = useStickyState("theme", THEMES.dark)
-    const [bodyFont, _setBodyFont] = useStickyState(DEFAULT.bodyFont, "bodyFont")
-    const [headerFont, _setHeaderFont] = useStickyState(DEFAULT.headerFont, "headerFont")
-    const [color, _setColor] = useStickyState(COLORS[0], "primaryColor")
+    const [colorId, setColorId] = useStickyState(0, "colorId")
+    const [headerFontId, setHeaderFontId] = useStickyState(0, "headerId")
+    const [bodyFontId, setBodyFontId] = useStickyState(0, "bodyFontId")
 
     const bodyClassNames = [styles.darkBody]
     const sectionClassNames = [styles.darkSection]
     const buttonClassNames = [
-        styles.darkBody,
         styles.darkButton,
-        colored(color).onHover,
-        colored(color).classColor,
+        colored(colorId).onHover,
+        colored(colorId).classColor,
     ]
 
-    const primaryColor = colored(color).var
-    console.log("color", color)
-    console.log("onHover", colored(color).onHover)
-    console.log("classColor", colored(color).classColor)
-    console.log("primaryColor", primaryColor)
+    const nextColor = () => {
+        const n = (Number(colorId) + 1) % NUMBER_OF_COLORS
+        setColorId(n)
+    }
+
+    const nextBodyFont = () => {
+        const n = (Number(bodyFontId) + 1) % NUMBER_OF_BODY_FONTS
+        setBodyFontId(n)
+    }
+
+    const nextHeaderFont = () => {
+        const n = (Number(headerFontId) + 1) % NUMBER_OF_HEADER_FONTS
+        setHeaderFontId(n)
+    }
+
+    const primaryColor = colored(colorId).var
+    const headerFont = `var(--header-font-0${headerFontId})`
+    const bodyFont = `var(--body-font-0${bodyFontId})`
 
     return (
         <ThemeContext.Provider
@@ -59,6 +72,9 @@ const ThemeProvider = ({ children }) => {
                 bodyFont,
                 headerFont,
                 primaryColor,
+                nextBodyFont,
+                nextColor,
+                nextHeaderFont,
                 bodyClassNames,
                 sectionClassNames,
                 buttonClassNames,
