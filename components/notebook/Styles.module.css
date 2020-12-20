@@ -13,10 +13,14 @@
 }
 
 .smallButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 3px;
     width: 30px;
     height: 30px;
     font-size: 15px;
+    text-decoration: none;
 }
 
 .linkButton {
