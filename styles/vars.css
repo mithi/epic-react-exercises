@@ -1,15 +1,23 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito&family=Kanit:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400&family=Kanit:wght@700&family=Arvo&family=Montserrat:wght@400&family=Quattrocento&family=Rokkitt:wght@300&family=Bevan&family=Cabin+Sketch:wght@700&family=Permanent+Marker&family=Walter+Turncoat&display=swap");
 
 :root {
     --pink-0: #e84393;
     --green-0: #5de294;
+    --blue-0: #16bdca;
+    --purple-0: #ac94fa;
+    --orange-0: #ff8a4c;
     --gray-00-light: rgb(223, 223, 223);
     --gray-01-dark: #202124;
-    --gray-02-transparent: rgba(191, 191, 191, 0.05);
-    --gray-03-transparent-2: rgba(0, 0, 0, 0.2);
     --gray-04-medium: rgba(39, 40, 43, 1);
-    --gray-05-transparent-3: rgba(26, 26, 29, 0.9);
     --gray-06-dark-2: #1a1a1e;
     --header-font-00: "Kanit";
-    --text-font-00: "Nunito";
+    --header-font-01: "Cabin Sketch";
+    --header-font-02: "Permanent Marker";
+    --header-font-03: "Walter Turncoat";
+    --header-font-04: "Bevan";
+    --body-font-00: "Nunito";
+    --body-font-01: "Arvo";
+    --body-font-02: "Montserrat";
+    --body-font-03: "Quattrocento";
+    --body-font-04: "Rokkitt";
 }
