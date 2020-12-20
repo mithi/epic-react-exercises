@@ -3,12 +3,15 @@ import { RiArrowLeftRightLine } from "react-icons/ri"
 import { FiGithub } from "react-icons/fi"
 import { BiRocket } from "react-icons/bi"
 import { GlobalStateContext } from "../../providers/global-state"
+import { ThemeContext } from "../../providers/theme"
 import { useContext } from "react"
 import Main from "../main"
 import NotebookLayout from "../main/three-sections"
 import styles from "./Styles.module.css"
 
 const Pagination = ({ numberOfPages, currentPageId, pathname }) => {
+    const { headerFont } = useContext(ThemeContext)
+
     return (
         <div className={styles.pagination}>
             {Array.from(Array(numberOfPages).keys()).map(i => {
@@ -23,6 +26,7 @@ const Pagination = ({ numberOfPages, currentPageId, pathname }) => {
                         className={styles.linkButton}
                         style={{
                             border,
+                            fontFamily: headerFont,
                         }}
                         page={buttonPathname}
                         children={pageId}
@@ -35,9 +39,11 @@ const Pagination = ({ numberOfPages, currentPageId, pathname }) => {
 
 const Header = ({ title, deployedSite, repository }) => {
     const { togglePrimarySection } = useContext(GlobalStateContext)
+    const { headerFont } = useContext(ThemeContext)
+
     return (
         <div className={styles.header}>
-            <h1>{title}</h1>
+            <h1 style={{ fontFamily: headerFont }}>{title}</h1>
             <div style={{ display: "flex", justifyContent: "flex-start" }}>
                 <IconButton
                     onClick={togglePrimarySection}

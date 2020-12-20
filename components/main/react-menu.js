@@ -1,22 +1,32 @@
 import styles from "./Styles.module.css"
 import { LinkButton } from "../button"
 import { GlobalStateContext } from "../../providers/global-state"
+import { ThemeContext } from "../../providers/theme"
 import { useContext } from "react"
 
 const BUTTON_STYLE = {
     fontSize: "1.25rem",
-    fontFamily: "var(--header-font-00)",
     borderRadius: "15px",
     padding: "15px",
     margin: "0",
     marginBottom: "15px",
 }
 
-const Button = ({ children, section, style = BUTTON_STYLE } = {}) => (
-    <div>
-        <LinkButton {...{ children, page: `/react/${section}`, style }} /> <br />
-    </div>
-)
+const Button = ({ children, section }) => {
+    const { headerFont } = useContext(ThemeContext)
+    return (
+        <div>
+            <LinkButton
+                {...{
+                    children,
+                    page: `/react/${section}`,
+                    style: { fontFamily: headerFont, ...BUTTON_STYLE },
+                }}
+            />{" "}
+            <br />
+        </div>
+    )
+}
 
 const Menu = ({ style } = {}) => {
     const { flipFaded } = useContext(GlobalStateContext)

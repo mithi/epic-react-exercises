@@ -20,7 +20,6 @@
 }
 
 .linkButton {
-    font-family: var(--header-font-00);
     border-radius: 25%;
     composes: smallButton;
 }
