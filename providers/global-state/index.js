@@ -7,6 +7,7 @@ const GlobalStateProvider = ({ children }) => {
     let [primarySection, setPrimarySection] = useStickyState("notes", "mode")
     let [fadeMain, setFadeMain] = useStickyState("false", "fadeMain")
     let [showReactMenu, setShowReactMenu] = useStickyState("false", "showReactMenu")
+    let [showThemeMenu, setShowThemeMenu] = useStickyState("false", "showThemeMenu")
 
     const togglePrimarySection = () => {
         setPrimarySection(primarySection === "notes" ? "code" : "notes", "mode")
