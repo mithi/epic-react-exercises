@@ -1,9 +1,9 @@
+/***************
+    HEADER FONTS
+ ***************/
+
 .headerFont0 {
     font-family: var(--header-font-00);
-}
-
-.textFont0 {
-    font-family: var(--text-font-00);
 }
 
 /***************
