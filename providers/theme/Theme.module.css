@@ -28,14 +28,38 @@
     background-color: var(--green-0);
 }
 
+.pinkBgOnHover:hover {
+    background-color: var(--pink-0);
+}
+.greenBgOnHover:hover {
+    background-color: var(--green-0);
+}
+.blueBgOnHover:hover {
+    background-color: var(--blue-0);
+}
+.purpleBgOnHover:hover {
+    background-color: var(--purple-0);
+}
+.orangeBgOnHover:hover {
+    background-color: var(--orange-0);
+}
+
+.pinkColor {
+    color: var(--pink-0);
+}
 .greenColor {
     color: var(--green-0);
 }
-
-.redBgOnHover:hover {
-    background-color: #ff0000;
+.blueColor {
+    color: var(--blue-0);
+}
+.purpleColor {
+    color: var(--purple-0);
+}
+.orangeColor {
+    color: var(--orange-0);
 }
 
-.redColor {
-    color: #ff0000;
+.greenColor {
+    color: var(--green-0);
 }

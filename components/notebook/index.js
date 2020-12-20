@@ -10,7 +10,7 @@ import NotebookLayout from "../main/three-sections"
 import styles from "./Styles.module.css"
 
 const Pagination = ({ numberOfPages, currentPageId, pathname }) => {
-    const { headerFont } = useContext(ThemeContext)
+    const { headerFont, primaryColor } = useContext(ThemeContext)
 
     return (
         <div className={styles.pagination}>
@@ -18,7 +18,7 @@ const Pagination = ({ numberOfPages, currentPageId, pathname }) => {
                 const pageId = i + 1
                 const buttonPathname = `${pathname}/${pageId === 1 ? "" : pageId}`
                 const border =
-                    pageId === currentPageId ? "2px solid var(--green-0)" : null
+                    pageId === currentPageId ? `2px solid ${primaryColor}` : null
 
                 return (
                     <LinkButton

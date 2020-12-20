@@ -4,10 +4,12 @@ import { useContext } from "react"
 import { ThemeContext } from "../../providers/theme"
 
 const Home = ({ children } = {}) => {
-    const { bodyClassNames } = useContext(ThemeContext)
-
+    const { bodyClassNames, bodyFont } = useContext(ThemeContext)
     return (
-        <div className={[styles.grid, ...bodyClassNames].join(" ")}>
+        <div
+            className={[styles.grid, ...bodyClassNames].join(" ")}
+            style={{ fontFamily: bodyFont }}
+        >
             <Nav />
             <main className={styles.main}>{children}</main>
         </div>

@@ -4,14 +4,16 @@ import styles from "./Theme.module.css"
 
 export const NUMBER_OF_BODY_FONTS = 5
 
-export const PRIMARY_COLORS = {
-    pink: "var(--pink-0)",
-    green: "var(--green-0)",
-    blue: "var(--blue-0)",
-    purple: "var(--purple-0)",
-    orange: "var(--orange-0)",
-}
+export const COLORS = ["pink", "green", "blue", "purple", "orange"]
+export const NUMBER_OF_COLORS = COLORS.length
 
+const colored = colorName => {
+    return {
+        onHover: styles[`pinkBgOnHover`],
+        classColor: styles[`${colorName}Color`],
+        var: `var(--${colorName}-0)`,
+    }
+}
 /*
 export const NUMBER_OF_THEMES = 3
 export const THEMES = {
@@ -24,7 +26,7 @@ export const THEMES = {
 const DEFAULT = {
     bodyFont: "var(--body-font-02)",
     headerFont: "var(--header-font-01)",
-    primaryColor: PRIMARY_COLORS.green,
+    primaryColor: colored(COLORS[0]).var,
     bodyClassNames: [styles.darkBody],
 }
 
@@ -34,20 +36,22 @@ const ThemeProvider = ({ children }) => {
     //const [theme, setTheme] = useStickyState("theme", THEMES.dark)
     const [bodyFont, _setBodyFont] = useStickyState(DEFAULT.bodyFont, "bodyFont")
     const [headerFont, _setHeaderFont] = useStickyState(DEFAULT.headerFont, "headerFont")
-
-    const [primaryColor, _setPrimaryColor] = useStickyState(
-        DEFAULT.primaryColor,
-        "primaryColor"
-    )
+    const [color, _setColor] = useStickyState(COLORS[0], "primaryColor")
 
     const bodyClassNames = [styles.darkBody]
     const sectionClassNames = [styles.darkSection]
     const buttonClassNames = [
         styles.darkBody,
         styles.darkButton,
-        styles.greenBgOnHover,
-        styles.greenColor,
+        colored(color).onHover,
+        colored(color).classColor,
     ]
+
+    const primaryColor = colored(color).var
+    console.log("color", color)
+    console.log("onHover", colored(color).onHover)
+    console.log("classColor", colored(color).classColor)
+    console.log("primaryColor", primaryColor)
 
     return (
         <ThemeContext.Provider
