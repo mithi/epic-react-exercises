@@ -1,13 +1,13 @@
 import styles from "./Styles.module.css"
 import Link from "next/link"
-import { useContext, useEffect, useState } from "react"
+import { useContext, useLayoutEffect, useState } from "react"
 import { ThemeContext } from "../../providers/theme/"
 
 const useButtonClasses = (className, isIcon) => {
     const { buttonClassNames } = useContext(ThemeContext)
     const [buttonClasses, setButtonClasses] = useState(buttonClassNames)
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         let final = [
             ...buttonClassNames,
             styles.button,

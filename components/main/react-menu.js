@@ -22,7 +22,7 @@ const Button = ({ children, section }) => {
                     page: `/react/${section}`,
                     style: { fontFamily: headerFont, ...BUTTON_STYLE },
                 }}
-            />{" "}
+            />
             <br />
         </div>
     )
