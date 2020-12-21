@@ -4,6 +4,7 @@ import styles from "./Theme.module.css"
 
 export const NUMBER_OF_BODY_FONTS = 5
 export const NUMBER_OF_HEADER_FONTS = 5
+export const NUMBER_OF_CODE_THEMES = 4
 
 export const COLORS = ["pink", "green", "blue", "purple", "orange"]
 export const NUMBER_OF_COLORS = COLORS.length
@@ -38,7 +39,7 @@ const ThemeProvider = ({ children }) => {
     const [colorId, setColorId] = useStickyState(0, "colorId")
     const [headerFontId, setHeaderFontId] = useStickyState(0, "headerId")
     const [bodyFontId, setBodyFontId] = useStickyState(0, "bodyFontId")
-
+    const [codeThemeId, setCodeThemeId] = useStickyState(0, "codeThemId")
     const bodyClassNames = [styles.darkBody]
     const sectionClassNames = [styles.darkSection]
     const onHoverClassName = colored(colorId).onHover
@@ -63,6 +64,11 @@ const ThemeProvider = ({ children }) => {
         setHeaderFontId(n)
     }
 
+    const nextCodeTheme = () => {
+        const n = (Number(codeThemeId) + 1) % NUMBER_OF_CODE_THEMES
+        setCodeThemeId(n)
+    }
+
     const primaryColor = colored(colorId).var
     const headerFont = `var(--header-font-0${headerFontId})`
     const bodyFont = `var(--body-font-0${bodyFontId})`
@@ -74,8 +80,10 @@ const ThemeProvider = ({ children }) => {
                 headerFont,
                 primaryColor,
                 nextBodyFont,
+                codeThemeId,
                 nextColor,
                 nextHeaderFont,
+                nextCodeTheme,
                 bodyClassNames,
                 sectionClassNames,
                 buttonClassNames,

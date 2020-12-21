@@ -19,6 +19,7 @@ const Menu = ({ style } = {}) => {
     const {
         nextColor,
         nextHeaderFont,
+        nextCodeTheme,
         headerFont,
         nextBodyFont,
         bodyFont,
@@ -81,6 +82,7 @@ const Menu = ({ style } = {}) => {
                 <div
                     style={{ padding: "5px", borderRadius: "5px" }}
                     className={onHoverClassName}
+                    onClick={nextCodeTheme}
                 >
                     <MarkdownRender>{SAMPLE_CODE}</MarkdownRender>
                 </div>
@@ -107,7 +109,7 @@ const Menu = ({ style } = {}) => {
                     <IconButton style={{ margin: "10px 5px" }}>
                         <FaCloudSun />
                     </IconButton>
-                    <IconButton style={{ margin: "10px 5px" }}>
+                    <IconButton onClick={nextCodeTheme} style={{ margin: "10px 5px" }}>
                         <FaCode />
                     </IconButton>
                 </div>

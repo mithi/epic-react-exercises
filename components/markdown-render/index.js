@@ -1,23 +1,15 @@
 import ReactMarkdown from "react-markdown"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
-import { atomDark } from "react-syntax-highlighter/dist/cjs/styles/prism"
+import {
+    atomDark,
+    prism,
+    vscDarkPlus,
+    tomorrow,
+} from "react-syntax-highlighter/dist/cjs/styles/prism"
 import { useContext } from "react"
 import { ThemeContext } from "../../providers/theme/"
 
-/*
-CODE
-- atomDark
-- okaida
-- pojoaque
-- vsc-dark-plus
-
-- funky
-
-- prism
-- solarizedlight
-- duotone-light
-- coy
- */
+const CODE_THEMES = [atomDark, prism, vscDarkPlus, tomorrow]
 
 const LINE_NUMBER_STYLE = {
     minWidth: "25px",
@@ -30,11 +22,13 @@ const LINE_NUMBER_STYLE = {
 }
 
 const Code = ({ children, language }) => {
+    const { codeThemeId } = useContext(ThemeContext)
+
     return (
-        <div style={{ fontSize: "12px" }}>
+        <div style={{ fontSize: "12px", letterSpacing: "1px" }}>
             <SyntaxHighlighter
                 language={language}
-                style={atomDark}
+                style={CODE_THEMES[codeThemeId]}
                 showLineNumbers={true}
                 wrapLongLines={true}
                 wrapLines={true}
@@ -48,7 +42,7 @@ const Code = ({ children, language }) => {
 
 const CustomHeading = ({ children, level }) => {
     const { headerFont } = useContext(ThemeContext)
-    console.log("custom heading", headerFont)
+
     const header = <span style={{ fontFamily: headerFont }}>{children}</span>
     switch (level) {
         case 1:
