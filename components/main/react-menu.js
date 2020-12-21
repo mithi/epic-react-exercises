@@ -4,14 +4,6 @@ import { GlobalStateContext } from "../../providers/global-state"
 import { ThemeContext } from "../../providers/theme"
 import { useContext } from "react"
 
-const BUTTON_STYLE = {
-    fontSize: "1.25rem",
-    borderRadius: "15px",
-    padding: "15px",
-    margin: "0",
-    marginBottom: "15px",
-}
-
 const Button = ({ children, section }) => {
     const { headerFont } = useContext(ThemeContext)
     return (
@@ -20,7 +12,8 @@ const Button = ({ children, section }) => {
                 {...{
                     children,
                     page: `/react/${section}`,
-                    style: { fontFamily: headerFont, ...BUTTON_STYLE },
+                    className: styles.reactMenuButton,
+                    style: { fontFamily: headerFont },
                 }}
             />
             <br />
@@ -34,7 +27,7 @@ const Menu = ({ style } = {}) => {
     return (
         <section
             onClick={flipFaded}
-            className={styles.mainReactMenu}
+            className={styles.menu}
             style={{ paddingRight: "30px", ...style }}
         >
             <Button section="fundamentals" children="1. React Fundamentals" />
