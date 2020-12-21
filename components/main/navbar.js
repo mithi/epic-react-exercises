@@ -9,22 +9,28 @@ import { useContext } from "react"
 import { GlobalStateContext } from "../../providers/global-state"
 import { ThemeContext } from "../../providers/theme"
 import ReactMenu from "./react-menu"
+import ThemeMenu from "./theme-menu"
 
 const Nav = () => {
-    const { flipFaded, showReactMenu } = useContext(GlobalStateContext)
+    const { changeMenuState, menuState } = useContext(GlobalStateContext)
     const { sectionClassNames } = useContext(ThemeContext)
 
     return (
         <>
-            {showReactMenu === "true" ? <ReactMenu /> : null}
+            {menuState === "theme" ? <ThemeMenu /> : null}
+            {menuState === "react" ? <ReactMenu /> : null}
             <nav className={[styles.nav, ...sectionClassNames].join(" ")}>
                 <div className={styles.navButtonsContainer}>
                     <IconButton
-                        onClick={flipFaded}
-                        onMouseEnter={flipFaded}
+                        onClick={() => changeMenuState("react")}
+                        onMouseEnter={() => changeMenuState("react")}
                         children={<FaReact />}
                     />
-                    <IconButton children={<MdSettings />} />
+                    <IconButton
+                        onClick={() => changeMenuState("theme")}
+                        onMouseEnter={() => changeMenuState("theme")}
+                        children={<MdSettings />}
+                    />
                     <LinkAwayIconButton
                         page="https://github.com/mithi"
                         children={<GoOctoface />}

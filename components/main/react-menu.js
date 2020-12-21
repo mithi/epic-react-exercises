@@ -22,11 +22,11 @@ const Button = ({ children, section }) => {
 }
 
 const Menu = ({ style } = {}) => {
-    const { flipFaded } = useContext(GlobalStateContext)
+    const { changeMenuState } = useContext(GlobalStateContext)
 
     return (
         <section
-            onClick={flipFaded}
+            onClick={() => changeMenuState("react")}
             className={styles.menu}
             style={{ paddingRight: "30px", ...style }}
         >
