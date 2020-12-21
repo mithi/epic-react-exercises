@@ -41,9 +41,10 @@ const ThemeProvider = ({ children }) => {
 
     const bodyClassNames = [styles.darkBody]
     const sectionClassNames = [styles.darkSection]
+    const onHoverClassName = colored(colorId).onHover
     const buttonClassNames = [
         styles.darkButton,
-        colored(colorId).onHover,
+        onHoverClassName,
         colored(colorId).classColor,
     ]
 
@@ -78,6 +79,7 @@ const ThemeProvider = ({ children }) => {
                 bodyClassNames,
                 sectionClassNames,
                 buttonClassNames,
+                onHoverClassName,
             }}
         >
             {children}
