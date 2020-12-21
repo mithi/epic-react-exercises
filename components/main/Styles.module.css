@@ -63,6 +63,13 @@
     width: 100%;
 }
 
+.themeMenu {
+    margin: 20px;
+    padding: 10px;
+    width: 450px;
+    border-radius: 10px;
+}
+
 .nav {
     flex-shrink: 0;
     width: 70px;
@@ -96,7 +103,7 @@
 
     .nav {
         height: 70px;
-        width: 100%;
+        width: 98%;
         padding: 0px;
         grid-area: 1 / 1 / 2 / 2;
     }
@@ -117,7 +124,7 @@
     .div0 {
         margin: 0;
         margin-bottom: 10px;
-        width: 100%;
+        width: 98%;
     }
 
     .div3 {
@@ -150,5 +157,10 @@
         left: 0px;
         z-index: 1;
         composes: div1;
+    }
+
+    .themeMenu {
+        width: 98%;
+        margin-top: 0;
     }
 }
