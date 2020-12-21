@@ -1,51 +1,127 @@
 import styles from "./Styles.module.css"
+import MarkdownRender from "../markdown-render"
 import { GlobalStateContext } from "../../providers/global-state"
 import { ThemeContext } from "../../providers/theme"
 import { useContext } from "react"
 import { IconButton } from "../../components/button"
-import { GiButtonFinger } from "react-icons/gi"
-import { IoIosCloseCircle } from "react-icons/io"
+import { FaCloudSun, FaCode, FaPaintBrush } from "react-icons/fa"
+import { CgFormatColor } from "react-icons/cg"
+import { BiText } from "react-icons/bi"
+
+const SAMPLE_CODE = "```python\n def hello():\n    return 'world!'"
+const SAMPLE_PARAGRAPH = `Click on any of the sample elements
+to change its style. You can
+customize: the primary color, the header font, the body font, the code
+theme, and the page theme.`
 
 const Menu = ({ style } = {}) => {
     const { changeMenuState } = useContext(GlobalStateContext)
-    const { nextColor, nextHeaderFont, headerFont, nextBodyFont, bodyFont } = useContext(
-        ThemeContext
-    )
+    const {
+        nextColor,
+        nextHeaderFont,
+        headerFont,
+        nextBodyFont,
+        bodyFont,
+        primaryColor,
+        onHoverClassName,
+        bodyClassNames,
+        sectionClassNames,
+    } = useContext(ThemeContext)
 
     return (
-        <section className={styles.menu} style={{ paddingRight: "30px", ...style }}>
-            <IconButton onClick={() => changeMenuState("theme")}>
-                <IoIosCloseCircle />
-            </IconButton>
-
-            <IconButton onClick={nextColor}>
-                <GiButtonFinger />
-            </IconButton>
-            <IconButton
-                onClick={nextHeaderFont}
+        <section className={styles.menu} style={{ ...style }}>
+            <div
                 style={{
-                    width: "auto",
-                    fontFamily: headerFont,
-                    padding: "50px",
-                    fontSize: "50px",
-                    borderRadius: "20px",
+                    border: `1px dotted ${primaryColor}`,
                 }}
+                className={[bodyClassNames[0], styles.themeMenu].join(" ")}
             >
-                Header!
-            </IconButton>
+                <div
+                    onClick={nextColor}
+                    className={onHoverClassName}
+                    style={{ height: "10px", marginTop: "5px" }}
+                >
+                    <div
+                        style={{
+                            width: "100%",
+                            height: "5px",
+                            backgroundColor: primaryColor,
+                        }}
+                    ></div>
+                </div>
+                <h1
+                    onClick={nextHeaderFont}
+                    className={onHoverClassName}
+                    style={{
+                        fontFamily: headerFont,
+                        padding: "10px",
+                        borderRadius: "5px",
+                        margin: "10px",
+                        marginBottom: "0",
+                    }}
+                >
+                    Header
+                </h1>
 
-            <IconButton
-                onClick={nextBodyFont}
-                style={{
-                    width: "auto",
-                    fontFamily: bodyFont,
-                    padding: "30px",
-                    borderRadius: "20px",
-                    fontSize: "18px",
-                }}
-            >
-                The quick brown fox jumps over the lazy dog.
-            </IconButton>
+                <p
+                    onClick={nextBodyFont}
+                    className={onHoverClassName}
+                    style={{
+                        fontFamily: bodyFont,
+                        padding: "10px",
+                        borderRadius: "5px",
+                        lineHeight: "1.3",
+                        margin: "10px",
+                        marginTop: "0",
+                    }}
+                >
+                    {SAMPLE_PARAGRAPH}
+                </p>
+
+                <div
+                    style={{ padding: "5px", borderRadius: "5px" }}
+                    className={onHoverClassName}
+                >
+                    <MarkdownRender>{SAMPLE_CODE}</MarkdownRender>
+                </div>
+
+                <div
+                    className={sectionClassNames[0]}
+                    style={{
+                        margin: "5px",
+                        padding: "5px",
+                        borderRadius: "15px",
+                        display: "flex",
+                        justifyContent: "center",
+                    }}
+                >
+                    <IconButton onClick={nextColor} style={{ margin: "10px 5px" }}>
+                        <FaPaintBrush />
+                    </IconButton>
+                    <IconButton onClick={nextHeaderFont} style={{ margin: "10px 5px" }}>
+                        <CgFormatColor />
+                    </IconButton>
+                    <IconButton onClick={nextBodyFont} style={{ margin: "10px 5px" }}>
+                        <BiText />
+                    </IconButton>
+                    <IconButton style={{ margin: "10px 5px" }}>
+                        <FaCloudSun />
+                    </IconButton>
+                    <IconButton style={{ margin: "10px 5px" }}>
+                        <FaCode />
+                    </IconButton>
+                </div>
+                <div
+                    onClick={() => changeMenuState("theme")}
+                    style={{
+                        color: primaryColor,
+                        margin: "20px 0px",
+                        textAlign: "center",
+                    }}
+                >
+                    close this menu
+                </div>
+            </div>
         </section>
     )
 }
