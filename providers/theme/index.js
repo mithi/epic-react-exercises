@@ -4,7 +4,7 @@ import styles from "./Theme.module.css"
 
 export const NUMBER_OF_BODY_FONTS = 5
 export const NUMBER_OF_HEADER_FONTS = 5
-export const NUMBER_OF_CODE_THEMES = 4
+export const NUMBER_OF_CODE_THEMES = 3
 
 export const COLORS = ["pink", "green", "blue", "purple", "orange"]
 export const NUMBER_OF_COLORS = COLORS.length

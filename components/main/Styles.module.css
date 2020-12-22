@@ -68,6 +68,7 @@
     padding: 10px;
     width: 450px;
     border-radius: 10px;
+    align-self: center;
 }
 
 .nav {
