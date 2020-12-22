@@ -10,7 +10,7 @@ const Home = ({ children } = {}) => {
     return (
         <div
             className={[styles.grid, ...bodyClassNames].join(" ")}
-            style={{ fontFamily: bodyFont }}
+            style={{ fontFamily: bodyFont, height: "100vh" }}
         >
             <Nav />
             <main

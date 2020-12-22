@@ -10,9 +10,8 @@ import { IconButton } from "../button"
 const ICON_BUTTON_STYLE = { margin: "10px 5px" }
 const SAMPLE_CODE = "```python\n def hello():\n    return 'world!'"
 const SAMPLE_PARAGRAPH = `Click on any of the sample elements
-to change its style. You can
-customize: the primary color, the header font, the body font, the code
-theme, and the page theme.`
+to change its style. Customize its primary color, header font, body font, code
+theme, and page theme!`
 
 const Menu = ({ style } = {}) => {
     const { changeMenuState } = useContext(GlobalStateContext)

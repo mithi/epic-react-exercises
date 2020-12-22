@@ -8,13 +8,12 @@ const LINE_NUMBER_STYLE = {
     width: "25px",
     paddingRight: "10px",
     paddingLeft: "0",
-    borderRight: "1px solid red",
     marginRight: "20px",
     marginLeft: 0,
 }
 
 const Code = ({ children, language }) => {
-    const { codeTheme } = useContext(ThemeContext)
+    const { codeTheme, primaryColor } = useContext(ThemeContext)
 
     return (
         <div style={{ fontSize: "12px", letterSpacing: "1px" }}>
@@ -24,7 +23,10 @@ const Code = ({ children, language }) => {
                 showLineNumbers={true}
                 wrapLongLines={true}
                 wrapLines={true}
-                lineNumberStyle={LINE_NUMBER_STYLE}
+                lineNumberStyle={{
+                    ...LINE_NUMBER_STYLE,
+                    borderRight: `1px solid ${primaryColor}`,
+                }}
             >
                 {children}
             </SyntaxHighlighter>
