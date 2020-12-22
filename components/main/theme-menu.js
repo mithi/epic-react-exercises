@@ -22,6 +22,7 @@ const Menu = ({ style } = {}) => {
         nextCodeTheme,
         headerFont,
         nextBodyFont,
+        nextPageTheme,
         bodyFont,
         primaryColor,
         onHoverClassName,
@@ -106,7 +107,7 @@ const Menu = ({ style } = {}) => {
                     <IconButton onClick={nextBodyFont} style={{ margin: "10px 5px" }}>
                         <BiText />
                     </IconButton>
-                    <IconButton style={{ margin: "10px 5px" }}>
+                    <IconButton onClick={nextPageTheme} style={{ margin: "10px 5px" }}>
                         <FaCloudSun />
                     </IconButton>
                     <IconButton onClick={nextCodeTheme} style={{ margin: "10px 5px" }}>

@@ -65,10 +65,9 @@
 
 .themeMenu {
     margin: 20px;
-    padding: 10px;
+    padding: 30px;
     width: 450px;
     border-radius: 10px;
-    align-self: center;
 }
 
 .nav {
@@ -163,5 +162,7 @@
     .themeMenu {
         width: 98%;
         margin-top: 0;
+        align-self: center;
+        padding: 10px;
     }
 }

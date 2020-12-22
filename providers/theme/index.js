@@ -17,6 +17,20 @@ const colored = id => {
     }
 }
 
+const THEMES = [
+    {
+        body: styles.darkBody,
+        section: styles.darkSection,
+        button: styles.darkButton,
+    },
+    {
+        body: styles.lightBody,
+        section: styles.lightSection,
+        button: styles.lightButton,
+    },
+]
+
+const NUMBER_OF_THEMES = THEMES.length
 /*
 export const NUMBER_OF_THEMES = 3
 export const THEMES = {
@@ -35,19 +49,16 @@ const DEFAULT = {
 const ThemeContext = createContext(DEFAULT)
 
 const ThemeProvider = ({ children }) => {
-    //const [theme, setTheme] = useStickyState("theme", THEMES.dark)
+    const [themeId, setThemeId] = useStickyState(0, "themeId")
     const [colorId, setColorId] = useStickyState(0, "colorId")
     const [headerFontId, setHeaderFontId] = useStickyState(0, "headerId")
     const [bodyFontId, setBodyFontId] = useStickyState(0, "bodyFontId")
     const [codeThemeId, setCodeThemeId] = useStickyState(0, "codeThemId")
-    const bodyClassNames = [styles.darkBody]
-    const sectionClassNames = [styles.darkSection]
+    const theme = THEMES[themeId]
+    const bodyClassNames = [theme.body]
+    const sectionClassNames = [theme.section]
     const onHoverClassName = colored(colorId).onHover
-    const buttonClassNames = [
-        styles.darkButton,
-        onHoverClassName,
-        colored(colorId).classColor,
-    ]
+    const buttonClassNames = [theme.button, onHoverClassName, colored(colorId).classColor]
 
     const nextColor = () => {
         const n = (Number(colorId) + 1) % NUMBER_OF_COLORS
@@ -69,6 +80,11 @@ const ThemeProvider = ({ children }) => {
         setCodeThemeId(n)
     }
 
+    const nextPageTheme = () => {
+        const n = (Number(themeId) + 1) % NUMBER_OF_THEMES
+        setThemeId(n)
+    }
+
     const primaryColor = colored(colorId).var
     const headerFont = `var(--header-font-0${headerFontId})`
     const bodyFont = `var(--body-font-0${bodyFontId})`
@@ -81,6 +97,7 @@ const ThemeProvider = ({ children }) => {
                 primaryColor,
                 nextBodyFont,
                 codeThemeId,
+                nextPageTheme,
                 nextColor,
                 nextHeaderFont,
                 nextCodeTheme,
