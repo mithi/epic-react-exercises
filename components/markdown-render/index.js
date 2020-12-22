@@ -1,7 +1,7 @@
 import ReactMarkdown from "react-markdown"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import { useContext } from "react"
-import { ThemeContext } from "../../providers/theme/"
+import { ThemeContext } from "providers/theme/"
 
 const LINE_NUMBER_STYLE = {
     minWidth: "25px",

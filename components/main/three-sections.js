@@ -1,5 +1,5 @@
 import styles from "./Styles.module.css"
-import { ThemeContext } from "../../providers/theme"
+import { ThemeContext } from "providers/theme"
 import { useContext } from "react"
 
 const ThreeSections = ({ div1, div2, div3 }) => {

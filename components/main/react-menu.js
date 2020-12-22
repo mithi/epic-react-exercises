@@ -1,7 +1,7 @@
 import styles from "./Styles.module.css"
 import { LinkButton } from "../button"
-import { GlobalStateContext } from "../../providers/global-state"
-import { ThemeContext } from "../../providers/theme"
+import { GlobalStateContext } from "providers/global-state"
+import { ThemeContext } from "providers/theme"
 import { useContext } from "react"
 
 const Button = ({ children, section }) => {

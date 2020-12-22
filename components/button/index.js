@@ -1,7 +1,7 @@
 import styles from "./Styles.module.css"
 import Link from "next/link"
 import { useContext, useLayoutEffect, useEffect, useState } from "react"
-import { ThemeContext } from "../../providers/theme/"
+import { ThemeContext } from "providers/theme/"
 
 // ***************
 // IMPORTANT: Use isomorphic effect

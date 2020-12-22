@@ -1,8 +1,7 @@
 import styles from "./Styles.module.css"
 import Nav from "./navbar"
 import { useContext } from "react"
-import { ThemeContext } from "../../providers/theme"
-import { GlobalStateContext } from "../../providers/global-state"
+import { ThemeContext, GlobalStateContext } from "providers"
 
 const Home = ({ children } = {}) => {
     const { bodyClassNames, bodyFont } = useContext(ThemeContext)

@@ -1,5 +1,5 @@
-import Main from "../../components/main"
-import ReactMenu from "../../components/main/react-menu"
+import Main from "components/main"
+import ReactMenu from "components/main/react-menu"
 
 export default function Home() {
     return (
