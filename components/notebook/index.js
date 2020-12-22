@@ -53,7 +53,13 @@ const Header = ({ title, deployedSite, repository }) => {
     return (
         <div className={styles.header}>
             <h1 style={{ fontFamily: headerFont }}>{title}</h1>
-            <div style={{ display: "flex", justifyContent: "flex-start" }}>
+            <div
+                style={{
+                    display: "flex",
+                    justifyContent: "flex-start",
+                    marginBottom: "10px",
+                }}
+            >
                 <IconButton
                     onClick={togglePrimarySection}
                     style={BUTTON_STYLE}

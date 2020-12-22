@@ -36,7 +36,7 @@ const Menu = ({ style } = {}) => {
             <Button section="performance" children="5. React Performance" />
             <Button section="testing" children="6. Testing React Apps" />
             <Button section="suspense" children="7. React Suspense" />
-            <Button section="app" children="8. Building an Epic React App" />
+            <Button section="app" children="8. Build Epic React App" />
         </section>
     )
 }

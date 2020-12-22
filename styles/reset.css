@@ -107,7 +107,6 @@ section {
 }
 body {
     line-height: 1;
-    background-color: var(--gray-01-dark);
 }
 ol,
 ul {
