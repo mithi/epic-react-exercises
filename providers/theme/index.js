@@ -1,10 +1,11 @@
-import { createContext, useEffect } from "react"
+import { createContext } from "react"
 import useStickyState from "../../hooks/useStickyState"
 import styles from "./Theme.module.css"
+import codeThemes from "./code-themes"
 
 export const NUMBER_OF_BODY_FONTS = 5
 export const NUMBER_OF_HEADER_FONTS = 5
-export const NUMBER_OF_CODE_THEMES = 3
+export const NUMBER_OF_CODE_THEMES = codeThemes.length
 
 export const COLORS = ["pink", "green", "blue", "purple", "orange"]
 export const NUMBER_OF_COLORS = COLORS.length
@@ -28,17 +29,14 @@ const THEMES = [
         section: styles.lightSection,
         button: styles.lightButton,
     },
+    {
+        body: styles.funkyBody,
+        section: styles.funkySection,
+        button: styles.funkyButton,
+    },
 ]
 
 const NUMBER_OF_THEMES = THEMES.length
-/*
-export const NUMBER_OF_THEMES = 3
-export const THEMES = {
-    dark: "dark",
-    light: "light",
-    funky: "funky",
-}
-*/
 
 const DEFAULT = {
     bodyFont: "var(--body-font-02)",
@@ -59,6 +57,7 @@ const ThemeProvider = ({ children }) => {
     const sectionClassNames = [theme.section]
     const onHoverClassName = colored(colorId).onHover
     const buttonClassNames = [theme.button, onHoverClassName, colored(colorId).classColor]
+    const codeTheme = codeThemes[codeThemeId]
 
     const nextColor = () => {
         const n = (Number(colorId) + 1) % NUMBER_OF_COLORS
@@ -96,7 +95,7 @@ const ThemeProvider = ({ children }) => {
                 headerFont,
                 primaryColor,
                 nextBodyFont,
-                codeThemeId,
+                codeTheme,
                 nextPageTheme,
                 nextColor,
                 nextHeaderFont,
