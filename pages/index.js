@@ -1,14 +1,15 @@
-import Head from "next/head"
-import Main from "../components/main"
+import landingString from "content/landing/index.md"
+import Main from "components/main"
+import MarkdownRender from "components/markdown-render"
 
 export default function Home() {
     return (
         <div>
-            <Head>
-                <title>Epic React Notes</title>
-                <link rel="icon" href="/favicon.ico" />
-            </Head>
-            <Main />
+            <Main>
+                <div style={{ width: "100%", maxWidth: "600px", padding: "10px" }}>
+                    <MarkdownRender>{landingString}</MarkdownRender>
+                </div>
+            </Main>
         </div>
     )
 }

@@ -1,4 +1,4 @@
-import { sectionProperties, pageContents } from "../../../utils"
+import { sectionProperties, pageContents } from "utils"
 import { PageLayoutHelper } from "."
 
 export async function getStaticPaths() {

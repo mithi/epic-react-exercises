@@ -1,13 +1,12 @@
+import styles from "./Styles.module.css"
+import { useContext } from "react"
 import { IconButton, LinkButton, LinkAwayIconButton } from "../button"
 import { RiArrowLeftRightLine } from "react-icons/ri"
 import { FiGithub } from "react-icons/fi"
 import { BiRocket } from "react-icons/bi"
-import { GlobalStateContext } from "../../providers/global-state"
-import { ThemeContext } from "../../providers/theme"
-import { useContext } from "react"
+import { GlobalStateContext, ThemeContext } from "providers"
 import Main from "../main"
 import NotebookLayout from "../main/three-sections"
-import styles from "./Styles.module.css"
 
 const Pagination = ({ numberOfPages, currentPageId, pathname }) => {
     const { headerFont, primaryColor } = useContext(ThemeContext)
@@ -37,6 +36,16 @@ const Pagination = ({ numberOfPages, currentPageId, pathname }) => {
     )
 }
 
+const BUTTON_STYLE = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    margin: "3px",
+    width: "30px",
+    height: "30px",
+    fontSize: "15px",
+}
+
 const Header = ({ title, deployedSite, repository }) => {
     const { togglePrimarySection } = useContext(GlobalStateContext)
     const { headerFont } = useContext(ThemeContext)
@@ -44,17 +53,32 @@ const Header = ({ title, deployedSite, repository }) => {
     return (
         <div className={styles.header}>
             <h1 style={{ fontFamily: headerFont }}>{title}</h1>
-            <div style={{ display: "flex", justifyContent: "flex-start" }}>
+            <div
+                style={{
+                    display: "flex",
+                    justifyContent: "flex-start",
+                    marginBottom: "10px",
+                }}
+            >
                 <IconButton
                     onClick={togglePrimarySection}
-                    className={styles.linkAwayIcon}
+                    style={BUTTON_STYLE}
+                    aria-label={"switch left and right sections"}
                 >
                     <RiArrowLeftRightLine />
                 </IconButton>
-                <LinkAwayIconButton page={repository} className={styles.linkAwayIcon}>
+                <LinkAwayIconButton
+                    page={repository}
+                    style={BUTTON_STYLE}
+                    aria-label={"go to source repository"}
+                >
                     <FiGithub />
                 </LinkAwayIconButton>
-                <LinkAwayIconButton page={deployedSite} className={styles.linkAwayIcon}>
+                <LinkAwayIconButton
+                    page={deployedSite}
+                    style={BUTTON_STYLE}
+                    aria-label={"go to source deployed site"}
+                >
                     <BiRocket />
                 </LinkAwayIconButton>
             </div>

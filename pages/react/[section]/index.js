@@ -1,6 +1,6 @@
-import PageLayout from "../../../components/notebook"
-import MarkdownRender from "../../../components/markdown-render"
-import { sectionProperties, pageContents } from "../../../utils"
+import PageLayout from "components/notebook"
+import MarkdownRender from "components/markdown-render"
+import { sectionProperties, pageContents } from "utils"
 
 export const PageLayoutHelper = ({
     codeString,

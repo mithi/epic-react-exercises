@@ -1,5 +1,5 @@
 import { createContext } from "react"
-import useStickyState from "../../hooks/useStickyState"
+import useStickyState from "hooks/useStickyState"
 
 const GlobalStateContext = createContext({})
 

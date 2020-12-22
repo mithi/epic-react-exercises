@@ -1,13 +1,12 @@
 import styles from "./Styles.module.css"
+import { useContext } from "react"
 import { GoOctoface } from "react-icons/go"
 import { MdSettings } from "react-icons/md"
-// import { BsThreeDots } from "react-icons/bs"
 import { BiCoffeeTogo } from "react-icons/bi"
 import { FaReact } from "react-icons/fa"
+import { GlobalStateContext, ThemeContext } from "providers"
+
 import { IconButton, LinkAwayIconButton } from "../button"
-import { useContext } from "react"
-import { GlobalStateContext } from "../../providers/global-state"
-import { ThemeContext } from "../../providers/theme"
 import ReactMenu from "./react-menu"
 import ThemeMenu from "./theme-menu"
 
@@ -25,19 +24,23 @@ const Nav = () => {
                         onClick={() => changeMenuState("react")}
                         onMouseEnter={() => changeMenuState("react")}
                         children={<FaReact />}
+                        aria-label={"react menu"}
                     />
                     <IconButton
                         onClick={() => changeMenuState("theme")}
                         onMouseEnter={() => changeMenuState("theme")}
+                        aria-label={"theme menu"}
                         children={<MdSettings />}
                     />
                     <LinkAwayIconButton
                         page="https://github.com/mithi"
                         children={<GoOctoface />}
+                        aria-label={"follow me on github"}
                     />
                     <LinkAwayIconButton
                         page="https://ko-fi.com/minimithi"
                         children={<BiCoffeeTogo />}
+                        aria-label={"buy me a coffee"}
                     />
                 </div>
             </nav>
