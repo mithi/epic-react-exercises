@@ -36,6 +36,16 @@ const Pagination = ({ numberOfPages, currentPageId, pathname }) => {
     )
 }
 
+const BUTTON_STYLE = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    margin: "3px",
+    width: "30px",
+    height: "30px",
+    fontSize: "15px",
+}
+
 const Header = ({ title, deployedSite, repository }) => {
     const { togglePrimarySection } = useContext(GlobalStateContext)
     const { headerFont } = useContext(ThemeContext)
@@ -44,16 +54,13 @@ const Header = ({ title, deployedSite, repository }) => {
         <div className={styles.header}>
             <h1 style={{ fontFamily: headerFont }}>{title}</h1>
             <div style={{ display: "flex", justifyContent: "flex-start" }}>
-                <IconButton
-                    onClick={togglePrimarySection}
-                    className={styles.linkAwayIcon}
-                >
+                <IconButton onClick={togglePrimarySection} style={BUTTON_STYLE}>
                     <RiArrowLeftRightLine />
                 </IconButton>
-                <LinkAwayIconButton page={repository} className={styles.linkAwayIcon}>
+                <LinkAwayIconButton page={repository} style={BUTTON_STYLE}>
                     <FiGithub />
                 </LinkAwayIconButton>
-                <LinkAwayIconButton page={deployedSite} className={styles.linkAwayIcon}>
+                <LinkAwayIconButton page={deployedSite} style={BUTTON_STYLE}>
                     <BiRocket />
                 </LinkAwayIconButton>
             </div>

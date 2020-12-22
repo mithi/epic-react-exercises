@@ -23,7 +23,6 @@ const useButtonClasses = (className, isIcon) => {
             ...buttonClassNames,
             styles.button,
             isIcon ? styles.buttonIcon : "",
-            ,
             className,
         ].join(" ")
 

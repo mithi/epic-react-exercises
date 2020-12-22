@@ -5,10 +5,14 @@
     align-items: center;
     margin-top: 5px;
     margin-bottom: 20px;
+    margin-left: 5px;
 }
 
 .header {
     margin-top: 10px;
+    margin-left: 5px;
+    margin-bottom: 5px;
+    margin-right: 5px;
     display: flex;
     justify-content: space-between;
     flex-wrap: nowrap;
@@ -28,11 +32,6 @@
 .linkButton {
     border-radius: 25%;
     composes: smallButton;
-}
-
-.linkAwayIcon {
-    composes: smallButton;
-    padding: 0;
 }
 
 @media (max-width: 850px) {
