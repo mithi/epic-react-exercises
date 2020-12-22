@@ -1,12 +1,12 @@
+import styles from "./Styles.module.css"
+import { useContext } from "react"
 import { IconButton, LinkButton, LinkAwayIconButton } from "../button"
 import { RiArrowLeftRightLine } from "react-icons/ri"
 import { FiGithub } from "react-icons/fi"
 import { BiRocket } from "react-icons/bi"
 import { GlobalStateContext, ThemeContext } from "providers"
-import { useContext } from "react"
 import Main from "../main"
 import NotebookLayout from "../main/three-sections"
-import styles from "./Styles.module.css"
 
 const Pagination = ({ numberOfPages, currentPageId, pathname }) => {
     const { headerFont, primaryColor } = useContext(ThemeContext)

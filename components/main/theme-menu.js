@@ -1,12 +1,11 @@
 import styles from "./Styles.module.css"
-import MarkdownRender from "../markdown-render"
-import { GlobalStateContext } from "providers/global-state"
-import { ThemeContext } from "providers/theme"
 import { useContext } from "react"
-import { IconButton } from "../button"
 import { FaCloudSun, FaCode, FaPaintBrush } from "react-icons/fa"
 import { CgFormatColor } from "react-icons/cg"
 import { BiText } from "react-icons/bi"
+import { ThemeContext, GlobalStateContext } from "providers"
+import MarkdownRender from "../markdown-render"
+import { IconButton } from "../button"
 
 const SAMPLE_CODE = "```python\n def hello():\n    return 'world!'"
 const SAMPLE_PARAGRAPH = `Click on any of the sample elements

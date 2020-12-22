@@ -1,12 +1,12 @@
 import styles from "./Styles.module.css"
+import { useContext } from "react"
 import { GoOctoface } from "react-icons/go"
 import { MdSettings } from "react-icons/md"
-// import { BsThreeDots } from "react-icons/bs"
 import { BiCoffeeTogo } from "react-icons/bi"
 import { FaReact } from "react-icons/fa"
-import { IconButton, LinkAwayIconButton } from "../button"
-import { useContext } from "react"
 import { GlobalStateContext, ThemeContext } from "providers"
+
+import { IconButton, LinkAwayIconButton } from "../button"
 import ReactMenu from "./react-menu"
 import ThemeMenu from "./theme-menu"
 
