@@ -1,11 +1,3 @@
-.headerFont0 {
-    font-family: var(--header-font-00);
-}
-
-.textFont0 {
-    font-family: var(--text-font-00);
-}
-
 /***************
     DARK THEME
  ***************/
@@ -21,13 +13,34 @@
 
 .darkButton {
     background-color: var(--gray-04-medium);
-    outline-color: rgba(0, 0, 0, 0.1);
+    outline: 0;
 }
 
 .darkButton:hover {
     color: var(--gray-01-dark);
 }
 
+/***************
+    LIGHT THEME
+ ***************/
+
+.lightBody {
+    color: var(--gray-01-dark);
+    background-color: var(--gray-02-medium-light);
+}
+
+.lightSection {
+    background-color: var(--gray-03-light-2);
+}
+
+.lightButton {
+    background-color: var(--gray-02-medium-light);
+    outline: 0;
+}
+
+.lightButton:hover {
+    color: var(--gray-00-light);
+}
 /***************
     COLORS
  ***************/
@@ -36,14 +49,38 @@
     background-color: var(--green-0);
 }
 
+.pinkBgOnHover:hover {
+    background-color: var(--pink-0);
+}
+.greenBgOnHover:hover {
+    background-color: var(--green-0);
+}
+.blueBgOnHover:hover {
+    background-color: var(--blue-0);
+}
+.purpleBgOnHover:hover {
+    background-color: var(--purple-0);
+}
+.orangeBgOnHover:hover {
+    background-color: var(--orange-0);
+}
+
+.pinkColor {
+    color: var(--pink-0);
+}
 .greenColor {
     color: var(--green-0);
 }
-
-.redBgOnHover:hover {
-    background-color: #ff0000;
+.blueColor {
+    color: var(--blue-0);
+}
+.purpleColor {
+    color: var(--purple-0);
+}
+.orangeColor {
+    color: var(--orange-0);
 }
 
-.redColor {
-    color: #ff0000;
+.greenColor {
+    color: var(--green-0);
 }

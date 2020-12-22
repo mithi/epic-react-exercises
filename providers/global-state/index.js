@@ -5,23 +5,21 @@ const GlobalStateContext = createContext({})
 
 const GlobalStateProvider = ({ children }) => {
     let [primarySection, setPrimarySection] = useStickyState("notes", "mode")
-    let [fadeMain, setFadeMain] = useStickyState("false", "fadeMain")
-    let [showReactMenu, setShowReactMenu] = useStickyState("false", "showReactMenu")
+    let [menuState, setMenuState] = useStickyState("none")
 
     const togglePrimarySection = () => {
         setPrimarySection(primarySection === "notes" ? "code" : "notes", "mode")
     }
 
-    const flipFaded = () => {
-        if (showReactMenu === "true") {
-            setFadeMain("false")
-            setShowReactMenu("false")
+    const changeMenuState = menuType => {
+        let nextState
+        if (menuType === "react") {
+            nextState = menuState !== "react" ? "react" : "none"
+        } else if (menuType === "theme") {
+            nextState = menuState !== "theme" ? "theme" : "none"
         }
 
-        if (showReactMenu === "false") {
-            setFadeMain("true")
-            setShowReactMenu("true")
-        }
+        setMenuState(nextState)
     }
 
     return (
@@ -29,9 +27,8 @@ const GlobalStateProvider = ({ children }) => {
             value={{
                 primarySection,
                 togglePrimarySection,
-                fadeMain,
-                showReactMenu,
-                flipFaded,
+                menuState,
+                changeMenuState,
             }}
         >
             {children}

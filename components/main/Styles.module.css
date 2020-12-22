@@ -42,7 +42,15 @@
     composes: common;
 }
 
-.mainReactMenu {
+.reactMenuButton {
+    font-size: 1.25rem;
+    border-radius: 15px;
+    padding: 15px;
+    margin: 0;
+    margin-bottom: 15px;
+}
+
+.menu {
     position: absolute;
     top: 5px;
     left: 80px;
@@ -53,6 +61,13 @@
     align-items: flex-start;
     line-height: 0.75;
     width: 100%;
+}
+
+.themeMenu {
+    margin: 20px;
+    padding: 30px;
+    width: 450px;
+    border-radius: 10px;
 }
 
 .nav {
@@ -88,7 +103,7 @@
 
     .nav {
         height: 70px;
-        width: 100%;
+        width: 98%;
         padding: 0px;
         grid-area: 1 / 1 / 2 / 2;
     }
@@ -109,7 +124,7 @@
     .div0 {
         margin: 0;
         margin-bottom: 10px;
-        width: 100%;
+        width: 98%;
     }
 
     .div3 {
@@ -135,12 +150,19 @@
         display: flex;
     }
 
-    .mainReactMenu {
+    .menu {
         position: absolute;
         width: 100%;
         top: 80px;
         left: 0px;
         z-index: 1;
         composes: div1;
+    }
+
+    .themeMenu {
+        width: 98%;
+        margin-top: 0;
+        align-self: center;
+        padding: 10px;
     }
 }

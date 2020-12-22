@@ -1,76 +1,51 @@
 import styles from "./Styles.module.css"
 import Link from "next/link"
-import { useContext } from "react"
+import { useContext, useLayoutEffect, useState } from "react"
 import { ThemeContext } from "../../providers/theme/"
 
-const TextButton = ({ children, classNames = [], ...otherprops } = {}) => {
+const useButtonClasses = (className, isIcon) => {
     const { buttonClassNames } = useContext(ThemeContext)
-    const className = [styles.button, ...buttonClassNames, ...classNames].join(" ")
-    return <button {...{ className, ...otherprops }}>{children}</button>
+    const [buttonClasses, setButtonClasses] = useState(buttonClassNames)
+
+    useLayoutEffect(() => {
+        let final = [
+            ...buttonClassNames,
+            styles.button,
+            isIcon ? styles.buttonIcon : "",
+            ,
+            className,
+        ].join(" ")
+
+        setButtonClasses(final)
+    }, [className, isIcon, buttonClassNames])
+
+    return buttonClasses
 }
 
-const LinkButton = ({ children, page, style = {}, classNames = [] } = {}) => {
-    const { buttonClassNames } = useContext(ThemeContext)
-    const className = [styles.button, ...buttonClassNames, ...classNames].join(" ")
-    return (
-        <>
-            <Link href={page}>
-                <a>
-                    <button {...{ className, style }}>{children}</button>
-                </a>
-            </Link>
-        </>
-    )
-}
-
-const LinkIconButton = props => {
-    const { children, page, ...otherprops } = props
-    const { buttonClassNames } = useContext(ThemeContext)
-    const className = [...buttonClassNames, styles.button, styles.buttonIcon].join(" ")
-
-    return (
+const LinkButton = ({ children, page, className, ...otherprops }) => (
+    <>
         <Link href={page}>
             <a>
-                <button {...{ className, ...otherprops }}>{children}</button>
+                <button className={useButtonClasses(className)} {...otherprops}>
+                    {children}
+                </button>
             </a>
         </Link>
-    )
-}
+    </>
+)
 
-const LinkAwayIconButton = props => {
-    const { children, page, className, ...otherprops } = props
-    const { buttonClassNames } = useContext(ThemeContext)
-    const classNameString = [
-        ...buttonClassNames,
-        styles.button,
-        styles.buttonIcon,
-        className,
-    ].join(" ")
-
-    return (
-        <a href={page} target="_blank" rel="noopener noreferrer">
-            <button className={classNameString} {...otherprops}>
-                {children}
-            </button>
-        </a>
-    )
-}
-
-const IconButton = props => {
-    const { children, className, ...otherprops } = props
-    const { buttonClassNames } = useContext(ThemeContext)
-    const classNameString = [
-        ...buttonClassNames,
-        styles.button,
-        styles.buttonIcon,
-        className,
-    ].join(" ")
-
-    return (
-        <button className={classNameString} {...otherprops}>
+const LinkAwayIconButton = ({ children, page, className, ...otherprops }) => (
+    <a href={page} target="_blank" rel="noopener noreferrer">
+        <button className={useButtonClasses(className, true)} {...otherprops}>
             {children}
         </button>
-    )
-}
+    </a>
+)
 
-export { LinkButton, LinkAwayIconButton, LinkIconButton, IconButton, TextButton }
+const IconButton = ({ children, className, ...otherprops }) => (
+    <button className={useButtonClasses(className, true)} {...otherprops}>
+        {children}
+    </button>
+)
+
+export { LinkButton, LinkAwayIconButton, IconButton }
