@@ -1,16 +1,24 @@
 import styles from "./Styles.module.css"
-import { useContext } from "react"
+import { useContext, useState, useEffect } from "react"
 import { ThemeContext, GlobalStateContext } from "providers"
 import Nav from "./navbar"
+import { MdInbox } from "react-icons/md"
 
 const Home = ({ children } = {}) => {
     const { bodyClassNames, bodyFont } = useContext(ThemeContext)
     const { menuState } = useContext(GlobalStateContext)
+    const [visible, setVisible] = useState(false)
+
+    useEffect(() => setVisible(true), [])
 
     return (
         <div
             className={[styles.grid, ...bodyClassNames].join(" ")}
-            style={{ fontFamily: bodyFont, height: "100vh" }}
+            style={{
+                overflow: "auto",
+                fontFamily: bodyFont,
+                visibility: visible ? "visible" : "hidden",
+            }}
         >
             <Nav />
             <main

@@ -38,13 +38,7 @@ const THEMES = [
 
 const NUMBER_OF_THEMES = THEMES.length
 
-const DEFAULT = {
-    bodyFont: "var(--body-font-02)",
-    headerFont: "var(--header-font-01)",
-    primaryColor: colored(COLORS[0]).var,
-}
-
-const ThemeContext = createContext(DEFAULT)
+const ThemeContext = createContext({})
 
 const ThemeProvider = ({ children }) => {
     const [themeId, setThemeId] = useStickyState(0, "themeId")

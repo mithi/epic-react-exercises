@@ -6,7 +6,7 @@ export default function Home() {
     return (
         <div>
             <Main>
-                <div style={{ width: "100%", maxWidth: "600px", padding: "30px" }}>
+                <div style={{ width: "100%", maxWidth: "600px", padding: "10px" }}>
                     <MarkdownRender>{landingString}</MarkdownRender>
                 </div>
             </Main>
