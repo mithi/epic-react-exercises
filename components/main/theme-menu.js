@@ -98,6 +98,10 @@ const Menu = ({ style } = {}) => {
                         justifyContent: "center",
                     }}
                 >
+                    <IconButton onClick={nextPageTheme} style={{ margin: "10px 5px" }}>
+                        <FaCloudSun />
+                    </IconButton>
+
                     <IconButton onClick={nextColor} style={{ margin: "10px 5px" }}>
                         <FaPaintBrush />
                     </IconButton>
@@ -106,9 +110,6 @@ const Menu = ({ style } = {}) => {
                     </IconButton>
                     <IconButton onClick={nextBodyFont} style={{ margin: "10px 5px" }}>
                         <BiText />
-                    </IconButton>
-                    <IconButton onClick={nextPageTheme} style={{ margin: "10px 5px" }}>
-                        <FaCloudSun />
                     </IconButton>
                     <IconButton onClick={nextCodeTheme} style={{ margin: "10px 5px" }}>
                         <FaCode />
