@@ -7,6 +7,7 @@ import { ThemeContext, GlobalStateContext } from "providers"
 import MarkdownRender from "../markdown-render"
 import { IconButton } from "../button"
 
+const ICON_BUTTON_STYLE = { margin: "10px 5px" }
 const SAMPLE_CODE = "```python\n def hello():\n    return 'world!'"
 const SAMPLE_PARAGRAPH = `Click on any of the sample elements
 to change its style. You can
@@ -36,6 +37,7 @@ const Menu = ({ style } = {}) => {
                     border: `1px dotted ${primaryColor}`,
                 }}
                 className={[bodyClassNames[0], styles.themeMenu].join(" ")}
+                aria-label={"change main color"}
             >
                 <div
                     onClick={nextColor}
@@ -97,20 +99,40 @@ const Menu = ({ style } = {}) => {
                         justifyContent: "center",
                     }}
                 >
-                    <IconButton onClick={nextPageTheme} style={{ margin: "10px 5px" }}>
+                    <IconButton
+                        onClick={nextPageTheme}
+                        style={ICON_BUTTON_STYLE}
+                        aria-label={"change page theme"}
+                    >
                         <FaCloudSun />
                     </IconButton>
 
-                    <IconButton onClick={nextColor} style={{ margin: "10px 5px" }}>
+                    <IconButton
+                        onClick={nextColor}
+                        style={ICON_BUTTON_STYLE}
+                        aria-label={"change main color"}
+                    >
                         <FaPaintBrush />
                     </IconButton>
-                    <IconButton onClick={nextHeaderFont} style={{ margin: "10px 5px" }}>
+                    <IconButton
+                        onClick={nextHeaderFont}
+                        style={ICON_BUTTON_STYLE}
+                        aria-label={"change header font"}
+                    >
                         <CgFormatColor />
                     </IconButton>
-                    <IconButton onClick={nextBodyFont} style={{ margin: "10px 5px" }}>
+                    <IconButton
+                        onClick={nextBodyFont}
+                        style={ICON_BUTTON_STYLE}
+                        aria-label={"change body font"}
+                    >
                         <BiText />
                     </IconButton>
-                    <IconButton onClick={nextCodeTheme} style={{ margin: "10px 5px" }}>
+                    <IconButton
+                        onClick={nextCodeTheme}
+                        style={ICON_BUTTON_STYLE}
+                        aria-label={"change code theme"}
+                    >
                         <FaCode />
                     </IconButton>
                 </div>

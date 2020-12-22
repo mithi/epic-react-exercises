@@ -24,19 +24,23 @@ const Nav = () => {
                         onClick={() => changeMenuState("react")}
                         onMouseEnter={() => changeMenuState("react")}
                         children={<FaReact />}
+                        aria-label={"react menu"}
                     />
                     <IconButton
                         onClick={() => changeMenuState("theme")}
                         onMouseEnter={() => changeMenuState("theme")}
+                        aria-label={"theme menu"}
                         children={<MdSettings />}
                     />
                     <LinkAwayIconButton
                         page="https://github.com/mithi"
                         children={<GoOctoface />}
+                        aria-label={"follow me on github"}
                     />
                     <LinkAwayIconButton
                         page="https://ko-fi.com/minimithi"
                         children={<BiCoffeeTogo />}
+                        aria-label={"buy me a coffee"}
                     />
                 </div>
             </nav>

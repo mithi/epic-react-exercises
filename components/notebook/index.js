@@ -54,13 +54,25 @@ const Header = ({ title, deployedSite, repository }) => {
         <div className={styles.header}>
             <h1 style={{ fontFamily: headerFont }}>{title}</h1>
             <div style={{ display: "flex", justifyContent: "flex-start" }}>
-                <IconButton onClick={togglePrimarySection} style={BUTTON_STYLE}>
+                <IconButton
+                    onClick={togglePrimarySection}
+                    style={BUTTON_STYLE}
+                    aria-label={"switch left and right sections"}
+                >
                     <RiArrowLeftRightLine />
                 </IconButton>
-                <LinkAwayIconButton page={repository} style={BUTTON_STYLE}>
+                <LinkAwayIconButton
+                    page={repository}
+                    style={BUTTON_STYLE}
+                    aria-label={"go to source repository"}
+                >
                     <FiGithub />
                 </LinkAwayIconButton>
-                <LinkAwayIconButton page={deployedSite} style={BUTTON_STYLE}>
+                <LinkAwayIconButton
+                    page={deployedSite}
+                    style={BUTTON_STYLE}
+                    aria-label={"go to source deployed site"}
+                >
                     <BiRocket />
                 </LinkAwayIconButton>
             </div>
