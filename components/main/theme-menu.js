@@ -123,7 +123,7 @@ const Menu = ({ style } = {}) => {
                         cursor: "pointer",
                     }}
                 >
-                    close this menu
+                    <a>close this menu</a>
                 </div>
             </div>
         </section>

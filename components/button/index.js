@@ -1,7 +1,7 @@
 import styles from "./Styles.module.css"
 import Link from "next/link"
 import { useContext, useLayoutEffect, useEffect, useState } from "react"
-import { ThemeContext } from "providers/theme/"
+import { ThemeContext } from "providers"
 
 // ***************
 // IMPORTANT: Use isomorphic effect
@@ -35,7 +35,7 @@ const useButtonClasses = (className, isIcon) => {
 const LinkButton = ({ children, page, className, ...otherprops }) => (
     <>
         <Link href={page}>
-            <a>
+            <a style={{ textDecoration: "none" }}>
                 <button className={useButtonClasses(className)} {...otherprops}>
                     {children}
                 </button>
