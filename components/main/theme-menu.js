@@ -121,6 +121,7 @@ const Menu = ({ style } = {}) => {
                         color: primaryColor,
                         margin: "20px 0px",
                         textAlign: "center",
+                        cursor: "pointer",
                     }}
                 >
                     close this menu

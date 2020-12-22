@@ -3,10 +3,12 @@
     justify-content: flex-start;
     flex-wrap: wrap;
     align-items: center;
+    margin-top: 5px;
     margin-bottom: 20px;
 }
 
 .header {
+    margin-top: 10px;
     display: flex;
     justify-content: space-between;
     flex-wrap: nowrap;

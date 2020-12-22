@@ -41,6 +41,29 @@
 .lightButton:hover {
     color: var(--gray-00-light);
 }
+
+/***************
+    FUNKY THEME
+ ***************/
+
+.funkyBody {
+    color: #d9b000;
+    background-color: #008f95;
+}
+
+.funkySection {
+    background-color: #037a7e;
+}
+
+.funkyButton {
+    background-color: #b9382d;
+    outline: 0;
+}
+
+.funkyButton:hover {
+    color: #01810c;
+}
+
 /***************
     COLORS
  ***************/
