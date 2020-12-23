@@ -1,7 +1,7 @@
 import Main from "components/main"
 import ReactMenu from "components/main/react-menu"
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps() {
     return {
         redirect: {
             destination: "/react",

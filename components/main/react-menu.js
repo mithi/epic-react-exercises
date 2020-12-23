@@ -22,6 +22,7 @@ const Button = ({ children, section }) => {
 
 const Menu = ({ style } = {}) => {
     const { changeMenuState } = useContext(GlobalStateContext)
+    const { primaryColor } = useContext(ThemeContext)
 
     return (
         <section
@@ -37,6 +38,17 @@ const Menu = ({ style } = {}) => {
             <Button section="testing" children="6. Testing React Apps" />
             <Button section="suspense" children="7. React Suspense" />
             <Button section="app" children="8. Build Epic React App" />
+            <a
+                style={{
+                    color: primaryColor,
+                    marginTop: "5px",
+                    marginLeft: "10px",
+                    cursor: "pointer",
+                }}
+                onClick={() => changeMenuState("react")}
+            >
+                [close]
+            </a>
         </section>
     )
 }

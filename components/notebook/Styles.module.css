@@ -13,6 +13,7 @@
     margin-left: 5px;
     margin-bottom: 5px;
     margin-right: 5px;
+    padding-right: 5px;
     display: flex;
     justify-content: space-between;
     flex-wrap: nowrap;
