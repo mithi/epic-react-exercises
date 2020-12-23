@@ -1,10 +1,11 @@
 import styles from "./Styles.module.css"
 import { useContext } from "react"
-import { IconButton, LinkButton, LinkAwayIconButton } from "../button"
 import { RiArrowLeftRightLine } from "react-icons/ri"
 import { FiGithub } from "react-icons/fi"
 import { BiRocket } from "react-icons/bi"
+import { VscDebug } from "react-icons/vsc"
 import { GlobalStateContext, ThemeContext } from "providers"
+import { IconButton, LinkButton, LinkAwayIconButton } from "../button"
 import Main from "../main"
 import NotebookLayout from "../main/three-sections"
 
@@ -80,6 +81,13 @@ const Header = ({ title, deployedSite, repository }) => {
                     aria-label={"go to source deployed site"}
                 >
                     <BiRocket />
+                </LinkAwayIconButton>
+                <LinkAwayIconButton
+                    page="https://github.com/mithi/epic-react-notes/issues/new"
+                    style={BUTTON_STYLE}
+                    aria-label={"report a bug"}
+                >
+                    <VscDebug />
                 </LinkAwayIconButton>
             </div>
         </div>

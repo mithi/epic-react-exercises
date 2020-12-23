@@ -2,7 +2,6 @@ import styles from "./Styles.module.css"
 import { useContext, useState, useEffect } from "react"
 import { ThemeContext, GlobalStateContext } from "providers"
 import Nav from "./navbar"
-import { MdInbox } from "react-icons/md"
 
 const Home = ({ children } = {}) => {
     const { bodyClassNames, bodyFont } = useContext(ThemeContext)
