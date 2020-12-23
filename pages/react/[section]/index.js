@@ -1,6 +1,10 @@
+import dynamic from "next/dynamic"
 import PageLayout from "components/notebook"
-import MarkdownRender from "components/markdown-render"
 import { sectionProperties, pageContents } from "utils"
+
+const DynamicMarkdownRender = dynamic(() => import("components/markdown-render"), {
+    loading: () => <p>Loading..</p>,
+})
 
 export const PageLayoutHelper = ({
     codeString,
@@ -12,8 +16,8 @@ export const PageLayoutHelper = ({
 }) => (
     <PageLayout
         {...{
-            code: <MarkdownRender children={codeString} />,
-            notes: <MarkdownRender children={notesString} />,
+            code: <DynamicMarkdownRender children={codeString} />,
+            notes: <DynamicMarkdownRender children={notesString} />,
             pageId,
             numberOfPages,
             properties,
