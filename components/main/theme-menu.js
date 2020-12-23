@@ -1,10 +1,10 @@
+import dynamic from "next/dynamic"
 import styles from "./Styles.module.css"
 import { useContext } from "react"
 import { FaCloudSun, FaCode, FaPaintBrush } from "react-icons/fa"
 import { CgFormatColor } from "react-icons/cg"
 import { BiText } from "react-icons/bi"
 import { ThemeContext, GlobalStateContext } from "providers"
-import MarkdownRender from "../markdown-render"
 import { IconButton } from "../button"
 
 const ICON_BUTTON_STYLE = { margin: "10px 5px" }
@@ -12,6 +12,10 @@ const SAMPLE_CODE = "```python\n def hello():\n    return 'world!'"
 const SAMPLE_PARAGRAPH = `Click on any of the sample elements
 to change its style. Customize its primary color, header font, body font, code
 theme, and page theme!`
+
+const DynamicMarkdownRender = dynamic(() => import("components/markdown-render"), {
+    loading: () => <p>Loading..</p>,
+})
 
 const Menu = ({ style } = {}) => {
     const { changeMenuState } = useContext(GlobalStateContext)
@@ -86,7 +90,7 @@ const Menu = ({ style } = {}) => {
                     className={onHoverClassName}
                     onClick={nextCodeTheme}
                 >
-                    <MarkdownRender>{SAMPLE_CODE}</MarkdownRender>
+                    <DynamicMarkdownRender>{SAMPLE_CODE}</DynamicMarkdownRender>
                 </div>
 
                 <div
