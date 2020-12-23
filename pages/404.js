@@ -1,8 +1,8 @@
-import Main from "components/main"
-import { FaBug } from "react-icons/fa"
 import { ThemeContext } from "providers"
 import { useContext } from "react"
+import Main from "components/main"
 import { LinkAwayIconButton } from "components/button"
+import { FaBug } from "react-icons/fa"
 
 export default function FourOhfour() {
     const { headerFont } = useContext(ThemeContext)
@@ -34,7 +34,7 @@ export default function FourOhfour() {
                     </h1>
                     <LinkAwayIconButton
                         aria-label={"report a bug"}
-                        page="https://https://github.com/mithi/epic-react-notes/issues/new"
+                        page="https://github.com/mithi/epic-react-notes/issues/new"
                     >
                         <FaBug />
                     </LinkAwayIconButton>
