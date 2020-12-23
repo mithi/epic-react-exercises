@@ -7,7 +7,7 @@ export const NUMBER_OF_BODY_FONTS = 5
 export const NUMBER_OF_HEADER_FONTS = 5
 export const NUMBER_OF_CODE_THEMES = codeThemes.length
 
-export const COLORS = ["pink", "green", "blue", "purple", "orange"]
+export const COLORS = ["blue", "pink", "green", "purple", "orange"]
 export const NUMBER_OF_COLORS = COLORS.length
 
 const colored = id => {

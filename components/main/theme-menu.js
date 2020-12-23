@@ -67,7 +67,7 @@ const Menu = ({ style } = {}) => {
                         marginBottom: "0",
                     }}
                 >
-                    Header
+                    Heading
                 </h1>
 
                 <p
@@ -86,7 +86,7 @@ const Menu = ({ style } = {}) => {
                 </p>
 
                 <div
-                    style={{ padding: "5px", borderRadius: "5px" }}
+                    style={{ padding: "5px", borderRadius: "5px", marginBottom: "10px" }}
                     className={onHoverClassName}
                     onClick={nextCodeTheme}
                 >
@@ -144,12 +144,13 @@ const Menu = ({ style } = {}) => {
                     onClick={() => changeMenuState("theme")}
                     style={{
                         color: primaryColor,
-                        margin: "20px 0px",
+                        marginTop: "20px",
+                        marginBottom: "10px",
                         textAlign: "center",
                         cursor: "pointer",
                     }}
                 >
-                    <a>close this menu</a>
+                    <a> [close]</a>
                 </div>
             </div>
         </section>
