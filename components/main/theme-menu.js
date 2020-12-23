@@ -34,6 +34,7 @@ const Menu = ({ style } = {}) => {
             <div
                 style={{
                     border: `1px dotted ${primaryColor}`,
+                    marginBottom: "30px",
                 }}
                 className={[bodyClassNames[0], styles.themeMenu].join(" ")}
                 aria-label={"change main color"}
