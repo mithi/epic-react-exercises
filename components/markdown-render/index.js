@@ -80,6 +80,10 @@ const renderers = {
     link: props => {
         return <LinkAwayText {...props} />
     },
+
+    paragraph: props => {
+        return <p style={{ marginBottom: "15px" }}>{props.children}</p>
+    },
 }
 
 const MarkdownRender = ({ children }) => <ReactMarkdown {...{ renderers, children }} />
