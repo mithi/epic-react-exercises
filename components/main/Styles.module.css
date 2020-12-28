@@ -28,19 +28,23 @@
     align-items: center;
 }
 
+.div0 {
+    padding: 15px;
+}
+
 .div1 {
     grid-area: 1 / 1 / 3 / 2;
-    composes: common;
+    composes: common div0;
 }
 
 .div2 {
     grid-area: 1 / 2 / 2 / 3;
-    composes: common;
+    composes: common div0;
 }
 
 .div3 {
     grid-area: 2 / 2 / 3 / 3;
-    composes: common;
+    composes: common div0;
 }
 
 .reactMenuButton {
@@ -146,7 +150,7 @@
     }
 
     .menu {
-        position: absolute;
+        position: relative;
         width: 100%;
         top: 80px;
         left: 0px;
