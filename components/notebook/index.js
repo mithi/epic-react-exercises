@@ -53,7 +53,7 @@ const Header = ({ title, deployedSite, repository }) => {
 
     return (
         <div className={styles.header}>
-            <h1 style={{ fontFamily: headerFont }}>{title}</h1>
+            <h1 style={{ fontFamily: headerFont, marginRight: "10px" }}>{title}</h1>
             <div
                 style={{
                     display: "flex",
