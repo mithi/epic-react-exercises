@@ -3,7 +3,7 @@ import { useContext } from "react"
 import { RiArrowLeftRightLine } from "react-icons/ri"
 import { FiGithub } from "react-icons/fi"
 import { BiRocket } from "react-icons/bi"
-import { VscDebug } from "react-icons/vsc"
+import { BsPencilSquare } from "react-icons/bs"
 import { GlobalStateContext, ThemeContext } from "providers"
 import { IconButton, LinkButton, LinkAwayIconButton } from "../button"
 import Main from "../main"
@@ -47,13 +47,13 @@ const BUTTON_STYLE = {
     fontSize: "15px",
 }
 
-const Header = ({ title, deployedSite, repository }) => {
+const Header = ({ title, deployedSite, repository, editPath }) => {
     const { togglePrimarySection } = useContext(GlobalStateContext)
     const { headerFont } = useContext(ThemeContext)
 
     return (
         <div className={styles.header}>
-            <h1 style={{ fontFamily: headerFont }}>{title}</h1>
+            <h1 style={{ fontFamily: headerFont, marginRight: "10px" }}>{title}</h1>
             <div
                 style={{
                     display: "flex",
@@ -83,11 +83,11 @@ const Header = ({ title, deployedSite, repository }) => {
                     <BiRocket />
                 </LinkAwayIconButton>
                 <LinkAwayIconButton
-                    page="https://github.com/mithi/epic-react-notes/issues/new"
+                    page={`https://github.com/mithi/epic-react-notes/edit/main/content${editPath}`}
                     style={BUTTON_STYLE}
-                    aria-label={"report a bug"}
+                    aria-label={"edit this page"}
                 >
-                    <VscDebug />
+                    <BsPencilSquare />
                 </LinkAwayIconButton>
             </div>
         </div>
@@ -101,7 +101,14 @@ const PageLayout = ({ properties, pageId, code, notes, numberOfPages, pathname }
     const { deployedSite, repository, title } = properties
     const div1 = (
         <>
-            <Header {...{ title, deployedSite, repository }} />
+            <Header
+                {...{
+                    title,
+                    deployedSite,
+                    repository,
+                    editPath: `${pathname}/${pageId}/notes.md`,
+                }}
+            />
             <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <Pagination {...{ numberOfPages, currentPageId, pathname }} />
             </div>

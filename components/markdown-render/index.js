@@ -16,13 +16,20 @@ const Code = ({ children, language }) => {
     const { codeTheme, primaryColor } = useContext(ThemeContext)
 
     return (
-        <div style={{ fontSize: "12px", letterSpacing: "1px" }}>
+        <div
+            style={{
+                fontSize: "12px",
+                letterSpacing: "1px",
+                marginTop: "20px",
+                marginBottom: "20px",
+            }}
+        >
             <SyntaxHighlighter
                 language={language}
                 style={codeTheme}
-                showLineNumbers={true}
-                wrapLongLines={true}
-                wrapLines={true}
+                showLineNumbers={false}
+                wrapLongLines={false}
+                wrapLines={false}
                 lineNumberStyle={{
                     ...LINE_NUMBER_STYLE,
                     borderRight: `1px solid ${primaryColor}`,
@@ -40,11 +47,11 @@ const CustomHeading = ({ children, level }) => {
     const header = <span style={{ fontFamily: headerFont }}>{children}</span>
     switch (level) {
         case 1:
-            return <h1>{header}</h1>
+            return <h1 style={{ marginTop: "20px" }}>{header}</h1>
         case 2:
-            return <h2>{header}</h2>
+            return <h2 style={{ marginTop: "20px" }}>{header}</h2>
         case 3:
-            return <h3>{header}</h3>
+            return <h3> {header}</h3>
         case 4:
             return <h4>{header}</h4>
         case 5:
@@ -72,6 +79,10 @@ const renderers = {
     },
     link: props => {
         return <LinkAwayText {...props} />
+    },
+
+    paragraph: props => {
+        return <p style={{ marginBottom: "15px" }}>{props.children}</p>
     },
 }
 
