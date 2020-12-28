@@ -1,3 +1,5 @@
+## useRef
+
 Clean up event handlers you have setup when your component is unmounted. We don't want
 event handlers dangling around on DOM nodes that are no longer in the document. (memory leak)
 
@@ -16,6 +18,8 @@ const MyFunctionComponent () => {
     return <div ref={myDivRef}>hi</div>
 }
 ```
+
+## Async with useEffect
 
 You cannot return anything other than the cleanup function in `useEffect`, this means you can NOT use `async/await` for that cleanup function since that returns a promise.
 

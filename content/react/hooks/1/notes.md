@@ -18,11 +18,18 @@
 
     -   Technique to share code between two sibling components (from React Docs)
 
-5.  [Don't sync states, derive it!](https://kentcdodds.com/blog/dont-sync-state-derive-it)
+5.  State Colocation
+
+    -   It means to put your state as close to where it's being used
+    -   Kent C Dodds: [State Colocation will make your React app faster](https://kentcdodds.com/blog/state-colocation-will-make-your-react-app-faster)
+    -   [Colocation](https://kentcdodds.com/blog/colocation)
+    -   One of the leading causes to slow React applications is global state, especially the rapidly changing variety.
+
+6.  [Don't sync states, derive it!](https://kentcdodds.com/blog/dont-sync-state-derive-it)
 
     -   It's usually better to calculate states (deriving) based on other states when you can as opposed to storing them (from Kent C Dodds Blog)
 
-6.  DOM interactions
+7.  DOM interactions
 
     -   Use `useRef`, `useEffect`
     -   `<div></div>` is just a syntactic sugar for `React.createElement()`, dom nodes are not created at all until `ReactDom.render()` is called.
@@ -30,11 +37,13 @@
     -   To access the dom, use a special prop called `ref`
     -   A component that has rendered is is said to be `mounted`. That's when `useEffect` callback is called, by that point`ref.current` set to the dom node which you can directly do interactions, manipulations
 
-7.  HTTP Requests
+8.  HTTP Requests
 
     -   IMPORTANT: React batches state updates (`setState`)
     -   [Does React batch state update functions when using hooks?](https://stackoverflow.com/questions/53048495/does-react-batch-state-update-functions-when-using-hooks) (StackOverflow #53048495)
     -   If the state changes are triggered asynchronously (like wrapped in a promise), they will not be batched; if they are triggered directly, they will be batched.
+
+9.  Kent C Dodds: [Stop Using `isLoading` booleans](https://kentcdodds.com/blog/stop-using-isloading-booleans)
 
 ## Exercises
 
@@ -50,7 +59,6 @@
     - Use `useRef` with [micku7zu/vanilla-tilt.js](https://micku7zu.github.io/vanilla-tilt.js/)
 
 3. [Fetch Pokemons ](https://react-hooks.netlify.app/6)
-    - [Stop Using `isLoading` booleans (Kent C Dodds Blog)](https://kentcdodds.com/blog/stop-using-isloading-booleans)
     - A form where users can enter the pokemon name and your app fetches that pokemon's data; show errors if any
     - Use status states (strings), do NOT derive from existing state or booleans. Show the following: `idle` no request made yet, `pending` request started, `resolved` request successful, `rejected` request
     - Use ONE state object ie `setState({status: 'resolved', pokemon})`, instead of several states (can you store this and use localStorage in a custom hook?), you can also try using `useReducer` instead of `useState`
