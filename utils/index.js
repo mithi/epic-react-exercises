@@ -13,6 +13,7 @@ content
             |-1
             |   |- code.md
             |   |- notes.md
+            |   |- app.js
             |-2
 
 **************
@@ -54,6 +55,9 @@ export function sectionProperties(topic) {
 export function pageContents(topic, section, pageId) {
     const directory = path.join(CONTENT_DIRECTORY, topic, section, pageId)
 
+    const files = fs.readdirSync(directory)
+    const hasApp = files.includes("app.js") ? true : false
+
     let notesString = "No note"
     let codeString = "No code"
 
@@ -69,5 +73,5 @@ export function pageContents(topic, section, pageId) {
         console.log(`Error reading code.md in ${directory}`)
     }
 
-    return { notesString, codeString }
+    return { notesString, codeString, hasApp }
 }

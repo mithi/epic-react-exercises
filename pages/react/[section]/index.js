@@ -13,6 +13,7 @@ export const PageLayoutHelper = ({
     numberOfPages,
     pageId,
     properties,
+    hasApp,
 }) => (
     <PageLayout
         {...{
@@ -22,6 +23,9 @@ export const PageLayoutHelper = ({
             numberOfPages,
             properties,
             pathname: `/react/${section}`,
+            topic: "react",
+            section,
+            hasApp,
         }}
     />
 )
@@ -38,7 +42,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
     const { section } = params
     const { numberOfPages, properties } = sectionProperties("react")[section]
-    const { notesString, codeString } = pageContents("react", section, "1")
+    const { notesString, codeString, hasApp } = pageContents("react", section, "1")
     return {
         props: {
             codeString,
@@ -47,6 +51,7 @@ export async function getStaticProps({ params }) {
             numberOfPages,
             pageId: "1",
             properties,
+            hasApp,
         },
     }
 }
