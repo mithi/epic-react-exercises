@@ -1,7 +1,7 @@
 1. How to add interactivity
 
     - Kent C Dodd's [Javascript to Know for React](https://kentcdodds.com/blog/javascript-to-know-for-react)
-    - The browser takes the html code and generates the DOM [(read: MDN Webdocs)](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction). The browser then exposes is to Javascript so you can add page interactivity.
+    - The browser takes the html code and generates the DOM [(read: MDN Webdocs)](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction). The browser then exposes this to Javascript so you can add page interactivity.
     - `document.createElement()` or `document.getElementById()`
     - `node.textContent = "Hello"` or `node.className = "container"`
     - `document.body.append(node)` or `node.append(otherNode)`
