@@ -8,7 +8,7 @@ import { BsPencilSquare } from "react-icons/bs"
 import { GlobalStateContext, ThemeContext } from "providers"
 import { IconButton, LinkButton, LinkAwayIconButton } from "../button"
 import Main from "../main"
-import NotebookLayout from "../main/three-sections"
+import NotebookLayout from "../main/two-sections"
 
 const Pagination = ({ numberOfPages, currentPageId, pathname }) => {
     const { headerFont, primaryColor } = useContext(ThemeContext)
@@ -128,13 +128,13 @@ const PageLayout = ({
             <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <Pagination {...{ numberOfPages, currentPageId, pathname }} />
             </div>
-            {primarySection === "code" ? code : styledNotes}
+            {primarySection === "code" ? <App /> : styledNotes}
         </>
     )
-    const div2 = primarySection !== "code" ? code : styledNotes
+    const div2 = primarySection !== "code" ? <App /> : styledNotes
     return (
         <Main>
-            <NotebookLayout {...{ div1, div2, div3: <App /> }} />
+            <NotebookLayout {...{ div1, div2 }} />
         </Main>
     )
 }
