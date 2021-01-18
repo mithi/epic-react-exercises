@@ -1,4 +1,5 @@
 import styles from "./Styles.module.css"
+import dynamic from "next/dynamic"
 import { useContext } from "react"
 import { RiArrowLeftRightLine } from "react-icons/ri"
 import { FiGithub } from "react-icons/fi"
@@ -94,11 +95,26 @@ const Header = ({ title, deployedSite, repository, editPath }) => {
     )
 }
 
-const PageLayout = ({ properties, pageId, code, notes, numberOfPages, pathname }) => {
+const PageLayout = ({
+    properties,
+    pageId,
+    code,
+    notes,
+    numberOfPages,
+    pathname,
+    hasApp,
+    topic,
+    section,
+}) => {
     const { primarySection } = useContext(GlobalStateContext)
     const currentPageId = Math.max(1, Math.min(Number(pageId) || 1, numberOfPages))
     const styledNotes = <span>{notes}</span>
     const { deployedSite, repository, title } = properties
+
+    const App = hasApp
+        ? dynamic(() => import(`content/${topic}/${section}/${pageId}/app`))
+        : () => "None"
+
     const div1 = (
         <>
             <Header
@@ -106,7 +122,7 @@ const PageLayout = ({ properties, pageId, code, notes, numberOfPages, pathname }
                     title,
                     deployedSite,
                     repository,
-                    editPath: `${pathname}/${pageId}/notes.md`,
+                    editPath: `${topic}/${section}/${pageId}/notes.md`,
                 }}
             />
             <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -116,10 +132,9 @@ const PageLayout = ({ properties, pageId, code, notes, numberOfPages, pathname }
         </>
     )
     const div2 = primarySection !== "code" ? code : styledNotes
-    const div3 = <div>preview</div>
     return (
         <Main>
-            <NotebookLayout {...{ div1, div2, div3 }} />
+            <NotebookLayout {...{ div1, div2, div3: <App /> }} />
         </Main>
     )
 }
