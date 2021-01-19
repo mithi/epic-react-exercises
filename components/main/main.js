@@ -5,12 +5,17 @@ import Nav from "./navbar"
 
 const Home = ({ children } = {}) => {
     const { bodyClassNames, bodyFont } = useContext(ThemeContext)
+    const [visible, setVisible] = useState(false)
+
+    useEffect(() => setVisible(true), [])
+
     return (
         <div
             className={[styles.grid, ...bodyClassNames].join(" ")}
             style={{
                 overflow: "auto",
                 fontFamily: bodyFont,
+                visibility: visible ? "visible" : "hidden",
             }}
         >
             <Nav />
