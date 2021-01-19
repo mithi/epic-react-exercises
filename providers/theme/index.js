@@ -23,16 +23,19 @@ const THEMES = [
         body: styles.darkBody,
         section: styles.darkSection,
         button: styles.darkButton,
+        invertedButton: styles.invertedDarkButton,
     },
     {
         body: styles.lightBody,
         section: styles.lightSection,
         button: styles.lightButton,
+        invertedButton: styles.invertedLightButton,
     },
     {
         body: styles.funkyBody,
         section: styles.funkySection,
         button: styles.funkyButton,
+        invertedButton: styles.invertedFunkyButton,
     },
 ]
 
@@ -58,6 +61,7 @@ const ThemeProvider = ({ children }) => {
     const sectionClassNames = [theme.section]
     const onHoverClassName = colored(colorId).onHover
     const buttonClassNames = [theme.button, onHoverClassName, colored(colorId).classColor]
+    const invertedButtonClassName = theme.invertedButton
     const codeTheme = codeThemes[codeThemeId]
 
     const nextColor = () => {
@@ -104,6 +108,7 @@ const ThemeProvider = ({ children }) => {
                 bodyClassNames,
                 sectionClassNames,
                 buttonClassNames,
+                invertedButtonClassName,
                 onHoverClassName,
             }}
         >

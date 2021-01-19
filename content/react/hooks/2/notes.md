@@ -1,7 +1,20 @@
-## useRef
+## [The Vanilla tilt Exercise](https://react-hooks.netlify.app/5)
 
-Clean up event handlers you have setup when your component is unmounted. We don't want
-event handlers dangling around on DOM nodes that are no longer in the document. (memory leak)
+-   Use `useRef` with [micku7zu/vanilla-tilt.js](https://micku7zu.github.io/vanilla-tilt.js/)
+
+## Additional Notes
+
+1.  DOM interactions
+
+    -   Use `useRef`, `useEffect`
+    -   `<div></div>` is just a syntactic sugar for `React.createElement()`, dom nodes are not created at all until `ReactDom.render()` is called.
+    -   The `render` method has no access to the dom node by itself, it only creates and returns react elements
+    -   To access the dom, use a special prop called `ref`
+    -   `mounted`: A component that has rendered. That's when `useEffect` callback is called, by that point `ref.current` set to the dom node which you can directly do interactions, manipulations
+
+2.  useRef
+    -   Clean up event handlers you have setup when your component is unmounted.
+    -   We don't want event handlers dangling around on DOM nodes that are no longer in the document. (memory leak)
 
 ```js
 
@@ -17,33 +30,4 @@ const MyFunctionComponent () => {
 
     return <div ref={myDivRef}>hi</div>
 }
-```
-
-## Async with useEffect
-
-You cannot return anything other than the cleanup function in `useEffect`, this means you can NOT use `async/await` for that cleanup function since that returns a promise.
-
-```js
-// case 1: this does not work, don't do this:
-useEffect(async () => {
-    const result = await doSomeAsyncThing()
-    // do something with the result
-})
-
-// case 2: You can do this instead
-useEffect(() => {
-    async function effect() {
-        const result = await doSomeAsyncThing()
-        // do something with the result
-    }
-
-    effect()
-})
-
-// case 3: Or even better
-useEffect(() => {
-    doSomeAsyncThing().then(result => {
-        // do something with the result
-    })
-})
 ```

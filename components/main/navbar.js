@@ -19,6 +19,7 @@ const MenuModal = () => {
             <DialogOverlay
                 isOpen={menuState === "theme"}
                 onDismiss={() => changeMenuState("none")}
+                style={{ background: "hsla(0, 0%, 0%, 0.6)" }}
             >
                 <DialogContent
                     aria-label="theme-menu"
@@ -30,6 +31,7 @@ const MenuModal = () => {
             <DialogOverlay
                 isOpen={menuState === "react"}
                 onDismiss={() => changeMenuState("none")}
+                style={{ background: "hsla(0, 0%, 0%, 0.75)" }}
             >
                 <DialogContent
                     aria-label="react-menu"
@@ -42,7 +44,7 @@ const MenuModal = () => {
     )
 }
 const Nav = () => {
-    const { changeMenuState, menuState } = useContext(GlobalStateContext)
+    const { changeMenuState } = useContext(GlobalStateContext)
     const { sectionClassNames } = useContext(ThemeContext)
 
     return (

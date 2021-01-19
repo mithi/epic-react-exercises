@@ -12,15 +12,16 @@ import { ThemeContext } from "providers"
 // `connect` to perform sync updates to a ref to save the latest props after
 // a render is actually committed to the DOM.
 
-const useButtonClasses = (className, isIcon) => {
-    const { buttonClassNames } = useContext(ThemeContext)
+const useButtonClasses = (className, isIcon, isInvertedColor) => {
+    const { buttonClassNames, invertedButtonClassName } = useContext(ThemeContext)
     const [buttonClasses, setButtonClasses] = useState(buttonClassNames)
     const useIsomorphicLayoutEffect =
         typeof window !== "undefined" ? useLayoutEffect : useEffect
 
+    const moreClassNames = isInvertedColor ? [invertedButtonClassName] : buttonClassNames
     useIsomorphicLayoutEffect(() => {
         let final = [
-            ...buttonClassNames,
+            ...moreClassNames,
             styles.button,
             isIcon ? styles.buttonIcon : "",
             className,
@@ -52,8 +53,11 @@ const LinkAwayIconButton = ({ children, page, className, ...otherprops }) => (
     </a>
 )
 
-const IconButton = ({ children, className, ...otherprops }) => (
-    <button className={useButtonClasses(className, true)} {...otherprops}>
+const IconButton = ({ children, className, isInvertedColor, ...otherprops }) => (
+    <button
+        className={useButtonClasses(className, true, isInvertedColor)}
+        {...otherprops}
+    >
         {children}
     </button>
 )
