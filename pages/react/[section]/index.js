@@ -7,21 +7,23 @@ const DynamicMarkdownRender = dynamic(() => import("components/markdown-render")
 })
 
 export const PageLayoutHelper = ({
-    codeString,
     notesString,
     section,
     numberOfPages,
     pageId,
     properties,
+    hasApp,
 }) => (
     <PageLayout
         {...{
-            code: <DynamicMarkdownRender children={codeString} />,
             notes: <DynamicMarkdownRender children={notesString} />,
             pageId,
             numberOfPages,
             properties,
             pathname: `/react/${section}`,
+            topic: "react",
+            section,
+            hasApp,
         }}
     />
 )
@@ -36,17 +38,18 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
+    const pageId = 1
     const { section } = params
     const { numberOfPages, properties } = sectionProperties("react")[section]
-    const { notesString, codeString } = pageContents("react", section, "1")
+    const { notesString, hasApp } = pageContents("react", section, pageId)
     return {
         props: {
-            codeString,
             notesString,
             section,
             numberOfPages,
-            pageId: "1",
+            pageId,
             properties,
+            hasApp,
         },
     }
 }

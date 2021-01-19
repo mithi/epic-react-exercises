@@ -8,11 +8,12 @@ const GlobalStateProvider = ({ children }) => {
     let [menuState, setMenuState] = useStickyState("none")
 
     const togglePrimarySection = () => {
-        setPrimarySection(primarySection === "notes" ? "code" : "notes", "mode")
+        setPrimarySection(primarySection === "notes" ? "app" : "notes", "app")
     }
 
     const changeMenuState = menuType => {
-        let nextState
+        // if menuType === "none": menuState = "none"
+        let nextState = "none"
         if (menuType === "react") {
             nextState = menuState !== "react" ? "react" : "none"
         } else if (menuType === "theme") {

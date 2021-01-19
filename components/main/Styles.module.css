@@ -5,11 +5,11 @@
     width: 100vw;
 }
 
-.threeSectionsLayout {
+.twoSectionsLayout {
     flex-grow: 0;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-rows: 1fr;
     grid-column-gap: 10px;
     grid-row-gap: 10px;
     justify-items: stretch;
@@ -33,17 +33,11 @@
 }
 
 .div1 {
-    grid-area: 1 / 1 / 3 / 2;
+    grid-area: 1 / 1 / 2 / 2;
     composes: common div0;
 }
-
 .div2 {
     grid-area: 1 / 2 / 2 / 3;
-    composes: common div0;
-}
-
-.div3 {
-    grid-area: 2 / 2 / 3 / 3;
     composes: common div0;
 }
 
@@ -119,7 +113,7 @@
         grid-area: 2 / 1 / 3 / 2;
     }
 
-    .threeSectionsLayout {
+    .twoSectionsLayout {
         display: flex;
         flex-direction: row;
         align-items: stretch;
@@ -131,10 +125,6 @@
         margin: 0;
         margin-bottom: 10px;
         width: 100vw;
-    }
-
-    .div3 {
-        composes: div0;
     }
 
     .div2 {
@@ -150,7 +140,6 @@
     }
 
     .menu {
-        position: relative;
         width: 100%;
         top: 80px;
         left: 0px;
