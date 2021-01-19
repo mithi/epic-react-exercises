@@ -100,7 +100,6 @@ const PageLayout = ({
     pageId,
     notes,
     numberOfPages,
-    pathname,
     hasApp,
     topic,
     section,
