@@ -11,7 +11,6 @@ content
     |-topic
         |-section
             |-1
-            |   |- code.md
             |   |- notes.md
             |   |- app.js
             |-2
@@ -61,7 +60,9 @@ export function pageContents(topic, section, pageId) {
     let notesString = "No note"
 
     try {
-        notesString = fs.readFileSync(path.join(directory, "notes.md"), "utf8")
+        if (files.includes("notes.md")) {
+            notesString = fs.readFileSync(path.join(directory, "notes.md"), "utf8")
+        }
     } catch (error) {
         console.log(`Error reading note.md in ${directory}`)
     }
