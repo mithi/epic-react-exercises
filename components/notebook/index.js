@@ -98,7 +98,6 @@ const Header = ({ title, deployedSite, repository, editPath }) => {
 const PageLayout = ({
     properties,
     pageId,
-    code,
     notes,
     numberOfPages,
     pathname,
@@ -128,10 +127,10 @@ const PageLayout = ({
             <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <Pagination {...{ numberOfPages, currentPageId, pathname }} />
             </div>
-            {primarySection === "code" ? <App /> : styledNotes}
+            {primarySection === "app" ? <App /> : styledNotes}
         </>
     )
-    const div2 = primarySection !== "code" ? <App /> : styledNotes
+    const div2 = primarySection !== "app" ? <App /> : styledNotes
     return (
         <Main>
             <NotebookLayout {...{ div1, div2 }} />

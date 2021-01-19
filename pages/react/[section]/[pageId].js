@@ -18,11 +18,10 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
     const { section, pageId } = params
     const { numberOfPages, properties } = sectionProperties("react")[section]
-    const { notesString, codeString, hasApp } = pageContents("react", section, pageId)
+    const { notesString, hasApp } = pageContents("react", section, pageId)
 
     return {
         props: {
-            codeString,
             notesString,
             section,
             numberOfPages,

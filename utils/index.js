@@ -59,7 +59,6 @@ export function pageContents(topic, section, pageId) {
     const hasApp = files.includes("app.js") ? true : false
 
     let notesString = "No note"
-    let codeString = "No code"
 
     try {
         notesString = fs.readFileSync(path.join(directory, "notes.md"), "utf8")
@@ -67,11 +66,5 @@ export function pageContents(topic, section, pageId) {
         console.log(`Error reading note.md in ${directory}`)
     }
 
-    try {
-        codeString = fs.readFileSync(path.join(directory, "code.md"), "utf8")
-    } catch {
-        console.log(`Error reading code.md in ${directory}`)
-    }
-
-    return { notesString, codeString, hasApp }
+    return { notesString, hasApp }
 }
