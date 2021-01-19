@@ -48,8 +48,8 @@ const PokemonSearchSection = () => {
             <form style={{ display: "flex" }}>
                 <input
                     className={bodyClassNames[0]}
-                    style={{ ...INPUT_STYLE, fontFamily: bodyFont }}
-                    placeholder="pokemon name..."
+                    style={{ ...INPUT_STYLE, fontFamily: bodyFont, margin: "5px" }}
+                    placeholder="write the pokemon name here..."
                 />
                 <IconButton
                     onClick={() => alert("hello!")}
