@@ -20,6 +20,14 @@
     color: var(--gray-01-dark);
 }
 
+.invertedDarkButton {
+    color: var(--gray-01-dark);
+    opacity: 0.8;
+}
+
+.invertedDarkButton:hover {
+    opacity: 1;
+}
 /***************
     LIGHT THEME
  ***************/
@@ -42,6 +50,15 @@
     color: var(--gray-00-light);
 }
 
+.invertedLightButton {
+    color: #ffffff;
+    opacity: 0.8;
+}
+
+.invertedLightButton:hover {
+    opacity: 1;
+}
+
 /***************
     FUNKY THEME
  ***************/
@@ -62,6 +79,15 @@
 
 .funkyButton:hover {
     color: #01810c;
+}
+
+.invertedFunkyButton {
+    color: #b9382d;
+    opacity: 0.8;
+}
+
+.invertedFunkyButton:hover {
+    opacity: 1;
 }
 
 /***************
