@@ -1,5 +1,3 @@
-## Notes
-
 1.  [Why React hooks?](https://www.youtube.com/watch?v=zWsZcBiwgVE&list=PLV5CVI1eNcJgNqzNwcs4UKrlJdhfDjshf)
 
     -   35 minute talk by Kent C Dodds
