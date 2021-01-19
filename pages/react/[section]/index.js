@@ -44,7 +44,6 @@ export async function getStaticProps({ params }) {
     const { notesString, hasApp } = pageContents("react", section, pageId)
     return {
         props: {
-            codeString,
             notesString,
             section,
             numberOfPages,

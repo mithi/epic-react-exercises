@@ -53,7 +53,7 @@ export function sectionProperties(topic) {
 }
 
 export function pageContents(topic, section, pageId) {
-    const directory = path.join(CONTENT_DIRECTORY, topic, section, pageId)
+    const directory = path.join(CONTENT_DIRECTORY, topic, section, pageId.toString())
 
     const files = fs.readdirSync(directory)
     const hasApp = files.includes("app.js") ? true : false
