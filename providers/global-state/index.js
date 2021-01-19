@@ -12,7 +12,8 @@ const GlobalStateProvider = ({ children }) => {
     }
 
     const changeMenuState = menuType => {
-        let nextState
+        // if menuType === "none": menuState = "none"
+        let nextState = "none"
         if (menuType === "react") {
             nextState = menuState !== "react" ? "react" : "none"
         } else if (menuType === "theme") {
