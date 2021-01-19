@@ -56,10 +56,3 @@
 2. [Vanilla tilt](https://react-hooks.netlify.app/5)
 
     - Use `useRef` with [micku7zu/vanilla-tilt.js](https://micku7zu.github.io/vanilla-tilt.js/)
-
-3. [Fetch Pokemons ](https://react-hooks.netlify.app/6)
-    - A form where users can enter the pokemon name and your app fetches that pokemon's data; show errors if any
-    - Use status states (strings), do NOT derive from existing state or booleans. Show the following: `idle` no request made yet, `pending` request started, `resolved` request successful, `rejected` request
-    - Use ONE state object ie `setState({status: 'resolved', pokemon})`, instead of several states (can you store this and use localStorage in a custom hook?), you can also try using `useReducer` instead of `useState`
-    - Create an `ErrorBoundary` class component to handle errors the correct way.
-    - Try using built-in `react-error-boundary` the right way; use `resetKeys` for better user experience
