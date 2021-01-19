@@ -14,7 +14,9 @@
     - [Does React batch state update functions when using hooks?](https://stackoverflow.com/questions/53048495/does-react-batch-state-update-functions-when-using-hooks) (StackOverflow #53048495)
     - If the state changes are triggered asynchronously (like wrapped in a promise), they will not be batched; if they are triggered directly, they will be batched.
 
-2. `async/await` in `useEffect`
+2. Kent C Dodds: [Stop Using `isLoading` booleans](https://kentcdodds.com/blog/stop-using-isloading-booleans)
+
+3. `async/await` in `useEffect`
 
     - You cannot return anything other than the cleanup function in `useEffect`, this means you can NOT use `async/await` for that cleanup function since that returns a promise.
 

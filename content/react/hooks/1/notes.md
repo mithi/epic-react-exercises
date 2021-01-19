@@ -36,5 +36,3 @@
 6.  [Don't sync states, derive it!](https://kentcdodds.com/blog/dont-sync-state-derive-it)
 
     -   It's usually better to calculate states (deriving) based on other states when you can as opposed to storing them (from Kent C Dodds Blog)
-
-7.  Kent C Dodds: [Stop Using `isLoading` booleans](https://kentcdodds.com/blog/stop-using-isloading-booleans)
