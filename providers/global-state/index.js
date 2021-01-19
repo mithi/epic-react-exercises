@@ -4,12 +4,7 @@ import useStickyState from "hooks/useStickyState"
 const GlobalStateContext = createContext({})
 
 const GlobalStateProvider = ({ children }) => {
-    let [primarySection, setPrimarySection] = useStickyState("notes", "mode")
     let [menuState, setMenuState] = useStickyState("none")
-
-    const togglePrimarySection = () => {
-        setPrimarySection(primarySection === "notes" ? "app" : "notes", "app")
-    }
 
     const changeMenuState = menuType => {
         // if menuType === "none": menuState = "none"
@@ -26,8 +21,6 @@ const GlobalStateProvider = ({ children }) => {
     return (
         <GlobalStateContext.Provider
             value={{
-                primarySection,
-                togglePrimarySection,
                 menuState,
                 changeMenuState,
             }}

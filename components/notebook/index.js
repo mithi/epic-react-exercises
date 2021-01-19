@@ -62,13 +62,6 @@ const Header = ({ title, deployedSite, repository, editPath }) => {
                     marginBottom: "10px",
                 }}
             >
-                <IconButton
-                    onClick={togglePrimarySection}
-                    style={BUTTON_STYLE}
-                    aria-label={"switch left and right sections"}
-                >
-                    <RiArrowLeftRightLine />
-                </IconButton>
                 <LinkAwayIconButton
                     page={repository}
                     style={BUTTON_STYLE}
@@ -84,7 +77,7 @@ const Header = ({ title, deployedSite, repository, editPath }) => {
                     <BiRocket />
                 </LinkAwayIconButton>
                 <LinkAwayIconButton
-                    page={`https://github.com/mithi/epic-react-notes/edit/main/content${editPath}`}
+                    page={`https://github.com/mithi/epic-notes/edit/main/content${editPath}`}
                     style={BUTTON_STYLE}
                     aria-label={"edit this page"}
                 >
@@ -104,7 +97,6 @@ const PageLayout = ({
     topic,
     section,
 }) => {
-    const { primarySection } = useContext(GlobalStateContext)
     const currentPageId = Math.max(1, Math.min(Number(pageId) || 1, numberOfPages))
     const styledNotes = <span>{notes}</span>
     const { deployedSite, repository, title } = properties
@@ -130,13 +122,13 @@ const PageLayout = ({
             <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <Pagination {...{ numberOfPages, currentPageId, pathname }} />
             </div>
-            {primarySection === "app" ? <App /> : styledNotes}
+            {styledNotes}
         </>
     )
-    const div2 = primarySection !== "app" ? <App /> : styledNotes
+
     return (
         <Main>
-            <NotebookLayout {...{ div1, div2 }} />
+            <NotebookLayout {...{ div1, div2: <App /> }} />
         </Main>
     )
 }
