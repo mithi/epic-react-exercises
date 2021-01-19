@@ -1,4 +1,4 @@
-## [Http Request Exercise](https://react-hooks.netlify.app/6)
+## [The Http Request Exercise](https://react-hooks.netlify.app/6)
 
 -   A form where users can enter the pokemon name and your app fetches that pokemon's data; show errors if any
 -   Use status states (strings), do NOT derive from existing state or booleans. Show the following: `idle` no request made yet, `pending` request started, `resolved` request successful, `rejected` request
@@ -8,7 +8,15 @@
 
 ## Additional Notes
 
-You cannot return anything other than the cleanup function in `useEffect`, this means you can NOT use `async/await` for that cleanup function since that returns a promise.
+1. HTTP Requests
+
+    - IMPORTANT: React batches state updates (`setState`)
+    - [Does React batch state update functions when using hooks?](https://stackoverflow.com/questions/53048495/does-react-batch-state-update-functions-when-using-hooks) (StackOverflow #53048495)
+    - If the state changes are triggered asynchronously (like wrapped in a promise), they will not be batched; if they are triggered directly, they will be batched.
+
+2. `async/await` in `useEffect`
+
+    - You cannot return anything other than the cleanup function in `useEffect`, this means you can NOT use `async/await` for that cleanup function since that returns a promise.
 
 ```js
 // case 1: this does not work, don't do this:
