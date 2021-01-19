@@ -9,6 +9,7 @@
         "stage": "next build && next start"
     },
     "dependencies": {
+        "@reach/dialog": "^0.12.1",
         "next": "10.0.3",
         "raw-loader": "^4.0.2",
         "react": "17.0.1",
