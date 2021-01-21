@@ -133,3 +133,15 @@
 .greenColor {
     color: var(--green-0);
 }
+
+/***************
+    DISABLED
+ ***************/
+
+.disabled {
+    opacity: 0.3;
+}
+
+.disabled:hover {
+    opacity: 0.3;
+}
