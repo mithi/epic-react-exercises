@@ -38,56 +38,78 @@ const TableRow = ({ ability, type, damage }) => {
     )
 }
 
-const TableHeader = () => {
-    const { headerFont, primaryColor } = useContext(ThemeContext)
-    const style = { ...ROW_STYLE, borderBottom: `1px solid ${primaryColor}` }
-    return (
-        <thead style={{ fontFamily: headerFont }}>
-            <tr>
-                <th {...{ style }}>Ability</th>
-                <th {...{ style }}>Type</th>
-                <th {...{ style }}>Damage</th>
-            </tr>
-        </thead>
-    )
+const PokemonLoadingView = () => (
+    <PokemonDataView
+        {...{
+            name: "Loading pokemon",
+            number: "...",
+            imageUrl: null,
+            abilities: null,
+            borderStyle: "dashed",
+        }}
+    />
+)
+
+const PokemonInfoView = ({ pokemonData }) => (
+    <PokemonDataView {...{ ...pokemonData, borderStyle: "solid" }} />
+)
+
+const PokemonCard = ({ children, style }) => {
+    const CARD_STYLE = { ...POKEMON_CARD_STYLE, ...style }
+    return <div style={CARD_STYLE}>{children}</div>
 }
 
-const PokemonDataView = ({ pokemonData }) => {
+const PokemonDataView = ({ imageUrl, name, number, abilities, borderStyle }) => {
     const { headerFont, primaryColor } = useContext(ThemeContext)
-    const SOLID_BORDER = { border: `1px solid ${primaryColor}` }
-    const DASHED_BORDER = { border: `1px dashed ${primaryColor}` }
-    const CARD_STYLE = { ...POKEMON_CARD_STYLE, ...SOLID_BORDER }
-    const IMAGE_STYLE = { ...POKEMON_IMAGE_STYLE, ...DASHED_BORDER }
+
+    const border = `1px ${borderStyle ? borderStyle : "solid"} ${primaryColor}`
+    const IMAGE_STYLE = { ...POKEMON_IMAGE_STYLE, border }
     const NAME_STYLE = { padding: "15px", fontFamily: headerFont, fontSize: "40px" }
     const TABLE_STYLE = { textAlign: "center", borderCollapse: "collapse" }
+    const TABLE_HEADER_STYLE = {
+        ...ROW_STYLE,
+        fontSize: "18px",
+        borderBottom: `1px solid ${primaryColor}`,
+    }
 
-    if (!pokemonData) {
-        return "No Pokemon"
+    let image = <div style={IMAGE_STYLE}>...</div>
+    if (imageUrl) {
+        image = <img src={imageUrl} alt={name} height={"200px"} style={IMAGE_STYLE} />
+    }
+
+    let tableBody = <TableRow {...{ ability: "-", type: "-", damage: "-" }} />
+    if (abilities) {
+        tableBody = abilities.map(ability => (
+            <TableRow
+                {...{
+                    key: ability.name,
+                    ability: ability.name,
+                    type: ability.type,
+                    damage: ability.damage,
+                }}
+            />
+        ))
     }
 
     return (
-        <div style={CARD_STYLE}>
-            <img src={pokemonData.image} height={"200px"} style={IMAGE_STYLE} />
+        <PokemonCard style={{ border }}>
+            {image}
             <h1 style={NAME_STYLE}>
-                {pokemonData.name} ({pokemonData.number})
+                {name} <sup style={{ fontSize: "20px" }}>({number})</sup>
             </h1>
             <table style={TABLE_STYLE}>
-                <TableHeader />
-                <tbody>
-                    {pokemonData.attacks.special.map(ability => (
-                        <TableRow
-                            {...{
-                                key: ability.name,
-                                ability: ability.name,
-                                type: ability.type,
-                                damage: ability.damage,
-                            }}
-                        />
-                    ))}
-                </tbody>
+                <thead style={{ fontFamily: headerFont }}>
+                    <tr style={TABLE_HEADER_STYLE}>
+                        <th>Ability</th>
+                        <th>Type</th>
+                        <th>Damage</th>
+                    </tr>
+                </thead>
+
+                <tbody>{tableBody}</tbody>
             </table>
-        </div>
+        </PokemonCard>
     )
 }
 
-export default PokemonDataView
+export { PokemonInfoView, PokemonLoadingView, PokemonCard }
