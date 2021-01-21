@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react"
+import { useEffect, useState } from "react"
 import PokemonSearchSection from "./components/pokemon-search"
 import PokemonDataView from "./components/pokemon-data-view"
 import axios from "axios"
@@ -39,9 +39,13 @@ const fetchPokemon = name => {
 }
 
 const App = () => {
+    let [pokemonData, setPokemonData] = useState(null)
+
     useEffect(() => {
-        fetchPokemon("pikachu").then(result => console.log(result.data.data.pokemon))
+        fetchPokemon("pikachu").then(result => setPokemonData(result.data.data.pokemon))
     }, [])
+
+    console.log(pokemonData)
 
     return (
         <>
