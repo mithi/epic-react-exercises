@@ -31,7 +31,7 @@ const fetchPokemon = name => {
         data: { query },
     })
         .then(result => {
-            return { data: result.data, error: null }
+            return { data: result.data.data.pokemon, error: null }
         })
         .catch(error => {
             return { data: null, error }
@@ -42,7 +42,7 @@ const App = () => {
     let [pokemonData, setPokemonData] = useState(null)
 
     useEffect(() => {
-        fetchPokemon("pikachu").then(result => setPokemonData(result.data.data.pokemon))
+        fetchPokemon("pikachu").then(result => setPokemonData(result.data))
     }, [])
 
     return (
