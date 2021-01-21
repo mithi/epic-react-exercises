@@ -38,11 +38,36 @@ const fetchPokemon = name => {
         })
 }
 
-const App = () => {
-    let [pokemonData, setPokemonData] = useState(null)
+const useFetchPokemon = () => {
+    const [pokemonData, setPokemonData] = useState(null)
+    const [pokemonName, fetchPokemonName] = useState(null)
+    const [isLoading, setIsLoading] = useState(false)
+    const [isError, setIsError] = useState(false)
 
     useEffect(() => {
-        fetchPokemon("pikachu").then(result => setPokemonData(result.data))
+        setIsError(false)
+        setIsLoading(true)
+        fetchPokemon(pokemonName).then(result => {
+            if (result.error) {
+                setIsError(true)
+                setIsLoading(false)
+                setPokemonData(null)
+            }
+
+            setIsLoading(false)
+            setIsError(false)
+            setPokemonData(result.data)
+        })
+    }, [pokemonName])
+
+    return [{ pokemonData, isLoading, isError }, fetchPokemonName]
+}
+
+const App = () => {
+    const [{ pokemonData }, fetchPokemonName] = useFetchPokemon()
+
+    useEffect(() => {
+        fetchPokemonName("pikachu")
     }, [])
 
     return (
