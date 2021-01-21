@@ -1,6 +1,6 @@
 import styles from "./Styles.module.css"
 import dynamic from "next/dynamic"
-import { useContext } from "react"
+import { useContext, useMemo } from "react"
 import { RiArrowLeftRightLine } from "react-icons/ri"
 import { FiGithub } from "react-icons/fi"
 import { BiRocket } from "react-icons/bi"
@@ -110,9 +110,13 @@ const PageLayout = ({
     const styledNotes = <span>{notes}</span>
     const { deployedSite, repository, title } = properties
 
-    const App = hasApp
-        ? dynamic(() => import(`content/${topic}/${section}/${pageId}/app`))
-        : () => "None"
+    const App = useMemo(
+        () =>
+            hasApp
+                ? dynamic(() => import(`content/${topic}/${section}/${pageId}/app`))
+                : () => "None",
+        [hasApp, topic, section, pageId]
+    )
 
     const div1 = (
         <>
