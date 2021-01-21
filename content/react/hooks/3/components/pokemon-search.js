@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { IconButton } from "components/button"
 import { SiPokemon } from "react-icons/si"
 import { ThemeContext } from "providers"
@@ -39,26 +39,41 @@ const FetchSubmitButtonText = () => (
         </span>
     </>
 )
-const PokemonSearchSection = () => {
+const PokemonSearchSection = ({ onSubmit }) => {
     const { primaryColor, bodyClassNames, bodyFont } = useContext(ThemeContext)
+    const [incompleteName, setIncompleteName] = useState("")
+
+    function handleChange(e) {
+        setIncompleteName(e.target.value)
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault()
+        const completeName = incompleteName
+        onSubmit(completeName)
+        setIncompleteName("")
+    }
 
     return (
         <>
             <p style={{ fontSize: "12px" }}>Try Pikachu, Charizard, Bulbasaur...</p>
-            <form style={{ display: "flex" }}>
+            <form style={{ display: "flex" }} onSubmit={handleSubmit}>
                 <input
+                    onChange={handleChange}
                     className={bodyClassNames[0]}
                     style={{ ...INPUT_STYLE, fontFamily: bodyFont, margin: "5px" }}
-                    placeholder="write the pokemon name here..."
+                    placeholder="Which pokemon..."
+                    value={incompleteName}
                 />
                 <IconButton
-                    onClick={() => alert("hello!")}
                     isInvertedColor={true}
                     style={{
                         ...ICON_STYLE,
                         backgroundColor: primaryColor,
                         fontFamily: bodyFont,
                     }}
+                    type="submit"
+                    disabled={!incompleteName.length}
                 >
                     <FetchSubmitButtonText />
                 </IconButton>
