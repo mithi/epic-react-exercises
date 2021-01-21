@@ -53,8 +53,6 @@ const TableHeader = () => {
 }
 
 const PokemonDataView = ({ pokemonData }) => {
-    console.log(pokemonData)
-
     const { headerFont, primaryColor } = useContext(ThemeContext)
     const SOLID_BORDER = { border: `1px solid ${primaryColor}` }
     const DASHED_BORDER = { border: `1px dashed ${primaryColor}` }
@@ -63,18 +61,29 @@ const PokemonDataView = ({ pokemonData }) => {
     const NAME_STYLE = { padding: "15px", fontFamily: headerFont, fontSize: "40px" }
     const TABLE_STYLE = { textAlign: "center", borderCollapse: "collapse" }
 
+    if (!pokemonData) {
+        return "No Pokemon"
+    }
+
     return (
         <div style={CARD_STYLE}>
-            <div style={IMAGE_STYLE}>
-                <p>Pokemon Image</p>
-            </div>
-            <h1 style={NAME_STYLE}>Pokemon Name</h1>
+            <img src={pokemonData.image} height={"200px"} style={IMAGE_STYLE} />
+            <h1 style={NAME_STYLE}>
+                {pokemonData.name} ({pokemonData.number})
+            </h1>
             <table style={TABLE_STYLE}>
                 <TableHeader />
                 <tbody>
-                    <TableRow ability="first" type="fire" damage={55} />
-                    <TableRow ability="second" type="fire" damage={101} />
-                    <TableRow ability="third" type="fire" damage={40} />
+                    {pokemonData.attacks.special.map(ability => (
+                        <TableRow
+                            {...{
+                                key: ability.name,
+                                ability: ability.name,
+                                type: ability.type,
+                                damage: ability.damage,
+                            }}
+                        />
+                    ))}
                 </tbody>
             </table>
         </div>
