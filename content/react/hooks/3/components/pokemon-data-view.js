@@ -1,66 +1,78 @@
 import { useContext } from "react"
 import { ThemeContext } from "providers"
 
-const PokemonDataView = () => {
-    const { headerFont, primaryColor } = useContext(ThemeContext)
-    const ROW_STYLE = {
-        borderBottom: `1px solid ${primaryColor}`,
-        lineHeight: "25px",
-        padding: "5px",
-        minWidth: "75px",
-    }
+const POKEMON_CARD_STYLE = {
+    padding: "20px",
+    margin: "20px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
+    borderRadius: "15px",
+}
+
+const POKEMON_IMAGE_STYLE = {
+    width: "200px",
+    height: "200px",
+    borderRadius: "15px",
+    padding: "5px",
+}
+
+const ROW_STYLE = {
+    lineHeight: "25px",
+    padding: "5px",
+    minWidth: "75px",
+    fontSize: "12px",
+}
+
+const TableRow = ({ ability, type, damage }) => {
+    const { primaryColor } = useContext(ThemeContext)
+    const style = { ...ROW_STYLE, borderBottom: `1px solid ${primaryColor}` }
 
     return (
-        <div
-            style={{
-                padding: "20px",
-                margin: "20px",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                flexDirection: "column",
-                border: `1px solid ${primaryColor}`,
-                borderRadius: "15px",
-            }}
-        >
-            <div
-                style={{
-                    width: "200px",
-                    height: "200px",
-                    border: `1px dashed ${primaryColor}`,
-                    borderRadius: "15px",
-                    padding: "5px",
-                }}
-            >
+        <tr>
+            <td {...{ style }}>{ability}</td>
+            <td {...{ style }}>{type}</td>
+            <td {...{ style }}>{damage}</td>
+        </tr>
+    )
+}
+
+const TableHeader = () => {
+    const { headerFont, primaryColor } = useContext(ThemeContext)
+    const style = { ...ROW_STYLE, borderBottom: `1px solid ${primaryColor}` }
+    return (
+        <thead style={{ fontFamily: headerFont }}>
+            <tr>
+                <th {...{ style }}>Ability</th>
+                <th {...{ style }}>Type</th>
+                <th {...{ style }}>Damage</th>
+            </tr>
+        </thead>
+    )
+}
+
+const PokemonDataView = () => {
+    const { headerFont, primaryColor } = useContext(ThemeContext)
+    const SOLID_BORDER = { border: `1px solid ${primaryColor}` }
+    const DASHED_BORDER = { border: `1px dashed ${primaryColor}` }
+    const CARD_STYLE = { ...POKEMON_CARD_STYLE, ...SOLID_BORDER }
+    const IMAGE_STYLE = { ...POKEMON_IMAGE_STYLE, ...DASHED_BORDER }
+    const NAME_STYLE = { padding: "15px", fontFamily: headerFont, fontSize: "40px" }
+    const TABLE_STYLE = { textAlign: "center", borderCollapse: "collapse" }
+
+    return (
+        <div style={CARD_STYLE}>
+            <div style={IMAGE_STYLE}>
                 <p>Pokemon Image</p>
             </div>
-            <h1 style={{ padding: "15px", fontFamily: headerFont, fontSize: "40px" }}>
-                Pokemon Name
-            </h1>
-            <table style={{ textAlign: "center", borderCollapse: "collapse" }}>
-                <thead style={{ fontFamily: headerFont }}>
-                    <tr>
-                        <th style={ROW_STYLE}>Ability</th>
-                        <th style={ROW_STYLE}>Type</th>
-                        <th style={ROW_STYLE}>Damage</th>
-                    </tr>
-                </thead>
-                <tbody style={{ fontSize: "12px" }}>
-                    <tr>
-                        <td style={ROW_STYLE}>First Ability</td>
-                        <td style={ROW_STYLE}>Fire</td>
-                        <td style={ROW_STYLE}>55</td>
-                    </tr>
-                    <tr>
-                        <td style={ROW_STYLE}>Second Ability</td>
-                        <td style={ROW_STYLE}>Water</td>
-                        <td style={ROW_STYLE}>100</td>
-                    </tr>
-                    <tr>
-                        <td style={ROW_STYLE}>Third Ability</td>
-                        <td style={ROW_STYLE}>Water</td>
-                        <td style={ROW_STYLE}>100</td>
-                    </tr>
+            <h1 style={NAME_STYLE}>Pokemon Name</h1>
+            <table style={TABLE_STYLE}>
+                <TableHeader />
+                <tbody>
+                    <TableRow ability="first" type="fire" damage={55} />
+                    <TableRow ability="second" type="fire" damage={101} />
+                    <TableRow ability="third" type="fire" damage={40} />
                 </tbody>
             </table>
         </div>
