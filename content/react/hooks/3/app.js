@@ -1,3 +1,4 @@
+import { useEffect, useMemo } from "react"
 import PokemonSearchSection from "./components/pokemon-search"
 import PokemonDataView from "./components/pokemon-data-view"
 import axios from "axios"
@@ -8,31 +9,29 @@ import axios from "axios"
 // PokemonSearchSection
 
 const fetchPokemon = name => {
-    axios({
-        url: "https://graphql-pokemon2.vercel.app/",
-        method: "post",
-        data: {
-            query: `
-            query PokemonInfo($name: String = "${name}") {
-                pokemon(name: $name) {
-                    number
-                    name
-                    image
-                    attacks {
-                        special {
-                        name
-                        type
-                        damage
-                        }
-                    }
+    let query = `
+    query PokemonInfo($name: String = "${name}") {
+        pokemon(name: $name) {
+            number
+            name
+            image
+            attacks {
+                special {
+                name
+                type
+                damage
                 }
             }
-        `,
-        },
+        }
+    }
+`
+    return axios({
+        url: "https://graphql-pokemon2.vercel.app/",
+        method: "post",
+        data: { query },
     })
         .then(result => {
             return { data: result.data, error: null }
-            console.log(result.data)
         })
         .catch(error => {
             return { data: null, error }
@@ -40,7 +39,10 @@ const fetchPokemon = name => {
 }
 
 const App = () => {
-    fetchPokemon("xxxx")
+    useEffect(() => {
+        fetchPokemon("pikachu").then(result => console.log(result.data.data.pokemon))
+    }, [])
+
     return (
         <>
             <PokemonSearchSection />
