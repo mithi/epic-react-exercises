@@ -52,7 +52,9 @@ const TableHeader = () => {
     )
 }
 
-const PokemonDataView = () => {
+const PokemonDataView = ({ pokemonData }) => {
+    console.log(pokemonData)
+
     const { headerFont, primaryColor } = useContext(ThemeContext)
     const SOLID_BORDER = { border: `1px solid ${primaryColor}` }
     const DASHED_BORDER = { border: `1px dashed ${primaryColor}` }

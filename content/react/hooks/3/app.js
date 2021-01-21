@@ -45,12 +45,10 @@ const App = () => {
         fetchPokemon("pikachu").then(result => setPokemonData(result.data.data.pokemon))
     }, [])
 
-    console.log(pokemonData)
-
     return (
         <>
             <PokemonSearchSection />
-            <PokemonDataView />
+            <PokemonDataView {...{ pokemonData }} />
         </>
     )
 }
