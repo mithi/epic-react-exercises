@@ -36,25 +36,32 @@ const useButtonClasses = (className, isIcon, disabled, isInvertedColor) => {
     return buttonClasses
 }
 
-const LinkButton = ({ children, page, className, ...otherprops }) => (
-    <>
-        <Link href={page}>
-            <a style={{ textDecoration: "none" }}>
-                <button className={useButtonClasses(className)} {...otherprops}>
-                    {children}
-                </button>
-            </a>
-        </Link>
-    </>
-)
+const LinkButton = ({ children, page, className, ...otherprops }) => {
+    const buttonClass = useButtonClasses(className)
+    return (
+        <>
+            <Link href={page}>
+                <a style={{ textDecoration: "none" }}>
+                    <button className={buttonClass} {...otherprops}>
+                        {children}
+                    </button>
+                </a>
+            </Link>
+        </>
+    )
+}
 
-const LinkAwayIconButton = ({ children, page, className, ...otherprops }) => (
-    <a href={page} target="_blank" rel="noopener noreferrer">
-        <button className={useButtonClasses(className, true)} {...otherprops}>
-            {children}
-        </button>
-    </a>
-)
+const LinkAwayIconButton = ({ children, page, className, ...otherprops }) => {
+    const buttonClass = useButtonClasses(className, true)
+
+    return (
+        <a href={page} target="_blank" rel="noopener noreferrer">
+            <button className={buttonClass} {...otherprops}>
+                {children}
+            </button>
+        </a>
+    )
+}
 
 const IconButton = ({
     children,
@@ -63,13 +70,9 @@ const IconButton = ({
     disabled,
     ...otherprops
 }) => {
-    console.log("button disabled", disabled)
+    const buttonClass = useButtonClasses(className, true, disabled, isInvertedColor)
     return (
-        <button
-            className={useButtonClasses(className, true, disabled, isInvertedColor)}
-            disabled={disabled}
-            {...otherprops}
-        >
+        <button className={buttonClass} disabled={disabled} {...otherprops}>
             {children}
         </button>
     )
