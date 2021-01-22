@@ -22,47 +22,42 @@ const ROW_STYLE = {
     lineHeight: "25px",
     padding: "5px",
     minWidth: "75px",
-    fontSize: "12px",
+    fontSize: "14px",
 }
 
-const TableRow = ({ ability, type, damage }) => {
+const PokemonLoadingView = () => {
     const { primaryColor } = useContext(ThemeContext)
-    const style = { ...ROW_STYLE, borderBottom: `1px solid ${primaryColor}` }
+    const border = `1px dashed ${primaryColor}`
 
     return (
-        <tr>
-            <td {...{ style }}>{ability}</td>
-            <td {...{ style }}>{type}</td>
-            <td {...{ style }}>{damage}</td>
-        </tr>
+        <PokemonDataView
+            {...{
+                name: "Loading...",
+                number: "xxx",
+                imageUrl: null,
+                abilities: null,
+                border,
+            }}
+        />
     )
 }
 
-const PokemonLoadingView = () => (
-    <PokemonDataView
-        {...{
-            name: "Loading...",
-            number: "xxx",
-            imageUrl: null,
-            abilities: null,
-            borderStyle: "dashed",
-        }}
-    />
-)
-
-const PokemonInfoView = ({ pokemonData }) => (
-    <PokemonDataView {...{ ...pokemonData, borderStyle: "solid" }} />
-)
+const PokemonInfoView = ({ pokemonData }) => {
+    const { primaryColor } = useContext(ThemeContext)
+    const border = `1px solid ${primaryColor}`
+    return <PokemonDataView {...{ ...pokemonData, border }} />
+}
 
 const PokemonCard = ({ children, style }) => {
     const CARD_STYLE = { ...POKEMON_CARD_STYLE, ...style }
     return <div style={CARD_STYLE}>{children}</div>
 }
 
-const PokemonDataView = ({ imageUrl, name, number, abilities, borderStyle }) => {
-    const { headerFont, primaryColor } = useContext(ThemeContext)
-
-    const border = `1px ${borderStyle ? borderStyle : "solid"} ${primaryColor}`
+const PokemonDataView = ({ imageUrl, name, number, abilities, border }) => {
+    /****************
+     * DECLARE STYLES
+     ****************/
+    const { headerFont } = useContext(ThemeContext)
     const IMAGE_STYLE = { ...POKEMON_IMAGE_STYLE, border }
     const NAME_STYLE = { padding: "15px", fontFamily: headerFont, fontSize: "40px" }
     const TABLE_STYLE = {
@@ -73,28 +68,45 @@ const PokemonDataView = ({ imageUrl, name, number, abilities, borderStyle }) => 
     const TABLE_HEADER_STYLE = {
         ...ROW_STYLE,
         fontSize: "18px",
-        borderBottom: `1px solid ${primaryColor}`,
+        borderBottom: border,
     }
+    const TABLE_ROW_STYLE = { ...ROW_STYLE, borderBottom: border }
 
+    /****************
+     * POKEMON IMAGE COMPONENT
+     ****************/
     let image = <div style={IMAGE_STYLE}>...</div>
     if (imageUrl) {
         image = <img src={imageUrl} alt={name} height={"200px"} style={IMAGE_STYLE} />
     }
 
-    let tableBody = <TableRow {...{ ability: "-", type: "-", damage: "-" }} />
+    /****************
+     * POKEMON ABILITY TABLE COMPONENT
+     ****************/
+    let tableBody = (
+        <tr>
+            <td style={TABLE_ROW_STYLE}>-</td>
+            <td style={TABLE_ROW_STYLE}>-</td>
+            <td style={TABLE_ROW_STYLE}>-</td>
+        </tr>
+    )
+
     if (abilities) {
-        tableBody = abilities.map(ability => (
-            <TableRow
-                {...{
-                    key: ability.name,
-                    ability: ability.name,
-                    type: ability.type,
-                    damage: ability.damage,
-                }}
-            />
-        ))
+        tableBody = abilities.map(abilityData => {
+            const { name, type, damage } = abilityData
+            return (
+                <tr>
+                    <td style={TABLE_ROW_STYLE}>{name}</td>
+                    <td style={TABLE_ROW_STYLE}>{type}</td>
+                    <td style={TABLE_ROW_STYLE}>{damage}</td>
+                </tr>
+            )
+        })
     }
 
+    /****************
+     * FINAL LAYOUT
+     ****************/
     return (
         <PokemonCard style={{ border }}>
             <h1 style={NAME_STYLE}>
