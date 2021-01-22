@@ -41,8 +41,8 @@ const TableRow = ({ ability, type, damage }) => {
 const PokemonLoadingView = () => (
     <PokemonDataView
         {...{
-            name: "Loading pokemon",
-            number: "...",
+            name: "Loading...",
+            number: "xxx",
             imageUrl: null,
             abilities: null,
             borderStyle: "dashed",
@@ -65,7 +65,11 @@ const PokemonDataView = ({ imageUrl, name, number, abilities, borderStyle }) => 
     const border = `1px ${borderStyle ? borderStyle : "solid"} ${primaryColor}`
     const IMAGE_STYLE = { ...POKEMON_IMAGE_STYLE, border }
     const NAME_STYLE = { padding: "15px", fontFamily: headerFont, fontSize: "40px" }
-    const TABLE_STYLE = { textAlign: "center", borderCollapse: "collapse" }
+    const TABLE_STYLE = {
+        textAlign: "center",
+        borderCollapse: "collapse",
+        marginTop: "15px",
+    }
     const TABLE_HEADER_STYLE = {
         ...ROW_STYLE,
         fontSize: "18px",
@@ -93,10 +97,10 @@ const PokemonDataView = ({ imageUrl, name, number, abilities, borderStyle }) => 
 
     return (
         <PokemonCard style={{ border }}>
-            {image}
             <h1 style={NAME_STYLE}>
                 {name} <sup style={{ fontSize: "20px" }}>({number})</sup>
             </h1>
+            {image}
             <table style={TABLE_STYLE}>
                 <thead style={{ fontFamily: headerFont }}>
                     <tr style={TABLE_HEADER_STYLE}>
