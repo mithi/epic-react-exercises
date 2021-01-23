@@ -41,14 +41,22 @@ const PokemonSearchSection = ({ onSubmit }) => {
 
     function handleSubmit(e) {
         e.preventDefault()
-        const completeName = incompleteName
-        onSubmit(completeName)
-        setIncompleteName("")
+        onSubmit(incompleteName)
+    }
+
+    function buttonSubmit(name) {
+        setIncompleteName(name)
+        onSubmit(name)
     }
 
     return (
         <>
-            <p style={{ fontSize: "12px" }}>Try Pikachu, Charizard, Bulbasaur...</p>
+            <p style={{ fontSize: "12px" }}>
+                Out of ideas? Try{" "}
+                <span onClick={() => buttonSubmit("Pikachu")}>Pikachu</span>,{" "}
+                <span onClick={() => buttonSubmit("Ninetales")}>Ninetales</span>, or{" "}
+                <span onClick={() => buttonSubmit("Charizard")}>Charizard</span>
+            </p>
             <form style={{ display: "flex" }} onSubmit={handleSubmit}>
                 <input
                     onChange={e => setIncompleteName(e.target.value)}
