@@ -9,7 +9,7 @@ const POKEMON_CARD_STYLE = {
     alignItems: "center",
     flexDirection: "column",
     borderRadius: "15px",
-    minHeight: "500px",
+    minHeight: "400px",
 }
 
 const POKEMON_IMAGE_STYLE = {
@@ -48,6 +48,23 @@ const PokemonLoadingView = ({ pokemonName }) => {
                 number: "xxx",
                 imageUrl: null,
                 abilities: null,
+                imageAlternative: "loading...",
+                border,
+            }}
+        />
+    )
+}
+
+const PokemonIdleView = () => {
+    const border = `1px dashed yellow`
+    return (
+        <PokemonDataView
+            {...{
+                name: `No Pokemon Yet!`,
+                number: "xxx",
+                imageUrl: null,
+                abilities: null,
+                imageAlternative: "Please submit a pokemon!",
                 border,
             }}
         />
@@ -65,7 +82,14 @@ const PokemonCard = ({ children, style }) => {
     return <div style={CARD_STYLE}>{children}</div>
 }
 
-const PokemonDataView = ({ imageUrl, name, number, abilities, border }) => {
+const PokemonDataView = ({
+    imageUrl,
+    name,
+    number,
+    abilities,
+    imageAlternative,
+    border,
+}) => {
     /****************
      * DECLARE STYLES
      ****************/
@@ -78,7 +102,7 @@ const PokemonDataView = ({ imageUrl, name, number, abilities, border }) => {
     /****************
      * POKEMON IMAGE COMPONENT
      ****************/
-    let image = <div style={IMAGE_STYLE}>😭</div>
+    let image = <div style={IMAGE_STYLE}>{imageAlternative || "..."}</div>
     if (imageUrl) {
         image = <img src={imageUrl} alt={name} height={"200px"} style={IMAGE_STYLE} />
     }
@@ -131,4 +155,4 @@ const PokemonDataView = ({ imageUrl, name, number, abilities, border }) => {
     )
 }
 
-export { PokemonInfoView, PokemonLoadingView, PokemonCard }
+export { PokemonIdleView, PokemonInfoView, PokemonLoadingView, PokemonCard }
