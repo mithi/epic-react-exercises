@@ -11,7 +11,7 @@ const TwoSections = ({ div1, div2 }) => {
     return (
         <div className={styles.twoSectionsLayout}>
             <section className={div1Styles}>{div1}</section>
-            <section className={div2Styles}>{div2}</section>
+            {div2 ? <section className={div2Styles}>{div2}</section> : null}
         </div>
     )
 }

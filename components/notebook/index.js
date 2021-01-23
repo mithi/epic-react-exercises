@@ -1,12 +1,11 @@
 import styles from "./Styles.module.css"
 import dynamic from "next/dynamic"
 import { useContext, useMemo } from "react"
-import { RiArrowLeftRightLine } from "react-icons/ri"
 import { FiGithub } from "react-icons/fi"
 import { BiRocket } from "react-icons/bi"
 import { BsPencilSquare } from "react-icons/bs"
-import { GlobalStateContext, ThemeContext } from "providers"
-import { IconButton, LinkButton, LinkAwayIconButton } from "../button"
+import { ThemeContext } from "providers"
+import { LinkButton, LinkAwayIconButton } from "../button"
 import Main from "../main"
 import NotebookLayout from "../main/two-sections"
 
@@ -49,7 +48,6 @@ const BUTTON_STYLE = {
 }
 
 const Header = ({ title, deployedSite, repository, editPath }) => {
-    const { togglePrimarySection } = useContext(GlobalStateContext)
     const { headerFont } = useContext(ThemeContext)
 
     return (
@@ -77,7 +75,7 @@ const Header = ({ title, deployedSite, repository, editPath }) => {
                     <BiRocket />
                 </LinkAwayIconButton>
                 <LinkAwayIconButton
-                    page={`https://github.com/mithi/epic-notes/edit/main/content${editPath}`}
+                    page={`https://github.com/mithi/epic-notes/edit/main/content/${editPath}`}
                     style={BUTTON_STYLE}
                     aria-label={"edit this page"}
                 >
@@ -105,7 +103,7 @@ const PageLayout = ({
         () =>
             hasApp
                 ? dynamic(() => import(`content/${topic}/${section}/${pageId}/app`))
-                : () => "None",
+                : () => null,
         [hasApp, topic, section, pageId]
     )
 
@@ -120,7 +118,13 @@ const PageLayout = ({
                 }}
             />
             <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <Pagination {...{ numberOfPages, currentPageId, pathname }} />
+                <Pagination
+                    {...{
+                        numberOfPages,
+                        currentPageId,
+                        pathname: `/${topic}/${section}`,
+                    }}
+                />
             </div>
             {styledNotes}
         </>
@@ -128,7 +132,7 @@ const PageLayout = ({
 
     return (
         <Main>
-            <NotebookLayout {...{ div1, div2: <App /> }} />
+            <NotebookLayout {...{ div1, div2: hasApp ? <App /> : null }} />
         </Main>
     )
 }
