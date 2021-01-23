@@ -56,6 +56,8 @@ const PokemonLoadingView = ({ pokemonName }) => {
 }
 
 const PokemonIdleView = () => {
+    const { primaryColor } = useContext(ThemeContext)
+
     return (
         <PokemonDataView
             {...{
@@ -64,7 +66,7 @@ const PokemonIdleView = () => {
                 imageUrl: null,
                 abilities: null,
                 imageAlternative: "Please submit a pokemon!",
-                border: "1px dashed yellow",
+                border: `1px dashed ${primaryColor}`,
             }}
         />
     )
