@@ -1,5 +1,6 @@
 import { useContext } from "react"
 import { ThemeContext } from "providers"
+import { IconButton } from "components/button"
 
 const POKEMON_CARD_STYLE = {
     padding: "20px",
@@ -14,7 +15,7 @@ const POKEMON_CARD_STYLE = {
 
 const POKEMON_IMAGE_STYLE = {
     width: "200px",
-    height: "200px",
+    minHeight: "200px",
     borderRadius: "15px",
     padding: "5px",
     fontSize: "30px",
@@ -39,7 +40,6 @@ const TABLE_STYLE = {
 
 const PokemonLoadingView = ({ pokemonName }) => {
     const { primaryColor } = useContext(ThemeContext)
-    const border = `1px dashed ${primaryColor}`
 
     return (
         <PokemonDataView
@@ -49,14 +49,13 @@ const PokemonLoadingView = ({ pokemonName }) => {
                 imageUrl: null,
                 abilities: null,
                 imageAlternative: "loading...",
-                border,
+                border: `1px dashed ${primaryColor}`,
             }}
         />
     )
 }
 
 const PokemonIdleView = () => {
-    const border = `1px dashed yellow`
     return (
         <PokemonDataView
             {...{
@@ -65,22 +64,41 @@ const PokemonIdleView = () => {
                 imageUrl: null,
                 abilities: null,
                 imageAlternative: "Please submit a pokemon!",
-                border,
+                border: "1px dashed yellow",
             }}
         />
     )
 }
 
 function PokemonErrorView({ error, resetErrorBoundary }) {
+    const { bodyFont } = useContext(ThemeContext)
+
     const imageAlternative = (
-        <div role="alert" style={{ fontSize: "15px" }}>
+        <div role="alert" style={{ fontSize: "15px", padding: "10px" }}>
             This error was caught by the error boundary!
             <br />
             <br />
             <span>{error.message}</span>
             <br />
             <br />
-            <button onClick={resetErrorBoundary}>Try again</button>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+                <IconButton
+                    onClick={resetErrorBoundary}
+                    style={{
+                        border: `1px solid red`,
+                        height: "30px",
+                        fontSize: "12px",
+                        borderRadius: "5px",
+                        backgroundColor: "red",
+                        width: "75px",
+                        fontFamily: bodyFont,
+                    }}
+                    isInvertedColor={true}
+                >
+                    {" "}
+                    Try again
+                </IconButton>
+            </div>
         </div>
     )
 
@@ -100,8 +118,9 @@ function PokemonErrorView({ error, resetErrorBoundary }) {
 
 const PokemonInfoView = ({ pokemonData }) => {
     const { primaryColor } = useContext(ThemeContext)
-    const border = `1px solid ${primaryColor}`
-    return <PokemonDataView {...{ ...pokemonData, border }} />
+    return (
+        <PokemonDataView {...{ ...pokemonData, border: `1px solid ${primaryColor}` }} />
+    )
 }
 
 const PokemonCard = ({ children, style }) => {
