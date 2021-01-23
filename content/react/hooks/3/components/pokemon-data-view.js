@@ -71,6 +71,33 @@ const PokemonIdleView = () => {
     )
 }
 
+function PokemonErrorView({ error, resetErrorBoundary }) {
+    const imageAlternative = (
+        <div role="alert" style={{ fontSize: "15px" }}>
+            This error was caught by the error boundary!
+            <br />
+            <br />
+            <span>{error.message}</span>
+            <br />
+            <br />
+            <button onClick={resetErrorBoundary}>Try again</button>
+        </div>
+    )
+
+    return (
+        <PokemonDataView
+            {...{
+                name: "Error! :(",
+                number: "xxx",
+                imageUrl: null,
+                abilities: null,
+                imageAlternative,
+                border: "1px dashed red",
+            }}
+        />
+    )
+}
+
 const PokemonInfoView = ({ pokemonData }) => {
     const { primaryColor } = useContext(ThemeContext)
     const border = `1px solid ${primaryColor}`
@@ -155,4 +182,10 @@ const PokemonDataView = ({
     )
 }
 
-export { PokemonIdleView, PokemonInfoView, PokemonLoadingView, PokemonCard }
+export {
+    PokemonIdleView,
+    PokemonInfoView,
+    PokemonLoadingView,
+    PokemonErrorView,
+    PokemonCard,
+}
