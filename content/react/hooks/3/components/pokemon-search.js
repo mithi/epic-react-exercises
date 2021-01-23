@@ -21,11 +21,7 @@ const ICON_STYLE = {
 
 const FetchSubmitButtonText = () => (
     <>
-        <span
-            style={{
-                fontSize: "0.6rem",
-            }}
-        >
+        <span style={{ fontSize: "0.6rem" }}>
             Fetch <br /> that
         </span>
         <span
@@ -43,10 +39,6 @@ const PokemonSearchSection = ({ onSubmit }) => {
     const { primaryColor, bodyClassNames, bodyFont } = useContext(ThemeContext)
     const [incompleteName, setIncompleteName] = useState("")
 
-    function handleChange(e) {
-        setIncompleteName(e.target.value)
-    }
-
     function handleSubmit(e) {
         e.preventDefault()
         const completeName = incompleteName
@@ -59,10 +51,10 @@ const PokemonSearchSection = ({ onSubmit }) => {
             <p style={{ fontSize: "12px" }}>Try Pikachu, Charizard, Bulbasaur...</p>
             <form style={{ display: "flex" }} onSubmit={handleSubmit}>
                 <input
-                    onChange={handleChange}
+                    onChange={e => setIncompleteName(e.target.value)}
                     className={bodyClassNames[0]}
                     style={{ ...INPUT_STYLE, fontFamily: bodyFont, margin: "5px" }}
-                    placeholder="Which pokemon..."
+                    placeholder="Which pokemon?"
                     value={incompleteName}
                 />
                 <IconButton
