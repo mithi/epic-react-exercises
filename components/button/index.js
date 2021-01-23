@@ -12,8 +12,10 @@ import { ThemeContext } from "providers"
 // `connect` to perform sync updates to a ref to save the latest props after
 // a render is actually committed to the DOM.
 
-const useButtonClasses = (className, isIcon, isInvertedColor) => {
-    const { buttonClassNames, invertedButtonClassName } = useContext(ThemeContext)
+const useButtonClasses = (className, isIcon, disabled, isInvertedColor) => {
+    const { buttonClassNames, invertedButtonClassName, disabledClassName } = useContext(
+        ThemeContext
+    )
     const [buttonClasses, setButtonClasses] = useState(buttonClassNames)
     const useIsomorphicLayoutEffect =
         typeof window !== "undefined" ? useLayoutEffect : useEffect
@@ -25,41 +27,55 @@ const useButtonClasses = (className, isIcon, isInvertedColor) => {
             styles.button,
             isIcon ? styles.buttonIcon : "",
             className,
+            disabled ? disabledClassName : "",
         ].join(" ")
 
         setButtonClasses(final)
-    }, [className, isIcon, buttonClassNames])
+    }, [className, isIcon, disabled, isInvertedColor, buttonClassNames])
 
     return buttonClasses
 }
 
-const LinkButton = ({ children, page, className, ...otherprops }) => (
-    <>
-        <Link href={page}>
-            <a style={{ textDecoration: "none" }}>
-                <button className={useButtonClasses(className)} {...otherprops}>
-                    {children}
-                </button>
-            </a>
-        </Link>
-    </>
-)
+const LinkButton = ({ children, page, className, ...otherprops }) => {
+    const buttonClass = useButtonClasses(className)
+    return (
+        <>
+            <Link href={page}>
+                <a style={{ textDecoration: "none" }}>
+                    <button className={buttonClass} {...otherprops}>
+                        {children}
+                    </button>
+                </a>
+            </Link>
+        </>
+    )
+}
 
-const LinkAwayIconButton = ({ children, page, className, ...otherprops }) => (
-    <a href={page} target="_blank" rel="noopener noreferrer">
-        <button className={useButtonClasses(className, true)} {...otherprops}>
+const LinkAwayIconButton = ({ children, page, className, ...otherprops }) => {
+    const buttonClass = useButtonClasses(className, true)
+
+    return (
+        <a href={page} target="_blank" rel="noopener noreferrer">
+            <button className={buttonClass} {...otherprops}>
+                {children}
+            </button>
+        </a>
+    )
+}
+
+const IconButton = ({
+    children,
+    className,
+    isInvertedColor,
+    disabled,
+    ...otherprops
+}) => {
+    const buttonClass = useButtonClasses(className, true, disabled, isInvertedColor)
+    return (
+        <button className={buttonClass} disabled={disabled} {...otherprops}>
             {children}
         </button>
-    </a>
-)
-
-const IconButton = ({ children, className, isInvertedColor, ...otherprops }) => (
-    <button
-        className={useButtonClasses(className, true, isInvertedColor)}
-        {...otherprops}
-    >
-        {children}
-    </button>
-)
+    )
+}
 
 export { LinkButton, LinkAwayIconButton, IconButton }

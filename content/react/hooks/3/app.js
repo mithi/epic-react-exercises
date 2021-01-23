@@ -1,16 +1,26 @@
+import { useState } from "react"
 import PokemonSearchSection from "./components/pokemon-search"
-import PokemonDataView from "./components/pokemon-data-view"
-// useFetchPokemon
-// PokemonDataView
-// NoPokemonView
-// PokemonInfoSection
-// PokemonSearchSection
+import PokemonInfoCard from "./components/pokemon-info-card"
+import { PokemonErrorView } from "./components/pokemon-data-view"
+import CustomErrorBoundary from "./components/custom-error-boundary"
 
-const App = () => (
-    <>
-        <PokemonSearchSection />
-        <PokemonDataView />
-    </>
-)
+function App() {
+    const [pokemonName, setPokemonName] = useState("")
 
+    return (
+        <>
+            <PokemonSearchSection
+                pokemonName={pokemonName}
+                onSubmit={newPokemonName => setPokemonName(newPokemonName)}
+            />
+            <CustomErrorBoundary
+                resetErrorBoundary={() => setPokemonName("")}
+                FallbackComponent={PokemonErrorView}
+                key={pokemonName}
+            >
+                <PokemonInfoCard pokemonName={pokemonName} />
+            </CustomErrorBoundary>
+        </>
+    )
+}
 export default App

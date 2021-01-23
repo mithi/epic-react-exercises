@@ -20,7 +20,6 @@ export const PageLayoutHelper = ({
             pageId,
             numberOfPages,
             properties,
-            pathname: `/react/${section}`,
             topic: "react",
             section,
             hasApp,

@@ -110,6 +110,7 @@ const ThemeProvider = ({ children }) => {
                 buttonClassNames,
                 invertedButtonClassName,
                 onHoverClassName,
+                disabledClassName: styles.disabled,
             }}
         >
             {children}

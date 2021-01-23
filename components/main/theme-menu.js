@@ -150,7 +150,7 @@ const Menu = ({ style } = {}) => {
                         cursor: "pointer",
                     }}
                 >
-                    <a> [close]</a>
+                    <a>[close]</a>
                 </div>
             </div>
         </section>
