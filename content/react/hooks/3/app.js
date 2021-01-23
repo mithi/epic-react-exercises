@@ -3,6 +3,7 @@ import PokemonSearchSection from "./components/pokemon-search"
 import {
     PokemonInfoView,
     PokemonLoadingView,
+    PokemonIdleView,
     PokemonCard,
 } from "./components/pokemon-data-view"
 import axios from "axios"
@@ -87,7 +88,6 @@ const PokemonApp = ({ pokemonName }) => {
         pokemonData: null,
         error: null,
     })
-    const { status, pokemonData, error } = state
 
     useEffect(() => {
         if (!pokemonName) {
@@ -106,24 +106,19 @@ const PokemonApp = ({ pokemonName }) => {
         )
     }, [pokemonName])
 
-    let card = null
-    if (status === "idle") {
-        card = (
-            <PokemonCard style={{ border: "1px dashed yellow" }}>
-                Please submit a pokemon!
-            </PokemonCard>
-        )
+    const { status, pokemonData, error } = state
+
+    if (status === "resolved") {
+        return <PokemonInfoView {...{ pokemonData }} />
+    } else if (status === "idle") {
+        return <PokemonIdleView />
     } else if (status === "pending") {
-        card = <PokemonLoadingView {...{ pokemonName }} />
+        return <PokemonLoadingView {...{ pokemonName }} />
     } else if (status === "rejected") {
         throw error
-    } else if (status === "resolved") {
-        card = <PokemonInfoView {...{ pokemonData }} />
-    } else {
-        throw new Error("This should be impossible")
     }
 
-    return card
+    throw new Error("This should be impossible")
 }
 
 function App() {
