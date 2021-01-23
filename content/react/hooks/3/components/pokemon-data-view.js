@@ -17,6 +17,11 @@ const POKEMON_IMAGE_STYLE = {
     height: "200px",
     borderRadius: "15px",
     padding: "5px",
+    fontSize: "30px",
+    textAlign: "center",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
 }
 
 const ROW_STYLE = {
@@ -24,6 +29,12 @@ const ROW_STYLE = {
     padding: "5px",
     minWidth: "75px",
     fontSize: "14px",
+}
+
+const TABLE_STYLE = {
+    textAlign: "center",
+    borderCollapse: "collapse",
+    marginTop: "15px",
 }
 
 const PokemonLoadingView = ({ pokemonName }) => {
@@ -60,23 +71,14 @@ const PokemonDataView = ({ imageUrl, name, number, abilities, border }) => {
      ****************/
     const { headerFont } = useContext(ThemeContext)
     const IMAGE_STYLE = { ...POKEMON_IMAGE_STYLE, border }
-    const NAME_STYLE = { padding: "15px", fontFamily: headerFont, fontSize: "40px" }
-    const TABLE_STYLE = {
-        textAlign: "center",
-        borderCollapse: "collapse",
-        marginTop: "15px",
-    }
-    const TABLE_HEADER_STYLE = {
-        ...ROW_STYLE,
-        fontSize: "18px",
-        borderBottom: border,
-    }
+    const NAME_STYLE = { fontFamily: headerFont, padding: "15px", fontSize: "40px" }
+    const TABLE_HEADER_STYLE = { ...ROW_STYLE, fontSize: "18px", borderBottom: border }
     const TABLE_ROW_STYLE = { ...ROW_STYLE, borderBottom: border }
 
     /****************
      * POKEMON IMAGE COMPONENT
      ****************/
-    let image = <div style={IMAGE_STYLE}>...</div>
+    let image = <div style={IMAGE_STYLE}>😭</div>
     if (imageUrl) {
         image = <img src={imageUrl} alt={name} height={"200px"} style={IMAGE_STYLE} />
     }
