@@ -9,6 +9,7 @@ const POKEMON_CARD_STYLE = {
     alignItems: "center",
     flexDirection: "column",
     borderRadius: "15px",
+    minHeight: "500px",
 }
 
 const POKEMON_IMAGE_STYLE = {
@@ -25,14 +26,14 @@ const ROW_STYLE = {
     fontSize: "14px",
 }
 
-const PokemonLoadingView = () => {
+const PokemonLoadingView = ({ pokemonName }) => {
     const { primaryColor } = useContext(ThemeContext)
     const border = `1px dashed ${primaryColor}`
 
     return (
         <PokemonDataView
             {...{
-                name: "Loading...",
+                name: `Loading ${pokemonName.slice(0, 15)}...`,
                 number: "xxx",
                 imageUrl: null,
                 abilities: null,
@@ -95,7 +96,7 @@ const PokemonDataView = ({ imageUrl, name, number, abilities, border }) => {
         tableBody = abilities.map(abilityData => {
             const { name, type, damage } = abilityData
             return (
-                <tr>
+                <tr key={name}>
                     <td style={TABLE_ROW_STYLE}>{name}</td>
                     <td style={TABLE_ROW_STYLE}>{type}</td>
                     <td style={TABLE_ROW_STYLE}>{damage}</td>
