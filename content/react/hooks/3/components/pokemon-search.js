@@ -52,10 +52,9 @@ const PokemonSearchSection = ({ onSubmit }) => {
     return (
         <>
             <p style={{ fontSize: "12px" }}>
-                Out of ideas? Try{" "}
-                <span onClick={() => buttonSubmit("Pikachu")}>Pikachu</span>,{" "}
-                <span onClick={() => buttonSubmit("Ninetales")}>Ninetales</span>, or{" "}
-                <span onClick={() => buttonSubmit("Charizard")}>Charizard</span>
+                Out of ideas? Try <a onClick={() => buttonSubmit("Pikachu")}>Pikachu</a>,{" "}
+                <a onClick={() => buttonSubmit("Ninetales")}>Ninetales</a>, or{" "}
+                <a onClick={() => buttonSubmit("Charizard")}>Charizard</a>
             </p>
             <form style={{ display: "flex" }} onSubmit={handleSubmit}>
                 <input
