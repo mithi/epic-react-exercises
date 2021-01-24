@@ -35,8 +35,21 @@ const FetchSubmitButtonText = () => (
         </span>
     </>
 )
+
+const PokemonSuggestion = ({ name, buttonSubmit }) => {
+    const { primaryColor } = useContext(ThemeContext)
+
+    return (
+        <a style={{ color: primaryColor }} onClick={() => buttonSubmit(name)}>
+            {name}
+        </a>
+    )
+}
+
 const PokemonSearchSection = ({ onSubmit }) => {
-    const { primaryColor, bodyClassNames, bodyFont } = useContext(ThemeContext)
+    const { primaryColor, bodyClassNames, bodyFont, headerFont } = useContext(
+        ThemeContext
+    )
     const [incompleteName, setIncompleteName] = useState("")
 
     function handleSubmit(e) {
@@ -51,10 +64,12 @@ const PokemonSearchSection = ({ onSubmit }) => {
 
     return (
         <>
+            <h2 style={{ fontFamily: headerFont }}>Fetch that Pokemon!</h2>
             <p style={{ fontSize: "12px" }}>
-                Out of ideas? Try <a onClick={() => buttonSubmit("Pikachu")}>Pikachu</a>,{" "}
-                <a onClick={() => buttonSubmit("Ninetales")}>Ninetales</a>, or{" "}
-                <a onClick={() => buttonSubmit("Charizard")}>Charizard</a>
+                Out of ideas? Try{" "}
+                <PokemonSuggestion {...{ name: "Pikachu", buttonSubmit }} />,{" "}
+                <PokemonSuggestion {...{ name: "Charizard", buttonSubmit }} />, or{" "}
+                <PokemonSuggestion {...{ name: "Ninetales", buttonSubmit }} />
             </p>
             <form style={{ display: "flex" }} onSubmit={handleSubmit}>
                 <input
