@@ -133,6 +133,7 @@
 
     .div1 {
         composes: div0;
+        order: 1;
     }
 
     .navButtonsContainer {
