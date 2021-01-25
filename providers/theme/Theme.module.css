@@ -13,7 +13,6 @@
 
 .darkButton {
     background-color: var(--gray-04-medium);
-    outline: 0;
 }
 
 .darkButton:hover {
@@ -43,7 +42,6 @@
 
 .lightButton {
     background-color: var(--gray-02-medium-light);
-    outline: 0;
 }
 
 .lightButton:hover {
@@ -74,7 +72,6 @@
 
 .funkyButton {
     background-color: #b9382d;
-    outline: 0;
 }
 
 .funkyButton:hover {

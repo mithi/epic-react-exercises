@@ -10,12 +10,17 @@
 
 input:focus,
 textarea:focus,
-select:focus {
+select:focus,
+a:focus,
+button:focus {
     outline-color: #c0c0c0;
     outline-width: 1px;
     outline-style: dashed;
 }
 
+div:focus {
+    outline: 0;
+}
 ::-webkit-input-placeholder {
     /* Edge */
     color: #c0c0c0;
