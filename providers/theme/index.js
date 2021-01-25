@@ -55,7 +55,7 @@ const ThemeProvider = ({ children }) => {
     const [colorId, setColorId] = useStickyState(0, "colorId")
     const [headerFontId, setHeaderFontId] = useStickyState(0, "headerId")
     const [bodyFontId, setBodyFontId] = useStickyState(0, "bodyFontId")
-    const [codeThemeId, setCodeThemeId] = useStickyState(0, "codeThemId")
+    const [codeThemeId, setCodeThemeId] = useStickyState(0, "codeThemeId")
     const theme = THEMES[themeId]
     const bodyClassNames = [theme.body]
     const sectionClassNames = [theme.section]

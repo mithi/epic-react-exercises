@@ -4,7 +4,7 @@ import useStickyState from "hooks/useStickyState"
 const GlobalStateContext = createContext({})
 
 const GlobalStateProvider = ({ children }) => {
-    let [menuState, setMenuState] = useStickyState("none")
+    let [menuState, setMenuState] = useStickyState("none", "menuState")
 
     const changeMenuState = menuType => {
         // if menuType === "none": menuState = "none"
