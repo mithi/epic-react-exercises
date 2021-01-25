@@ -1,10 +1,9 @@
-import { createContext } from "react"
-import useStickyState from "hooks/useStickyState"
+import { createContext, useState } from "react"
 
 const GlobalStateContext = createContext({})
 
 const GlobalStateProvider = ({ children }) => {
-    let [menuState, setMenuState] = useStickyState("none", "menuState")
+    let [menuState, setMenuState] = useState("none", "menuState")
 
     const changeMenuState = menuType => {
         // if menuType === "none": menuState = "none"
