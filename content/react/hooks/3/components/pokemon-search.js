@@ -1,5 +1,5 @@
 import { useContext, useState } from "react"
-import { IconButton } from "components/button"
+import { TextButton } from "components/button"
 import { SiPokemon } from "react-icons/si"
 import { ThemeContext } from "providers"
 
@@ -35,8 +35,21 @@ const FetchSubmitButtonText = () => (
         </span>
     </>
 )
+
+const PokemonSuggestion = ({ name, buttonSubmit }) => {
+    const { primaryColor } = useContext(ThemeContext)
+
+    return (
+        <a style={{ color: primaryColor }} onClick={() => buttonSubmit(name)}>
+            {name}
+        </a>
+    )
+}
+
 const PokemonSearchSection = ({ onSubmit }) => {
-    const { primaryColor, bodyClassNames, bodyFont } = useContext(ThemeContext)
+    const { primaryColor, bodyClassNames, bodyFont, headerFont } = useContext(
+        ThemeContext
+    )
     const [incompleteName, setIncompleteName] = useState("")
 
     function handleSubmit(e) {
@@ -51,11 +64,12 @@ const PokemonSearchSection = ({ onSubmit }) => {
 
     return (
         <>
+            <h2 style={{ fontFamily: headerFont }}>Fetch that Pokemon!</h2>
             <p style={{ fontSize: "12px" }}>
                 Out of ideas? Try{" "}
-                <span onClick={() => buttonSubmit("Pikachu")}>Pikachu</span>,{" "}
-                <span onClick={() => buttonSubmit("Ninetales")}>Ninetales</span>, or{" "}
-                <span onClick={() => buttonSubmit("Charizard")}>Charizard</span>
+                <PokemonSuggestion {...{ name: "Pikachu", buttonSubmit }} />,{" "}
+                <PokemonSuggestion {...{ name: "Charizard", buttonSubmit }} />, or{" "}
+                <PokemonSuggestion {...{ name: "Ninetales", buttonSubmit }} />
             </p>
             <form style={{ display: "flex" }} onSubmit={handleSubmit}>
                 <input
@@ -65,18 +79,19 @@ const PokemonSearchSection = ({ onSubmit }) => {
                     placeholder="Which pokemon?"
                     value={incompleteName}
                 />
-                <IconButton
+                <TextButton
                     isInvertedColor={true}
                     style={{
                         ...ICON_STYLE,
                         backgroundColor: primaryColor,
                         fontFamily: bodyFont,
+                        height: "3rem",
                     }}
                     type="submit"
                     disabled={!incompleteName.length}
                 >
                     <FetchSubmitButtonText />
-                </IconButton>
+                </TextButton>
             </form>
         </>
     )

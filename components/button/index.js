@@ -78,4 +78,6 @@ const IconButton = ({
     )
 }
 
-export { LinkButton, LinkAwayIconButton, IconButton }
+const TextButton = props => <IconButton {...props} />
+
+export { LinkButton, LinkAwayIconButton, IconButton, TextButton }

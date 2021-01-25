@@ -1,6 +1,6 @@
 import { useContext } from "react"
 import { ThemeContext } from "providers"
-import { IconButton } from "components/button"
+import { TextButton } from "components/button"
 
 const POKEMON_CARD_STYLE = {
     padding: "20px",
@@ -84,7 +84,7 @@ function PokemonErrorView({ error, resetErrorBoundary }) {
             <br />
             <br />
             <div style={{ display: "flex", justifyContent: "center" }}>
-                <IconButton
+                <TextButton
                     onClick={resetErrorBoundary}
                     style={{
                         border: `1px solid red`,
@@ -97,9 +97,8 @@ function PokemonErrorView({ error, resetErrorBoundary }) {
                     }}
                     isInvertedColor={true}
                 >
-                    {" "}
                     Try again
-                </IconButton>
+                </TextButton>
             </div>
         </div>
     )
