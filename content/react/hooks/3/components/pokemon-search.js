@@ -16,24 +16,29 @@ const ICON_STYLE = {
     borderRadius: "10px",
     margin: "5px",
     padding: "10px",
-    outline: 0,
+    height: "3rem",
 }
 
-const FetchSubmitButtonText = () => (
-    <>
+const SUBMIT_BUTTON_STYLE = {
+    fontSize: "4rem",
+    paddingTop: "15px",
+    margin: "10px 5px",
+}
+
+const FetchSubmitButton = ({ disabled }) => (
+    <TextButton
+        isInvertedColor={true}
+        style={ICON_STYLE}
+        type="submit"
+        disabled={disabled}
+    >
         <span style={{ fontSize: "0.6rem" }}>
             Fetch <br /> that
         </span>
-        <span
-            style={{
-                fontSize: "4rem",
-                paddingTop: "15px",
-                margin: "10px 5px",
-            }}
-        >
+        <span style={SUBMIT_BUTTON_STYLE}>
             <SiPokemon />
         </span>
-    </>
+    </TextButton>
 )
 
 const PokemonSuggestion = ({ name, buttonSubmit }) => {
@@ -46,10 +51,19 @@ const PokemonSuggestion = ({ name, buttonSubmit }) => {
     )
 }
 
-const PokemonSearchSection = ({ onSubmit }) => {
-    const { primaryColor, bodyClassNames, bodyFont, headerFont } = useContext(
-        ThemeContext
+const SearchInputField = ({ placeholder, value, onChange }) => {
+    const { bodyClassNames, bodyFont } = useContext(ThemeContext)
+    return (
+        <input
+            className={bodyClassNames[0]}
+            style={{ ...INPUT_STYLE, fontFamily: bodyFont, margin: "5px" }}
+            {...{ placeholder, value, onChange }}
+        />
     )
+}
+
+const PokemonSearchSection = ({ onSubmit }) => {
+    const { headerFont } = useContext(ThemeContext)
     const [incompleteName, setIncompleteName] = useState("")
 
     function handleSubmit(e) {
@@ -72,26 +86,12 @@ const PokemonSearchSection = ({ onSubmit }) => {
                 <PokemonSuggestion {...{ name: "Ninetales", buttonSubmit }} />
             </p>
             <form style={{ display: "flex" }} onSubmit={handleSubmit}>
-                <input
+                <SearchInputField
                     onChange={e => setIncompleteName(e.target.value)}
-                    className={bodyClassNames[0]}
-                    style={{ ...INPUT_STYLE, fontFamily: bodyFont, margin: "5px" }}
                     placeholder="Which pokemon?"
                     value={incompleteName}
                 />
-                <TextButton
-                    isInvertedColor={true}
-                    style={{
-                        ...ICON_STYLE,
-                        backgroundColor: primaryColor,
-                        fontFamily: bodyFont,
-                        height: "3rem",
-                    }}
-                    type="submit"
-                    disabled={!incompleteName.length}
-                >
-                    <FetchSubmitButtonText />
-                </TextButton>
+                <FetchSubmitButton disabled={!incompleteName.length} />
             </form>
         </>
     )
