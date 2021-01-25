@@ -1,5 +1,5 @@
 import { useContext, useState } from "react"
-import { IconButton } from "components/button"
+import { TextButton } from "components/button"
 import { SiPokemon } from "react-icons/si"
 import { ThemeContext } from "providers"
 
@@ -79,18 +79,19 @@ const PokemonSearchSection = ({ onSubmit }) => {
                     placeholder="Which pokemon?"
                     value={incompleteName}
                 />
-                <IconButton
+                <TextButton
                     isInvertedColor={true}
                     style={{
                         ...ICON_STYLE,
                         backgroundColor: primaryColor,
                         fontFamily: bodyFont,
+                        height: "3rem",
                     }}
                     type="submit"
                     disabled={!incompleteName.length}
                 >
                     <FetchSubmitButtonText />
-                </IconButton>
+                </TextButton>
             </form>
         </>
     )
