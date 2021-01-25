@@ -9,12 +9,12 @@ class CustomErrorBoundary extends Component {
 
     render() {
         const { error } = this.state
-        const { resetErrorBoundary, FallbackComponent } = this.props
+        const { resetFunction, FallbackComponent, children } = this.props
         if (error) {
-            return <FallbackComponent {...{ error, resetErrorBoundary }} />
+            return <FallbackComponent {...{ error, resetFunction }} />
         }
 
-        return this.props.children
+        return children
     }
 }
 

@@ -63,21 +63,36 @@ const LinkAwayIconButton = ({ children, page, className, ...otherprops }) => {
     )
 }
 
-const IconButton = ({
-    children,
-    className,
-    isInvertedColor,
-    disabled,
-    ...otherprops
-}) => {
-    const buttonClass = useButtonClasses(className, true, disabled, isInvertedColor)
+const IconButton = ({ children, className, ...otherprops }) => {
+    const buttonClass = useButtonClasses(className, true)
     return (
-        <button className={buttonClass} disabled={disabled} {...otherprops}>
+        <button className={buttonClass} {...otherprops}>
             {children}
         </button>
     )
 }
 
-const TextButton = props => <IconButton {...props} />
+const TextButton = ({
+    children,
+    className,
+    isInvertedColor,
+    disabled,
+    style,
+    ...otherprops
+}) => {
+    const buttonClass = useButtonClasses(className, true, disabled, isInvertedColor)
+    const { bodyFont, primaryColor } = useContext(ThemeContext)
+    const newStyle = { fontFamily: bodyFont, backgroundColor: primaryColor, ...style }
+    return (
+        <button
+            className={buttonClass}
+            disabled={disabled}
+            style={newStyle}
+            {...otherprops}
+        >
+            {children}
+        </button>
+    )
+}
 
 export { LinkButton, LinkAwayIconButton, IconButton, TextButton }

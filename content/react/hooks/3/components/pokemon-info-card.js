@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { useStickyState } from "hooks"
 import { PokemonInfoView, PokemonLoadingView, PokemonIdleView } from "./pokemon-data-view"
 import axios from "axios"
 
@@ -60,12 +61,8 @@ const PokemonInfoCard = ({ pokemonName }) => {
 
         setState({ status: "pending" })
         fetchPokemon(pokemonName).then(
-            pokemonData => {
-                setState({ status: "resolved", pokemonData })
-            },
-            error => {
-                setState({ status: "rejected", error })
-            }
+            pokemonData => setState({ status: "resolved", pokemonData }),
+            error => setState({ status: "rejected", error })
         )
     }, [pokemonName])
 

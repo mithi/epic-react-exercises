@@ -38,6 +38,15 @@ const TABLE_STYLE = {
     marginTop: "15px",
 }
 
+const ERROR_BUTTON_STYLE = {
+    border: "1px solid red",
+    height: "30px",
+    fontSize: "12px",
+    borderRadius: "5px",
+    backgroundColor: "red",
+    width: "75px",
+}
+
 const PokemonLoadingView = ({ pokemonName }) => {
     const { primaryColor } = useContext(ThemeContext)
 
@@ -72,9 +81,7 @@ const PokemonIdleView = () => {
     )
 }
 
-function PokemonErrorView({ error, resetErrorBoundary }) {
-    const { bodyFont } = useContext(ThemeContext)
-
+function PokemonErrorView({ error, resetFunction }) {
     const imageAlternative = (
         <div role="alert" style={{ fontSize: "15px", padding: "10px" }}>
             This error was caught by the error boundary!
@@ -85,16 +92,8 @@ function PokemonErrorView({ error, resetErrorBoundary }) {
             <br />
             <div style={{ display: "flex", justifyContent: "center" }}>
                 <TextButton
-                    onClick={resetErrorBoundary}
-                    style={{
-                        border: `1px solid red`,
-                        height: "30px",
-                        fontSize: "12px",
-                        borderRadius: "5px",
-                        backgroundColor: "red",
-                        width: "75px",
-                        fontFamily: bodyFont,
-                    }}
+                    onClick={resetFunction}
+                    style={ERROR_BUTTON_STYLE}
                     isInvertedColor={true}
                 >
                     Try again
@@ -195,7 +194,6 @@ const PokemonDataView = ({
                         <th>Damage</th>
                     </tr>
                 </thead>
-
                 <tbody>{tableBody}</tbody>
             </table>
         </PokemonCard>
