@@ -76,7 +76,6 @@
     justify-content: center;
     flex-wrap: wrap;
     padding: 0px;
-    z-index: 2;
     composes: common;
 }
 
@@ -86,6 +85,7 @@
 
 .navButtonsContainer {
     height: auto;
+    z-index: 2;
 }
 
 .paragraph {
@@ -102,7 +102,6 @@
     }
 
     .nav {
-        z-index: 2;
         height: 70px;
         width: 100vw;
         padding: 0px;
