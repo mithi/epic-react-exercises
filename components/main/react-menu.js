@@ -31,6 +31,7 @@ const Menu = ({ style, showCloseButton = true } = {}) => {
                 marginLeft: "10px",
                 cursor: "pointer",
             }}
+            href="#"
             onClick={() => changeMenuState("react")}
         >
             [close]

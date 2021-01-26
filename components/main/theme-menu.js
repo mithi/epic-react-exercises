@@ -140,17 +140,14 @@ const Menu = ({ style } = {}) => {
                         <FaCode />
                     </IconButton>
                 </div>
-                <div
-                    onClick={() => changeMenuState("theme")}
-                    style={{
-                        color: primaryColor,
-                        marginTop: "20px",
-                        marginBottom: "10px",
-                        textAlign: "center",
-                        cursor: "pointer",
-                    }}
-                >
-                    <a>[close]</a>
+                <div style={{ margin: "15px", textAlign: "center" }}>
+                    <a
+                        href="#"
+                        style={{ color: primaryColor }}
+                        onClick={() => changeMenuState("theme")}
+                    >
+                        [close]
+                    </a>
                 </div>
             </div>
         </section>

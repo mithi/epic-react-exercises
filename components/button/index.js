@@ -42,7 +42,7 @@ const LinkButton = ({ children, page, className, ...otherprops }) => {
         <>
             <Link href={page}>
                 <a style={{ textDecoration: "none" }}>
-                    <button className={buttonClass} {...otherprops}>
+                    <button className={buttonClass} {...otherprops} tabIndex="-1">
                         {children}
                     </button>
                 </a>
@@ -55,7 +55,7 @@ const LinkAwayIconButton = ({ children, page, className, ...otherprops }) => {
     const buttonClass = useButtonClasses(className, true)
 
     return (
-        <a href={page} target="_blank" rel="noopener noreferrer">
+        <a href={page} tabIndex="-1" target="_blank" rel="noopener noreferrer">
             <button className={buttonClass} {...otherprops}>
                 {children}
             </button>
