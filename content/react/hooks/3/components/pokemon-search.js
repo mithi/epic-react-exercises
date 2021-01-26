@@ -62,9 +62,8 @@ const SearchInputField = ({ placeholder, value, onChange }) => {
     )
 }
 
-const PokemonSearchSection = ({ onSubmit }) => {
+const PokemonSearchSection = ({ onSubmit, setIncompleteName, incompleteName }) => {
     const { headerFont } = useContext(ThemeContext)
-    const [incompleteName, setIncompleteName] = useState("")
 
     function handleSubmit(e) {
         e.preventDefault()
