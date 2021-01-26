@@ -144,7 +144,7 @@ const Menu = ({ style } = {}) => {
                     <a
                         href="#"
                         style={{ color: primaryColor }}
-                        onClick={() => changeMenuState("theme")}
+                        onClick={() => changeMenuState("none")}
                     >
                         [close]
                     </a>

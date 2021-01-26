@@ -32,14 +32,14 @@ const Menu = ({ style, showCloseButton = true } = {}) => {
                 cursor: "pointer",
             }}
             href="#"
-            onClick={() => changeMenuState("react")}
+            onClick={() => changeMenuState("none")}
         >
             [close]
         </a>
     ) : null
     return (
         <section
-            onClick={() => changeMenuState("react")}
+            onClick={() => changeMenuState("none")}
             className={styles.menu}
             style={{ paddingRight: "30px", ...style }}
         >
