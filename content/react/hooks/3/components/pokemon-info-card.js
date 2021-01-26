@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import { useStickyState } from "hooks"
 import { PokemonInfoView, PokemonLoadingView, PokemonIdleView } from "./pokemon-data-view"
 import axios from "axios"
 

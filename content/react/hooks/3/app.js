@@ -6,17 +6,23 @@ import CustomErrorBoundary from "./components/custom-error-boundary"
 
 function App() {
     const [submittedName, setSubmittedName] = useState("")
+    const [incompleteName, setIncompleteName] = useState("")
+
+    const resetFunction = () => {
+        setIncompleteName("")
+        setSubmittedName("")
+    }
 
     return (
         <>
             <PokemonSearchbar
                 pokemonName={submittedName}
                 onSubmit={name => setSubmittedName(name)}
+                {...{ incompleteName, setIncompleteName }}
             />
             <CustomErrorBoundary
-                resetFunction={() => setSubmittedName("")}
                 FallbackComponent={PokemonErrorView}
-                key={submittedName}
+                {...{ resetFunction, key: submittedName }}
             >
                 <PokemonInfoCard pokemonName={submittedName} />
             </CustomErrorBoundary>
