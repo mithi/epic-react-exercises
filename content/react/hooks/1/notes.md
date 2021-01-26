@@ -36,3 +36,13 @@
 6.  [Don't sync states, derive it!](https://kentcdodds.com/blog/dont-sync-state-derive-it)
 
     -   It's usually better to calculate states (deriving) based on other states when you can as opposed to storing them (from Kent C Dodds Blog)
+
+## Further Reading
+
+-   [Eloquent Javascript: Events](https://eloquentjavascript.net/15_event.html)
+-   [MDN Docs: Events](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events)
+-   [MDN Docs: Events (refefence)](https://developer.mozilla.org/en-US/docs/Web/Events)
+-   [Kent C Dodd's UseLocalStorage Implementation](https://github.com/kentcdodds/react-hooks/blob/main/src/final/02.extra-4.js)
+-   [usehooks.com: useLocalStorage](https://usehooks.com/useLocalStorage/)
+-   [rehooks/awesome-react-hooks](https://github.com/rehooks/awesome-react-hooks)
+-   [donavon/use-persisted-state](https://github.com/donavon/use-persisted-state)

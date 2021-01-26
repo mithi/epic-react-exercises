@@ -10,7 +10,7 @@
     -   `<div></div>` is just a syntactic sugar for `React.createElement()`, dom nodes are not created at all until `ReactDom.render()` is called.
     -   The `render` method has no access to the dom node by itself, it only creates and returns react elements
     -   To access the dom, use a special prop called `ref`
-    -   `mounted`: A component that has rendered. That's when `useEffect` callback is called, by that point `ref.current` set to the dom node which you can directly do interactions, manipulations
+    -   A component that has rendered is said to be `mounted`. That's when `useEffect` callback is called, by that point `ref.current` set to the dom node which you can directly do interactions, manipulations
 
 2.  useRef
     -   Clean up event handlers you have setup when your component is unmounted.
@@ -31,3 +31,8 @@ const MyFunctionComponent () => {
     return <div ref={myDivRef}>hi</div>
 }
 ```
+
+## Other Interesting Libraries that manipulate the dom
+
+-   [yoannmoinet/nipplejs](https://github.com/yoannmoinet/nipplejs)
+-   [hammer.js](https://github.com/hammerjs/hammer.js)
