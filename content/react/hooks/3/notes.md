@@ -122,3 +122,4 @@ class CustomErrorBoundary extends Component {
 
 -   Refactor the [data views module](https://github.com/mithi/epic-notes/blob/main/content/react/hooks/3/components/pokemon-data-view.js)
 -   How to refactor to use local storage so that the previously fetched pokemon data will still be displayed on refresh?
+-   Currently, when the `try again` button is clicked, the string in the search bar will not reset. What is the best way to add this functionality? Probably by lifting `incompleteName` and `setIncompleteName` up from the searchbar to its parent component.

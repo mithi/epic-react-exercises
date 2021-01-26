@@ -9,9 +9,9 @@ const DynamicMarkdownRender = dynamic(() => import("components/markdown-render")
 
 export default function Home() {
     const div1 = (
-        <div style={{ width: "100%", maxWidth: "600px", padding: "10px" }}>
+        <article style={{ width: "100%", maxWidth: "600px", padding: "10px" }}>
             <DynamicMarkdownRender>{landingString}</DynamicMarkdownRender>
-        </div>
+        </article>
     )
 
     return (

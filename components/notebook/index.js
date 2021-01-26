@@ -96,7 +96,6 @@ const PageLayout = ({
     section,
 }) => {
     const currentPageId = Math.max(1, Math.min(Number(pageId) || 1, numberOfPages))
-    const styledNotes = <span>{notes}</span>
     const { deployedSite, repository, title } = properties
 
     const App = useMemo(
@@ -126,7 +125,7 @@ const PageLayout = ({
                     }}
                 />
             </div>
-            {styledNotes}
+            <article>{notes}</article>
         </>
     )
 
