@@ -45,7 +45,7 @@ const PokemonSuggestion = ({ name, buttonSubmit }) => {
     const { primaryColor } = useContext(ThemeContext)
 
     return (
-        <a style={{ color: primaryColor }} onClick={() => buttonSubmit(name)}>
+        <a style={{ color: primaryColor }} onClick={() => buttonSubmit(name)} href="#">
             {name}
         </a>
     )
