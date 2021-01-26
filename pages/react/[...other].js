@@ -13,7 +13,7 @@ export async function getServerSideProps() {
 function Page() {
     return (
         <Main>
-            <ReactMenu />
+            <ReactMenu showCloseButton={false} style={{ zIndex: 0 }} />
         </Main>
     )
 }
