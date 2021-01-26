@@ -16,12 +16,7 @@
 -   Why did Kent say [Stop Using `isLoading` booleans](https://kentcdodds.com/blog/stop-using-isloading-booleans)?
 -   What is the difference between `fetch().then(result => result, error => error)` and `fetch().then(result => result).catch(error => error)` ?
 -   [Public Class Fields with React Components](https://egghead.io/lessons/javascript-public-class-fields-with-react-components)
-
-## ToDos
-
--   Try using the npm package [bvaughn/react-error-boundary](https://github.com/bvaughn/react-error-boundary)
--   Try using `useReducer` instead of `useState`
--   Refactor the [data views module](https://github.com/mithi/epic-notes/blob/main/content/react/hooks/3/components/pokemon-data-view.js) among other things that can be refactored
+-   The npm package [bvaughn/react-error-boundary](https://github.com/bvaughn/react-error-boundary)
 
 ## My implementation
 
@@ -122,3 +117,8 @@ class CustomErrorBoundary extends Component {
     }
 }
 ```
+
+## ToDos
+
+-   Refactor the [data views module](https://github.com/mithi/epic-notes/blob/main/content/react/hooks/3/components/pokemon-data-view.js)
+-   How to refactor to use local storage so that the previously fetched pokemon data will still be displayed on refresh?
