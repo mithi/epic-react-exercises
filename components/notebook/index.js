@@ -125,13 +125,15 @@ const PageLayout = ({
                     }}
                 />
             </div>
-            <article>{notes}</article>
+            {hasApp ? <App /> : <article>{notes}</article>}
         </>
     )
 
+    const div2 = hasApp ? <article>{notes}</article> : null
+
     return (
         <Main>
-            <NotebookLayout {...{ div1, div2: hasApp ? <App /> : null }} />
+            <NotebookLayout {...{ div1, div2 }} />
         </Main>
     )
 }

@@ -63,8 +63,6 @@ const SearchInputField = ({ placeholder, value, onChange }) => {
 }
 
 const PokemonSearchSection = ({ onSubmit, setIncompleteName, incompleteName }) => {
-    const { headerFont } = useContext(ThemeContext)
-
     function handleSubmit(e) {
         e.preventDefault()
         onSubmit(incompleteName)
@@ -77,7 +75,6 @@ const PokemonSearchSection = ({ onSubmit, setIncompleteName, incompleteName }) =
 
     return (
         <>
-            <h2 style={{ fontFamily: headerFont }}>Fetch that Pokemon!</h2>
             <p style={{ fontSize: "12px" }}>
                 Out of ideas? Try{" "}
                 <PokemonSuggestion {...{ name: "Pikachu", buttonSubmit }} />,{" "}

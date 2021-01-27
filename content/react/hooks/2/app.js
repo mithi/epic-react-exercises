@@ -12,13 +12,13 @@ const centeredStyle = {
 }
 
 const tiltRootStyle = {
-    height: "50vh",
+    height: "35vh",
     width: "50%",
     borderRadius: "15px",
     ...centeredStyle,
 }
 
-const parentStyle = { ...centeredStyle, height: "80vh" }
+const parentStyle = { ...centeredStyle, height: "55vh" }
 
 const vanillaTiltOptions = {
     max: 25,
@@ -38,8 +38,10 @@ function Tilt({ children, setData }) {
     }, [])
 
     return (
-        <div ref={divRef} {...{ style }}>
-            {children}
+        <div style={parentStyle}>
+            <div ref={divRef} {...{ style }}>
+                {children}
+            </div>
         </div>
     )
 }
@@ -76,13 +78,10 @@ function App() {
 
     return (
         <>
-            <p>Entering the box will transform its perspective.</p>
-
-            <div style={parentStyle}>
-                <Tilt {...{ setData }}>
-                    <TiltDataDisplay {...{ data }} />
-                </Tilt>
-            </div>
+            <p>Touching the box will transform its perspective.</p>
+            <Tilt {...{ setData }}>
+                <TiltDataDisplay {...{ data }} />
+            </Tilt>
         </>
     )
 }

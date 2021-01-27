@@ -97,19 +97,21 @@
         grid-template-columns: 1fr;
         grid-template-rows: auto;
         min-height: 100vh;
-        width: fit-content;
+        width: 100%;
     }
 
     .nav {
         height: 70px;
-        width: 100vw;
+        width: 96%;
         padding: 0px;
         grid-area: 1 / 1 / 2 / 2;
+        z-index: 2;
     }
 
     .main {
         margin-top: 10px;
         grid-area: 2 / 1 / 3 / 2;
+        width: 98%;
     }
 
     .twoSectionsLayout {
@@ -118,6 +120,7 @@
         align-items: stretch;
         justify-content: stretch;
         flex-wrap: wrap;
+        width: 98%;
     }
 
     .div0 {
@@ -132,7 +135,6 @@
 
     .div1 {
         composes: div0;
-        order: 1;
     }
 
     .navButtonsContainer {
