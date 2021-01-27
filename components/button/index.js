@@ -20,7 +20,20 @@ const useButtonClasses = (className, isIcon, disabled, isInvertedColor) => {
     const useIsomorphicLayoutEffect =
         typeof window !== "undefined" ? useLayoutEffect : useEffect
 
-    const moreClassNames = isInvertedColor ? [invertedButtonClassName] : buttonClassNames
+    const [
+        themeButtonClass,
+        onHoverClass,
+        colorClass,
+        themeButtonClassOnHover,
+    ] = buttonClassNames
+    let moreClassNames = isInvertedColor
+        ? [invertedButtonClassName]
+        : [themeButtonClass, colorClass]
+
+    moreClassNames = disabled
+        ? moreClassNames
+        : [...moreClassNames, onHoverClass, themeButtonClassOnHover]
+
     useIsomorphicLayoutEffect(() => {
         let final = [
             ...moreClassNames,
@@ -36,13 +49,18 @@ const useButtonClasses = (className, isIcon, disabled, isInvertedColor) => {
     return buttonClasses
 }
 
-const LinkButton = ({ children, page, className, ...otherprops }) => {
-    const buttonClass = useButtonClasses(className)
+const LinkButton = ({ children, page, className, disabled, ...otherprops }) => {
+    const buttonClass = useButtonClasses(className, false, disabled)
     return (
         <>
             <Link href={page}>
                 <a style={{ textDecoration: "none" }}>
-                    <button className={buttonClass} {...otherprops} tabIndex="-1">
+                    <button
+                        className={buttonClass}
+                        {...otherprops}
+                        disabled={disabled}
+                        tabIndex="-1"
+                    >
                         {children}
                     </button>
                 </a>

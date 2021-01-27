@@ -17,17 +17,15 @@ const Pagination = ({ numberOfPages, currentPageId, pathname }) => {
             {Array.from(Array(numberOfPages).keys()).map(i => {
                 const pageId = i + 1
                 const buttonPathname = `${pathname}/${pageId === 1 ? "" : pageId}`
-                const border =
-                    pageId === currentPageId ? `2px solid ${primaryColor}` : null
+                const disabled = pageId === currentPageId
+                const border = disabled ? `2px solid ${primaryColor}` : null
 
                 return (
                     <LinkButton
                         key={buttonPathname}
                         className={styles.linkButton}
-                        style={{
-                            border,
-                            fontFamily: headerFont,
-                        }}
+                        style={{ border, fontFamily: headerFont }}
+                        disabled={disabled}
                         page={buttonPathname}
                         children={pageId}
                     />
