@@ -1,13 +1,13 @@
 import styles from "./Styles.module.css"
 import dynamic from "next/dynamic"
-import { useContext, useMemo } from "react"
+import { useMemo } from "react"
 import { FiGithub } from "react-icons/fi"
 import { BiRocket } from "react-icons/bi"
 import { BsPencilSquare } from "react-icons/bs"
-import { ThemeContext } from "providers"
 import { LinkAwayIconButton, DefaultLinkButton } from "../button"
 import Main from "../main"
 import NotebookLayout from "../main/two-sections"
+import { PrettyHeader } from "../pretty-defaults"
 
 const Pagination = ({ numberOfPages, currentPageId, pathname }) => {
     return (
@@ -41,11 +41,11 @@ const BUTTON_STYLE = {
 }
 
 const Header = ({ title, deployedSite, repository, editPath }) => {
-    const { headerFont } = useContext(ThemeContext)
-
     return (
         <div className={styles.header}>
-            <h1 style={{ fontFamily: headerFont, marginRight: "10px" }}>{title}</h1>
+            <PrettyHeader Component="h1" style={{ marginRight: "10px" }}>
+                {title}
+            </PrettyHeader>
             <div
                 style={{
                     display: "flex",
