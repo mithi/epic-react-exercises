@@ -8,15 +8,17 @@
 
 ## My Implementation
 
-My top level component houses three children components
+My top level component houses basically renders the following:
 
 ```js
-// `Board` is the clickable board
-<Board {...{ currentBoard, onPlayerMove, disableButtons: gameFinished }} />
 // info about the current state of the board)
 <BoardStatus {...{ winnerIfAny, gameFinished, playerToMove }} />
+// `Board` is the clickable board
+<Board {...{ currentBoard, onPlayerMove, disableButtons: gameFinished }} />
 // buttons that you can click to move forward and backward in time
 <MoveHistory {...{ numberOfSnapshots, onLoadBoardSnapshot, currentSnapshotId }} />
+<RestartButton {...{ onRestart: restart }} />
+
 ```
 
 My top level component manages a simple state:
@@ -36,7 +38,7 @@ const state = {
 }
 ```
 
-Whenever the state changes we analyze the current board with this helper function
+Whenever the state changes we analyze the current board with this helper function:
 
 ```js
 /*
@@ -83,7 +85,7 @@ const analyzeBoard = board => {
 }
 ```
 
-Putting everything together, this is the result
+Putting everything together, this is the result:
 
 ```jsx
 const INITIAL_BOARD = [null, null, null, null, null, null, null, null, null]
