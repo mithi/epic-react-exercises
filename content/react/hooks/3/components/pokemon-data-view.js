@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import { ThemeContext } from "providers"
 import { TextButton } from "components/button"
+import { PrettyHeader } from "components/pretty-defaults"
 
 const POKEMON_CARD_STYLE = {
     padding: "20px",
@@ -139,9 +140,7 @@ const PokemonDataView = ({
     /****************
      * DECLARE STYLES
      ****************/
-    const { headerFont } = useContext(ThemeContext)
     const IMAGE_STYLE = { ...POKEMON_IMAGE_STYLE, border }
-    const NAME_STYLE = { fontFamily: headerFont, padding: "15px", fontSize: "40px" }
     const TABLE_HEADER_STYLE = { ...ROW_STYLE, fontSize: "18px", borderBottom: border }
     const TABLE_ROW_STYLE = { ...ROW_STYLE, borderBottom: border }
 
@@ -182,16 +181,16 @@ const PokemonDataView = ({
      ****************/
     return (
         <PokemonCard style={{ border }}>
-            <h1 style={NAME_STYLE}>
+            <PrettyHeader Component="h1" style={{ padding: "15px", fontSize: "40px" }}>
                 {name} <sup style={{ fontSize: "20px" }}>({number})</sup>
-            </h1>
+            </PrettyHeader>
             {image}
             <table style={TABLE_STYLE}>
-                <thead style={{ fontFamily: headerFont }}>
+                <thead>
                     <tr style={TABLE_HEADER_STYLE}>
-                        <th>Ability</th>
-                        <th>Type</th>
-                        <th>Damage</th>
+                        <PrettyHeader Component="th">Ability</PrettyHeader>
+                        <PrettyHeader Component="th">Type</PrettyHeader>
+                        <PrettyHeader Component="th">Damage</PrettyHeader>
                     </tr>
                 </thead>
                 <tbody>{tableBody}</tbody>
