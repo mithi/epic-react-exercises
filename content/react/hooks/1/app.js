@@ -1,35 +1,104 @@
 import { useStickyState } from "hooks"
-
+import { TextButton, DefaultButton } from "components/button"
+import { PrettyHeader } from "components/pretty-defaults"
 const X_PLAYER = "x"
 const O_PLAYER = "o"
 
 const Board = ({ currentBoard, onPlayerMove, disableButtons }) => {
     const square = i => {
-        const x = currentBoard[i]
-        const disabled = disableButtons || x ? true : false
+        const player = currentBoard[i]
+        const disabled = disableButtons || player ? true : false
         const onClick = disabled ? null : () => onPlayerMove(i)
-        return <button {...{ onClick, disabled }}>{x ? x : "."}</button>
+        const children = player ? player : "."
+        const style = { fontSize: "50px", height: "75px", width: "75px", margin: "5px" }
+        return <DefaultButton {...{ onClick, disabled, style, children }} />
+    }
+
+    return (
+        <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>{square(0)}</td>
+                        <td>{square(1)}</td>
+                        <td>{square(2)}</td>
+                    </tr>
+                    <tr>
+                        <td>{square(3)}</td>
+                        <td>{square(4)}</td>
+                        <td>{square(5)}</td>
+                    </tr>
+                    <tr>
+                        <td>{square(6)}</td>
+                        <td>{square(7)}</td>
+                        <td>{square(8)}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    )
+}
+
+const BoardStatus = ({ winnerIfAny, gameFinished, playerToMove }) => {
+    let children = null
+    if (gameFinished) {
+        children = winnerIfAny ? `winner: ${winnerIfAny}` : `Nobody won.`
+    } else {
+        children = `Player ${playerToMove}, please move!`
     }
     return (
-        <table>
-            <tbody>
-                <tr>
-                    <td>{square(0)}</td>
-                    <td>{square(1)}</td>
-                    <td>{square(2)}</td>
-                </tr>
-                <tr>
-                    <td>{square(3)}</td>
-                    <td>{square(4)}</td>
-                    <td>{square(5)}</td>
-                </tr>
-                <tr>
-                    <td>{square(6)}</td>
-                    <td>{square(7)}</td>
-                    <td>{square(8)}</td>
-                </tr>
-            </tbody>
-        </table>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+            <PrettyHeader style={{ fontSize: "40px", margin: "20px" }} Component={"div"}>
+                {children}
+            </PrettyHeader>
+        </div>
+    )
+}
+
+const RestartButton = ({ onRestart }) => {
+    return (
+        <div style={{ display: "flex", width: "100%", justifyContent: "center" }}>
+            <TextButton
+                isInvertedColor={true}
+                disabled={!onRestart}
+                style={{
+                    width: "auto",
+                    height: "20px",
+                    padding: "20px",
+                    fontSize: "14px",
+                    borderRadius: "10px",
+                    margin: "10px",
+                }}
+                useBgPrimaryColor={true}
+                onClick={onRestart}
+            >
+                <PrettyHeader Component={"span"}>Restart!</PrettyHeader>
+            </TextButton>
+        </div>
+    )
+}
+const MoveHistory = ({ numberOfSnapshots, onLoadBoardSnapshot, currentSnapshotId }) => {
+    const buttonIterator = Array(numberOfSnapshots).fill(null)
+    const buttons = buttonIterator.map((_, i) => {
+        const disabled = i === currentSnapshotId
+        const onClick = disabled ? null : () => onLoadBoardSnapshot(i)
+        return <DefaultButton {...{ key: i, onClick, disabled, children: i }} />
+    })
+
+    return (
+        <>
+            <div
+                style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    alignItems: "center",
+                    margin: "10px",
+                    justifyContent: "center",
+                }}
+            >
+                {buttons}
+            </div>
+        </>
     )
 }
 
@@ -78,34 +147,6 @@ const analyzeBoard = board => {
     return { gameFinished: false, winnerIfAny: null, playerToMove }
 }
 
-const BoardStatus = ({ winnerIfAny, gameFinished, playerToMove, onRestart }) => {
-    return (
-        <>
-            <p>winnerIfAny: {winnerIfAny ? winnerIfAny : "pending"}</p>
-            <p>gameFinished: {gameFinished ? "true" : "false"}</p>
-            <p>playerToMove: {playerToMove ? playerToMove : "none"}</p>
-            <button onClick={onRestart}>restart</button>
-        </>
-    )
-}
-
-const MoveHistory = ({ numberOfSnapshots, onLoadBoardSnapshot, currentSnapshotId }) => {
-    const buttons = Array(numberOfSnapshots)
-        .fill(null)
-        .map((_, i) => {
-            const disabled = i === currentSnapshotId
-            const onClick = disabled ? null : () => onLoadBoardSnapshot(i)
-            return <button {...{ key: i, onClick, disabled }}>{i}</button>
-        })
-
-    return (
-        <>
-            <p>Click which move to go back to: </p>
-            {buttons}
-        </>
-    )
-}
-
 const INITIAL_BOARD = [null, null, null, null, null, null, null, null, null]
 const INITIAL_STATE = {
     boardSnapshots: [INITIAL_BOARD],
@@ -145,13 +186,15 @@ const App = () => {
 
     const onRestart = () => setState(INITIAL_STATE)
 
+    const restart = numberOfSnapshots === 1 ? null : onRestart
     return (
         <>
+            <BoardStatus {...{ winnerIfAny, gameFinished, playerToMove }} />
             <Board {...{ currentBoard, onPlayerMove, disableButtons: gameFinished }} />
-            <BoardStatus {...{ winnerIfAny, gameFinished, playerToMove, onRestart }} />
             <MoveHistory
                 {...{ numberOfSnapshots, onLoadBoardSnapshot, currentSnapshotId }}
             />
+            <RestartButton {...{ onRestart: restart }} />
         </>
     )
 }
