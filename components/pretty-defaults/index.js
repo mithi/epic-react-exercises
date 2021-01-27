@@ -2,9 +2,10 @@ import { ThemeContext } from "providers"
 import { useContext } from "react"
 
 const PrettyHeader = ({ style, children, Component, ...otherProps }) => {
+    Component = Component ? Component : "div"
     const { headerFont } = useContext(ThemeContext)
-    let newStyle = { ...style, fontFamily: headerFont }
-    return <Component {...{ style: newStyle, ...otherProps }}>{children}</Component>
+    style = { ...style, fontFamily: headerFont }
+    return <Component {...{ style, ...otherProps }}>{children}</Component>
 }
 
 const PrettyAnchor = ({ style, children, onClick, href, ...otherProps }) => {

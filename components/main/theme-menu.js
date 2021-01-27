@@ -27,6 +27,7 @@ const Menu = ({ style } = {}) => {
         nextBodyFont,
         nextPageTheme,
         primaryColor,
+        bodyFont,
         onHoverClassName,
         bodyClassNames,
         sectionClassNames,
@@ -64,6 +65,7 @@ const Menu = ({ style } = {}) => {
                         margin: "10px",
                         marginBottom: "0",
                     }}
+                    Component="h1"
                 >
                     Heading
                 </PrettyHeader>
@@ -77,6 +79,7 @@ const Menu = ({ style } = {}) => {
                         lineHeight: "1.3",
                         margin: "10px",
                         marginTop: "0",
+                        fontFamily: bodyFont,
                     }}
                 >
                     {SAMPLE_PARAGRAPH}
