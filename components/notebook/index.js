@@ -5,26 +5,21 @@ import { FiGithub } from "react-icons/fi"
 import { BiRocket } from "react-icons/bi"
 import { BsPencilSquare } from "react-icons/bs"
 import { ThemeContext } from "providers"
-import { LinkButton, LinkAwayIconButton } from "../button"
+import { LinkAwayIconButton, DefaultLinkButton } from "../button"
 import Main from "../main"
 import NotebookLayout from "../main/two-sections"
 
 const Pagination = ({ numberOfPages, currentPageId, pathname }) => {
-    const { headerFont, primaryColor } = useContext(ThemeContext)
-
     return (
         <div className={styles.pagination}>
             {Array.from(Array(numberOfPages).keys()).map(i => {
                 const pageId = i + 1
                 const buttonPathname = `${pathname}/${pageId === 1 ? "" : pageId}`
                 const disabled = pageId === currentPageId
-                const border = disabled ? `2px solid ${primaryColor}` : null
 
                 return (
-                    <LinkButton
+                    <DefaultLinkButton
                         key={buttonPathname}
-                        className={styles.linkButton}
-                        style={{ border, fontFamily: headerFont }}
                         disabled={disabled}
                         page={buttonPathname}
                         children={pageId}

@@ -31,6 +31,7 @@ const FetchSubmitButton = ({ disabled }) => (
         style={ICON_STYLE}
         type="submit"
         disabled={disabled}
+        useBgPrimaryColor={true}
     >
         <span style={{ fontSize: "0.6rem" }}>
             Fetch <br /> that
