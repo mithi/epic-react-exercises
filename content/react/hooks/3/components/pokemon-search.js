@@ -1,15 +1,6 @@
-import { useContext, useState } from "react"
 import { TextButton } from "components/button"
 import { SiPokemon } from "react-icons/si"
-import { ThemeContext } from "providers"
-
-const INPUT_STYLE = {
-    width: "68%",
-    borderWidth: "0px",
-    borderRadius: "10px",
-    margin: "5px 0px",
-    padding: "5px 15px",
-}
+import { PrettyAnchor, PrettyInputField } from "components/pretty-defaults"
 
 const ICON_STYLE = {
     width: "32%",
@@ -43,23 +34,10 @@ const FetchSubmitButton = ({ disabled }) => (
 )
 
 const PokemonSuggestion = ({ name, buttonSubmit }) => {
-    const { primaryColor } = useContext(ThemeContext)
-
     return (
-        <a style={{ color: primaryColor }} onClick={() => buttonSubmit(name)} href="#">
+        <PrettyAnchor onClick={() => buttonSubmit(name)} href="#">
             {name}
-        </a>
-    )
-}
-
-const SearchInputField = ({ placeholder, value, onChange }) => {
-    const { bodyClassNames, bodyFont } = useContext(ThemeContext)
-    return (
-        <input
-            className={bodyClassNames[0]}
-            style={{ ...INPUT_STYLE, fontFamily: bodyFont, margin: "5px" }}
-            {...{ placeholder, value, onChange }}
-        />
+        </PrettyAnchor>
     )
 }
 
@@ -83,7 +61,8 @@ const PokemonSearchSection = ({ onSubmit, setIncompleteName, incompleteName }) =
                 <PokemonSuggestion {...{ name: "Ninetales", buttonSubmit }} />
             </p>
             <form style={{ display: "flex" }} onSubmit={handleSubmit}>
-                <SearchInputField
+                <PrettyInputField
+                    style={{ width: "68%" }}
                     onChange={e => setIncompleteName(e.target.value)}
                     placeholder="Which pokemon?"
                     value={incompleteName}
