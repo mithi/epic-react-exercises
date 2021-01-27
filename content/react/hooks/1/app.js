@@ -1,8 +1,8 @@
 import { useStickyState } from "hooks"
 import { TextButton, DefaultButton } from "components/button"
 import { PrettyHeader } from "components/pretty-defaults"
-const X_PLAYER = "x"
-const O_PLAYER = "o"
+const X_PLAYER = "X"
+const O_PLAYER = "O"
 
 const Board = ({ currentBoard, onPlayerMove, disableButtons }) => {
     const square = i => {
@@ -42,9 +42,9 @@ const Board = ({ currentBoard, onPlayerMove, disableButtons }) => {
 const BoardStatus = ({ winnerIfAny, gameFinished, playerToMove }) => {
     let children = null
     if (gameFinished) {
-        children = winnerIfAny ? `winner: ${winnerIfAny}` : `Nobody won.`
+        children = winnerIfAny ? `Winner: Player ${winnerIfAny} 🎉🥳` : `Nobody won.`
     } else {
-        children = `Player ${playerToMove}, please move!`
+        children = `Player ${playerToMove}, it's your turn!`
     }
     return (
         <div style={{ display: "flex", justifyContent: "center" }}>
