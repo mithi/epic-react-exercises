@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { useStickyState } from "hooks"
+
 const X_PLAYER = "x"
 const O_PLAYER = "o"
 
@@ -99,7 +100,7 @@ const MoveHistory = ({ numberOfSnapshots, onLoadBoardSnapshot, currentSnapshotId
 
     return (
         <>
-            <p>Click the which move to go back to: </p>
+            <p>Click which move to go back to: </p>
             {buttons}
         </>
     )
@@ -112,9 +113,9 @@ const INITIAL_STATE = {
 }
 
 const App = () => {
-    const [state, setState] = useState(INITIAL_STATE)
+    const [state, setState] = useStickyState(INITIAL_STATE, "hooks:tictactoe")
 
-    // changing the state of the same triggers a rerender
+    // changing the state triggers a rerender
     // so we get to analyze the latest board each time
     const { currentSnapshotId, boardSnapshots } = state
     const currentBoard = boardSnapshots[currentSnapshotId]
@@ -132,6 +133,7 @@ const App = () => {
             ...boardSnapshots.slice(0, currentSnapshotId + 1),
             nextBoard,
         ]
+
         setState({
             boardSnapshots: nextBoardSnapshots,
             currentSnapshotId: currentSnapshotId + 1,
@@ -142,14 +144,15 @@ const App = () => {
         setState({ ...state, currentSnapshotId: snapShotId })
 
     const onRestart = () => setState(INITIAL_STATE)
+
     return (
-        <div>
+        <>
             <Board {...{ currentBoard, onPlayerMove, disableButtons: gameFinished }} />
             <BoardStatus {...{ winnerIfAny, gameFinished, playerToMove, onRestart }} />
             <MoveHistory
                 {...{ numberOfSnapshots, onLoadBoardSnapshot, currentSnapshotId }}
             />
-        </div>
+        </>
     )
 }
 
