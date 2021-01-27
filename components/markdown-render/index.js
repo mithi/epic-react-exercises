@@ -2,6 +2,7 @@ import { useContext } from "react"
 import ReactMarkdown from "react-markdown"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import { ThemeContext } from "providers"
+import { PrettyHeader, PrettyAnchor } from "components/pretty-defaults"
 
 const LINE_NUMBER_STYLE = {
     minWidth: "25px",
@@ -42,32 +43,35 @@ const Code = ({ children, language }) => {
 }
 
 const CustomHeading = ({ children, level }) => {
-    const { headerFont } = useContext(ThemeContext)
-
-    const header = <span style={{ fontFamily: headerFont }}>{children}</span>
+    const style = { marginTop: "20px" }
     switch (level) {
         case 1:
-            return <h1 style={{ marginTop: "20px" }}>{header}</h1>
+            return (
+                <PrettyHeader Component="h1" {...{ style }}>
+                    {" "}
+                    {children}
+                </PrettyHeader>
+            )
+
         case 2:
-            return <h2 style={{ marginTop: "20px" }}>{header}</h2>
+            return (
+                <PrettyHeader Component="h2" {...{ style }}>
+                    {children}
+                </PrettyHeader>
+            )
         case 3:
-            return <h3> {header}</h3>
+            return <PrettyHeader Component="h3">{children}</PrettyHeader>
         case 4:
-            return <h4>{header}</h4>
+            return <PrettyHeader Component="h4">{children}</PrettyHeader>
         case 5:
-            return <h5>{header}</h5>
+            return <PrettyHeader Component="h5">{children}</PrettyHeader>
         default:
-            return <h6>{header}</h6>
+            return <PrettyHeader Component="h6">{children}</PrettyHeader>
     }
 }
 
 const LinkAwayText = ({ href, children }) => {
-    const { primaryColor } = useContext(ThemeContext)
-    return (
-        <a {...{ href }} style={{ color: primaryColor }}>
-            {children}
-        </a>
-    )
+    return <PrettyAnchor {...{ href }}>{children}</PrettyAnchor>
 }
 
 const renderers = {
