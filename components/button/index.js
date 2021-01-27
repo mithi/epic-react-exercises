@@ -118,7 +118,7 @@ const TextButton = ({
     )
 }
 
-const NUMBER_BUTTON_STYLE = {
+const DEFAULT_BUTTON_STYLE = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -134,32 +134,27 @@ const DefaultLinkButton = ({ style, disabled, ...otherProps }) => {
     const { headerFont, primaryColor } = useContext(ThemeContext)
     const border = disabled ? `2px solid ${primaryColor}` : null
 
-    const newStyle = {
-        ...NUMBER_BUTTON_STYLE,
+    style = {
+        ...DEFAULT_BUTTON_STYLE,
         border,
         fontFamily: headerFont,
         ...style,
     }
 
-    return <LinkButton {...{ ...otherProps, disabled, style: newStyle }} />
+    return <LinkButton {...{ ...otherProps, disabled, style }} />
 }
 
 const DefaultButton = ({ style, children, disabled, ...otherProps }) => {
     const { headerFont, primaryColor } = useContext(ThemeContext)
-
     const border = disabled ? `2px solid ${primaryColor}` : null
 
-    const newStyle = {
-        ...NUMBER_BUTTON_STYLE,
+    style = {
+        ...DEFAULT_BUTTON_STYLE,
         border,
         fontFamily: headerFont,
         ...style,
     }
-    return (
-        <TextButton {...{ ...otherProps, disabled, style: newStyle }}>
-            {children}
-        </TextButton>
-    )
+    return <TextButton {...{ ...otherProps, disabled, style }}>{children}</TextButton>
 }
 export {
     LinkButton,

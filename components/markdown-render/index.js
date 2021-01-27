@@ -71,7 +71,11 @@ const CustomHeading = ({ children, level }) => {
 }
 
 const LinkAwayText = ({ href, children }) => {
-    return <PrettyAnchor {...{ href }}>{children}</PrettyAnchor>
+    return (
+        <PrettyAnchor {...{ href, target: "_blank", rel: "noopener noreferrer" }}>
+            {children}
+        </PrettyAnchor>
+    )
 }
 
 const renderers = {

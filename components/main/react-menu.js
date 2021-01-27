@@ -24,10 +24,7 @@ const Menu = ({ style, showCloseButton = true } = {}) => {
     const { changeMenuState } = useContext(GlobalStateContext)
     const maybeCloseButton = showCloseButton ? (
         <PrettyAnchor
-            style={{
-                marginTop: "5px",
-                marginLeft: "10px",
-            }}
+            style={{ marginTop: "5px", marginLeft: "10px" }}
             href="#"
             onClick={() => changeMenuState("none")}
         >

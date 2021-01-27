@@ -1,8 +1,13 @@
 import styles from "./Styles.module.css"
 import { useContext, useState, useEffect } from "react"
-import { ThemeContext, GlobalStateContext } from "providers"
+import { ThemeContext } from "providers"
 import Nav from "./navbar"
 
+/*
+    ❗❗❗❗ IMPORTANT ❗❗❗❗
+    the setVisible hack is important to address FOUC ( flash of unstyled content )
+    DON'T REMOVE IT!
+ */
 const Home = ({ children } = {}) => {
     const { bodyClassNames, bodyFont } = useContext(ThemeContext)
     const [visible, setVisible] = useState(false)
