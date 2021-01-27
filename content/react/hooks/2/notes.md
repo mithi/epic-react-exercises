@@ -19,7 +19,11 @@ function Tilt({ children, setData }) {
         return () => node.vanillaTilt.destroy()
     }, [])
 
-    return <div ref={divRef}> {children} </div>
+    return (
+        <div>
+            <div ref={divRef}> {children} </div>
+        </div>
+    )
 }
 
 function App() {
@@ -27,12 +31,10 @@ function App() {
 
     return (
         <>
-            <p>Entering the box will transform its perspective.</p>
-            <div>
-                <Tilt {...{ setData }}>
-                    <TiltDataDisplay {...{ data }} />
-                </Tilt>
-            </div>
+            <p>Touching the box will transform its perspective.</p>
+            <Tilt {...{ setData }}>
+                <TiltDataDisplay {...{ data }} />
+            </Tilt>
         </>
     )
 }
@@ -47,7 +49,7 @@ function App() {
     -   To access the dom, use a special prop called `ref`
     -   A component that has rendered is said to be `mounted`. That's when `useEffect` callback is called. By that point `ref.current` is set to the dom node which you can directly do interactions, manipulations...
 
-2.  Other Interesting Libraries that manipulate the dom
+2.  Other interesting libraries that manipulate the dom
     -   [yoannmoinet/nipplejs](https://github.com/yoannmoinet/nipplejs)
     -   [hammer.js](https://github.com/hammerjs/hammer.js)
 

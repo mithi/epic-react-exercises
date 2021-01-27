@@ -15,7 +15,7 @@
     background-color: var(--gray-04-medium);
 }
 
-.darkButton:hover {
+.darkButtonOnHover:hover {
     color: var(--gray-01-dark);
 }
 
@@ -44,7 +44,7 @@
     background-color: var(--gray-02-medium-light);
 }
 
-.lightButton:hover {
+.lightButtonOnHover:hover {
     color: var(--gray-00-light);
 }
 
@@ -74,7 +74,7 @@
     background-color: #b9382d;
 }
 
-.funkyButton:hover {
+.funkyButtonOnHover:hover {
     color: #01810c;
 }
 

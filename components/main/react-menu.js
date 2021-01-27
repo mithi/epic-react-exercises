@@ -1,20 +1,20 @@
 import styles from "./Styles.module.css"
 import { useContext } from "react"
-import { GlobalStateContext, ThemeContext } from "providers"
+import { GlobalStateContext } from "providers"
 import { LinkButton } from "../button"
+import { PrettyHeader, PrettyAnchor } from "../pretty-defaults"
 
 const Button = ({ children, section }) => {
-    const { headerFont } = useContext(ThemeContext)
     return (
         <div>
             <LinkButton
                 {...{
-                    children,
                     page: `/react/${section}`,
                     className: styles.reactMenuButton,
-                    style: { fontFamily: headerFont },
                 }}
-            />
+            >
+                <PrettyHeader Component="span">{children}</PrettyHeader>
+            </LinkButton>
             <br />
         </div>
     )
@@ -22,20 +22,17 @@ const Button = ({ children, section }) => {
 
 const Menu = ({ style, showCloseButton = true } = {}) => {
     const { changeMenuState } = useContext(GlobalStateContext)
-    const { primaryColor } = useContext(ThemeContext)
     const maybeCloseButton = showCloseButton ? (
-        <a
+        <PrettyAnchor
             style={{
-                color: primaryColor,
                 marginTop: "5px",
                 marginLeft: "10px",
-                cursor: "pointer",
             }}
             href="#"
             onClick={() => changeMenuState("none")}
         >
             [close]
-        </a>
+        </PrettyAnchor>
     ) : null
     return (
         <section

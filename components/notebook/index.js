@@ -1,33 +1,26 @@
 import styles from "./Styles.module.css"
 import dynamic from "next/dynamic"
-import { useContext, useMemo } from "react"
+import { useMemo } from "react"
 import { FiGithub } from "react-icons/fi"
 import { BiRocket } from "react-icons/bi"
 import { BsPencilSquare } from "react-icons/bs"
-import { ThemeContext } from "providers"
-import { LinkButton, LinkAwayIconButton } from "../button"
+import { LinkAwayIconButton, DefaultLinkButton } from "../button"
 import Main from "../main"
 import NotebookLayout from "../main/two-sections"
+import { PrettyHeader } from "../pretty-defaults"
 
 const Pagination = ({ numberOfPages, currentPageId, pathname }) => {
-    const { headerFont, primaryColor } = useContext(ThemeContext)
-
     return (
         <div className={styles.pagination}>
             {Array.from(Array(numberOfPages).keys()).map(i => {
                 const pageId = i + 1
                 const buttonPathname = `${pathname}/${pageId === 1 ? "" : pageId}`
-                const border =
-                    pageId === currentPageId ? `2px solid ${primaryColor}` : null
+                const disabled = pageId === currentPageId
 
                 return (
-                    <LinkButton
+                    <DefaultLinkButton
                         key={buttonPathname}
-                        className={styles.linkButton}
-                        style={{
-                            border,
-                            fontFamily: headerFont,
-                        }}
+                        disabled={disabled}
                         page={buttonPathname}
                         children={pageId}
                     />
@@ -48,11 +41,11 @@ const BUTTON_STYLE = {
 }
 
 const Header = ({ title, deployedSite, repository, editPath }) => {
-    const { headerFont } = useContext(ThemeContext)
-
     return (
         <div className={styles.header}>
-            <h1 style={{ fontFamily: headerFont, marginRight: "10px" }}>{title}</h1>
+            <PrettyHeader Component="h1" style={{ marginRight: "10px" }}>
+                {title}
+            </PrettyHeader>
             <div
                 style={{
                     display: "flex",
@@ -125,13 +118,15 @@ const PageLayout = ({
                     }}
                 />
             </div>
-            <article>{notes}</article>
+            {hasApp ? <App /> : <article>{notes}</article>}
         </>
     )
 
+    const div2 = hasApp ? <article>{notes}</article> : null
+
     return (
         <Main>
-            <NotebookLayout {...{ div1, div2: hasApp ? <App /> : null }} />
+            <NotebookLayout {...{ div1, div2 }} />
         </Main>
     )
 }

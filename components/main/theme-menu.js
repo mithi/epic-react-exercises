@@ -6,6 +6,7 @@ import { CgFormatColor } from "react-icons/cg"
 import { BiText } from "react-icons/bi"
 import { ThemeContext, GlobalStateContext } from "providers"
 import { IconButton } from "../button"
+import { PrettyAnchor, PrettyHeader } from "../pretty-defaults"
 
 const ICON_BUTTON_STYLE = { margin: "10px 5px" }
 const SAMPLE_CODE = "```python\n def hello():\n    return 'world!'"
@@ -23,10 +24,8 @@ const Menu = ({ style } = {}) => {
         nextColor,
         nextHeaderFont,
         nextCodeTheme,
-        headerFont,
         nextBodyFont,
         nextPageTheme,
-        bodyFont,
         primaryColor,
         onHoverClassName,
         bodyClassNames,
@@ -56,11 +55,10 @@ const Menu = ({ style } = {}) => {
                         }}
                     ></div>
                 </div>
-                <h1
+                <PrettyHeader
                     onClick={nextHeaderFont}
                     className={onHoverClassName}
                     style={{
-                        fontFamily: headerFont,
                         padding: "10px",
                         borderRadius: "5px",
                         margin: "10px",
@@ -68,13 +66,12 @@ const Menu = ({ style } = {}) => {
                     }}
                 >
                     Heading
-                </h1>
+                </PrettyHeader>
 
                 <p
                     onClick={nextBodyFont}
                     className={onHoverClassName}
                     style={{
-                        fontFamily: bodyFont,
                         padding: "10px",
                         borderRadius: "5px",
                         lineHeight: "1.3",
@@ -141,13 +138,9 @@ const Menu = ({ style } = {}) => {
                     </IconButton>
                 </div>
                 <div style={{ margin: "15px", textAlign: "center" }}>
-                    <a
-                        href="#"
-                        style={{ color: primaryColor }}
-                        onClick={() => changeMenuState("none")}
-                    >
+                    <PrettyAnchor href="#" onClick={() => changeMenuState("none")}>
                         [close]
-                    </a>
+                    </PrettyAnchor>
                 </div>
             </div>
         </section>

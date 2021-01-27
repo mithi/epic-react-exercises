@@ -16,16 +16,6 @@
     -   [usehooks.com: useLocalStorage](https://usehooks.com/useLocalStorage/)
     -   [donavon/use-persisted-state](https://github.com/donavon/use-persisted-state)
 
-## You should know these things
-
--   What is an [error boundary](https://reactjs.org/docs/error-boundaries.html) and what is it for?
--   Can you do something like `useEffect(async () => await doSomething())` ? Why or why not? If not, what should we do instead?
--   [Does React batch state update functions when using hooks?](https://stackoverflow.com/questions/53048495/does-react-batch-state-update-functions-when-using-hooks). Is the behavior the same for Promise calls? [Could this change in the future](https://stackoverflow.com/questions/53048495/does-react-batch-state-update-functions-when-using-hooks)?
--   Why did Kent say [Stop Using `isLoading` booleans](https://kentcdodds.com/blog/stop-using-isloading-booleans)?
--   What is the difference between `fetch().then(result => result, error => error)` and `fetch().then(result => result).catch(error => error)` ?
--   [Public Class Fields with React Components](https://egghead.io/lessons/javascript-public-class-fields-with-react-components)
--   The npm package [bvaughn/react-error-boundary](https://github.com/bvaughn/react-error-boundary)
-
 ## My implementation
 
 1.  It's better to put all the states in one state object (ie `{status, pokemonData, error}`), instead of having several `useState()` declarations.
