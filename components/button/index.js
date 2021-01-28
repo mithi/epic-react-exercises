@@ -56,10 +56,9 @@ const LinkButton = ({ children, page, className, disabled, ...otherprops }) => {
             <Link href={page}>
                 <a style={{ textDecoration: "none" }}>
                     <button
-                        className={buttonClass}
-                        {...otherprops}
-                        disabled={disabled}
                         tabIndex="-1"
+                        className={buttonClass}
+                        {...{ ...otherprops, disabled }}
                     >
                         {children}
                     </button>
@@ -71,7 +70,6 @@ const LinkButton = ({ children, page, className, disabled, ...otherprops }) => {
 
 const LinkAwayIconButton = ({ children, page, className, ...otherprops }) => {
     const buttonClass = useButtonClasses(className, true)
-
     return (
         <a href={page} tabIndex="-1" target="_blank" rel="noopener noreferrer">
             <button className={buttonClass} {...otherprops}>
@@ -101,20 +99,14 @@ const TextButton = ({
 }) => {
     const buttonClass = useButtonClasses(className, true, disabled, isInvertedColor)
     const { bodyFont, primaryColor } = useContext(ThemeContext)
-    let newStyle = { fontFamily: bodyFont, ...style }
-    newStyle = useBgPrimaryColor
-        ? { ...newStyle, backgroundColor: primaryColor }
-        : newStyle
+    style = { fontFamily: bodyFont, ...style }
+    style = useBgPrimaryColor ? { ...style, backgroundColor: primaryColor } : style
 
     return (
         <button
             className={buttonClass}
-            disabled={disabled}
-            style={newStyle}
-            {...otherprops}
-        >
-            {children}
-        </button>
+            {...{ ...otherprops, style, disabled, children }}
+        />
     )
 }
 
@@ -127,7 +119,7 @@ const DEFAULT_BUTTON_STYLE = {
     height: "30px",
     fontSize: "20px",
     textDecoration: "none",
-    borderRadius: "25%",
+    borderRadius: "10px",
 }
 
 const DefaultLinkButton = ({ style, disabled, ...otherProps }) => {
@@ -154,7 +146,7 @@ const DefaultButton = ({ style, children, disabled, ...otherProps }) => {
         fontFamily: headerFont,
         ...style,
     }
-    return <TextButton {...{ ...otherProps, disabled, style }}>{children}</TextButton>
+    return <TextButton {...{ ...otherProps, disabled, style, children }} />
 }
 export {
     LinkButton,
