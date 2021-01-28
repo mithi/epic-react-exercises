@@ -102,8 +102,8 @@ const App = () => {
     // so we get to analyze the latest board each time
     const { currentSnapshotId, boardSnapshots } = state
     const currentBoard = boardSnapshots[currentSnapshotId]
-    const numberOfSnapshots = boardSnapshots.length
     const { winnerIfAny, gameFinished, playerToMove } = analyzeBoard(currentBoard)
+    const numberOfSnapshots = boardSnapshots.length
 
     const onPlayerMove = squareId => {
         // all occupied squares are disabled at this point
