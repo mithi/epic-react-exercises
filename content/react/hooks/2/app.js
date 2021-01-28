@@ -25,10 +25,15 @@ const vanillaTiltOptions = {
     perspective: 150,
 }
 
-function Tilt({ children, setData }) {
-    const divRef = useRef()
+const useTiltStyle = () => {
     const { primaryColor } = useContext(ThemeContext)
     const style = { ...tiltRootStyle, border: `3px dashed ${primaryColor}` }
+    return style
+}
+
+function Tilt({ children, setData }) {
+    const divRef = useRef()
+    const style = useTiltStyle()
 
     useEffect(() => {
         const node = divRef.current

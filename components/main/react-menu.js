@@ -39,8 +39,8 @@ const Menu = ({ style, showCloseButton = true } = {}) => {
         >
             <Button section="fundamentals" children="1. React Fundamentals" />
             <Button section="hooks" children="2. React Hooks" />
-            <Button section="patterns" children="3. Advanced React Patterns" />
-            <Button section="advanced-hooks" children="4. Advanced Hooks" />
+            <Button section="advanced-hooks" children="3. Advanced Hooks" />
+            <Button section="patterns" children="4. Advanced React Patterns" />
             <Button section="performance" children="5. React Performance" />
             <Button section="testing" children="6. Testing React Apps" />
             <Button section="suspense" children="7. React Suspense" />

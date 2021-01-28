@@ -61,8 +61,8 @@ const usePokemonDataViewStyles = dataViewType => {
     const trStyle = { ...ROW_STYLE, borderBottom: border }
     const cardStyle = { ...POKEMON_CARD_STYLE, border }
 
-    const PrettyTr = ({ key, content }) => (
-        <tr key={key} style={trStyle}>
+    const PrettyTr = ({ content }) => (
+        <tr style={trStyle}>
             <td style={trStyle}>{content[0]}</td>
             <td style={trStyle}>{content[1]}</td>
             <td style={trStyle}>{content[2]}</td>
@@ -156,7 +156,7 @@ const PokemonDataView = ({
     if (abilities) {
         tableBody = abilities.map(abilityData => {
             const { name, type, damage } = abilityData
-            return <PrettyTr {...{ content: [name, type, damage] }} />
+            return <PrettyTr {...{ key: name, content: [name, type, damage] }} />
         })
     }
 
