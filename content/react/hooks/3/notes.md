@@ -7,6 +7,8 @@
 -   When something goes wrong (like a `network error`, or a `pokemon not existing in the database`), the error should be displayed at the bottom of the search bar. The search bar should ALWAYS be mounted.
 -   There should be a button to `try again` after an error. Upon clicking this , the `no pokemon yet, please submit a pokemon!` will be shown and the current string on the search bar would be removed.
 -   After an error, the user should be able to use the search bar to search for a new pokemon without having to click the `try again` button.
+-   [Kent's Implementation](https://github.com/kentcdodds/react-hooks/blob/main/src/final/04.extra-3.js)
+-   [My Implementation](https://github.com/mithi/epic-notes/blob/main/content/react/hooks/3/app.js)
 
 ## ToDos
 
@@ -28,7 +30,7 @@
 4.  [Put it all together](https://github.com/mithi/epic-notes/blob/main/content/react/hooks/3/app.js), the overall component, only has two main components, the `pokemonSearchbar` and `pokemonInfoCard` wrapped by `CustomErrorBoundary`
     -   It now only has two states which is `submittedName` and `incompleteName`. `submittedName` is NOT necessarily a real pokemon name, it is whatever the string is in the search bar when the submit button is clicked..
     -   `incompleteName` used to be handled by the search bar component, but this state was lifted up because, it is required to reset the boundary function.
-    -   The `resetErrorBoundaryFunction` resets by setting the current `submittedName` to `""`. `""` would never be equal to a previous `submittedName` because our user interface would not allow that to be submitted. This guarantees that the error boundary would be remounted.
+    -   The `resetFunction` resets by setting the current `submittedName` to `""`. `""` would never be equal to a previous `submittedName` because our user interface would not allow that to be submitted. This guarantees that the error boundary would be remounted.
 
 ## A Few Code Snippets
 

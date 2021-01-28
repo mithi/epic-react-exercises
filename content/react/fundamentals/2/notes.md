@@ -1,3 +1,14 @@
+## Ex0: Built in functions
+
+```js
+let node = document.getElementById("root")
+let otherNode = document.createElement("div")
+otherNode.textContent = "Hello World"
+otherNode.className = "container"
+document.body.append(node)
+node.append(otherNode)
+```
+
 ## Ex1: Pure JS
 
 Create and append dom elements in vanilla javascript. Write a javascript code between `<script>` tags to produce this.
@@ -15,8 +26,8 @@ Here is an example html file
     <!-- html elements can already exist before running your code -->
     <div id="root"></div>
     <script type="module">
-        //Write your javascript code here,
-        // which is below all the existing html nodes
+        // write your javascript code here,
+        // this is below all the existing html nodes
         const node = document.getElementById("root")
     </script>
 </body>
@@ -46,26 +57,12 @@ rootElement.append(element)
 
 ## Ex2: Babel for inline JSX
 
-You can actually use react directly on your html file like this:
+You can actually use react (and optionality the babel compiler to add jsx) directly on your html file like this:
 
 ```html
 <body>
     <div id="root"></div>
     <!-- You can import react directly on your html document via unpkg -->
-
-    <script src="https://unpkg.com/react@17.0.0/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@17.0.0/umd/react-dom.development.js"></script>
-    <script type="module">
-        // write your script here!
-    </script>
-</body>
-```
-
-And also use babel compiler to add jsx:
-
-```html
-<body>
-    <div id="root"></div>
     <script src="https://unpkg.com/react@17.0.0/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@17.0.0/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
@@ -125,19 +122,20 @@ How can we render this?
 
 ```html
 <div className="container">
-    <div className="message">Hello World</div>
-    <div className="message">Goodbye World</div>
+    <div className="myMessage">Hello World</div>
+    <div className="myMessage">Goodbye World</div>
 </div>
 ```
 
-The first argument of `React.createElement()` can be an string (like `div`, `h1`) or a function like this:
+You can do something like this and it will work, but it's not following
+the convention the the Babel compiler recognizes.
 
 ```js
 // **********
 //  (NOT FOLLOWING BABEL'S CONVENTION)
 // **********
 function message({ children }) {
-    return <div className="message">{children}</div>
+    return <div className="myMessage">{children}</div>
 }
 
 const element = (
@@ -148,10 +146,10 @@ const element = (
 )
 ```
 
-In this case, it is being used as a component. It works but not best practice. You should use capitalized `Message` instead of `message` because you'd be following the convention which the babel compiler understands
+In this case, it is being used as a component. It works but not best practice. You should use capitalized `Message` instead of `message`. That way, you'd be following the convention which the babel compiler understands
 
-How babel parses JSX based on appearance/
-Notice that `lowercase`, `kebab` and `snake_case` are compiled into strings. while `Capitalized` and `propery.access` is s seen as a function
+How babel parses JSX based on appearance...
+Notice that `lowercase`, `kebab` and `snake_case` are compiled into strings. while `Capitalized` and `property.access` is seen as a function
 
 ```js
 ui = <Capitalized /> // React.createElement(Capitalized)
