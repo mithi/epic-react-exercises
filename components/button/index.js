@@ -58,21 +58,19 @@ const LinkButton = ({ children, page, className, disabled, ...otherprops }) => {
                     <button
                         tabIndex="-1"
                         className={buttonClass}
-                        {...{ ...otherprops, disabled }}
-                    >
-                        {children}
-                    </button>
+                        {...{ ...otherprops, disabled, children }}
+                    />
                 </a>
             </Link>
         </>
     )
 }
 
-const LinkAwayIconButton = ({ children, page, className, ...otherprops }) => {
+const LinkAwayIconButton = ({ children, page, className, ...otherProps }) => {
     const buttonClass = useButtonClasses(className, true)
     return (
         <a href={page} tabIndex="-1" target="_blank" rel="noopener noreferrer">
-            <button className={buttonClass} {...otherprops}>
+            <button className={buttonClass} {...otherProps}>
                 {children}
             </button>
         </a>
@@ -119,35 +117,31 @@ const DEFAULT_BUTTON_STYLE = {
     height: "30px",
     fontSize: "20px",
     textDecoration: "none",
-    borderRadius: "10px",
+    borderRadius: "25%",
 }
 
-const DefaultLinkButton = ({ style, disabled, ...otherProps }) => {
+const useDefaultButtonStyle = (disabled, style) => {
     const { headerFont, primaryColor } = useContext(ThemeContext)
     const border = disabled ? `2px solid ${primaryColor}` : null
 
-    style = {
+    return {
         ...DEFAULT_BUTTON_STYLE,
         border,
         fontFamily: headerFont,
         ...style,
     }
+}
 
+const DefaultLinkButton = ({ style, disabled, ...otherProps }) => {
+    style = useDefaultButtonStyle(disabled, style)
     return <LinkButton {...{ ...otherProps, disabled, style }} />
 }
 
 const DefaultButton = ({ style, children, disabled, ...otherProps }) => {
-    const { headerFont, primaryColor } = useContext(ThemeContext)
-    const border = disabled ? `2px solid ${primaryColor}` : null
-
-    style = {
-        ...DEFAULT_BUTTON_STYLE,
-        border,
-        fontFamily: headerFont,
-        ...style,
-    }
+    style = useDefaultButtonStyle(disabled, style)
     return <TextButton {...{ ...otherProps, disabled, style, children }} />
 }
+
 export {
     LinkButton,
     LinkAwayIconButton,
