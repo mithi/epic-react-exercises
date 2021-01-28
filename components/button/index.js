@@ -56,25 +56,21 @@ const LinkButton = ({ children, page, className, disabled, ...otherprops }) => {
             <Link href={page}>
                 <a style={{ textDecoration: "none" }}>
                     <button
-                        className={buttonClass}
-                        {...otherprops}
-                        disabled={disabled}
                         tabIndex="-1"
-                    >
-                        {children}
-                    </button>
+                        className={buttonClass}
+                        {...{ ...otherprops, disabled, children }}
+                    />
                 </a>
             </Link>
         </>
     )
 }
 
-const LinkAwayIconButton = ({ children, page, className, ...otherprops }) => {
+const LinkAwayIconButton = ({ children, page, className, ...otherProps }) => {
     const buttonClass = useButtonClasses(className, true)
-
     return (
         <a href={page} tabIndex="-1" target="_blank" rel="noopener noreferrer">
-            <button className={buttonClass} {...otherprops}>
+            <button className={buttonClass} {...otherProps}>
                 {children}
             </button>
         </a>
@@ -101,20 +97,14 @@ const TextButton = ({
 }) => {
     const buttonClass = useButtonClasses(className, true, disabled, isInvertedColor)
     const { bodyFont, primaryColor } = useContext(ThemeContext)
-    let newStyle = { fontFamily: bodyFont, ...style }
-    newStyle = useBgPrimaryColor
-        ? { ...newStyle, backgroundColor: primaryColor }
-        : newStyle
+    style = { fontFamily: bodyFont, ...style }
+    style = useBgPrimaryColor ? { ...style, backgroundColor: primaryColor } : style
 
     return (
         <button
             className={buttonClass}
-            disabled={disabled}
-            style={newStyle}
-            {...otherprops}
-        >
-            {children}
-        </button>
+            {...{ ...otherprops, style, disabled, children }}
+        />
     )
 }
 
@@ -130,32 +120,28 @@ const DEFAULT_BUTTON_STYLE = {
     borderRadius: "25%",
 }
 
-const DefaultLinkButton = ({ style, disabled, ...otherProps }) => {
+const useDefaultButtonStyle = (disabled, style) => {
     const { headerFont, primaryColor } = useContext(ThemeContext)
     const border = disabled ? `2px solid ${primaryColor}` : null
 
-    style = {
+    return {
         ...DEFAULT_BUTTON_STYLE,
         border,
         fontFamily: headerFont,
         ...style,
     }
+}
 
+const DefaultLinkButton = ({ style, disabled, ...otherProps }) => {
+    style = useDefaultButtonStyle(disabled, style)
     return <LinkButton {...{ ...otherProps, disabled, style }} />
 }
 
 const DefaultButton = ({ style, children, disabled, ...otherProps }) => {
-    const { headerFont, primaryColor } = useContext(ThemeContext)
-    const border = disabled ? `2px solid ${primaryColor}` : null
-
-    style = {
-        ...DEFAULT_BUTTON_STYLE,
-        border,
-        fontFamily: headerFont,
-        ...style,
-    }
-    return <TextButton {...{ ...otherProps, disabled, style }}>{children}</TextButton>
+    style = useDefaultButtonStyle(disabled, style)
+    return <TextButton {...{ ...otherProps, disabled, style, children }} />
 }
+
 export {
     LinkButton,
     LinkAwayIconButton,

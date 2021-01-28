@@ -19,7 +19,7 @@ const MenuModal = () => {
             <DialogOverlay
                 isOpen={menuState === "theme"}
                 onDismiss={() => changeMenuState("none")}
-                style={{ background: "hsla(0, 0%, 0%, 0.6)" }}
+                style={{ background: "hsla(0, 0%, 0%, 0.75)" }}
             >
                 <DialogContent
                     aria-label="theme-menu"

@@ -48,7 +48,7 @@ const BoardStatus = ({ winnerIfAny, gameFinished, playerToMove }) => {
     }
     return (
         <div style={{ display: "flex", justifyContent: "center" }}>
-            <PrettyHeader style={{ fontSize: "40px", margin: "20px" }} Component={"div"}>
+            <PrettyHeader style={{ fontSize: "30px", margin: "20px" }} Component={"div"}>
                 {children}
             </PrettyHeader>
         </div>
@@ -161,8 +161,8 @@ const App = () => {
     // so we get to analyze the latest board each time
     const { currentSnapshotId, boardSnapshots } = state
     const currentBoard = boardSnapshots[currentSnapshotId]
-    const numberOfSnapshots = boardSnapshots.length
     const { winnerIfAny, gameFinished, playerToMove } = analyzeBoard(currentBoard)
+    const numberOfSnapshots = boardSnapshots.length
 
     const onPlayerMove = squareId => {
         // all occupied squares are disabled at this point
