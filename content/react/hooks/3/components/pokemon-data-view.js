@@ -31,11 +31,12 @@ const POKEMON_IMAGE_STYLE = {
 
 const ERROR_BUTTON_STYLE = {
     border: "1px solid red",
-    height: "30px",
-    fontSize: "12px",
-    borderRadius: "5px",
+    fontSize: "16px",
+    borderRadius: "8px",
     backgroundColor: "red",
-    width: "75px",
+    width: "auto",
+    padding: "5px",
+    height: "auto",
 }
 
 const ROW_STYLE = {
@@ -76,10 +77,7 @@ const PokemonLoadingView = ({ pokemonName }) => {
         <PokemonDataView
             {...{
                 name: `Loading ${pokemonName.slice(0, 15)}...`,
-                number: "xxx",
-                imageUrl: null,
-                abilities: null,
-                imageAlternative: "loading...",
+                imageAlternative: "Loading...",
                 dataViewType: "loading",
             }}
         />
@@ -91,9 +89,6 @@ const PokemonIdleView = () => {
         <PokemonDataView
             {...{
                 name: `No Pokemon Yet!`,
-                number: "xxx",
-                imageUrl: null,
-                abilities: null,
                 imageAlternative: "Please submit a pokemon!",
                 dataViewType: "idle",
             }}
@@ -111,7 +106,7 @@ function PokemonErrorView({ error, resetFunction }) {
                     style={ERROR_BUTTON_STYLE}
                     isInvertedColor={true}
                 >
-                    Try again
+                    <PrettyHeader> Try again </PrettyHeader>
                 </TextButton>
                 <div> This error was caught by the error boundary!</div>
             </div>
@@ -122,9 +117,6 @@ function PokemonErrorView({ error, resetFunction }) {
         <PokemonDataView
             {...{
                 name: "Error! :(",
-                number: "xxx",
-                imageUrl: null,
-                abilities: null,
                 imageAlternative,
                 dataViewType: "error",
             }}
@@ -174,7 +166,7 @@ const PokemonDataView = ({
     return (
         <div style={cardStyle}>
             <PrettyHeader Component="h1" style={{ padding: "15px", fontSize: "40px" }}>
-                {name} <sup style={{ fontSize: "20px" }}>({number})</sup>
+                {name} <sup style={{ fontSize: "20px" }}>({number || "xxx"})</sup>
             </PrettyHeader>
             {image}
             <table>
