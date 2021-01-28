@@ -5,10 +5,11 @@
 -   Display the status of the game (winner, who's turn is it, if the game is finished etc)
 -   Be able to keep a history of the game; allow players to go backward and forward in time
 -   [Kent's Implementation](https://github.com/kentcdodds/react-hooks/blob/main/src/final/04.extra-3.js)
+-   [My Implementation](https://github.com/mithi/epic-notes/blob/main/content/react/hooks/1/app.js)
 
 ## My Implementation
 
-My top level component houses basically renders the following:
+My top level component basically renders the following:
 
 ```js
 // info about the current state of the board)
