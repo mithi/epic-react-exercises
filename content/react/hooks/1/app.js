@@ -77,6 +77,7 @@ const RestartButton = ({ onRestart }) => {
         </div>
     )
 }
+
 const MoveHistory = ({ numberOfSnapshots, onLoadBoardSnapshot, currentSnapshotId }) => {
     const buttonIterator = Array(numberOfSnapshots).fill(null)
     const buttons = buttonIterator.map((_, i) => {
