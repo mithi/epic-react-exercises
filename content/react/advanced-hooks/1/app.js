@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react"
+import { GiPerspectiveDiceSixFacesRandom } from "react-icons/gi"
 import useSafeAsync from "./components/use-async"
 import delayedFetchRickAndMortyCharacterById from "./components/fetch-rick-and-morty"
 import PositiveIntegerSearchbar from "./components/positive-integer-search-bar"
-
+import SampleSvg from "./svg/morty-smith.svg"
+import { DefaultButton } from "components/button"
 /*
-This`RickAndMortyInfoCard` is written roughly as in the code block below this paragraph (with modifications
-of the a prettier return value).
-
-It uses a `useSafeAsync` hook that's responsible for managing the state,
+This`RickAndMortyInfoCard` uses a `useSafeAsync` hook that's responsible for managing the state,
 and fetching the data.
 
 The hook makes sure that the dispatch function (that returns the the data and state from
@@ -47,19 +46,41 @@ function RickAndMortyInfoCard({ characterId }) {
     throw new Error("This should be impossible")
 }
 
-function App() {
-    const [submittedValue, setSubmittedValue] = useState("")
-    const [incompleteValue, setIncompleteValue] = useState("")
+const NUMBER_OF_RICK_AND_MORTY_CHARACTERS = 672
 
+const randomCharId = () =>
+    Math.floor(Math.random() * NUMBER_OF_RICK_AND_MORTY_CHARACTERS) + 1
+
+function App() {
+    const [state, setState] = useState({
+        submittedValue: "",
+        incompleteValue: "",
+    })
+
+    const setIncompleteValue = incompleteValue => setState({ ...state, incompleteValue })
+    const setSubmittedValue = submittedValue => setState({ ...state, submittedValue })
+
+    const setRandomValue = () => {
+        const id = randomCharId()
+        setState({ submittedValue: id, incompleteValue: id })
+    }
+
+    const { incompleteValue, submittedValue } = state
     return (
         <>
-            <PositiveIntegerSearchbar
-                value={submittedValue}
-                onSubmit={value => setSubmittedValue(value)}
-                {...{ incompleteValue, setIncompleteValue }}
-                placeholder={"Rick and Morty character id)..."}
-            />
+            <div>
+                <PositiveIntegerSearchbar
+                    value={submittedValue}
+                    onSubmit={value => setSubmittedValue(value)}
+                    {...{ incompleteValue, setIncompleteValue }}
+                    placeholder={"Enter a positive integer..."}
+                />
+                <DefaultButton onClick={setRandomValue}>
+                    <GiPerspectiveDiceSixFacesRandom />
+                </DefaultButton>
+            </div>
             <RickAndMortyInfoCard characterId={submittedValue} />
+            <SampleSvg />
         </>
     )
 }
