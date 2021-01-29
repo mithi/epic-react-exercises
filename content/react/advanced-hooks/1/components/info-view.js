@@ -29,7 +29,7 @@ const IMAGE_STYLE = {
 }
 
 const InfoView = ({ data }) => {
-    const { name, status, species, gender, origin, location, imageUrl } = data
+    const { name, status, species, gender, origin, location, imageUrl, id } = data
     const info = (
         <ul>
             <li>status: {status}</li>
@@ -49,7 +49,9 @@ const InfoView = ({ data }) => {
                 height="125px"
             />
             <div style={{ margin: "0px 20px" }}>
-                <PrettyHeader style={{ fontSize: "30px" }}>{name}</PrettyHeader>
+                <PrettyHeader style={{ fontSize: "30px" }}>
+                    #{id}. {name}
+                </PrettyHeader>
                 {info}
             </div>
         </div>

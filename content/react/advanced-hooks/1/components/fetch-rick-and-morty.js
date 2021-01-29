@@ -13,7 +13,7 @@ const transformRickAndMortyData = result => {
 
     const character = result.data.data.character
 
-    const { name, status, species, gender, origin, location, image } = character
+    const { name, status, species, gender, origin, location, image, id } = character
 
     return {
         name,
@@ -23,6 +23,7 @@ const transformRickAndMortyData = result => {
         origin: origin.name,
         location: location.name,
         imageUrl: image,
+        id,
     }
 }
 
@@ -30,6 +31,7 @@ const delayedFetchRickAndMortyCharacterById = async characterId => {
     let query = `
     {
         character(id: ${characterId}) {
+            id,
             name
             status
             species
