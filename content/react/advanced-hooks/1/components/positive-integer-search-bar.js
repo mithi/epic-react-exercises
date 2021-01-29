@@ -8,6 +8,7 @@ const PositiveIntegerSearchbar = ({
     setIncompleteValue,
     incompleteValue,
     placeholder,
+    disabled,
 }) => {
     function handleSubmit(e) {
         e.preventDefault()
@@ -37,7 +38,7 @@ const PositiveIntegerSearchbar = ({
             <TextButton
                 isInvertedColor={true}
                 type="submit"
-                disabled={!incompleteValue}
+                disabled={disabled}
                 style={{
                     width: "auto",
                     borderRadius: "10px",
