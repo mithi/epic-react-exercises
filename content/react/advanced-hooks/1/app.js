@@ -23,10 +23,14 @@ to fetch the data. The `runFunction` takes in a promise and updates the state `{
 In our case, the promise that we feed to the `runFunction` is the return value of the `fetchFunction`
 we call whenever we need to fetch something.
  */
-function RickAndMortyInfoCard({ characterId }) {
+function RickAndMortyInfoCard({ characterId, getStatus }) {
     const { data, status, error, runFunction } = useSafeAsync({
         status: characterId ? "pending" : "idle",
     })
+
+    useEffect(() => {
+        getStatus(status)
+    }, [status, getStatus])
 
     useEffect(() => {
         if (!characterId) {
@@ -59,15 +63,29 @@ function App() {
         incompleteValue: "",
     })
 
-    const setIncompleteValue = incompleteValue => setState({ ...state, incompleteValue })
-    const setSubmittedValue = submittedValue => setState({ ...state, submittedValue })
+    const [fetchStatus, setFetchStatus] = useState("idle")
+
+    const { incompleteValue, submittedValue } = state
+
+    const setIncompleteValue = value => setState({ ...state, incompleteValue: value })
+    const setSubmittedValue = value => setState({ ...state, submittedValue: value })
 
     const setRandomValue = () => {
         const id = getRandomRickAndMortyCharacterId()
         setState({ submittedValue: id, incompleteValue: id })
     }
 
-    const { incompleteValue, submittedValue } = state
+    const randomButtonDisabled = fetchStatus === "pending"
+    // the submit button is disabled when
+    // 1. We are process of fetching data
+    // 2. the input field value has already been resolved or rejected
+    // 3. There is no value in the input field
+    const submitButtonDisabled =
+        randomButtonDisabled ||
+        !incompleteValue ||
+        (incompleteValue === submittedValue &&
+            ["resolved", "rejected"].includes(fetchStatus))
+
     return (
         <div style={{ margin: "20px" }}>
             <p style={{ fontSize: "12px" }}>
@@ -87,16 +105,21 @@ function App() {
                     onSubmit={value => setSubmittedValue(value)}
                     {...{ incompleteValue, setIncompleteValue }}
                     placeholder={"Pick a number!"}
+                    disabled={submitButtonDisabled}
                 />
                 <DefaultButton
                     onClick={setRandomValue}
                     style={{ height: "35px", width: "35px" }}
+                    disabled={randomButtonDisabled}
                 >
                     <GiPerspectiveDiceSixFacesRandom />
                 </DefaultButton>
             </div>
 
-            <RickAndMortyInfoCard characterId={submittedValue} />
+            <RickAndMortyInfoCard
+                characterId={submittedValue}
+                {...{ getStatus: setFetchStatus }}
+            />
         </div>
     )
 }
