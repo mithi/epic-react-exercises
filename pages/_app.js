@@ -3,6 +3,7 @@ import Head from "next/head"
 import "styles/reset.css"
 import "styles/vars.css"
 import "styles/default.css"
+import "styles/spinner.css"
 
 const DynamicGlobalStateProvider = dynamic(() =>
     import("providers").then(mod => mod.GlobalStateProvider)
