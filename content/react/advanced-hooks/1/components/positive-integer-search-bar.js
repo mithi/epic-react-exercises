@@ -1,7 +1,9 @@
 import { PrettyInputField } from "components/pretty-defaults"
 import { TextButton } from "components/button"
+import { GiClick } from "react-icons/gi"
 
 const PositiveIntegerSearchbar = ({
+    style,
     onSubmit,
     setIncompleteValue,
     incompleteValue,
@@ -15,7 +17,12 @@ const PositiveIntegerSearchbar = ({
     return (
         <form
             onSubmit={handleSubmit}
-            style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+            style={{
+                display: "flex",
+                alignItems: "center",
+                flexWrap: "wrap",
+                ...style,
+            }}
         >
             <PrettyInputField
                 type="number"
@@ -25,15 +32,23 @@ const PositiveIntegerSearchbar = ({
                 placeholder={placeholder}
                 value={incompleteValue}
                 onChange={e => setIncompleteValue(e.target.value)}
-                style={{ height: "40px", width: "70%" }}
+                style={{ height: "40px", width: "190px" }}
             />
             <TextButton
                 isInvertedColor={true}
                 type="submit"
-                disabled={!incompleteValue.length}
-                style={{ height: "35px", width: "30%", borderRadius: "10px" }}
+                disabled={!incompleteValue}
+                style={{
+                    width: "auto",
+                    borderRadius: "10px",
+                    margin: "0px 5px",
+                    height: "auto",
+                    padding: "10px 10px",
+                    fontSize: "12px",
+                }}
                 useBgPrimaryColor={true}
             >
+                <GiClick />
                 Submit
             </TextButton>
         </form>
