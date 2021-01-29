@@ -10,6 +10,7 @@
     },
     "dependencies": {
         "@reach/dialog": "^0.12.1",
+        "@svgr/webpack": "^5.5.0",
         "axios": "^0.21.1",
         "next": "10.0.3",
         "raw-loader": "^4.0.2",

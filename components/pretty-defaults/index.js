@@ -38,4 +38,8 @@ const PrettyInputField = ({ placeholder, value, onChange, style, ...otherProps }
     )
 }
 
-export { PrettyHeader, PrettyAnchor, PrettyInputField }
+const BorderedDiv = ({ style, children }) => {
+    const { primaryColor } = useContext(ThemeContext)
+    return <div style={{ border: `1px solid ${primaryColor}`, ...style }}>{children}</div>
+}
+export { PrettyHeader, PrettyAnchor, PrettyInputField, BorderedDiv }
