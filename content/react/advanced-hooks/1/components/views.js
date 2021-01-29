@@ -14,7 +14,7 @@ const IdleView = () => (
 const PendingView = () => (
     <>
         <div style={{ display: "flex", justifyContent: "center" }}>
-            <div class="lds-ellipsis">
+            <div className="lds-ellipsis">
                 <div></div>
                 <div></div>
                 <div></div>
