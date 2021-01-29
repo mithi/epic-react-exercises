@@ -1,3 +1,6 @@
+import { PrettyInputField } from "components/pretty-defaults"
+import { TextButton } from "components/button"
+
 const PositiveIntegerSearchbar = ({
     onSubmit,
     setIncompleteValue,
@@ -10,8 +13,11 @@ const PositiveIntegerSearchbar = ({
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input
+        <form
+            onSubmit={handleSubmit}
+            style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+        >
+            <PrettyInputField
                 type="number"
                 pattern="^[0-9]"
                 min="1"
@@ -19,10 +25,17 @@ const PositiveIntegerSearchbar = ({
                 placeholder={placeholder}
                 value={incompleteValue}
                 onChange={e => setIncompleteValue(e.target.value)}
+                style={{ height: "40px", width: "70%" }}
             />
-            <button type="submit" disabled={!incompleteValue.length}>
+            <TextButton
+                isInvertedColor={true}
+                type="submit"
+                disabled={!incompleteValue.length}
+                style={{ height: "35px", width: "30%", borderRadius: "10px" }}
+                useBgPrimaryColor={true}
+            >
                 Submit
-            </button>
+            </TextButton>
         </form>
     )
 }
