@@ -3,8 +3,10 @@ import { GiPerspectiveDiceSixFacesRandom } from "react-icons/gi"
 import useSafeAsync from "./components/use-async"
 import delayedFetchRickAndMortyCharacterById from "./components/fetch-rick-and-morty"
 import PositiveIntegerSearchbar from "./components/positive-integer-search-bar"
-import SampleSvg from "./svg/morty-smith.svg"
+import { ErrorView, PendingView, IdleView } from "./components/views"
+import InfoView from "./components/info-view"
 import { DefaultButton } from "components/button"
+import { BorderedDiv } from "components/pretty-defaults"
 /*
 This`RickAndMortyInfoCard` uses a `useSafeAsync` hook that's responsible for managing the state,
 and fetching the data.
@@ -34,22 +36,22 @@ function RickAndMortyInfoCard({ characterId }) {
     }, [characterId, runFunction])
 
     if (status === "idle") {
-        return "submit a character"
+        return <IdleView />
     } else if (status === "pending") {
-        return "loading"
+        return <PendingView />
     } else if (status === "rejected") {
-        return `error: ${error.message}`
+        return <ErrorView message={error.message} />
     } else if (status === "resolved") {
-        return `data: ${JSON.stringify(data)}`
+        return <InfoView data={data} />
     }
 
     throw new Error("This should be impossible")
 }
 
 const NUMBER_OF_RICK_AND_MORTY_CHARACTERS = 672
-
-const randomCharId = () =>
-    Math.floor(Math.random() * NUMBER_OF_RICK_AND_MORTY_CHARACTERS) + 1
+const randomIntegerBetween = (x, y) => Math.floor(Math.random() * y) + x
+const getRandomRickAndMortyCharacterId = () =>
+    randomIntegerBetween(1, NUMBER_OF_RICK_AND_MORTY_CHARACTERS)
 
 function App() {
     const [state, setState] = useState({
@@ -61,43 +63,67 @@ function App() {
     const setSubmittedValue = submittedValue => setState({ ...state, submittedValue })
 
     const setRandomValue = () => {
-        const id = randomCharId()
+        const id = getRandomRickAndMortyCharacterId()
         setState({ submittedValue: id, incompleteValue: id })
     }
 
     const { incompleteValue, submittedValue } = state
     return (
-        <>
-            <div>
+        <div style={{ margin: "20px" }}>
+            <p style={{ fontSize: "12px" }}>
+                Only positive integers from 1 to 671 correspond to a Rick and Morty
+                character.
+            </p>
+
+            <div
+                style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "flex-start",
+                }}
+            >
                 <PositiveIntegerSearchbar
                     value={submittedValue}
                     onSubmit={value => setSubmittedValue(value)}
                     {...{ incompleteValue, setIncompleteValue }}
-                    placeholder={"Enter a positive integer..."}
+                    placeholder={"Pick a number!"}
                 />
-                <DefaultButton onClick={setRandomValue}>
+                <DefaultButton
+                    onClick={setRandomValue}
+                    style={{ height: "35px", width: "35px" }}
+                >
                     <GiPerspectiveDiceSixFacesRandom />
                 </DefaultButton>
             </div>
+
             <RickAndMortyInfoCard characterId={submittedValue} />
-            <SampleSvg />
-        </>
+        </div>
     )
 }
 
 function AppWithUnmountCheckbox() {
     const [mountApp, setMountApp] = useState(true)
+
     return (
         <div>
-            <label>
-                <input
-                    type="checkbox"
-                    checked={mountApp}
-                    onChange={e => setMountApp(e.target.checked)}
-                />
-                Mount Component
-            </label>
-            <hr />
+            <BorderedDiv
+                style={{
+                    margin: "10px",
+                    padding: "10px",
+                    borderWidth: "1px",
+                    borderStyle: "dashed",
+                    width: "auto",
+                }}
+            >
+                <label>
+                    <input
+                        type="checkbox"
+                        checked={mountApp}
+                        onChange={e => setMountApp(e.target.checked)}
+                    />
+                    <span style={{ fontSize: "15px" }}> Mount the search bar</span>
+                </label>
+            </BorderedDiv>
             {mountApp ? <App /> : null}
         </div>
     )
