@@ -75,13 +75,13 @@ function App() {
         setState({ submittedValue: id, incompleteValue: id })
     }
 
-    const randomButtonDisabled = fetchStatus === "pending"
+    const disabledByPending = fetchStatus === "pending"
     // the submit button is disabled when
     // 1. We are process of fetching data
     // 2. the input field value has already been resolved or rejected
     // 3. There is no value in the input field
     const submitButtonDisabled =
-        randomButtonDisabled ||
+        disabledByPending ||
         !incompleteValue ||
         (incompleteValue === submittedValue &&
             ["resolved", "rejected"].includes(fetchStatus))
@@ -105,12 +105,13 @@ function App() {
                     onSubmit={value => setSubmittedValue(value)}
                     {...{ incompleteValue, setIncompleteValue }}
                     placeholder={"Pick a number!"}
-                    disabled={submitButtonDisabled}
+                    disableButton={submitButtonDisabled}
+                    disableInputField={disabledByPending}
                 />
                 <DefaultButton
                     onClick={setRandomValue}
                     style={{ height: "35px", width: "35px" }}
-                    disabled={randomButtonDisabled}
+                    disabled={disabledByPending}
                 >
                     <GiPerspectiveDiceSixFacesRandom />
                 </DefaultButton>
@@ -133,9 +134,7 @@ function AppWithUnmountCheckbox() {
                 style={{
                     margin: "10px",
                     padding: "10px",
-                    borderWidth: "1px",
                     borderStyle: "dashed",
-                    width: "auto",
                 }}
             >
                 <label>
