@@ -1,5 +1,4 @@
 import styles from "./Styles.module.css"
-import { MenuStateProvider } from "providers"
 import { LinkButton } from "../button"
 import { PrettyHeader, PrettyAnchor } from "../pretty-defaults"
 import { useMenuState } from "hooks"
@@ -20,8 +19,9 @@ const Button = ({ children, section }) => {
     )
 }
 
-const MenuInner = ({ style, showCloseButton = true } = {}) => {
+const Menu = ({ style, showCloseButton = true } = {}) => {
     const { changeMenuState } = useMenuState()
+
     const maybeCloseButton = showCloseButton ? (
         <PrettyAnchor
             style={{ marginTop: "5px", marginLeft: "10px" }}
@@ -49,11 +49,5 @@ const MenuInner = ({ style, showCloseButton = true } = {}) => {
         </section>
     )
 }
-
-const Menu = ({ ...props }) => (
-    <MenuStateProvider>
-        <MenuInner {...props} />
-    </MenuStateProvider>
-)
 
 export default Menu

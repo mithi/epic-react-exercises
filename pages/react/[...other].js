@@ -1,5 +1,4 @@
 import Main from "components/main"
-import ReactMenu from "components/main/react-menu"
 
 export async function getServerSideProps() {
     return {
@@ -11,11 +10,7 @@ export async function getServerSideProps() {
 }
 
 function Page() {
-    return (
-        <Main>
-            <ReactMenu showCloseButton={false} style={{ zIndex: 0 }} />
-        </Main>
-    )
+    return <Main>This shouldn't be possible.</Main>
 }
 
 export default Page
