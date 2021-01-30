@@ -1,5 +1,6 @@
-import { ThemeContext } from "providers"
+import Link from "next/link"
 import { useContext } from "react"
+import { ThemeContext } from "providers"
 
 const PrettyHeader = ({ style, children, Component, ...otherProps }) => {
     Component = Component ? Component : "div"
@@ -17,6 +18,17 @@ const PrettyAnchor = ({ style, children, onClick, href, ...otherProps }) => {
         >
             {children}
         </a>
+    )
+}
+
+const PrettyLink = ({ style, children, href, ...otherProps }) => {
+    const { primaryColor } = useContext(ThemeContext)
+    return (
+        <Link {...{ href }}>
+            <a style={{ color: primaryColor, ...style }} {...{ ...otherProps }}>
+                {children}
+            </a>
+        </Link>
     )
 }
 
@@ -53,4 +65,4 @@ const BorderedDiv = ({ style, children }) => {
         </div>
     )
 }
-export { PrettyHeader, PrettyAnchor, PrettyInputField, BorderedDiv }
+export { PrettyHeader, PrettyAnchor, PrettyInputField, BorderedDiv, PrettyLink }
