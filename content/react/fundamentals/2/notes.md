@@ -1,17 +1,6 @@
-## Ex0: Built in functions
+## Exercise One: Pure Javascript
 
-```js
-let node = document.getElementById("root")
-let otherNode = document.createElement("div")
-otherNode.textContent = "Hello World"
-otherNode.className = "container"
-document.body.append(node)
-node.append(otherNode)
-```
-
-## Ex1: Pure JS
-
-Create and append dom elements in vanilla javascript. Write a javascript code between `<script>` tags to produce this.
+Create and append dom elements in vanilla javascript. Write a javascript code between `<script>` tags to produce the codeblock below on an html file
 
 ```html
 <div id="root">
@@ -19,7 +8,7 @@ Create and append dom elements in vanilla javascript. Write a javascript code be
 </div>
 ```
 
-Here is an example html file
+Use the code block below as your starting point.
 
 ```html
 <body>
@@ -55,9 +44,31 @@ element.className = "container"
 rootElement.append(element)
 ```
 
-## Ex2: Babel for inline JSX
+## Exercise Two: Babel for inline JSX
 
-You can actually use react (and optionality the babel compiler to add jsx) directly on your html file like this:
+Exercise 2a: Create an `div` element with a `class` of `container` with `Hello World` written on it. Use `jsx` syntax. Assume that a `div` with an `id` of `root` already exists in the page. Put the `div` with a `class` of container inside the `root` node. Use `ReactDom` to render this on the browser.
+
+Solution:
+
+```js
+const element = <div className="container">Hello World</div>
+ReactDOM.render(element, document.getElementById("root"))
+```
+
+Exercise 2b: Do the same as in Exercise 2a, but instead of using `jsx` syntax, use `React.createElement` instead.
+
+Solution:
+
+```js
+const rootElement = document.getElementById("root")
+const element = React.createElement("div", {
+    className: "container",
+    children: "Hello World",
+})
+ReactDOM.render(element, rootElement)
+```
+
+Fun fact: you can actually use React (and optionally the babel compiler to add jsx) directly on your html file like this:
 
 ```html
 <body>
@@ -72,27 +83,9 @@ You can actually use react (and optionality the babel compiler to add jsx) direc
 </body>
 ```
 
-Example 2a
+## Exercise Three: Multiple children
 
-```js
-const element = <div className="container">Hello World</div>
-ReactDOM.render(element, document.getElementById("root"))
-```
-
-Example 2b
-
-```js
-const rootElement = document.getElementById("root")
-const element = React.createElement("div", {
-    className: "container",
-    children: "Hello World",
-})
-ReactDOM.render(element, rootElement)
-```
-
-## Ex3: Multiple children
-
-To make this
+Write code using `React` to generate the `html` code below.
 
 ```html
 <div id="root">
@@ -103,7 +96,7 @@ To make this
 </div>
 ```
 
-You can do
+Solution:
 
 ```js
 const helloElement = React.createElement("span", null, "Hello")
@@ -116,9 +109,9 @@ const element = React.createElement("div", {
 ReactDOM.render(element, rootElement)
 ```
 
-## Ex4 createElement's first argument
+## Exercise Four: Function Components
 
-How can we render this?
+Write a function `message` that you can reuse to produce the code below. This function must be fed to `React.createElement()` Will this work if the first letter is not a capital letter? What is the difference between using writing the function to be `const message = () => {}` and `const Message = () => {}` ?
 
 ```html
 <div className="container">
@@ -126,6 +119,8 @@ How can we render this?
     <div className="myMessage">Goodbye World</div>
 </div>
 ```
+
+Solution:
 
 You can do something like this and it will work, but it's not following
 the convention the the Babel compiler recognizes.
@@ -146,21 +141,37 @@ const element = (
 )
 ```
 
-In this case, it is being used as a component. It works but not best practice. You should use capitalized `Message` instead of `message`. That way, you'd be following the convention which the babel compiler understands
+In this case, it is being used as a component. It works but not best practice. You should use capitalized `Message` instead of `message`. That way, you'd be following the convention which the babel compiler understands.
 
-How babel parses JSX based on appearance...
-Notice that `lowercase`, `kebab` and `snake_case` are compiled into strings. while `Capitalized` and `property.access` is seen as a function
+## Exercise Five: How babel compiles jsx
+
+Understand how `babel` compiles `jsx` based on the appearance of the component name.
+In order words, how would `babel` compile the following components?
+
+```jsx
+<Capitalized />
+<property.access />
+<lowercase />
+<kebab-case />
+<Upper-Kebab-Case />
+<Upper_Snake_Case />
+<lower_snake_case />
+<Property['Access']/>
+
+```
+
+Solution:
 
 ```js
-ui = <Capitalized /> // React.createElement(Capitalized)
-ui = <property.access /> // React.createElement(property.access)
-ui = <Property.Access />// React.createElement(Property.Access)
-ui = <Property['Access'] />// SyntaxError
-ui = <lowercase />// React.createElement('lowercase')
-ui = <kebab-case />// React.createElement('kebab-case')
-ui = <Upper-Kebab-Case />// React.createElement('Upper-Kebab-Case')
-ui = <Upper_Snake_Case />// React.createElement(Upper_Snake_Case)
-ui = <lower_snake_case />// React.createElement('lower_snake_case')
+React.createElement(Capitalized)
+React.createElement(property.access)
+React.createElement(Property.Access)
+React.createElement("lowercase")
+React.createElement("kebab-case")
+React.createElement("Upper-Kebab-Case")
+React.createElement(Upper_Snake_Case)
+React.createElement("lower_snake_case")
+// SyntaxError
 ```
 
 # END
