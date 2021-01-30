@@ -1,8 +1,6 @@
 import VanillaTilt from "vanilla-tilt"
 import { useEffect, useRef, useState } from "react"
-import { useContext } from "react"
-import { ThemeContext } from "providers"
-
+import { useTheme } from "hooks"
 const centeredStyle = {
     display: "flex",
     justifyContent: "center",
@@ -15,6 +13,8 @@ const tiltRootStyle = {
     height: "35vh",
     width: "50%",
     borderRadius: "15px",
+    borderWidth: "3px",
+    borderStyle: "dashed",
     ...centeredStyle,
 }
 
@@ -26,9 +26,8 @@ const vanillaTiltOptions = {
 }
 
 const useTiltStyle = () => {
-    const { primaryColor } = useContext(ThemeContext)
-    const style = { ...tiltRootStyle, border: `3px dashed ${primaryColor}` }
-    return style
+    const { primaryColor } = useTheme()
+    return { ...tiltRootStyle, borderColor: primaryColor }
 }
 
 function Tilt({ children, setData }) {

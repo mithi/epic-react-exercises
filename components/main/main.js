@@ -1,6 +1,6 @@
 import styles from "./Styles.module.css"
-import { useContext, useState, useEffect } from "react"
-import { ThemeContext } from "providers"
+import { useState, useEffect } from "react"
+import { useTheme } from "hooks"
 import Nav from "./navbar"
 
 /*
@@ -9,7 +9,7 @@ import Nav from "./navbar"
     DON'T REMOVE IT!
  */
 const Home = ({ children } = {}) => {
-    const { bodyClassNames, bodyFont } = useContext(ThemeContext)
+    const { bodyClassNames, bodyFont } = useTheme()
     const [visible, setVisible] = useState(false)
 
     useEffect(() => setVisible(true), [])

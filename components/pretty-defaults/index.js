@@ -1,16 +1,15 @@
 import Link from "next/link"
-import { useContext } from "react"
-import { ThemeContext } from "providers"
+import { useTheme } from "hooks"
 
 const PrettyHeader = ({ style, children, Component, ...otherProps }) => {
     Component = Component ? Component : "div"
-    const { headerFont } = useContext(ThemeContext)
+    const { headerFont } = useTheme()
     style = { ...style, fontFamily: headerFont }
     return <Component {...{ style, ...otherProps }}>{children}</Component>
 }
 
 const PrettyAnchor = ({ style, children, onClick, href, ...otherProps }) => {
-    const { primaryColor } = useContext(ThemeContext)
+    const { primaryColor } = useTheme()
     return (
         <a
             style={{ color: primaryColor, ...style }}
@@ -22,7 +21,7 @@ const PrettyAnchor = ({ style, children, onClick, href, ...otherProps }) => {
 }
 
 const PrettyLink = ({ style, children, href, ...otherProps }) => {
-    const { primaryColor } = useContext(ThemeContext)
+    const { primaryColor } = useTheme()
     return (
         <Link {...{ href }}>
             <a style={{ color: primaryColor, ...style }} {...{ ...otherProps }}>
@@ -40,7 +39,7 @@ const INPUT_STYLE = {
 }
 
 const PrettyInputField = ({ placeholder, value, onChange, style, ...otherProps }) => {
-    const { bodyClassNames, bodyFont } = useContext(ThemeContext)
+    const { bodyClassNames, bodyFont } = useTheme()
     return (
         <input
             className={bodyClassNames[0]}
@@ -50,8 +49,8 @@ const PrettyInputField = ({ placeholder, value, onChange, style, ...otherProps }
     )
 }
 
-const BorderedDiv = ({ style, children }) => {
-    const { primaryColor } = useContext(ThemeContext)
+const BorderedDiv = ({ style, children, ...otherProps }) => {
+    const { primaryColor } = useTheme()
     return (
         <div
             style={{
@@ -60,6 +59,7 @@ const BorderedDiv = ({ style, children }) => {
                 borderColor: primaryColor,
                 ...style,
             }}
+            {...otherProps}
         >
             {children}
         </div>

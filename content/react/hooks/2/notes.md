@@ -2,8 +2,7 @@
 
 -   Transform the perspective of a container on enter with [micku7zu/vanilla-tilt.js](https://micku7zu.github.io/vanilla-tilt.js/)
 -   Display the details of the perspective transform as it happens
--   Use `useRef` to access the dom node after the component mounts
--   Clean up event handlers you have setup when your component is unmounted. We don't want event handlers dangling around on DOM nodes that are no longer in the document. (memory leak)
+-   Remember: We don't want event handlers dangling around on DOM nodes that are no longer in the document. (memory leak)
 
 ## Code Snippets
 
@@ -49,16 +48,22 @@ function App() {
     -   To access the dom, use a special prop called `ref`
     -   A component that has rendered is said to be `mounted`. That's when `useEffect` callback is called. By that point `ref.current` is set to the dom node which you can directly do interactions, manipulations...
 
-2.  Other interesting libraries that manipulate the dom
+2.  ❗ ❗[Ref Forwarding](https://reactjs.org/docs/forwarding-refs.html)
+
+    -   ❗ ❗You CANNOT pass `ref` to a component as a prop the usual way that you might think
+    -   Ref forwarding is an opt-in feature that lets some components take a ref they receive, and pass it further down (in other words, “forward” it) to a child.
+
+3.  Other interesting libraries that manipulate the dom
+
     -   [yoannmoinet/nipplejs](https://github.com/yoannmoinet/nipplejs)
     -   [hammer.js](https://github.com/hammerjs/hammer.js)
 
-## Further Reading
+4.  Further Reading
 
--   [ Tyler McGinnis: Understanding React's useRef Hook](https://ui.dev/useref/)
--   [Eloquent Javascript: Events](https://eloquentjavascript.net/15_event.html)
--   [MDN Docs: Events](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events)
--   [MDN Docs: Events (refefence)](https://developer.mozilla.org/en-US/docs/Web/Events)
--   [rehooks/awesome-react-hooks](https://github.com/rehooks/awesome-react-hooks)
+    -   [ Tyler McGinnis: Understanding React's useRef Hook](https://ui.dev/useref/)
+    -   [Eloquent Javascript: Events](https://eloquentjavascript.net/15_event.html)
+    -   [MDN Docs: Events](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events)
+    -   [MDN Docs: Events (refefence)](https://developer.mozilla.org/en-US/docs/Web/Events)
+    -   [rehooks/awesome-react-hooks](https://github.com/rehooks/awesome-react-hooks)
 
 # END

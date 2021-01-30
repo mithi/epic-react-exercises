@@ -1,8 +1,8 @@
-import { createContext, useState } from "react"
+import { createContext, useEffect, useState } from "react"
 
-const GlobalStateContext = createContext({})
+const MenuStateContext = createContext({})
 
-const GlobalStateProvider = ({ children }) => {
+const MenuStateProvider = ({ children }) => {
     let [menuState, setMenuState] = useState("none", "menuState")
 
     const changeMenuState = menuType => {
@@ -13,15 +13,15 @@ const GlobalStateProvider = ({ children }) => {
     }
 
     return (
-        <GlobalStateContext.Provider
+        <MenuStateContext.Provider
             value={{
                 menuState,
                 changeMenuState,
             }}
         >
             {children}
-        </GlobalStateContext.Provider>
+        </MenuStateContext.Provider>
     )
 }
 
-export { GlobalStateContext, GlobalStateProvider }
+export { MenuStateContext, MenuStateProvider }

@@ -1,8 +1,6 @@
-import Link from "next/link"
-import { useContext } from "react"
+import { useTheme } from "hooks"
 import ReactMarkdown from "react-markdown"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
-import { ThemeContext } from "providers"
 import { PrettyHeader, PrettyLink, PrettyAnchor } from "components/pretty-defaults"
 
 const LINE_NUMBER_STYLE = {
@@ -15,7 +13,7 @@ const LINE_NUMBER_STYLE = {
 }
 
 const Code = ({ children, language }) => {
-    const { codeTheme, primaryColor } = useContext(ThemeContext)
+    const { codeTheme, primaryColor } = useTheme()
 
     return (
         <div

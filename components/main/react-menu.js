@@ -1,8 +1,7 @@
 import styles from "./Styles.module.css"
-import { useContext } from "react"
-import { GlobalStateContext } from "providers"
 import { LinkButton } from "../button"
 import { PrettyHeader, PrettyAnchor } from "../pretty-defaults"
+import { useMenuState } from "hooks"
 
 const Button = ({ children, section }) => {
     return (
@@ -21,7 +20,8 @@ const Button = ({ children, section }) => {
 }
 
 const Menu = ({ style, showCloseButton = true } = {}) => {
-    const { changeMenuState } = useContext(GlobalStateContext)
+    const { changeMenuState } = useMenuState()
+
     const maybeCloseButton = showCloseButton ? (
         <PrettyAnchor
             style={{ marginTop: "5px", marginLeft: "10px" }}

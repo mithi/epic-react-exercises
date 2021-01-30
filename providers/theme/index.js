@@ -1,5 +1,5 @@
 import { createContext } from "react"
-import useStickyState from "hooks/useStickyState"
+import { useStickyState } from "hooks"
 import styles from "./Theme.module.css"
 import codeThemes from "./code-themes"
 

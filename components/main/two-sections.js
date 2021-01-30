@@ -1,9 +1,8 @@
 import styles from "./Styles.module.css"
-import { useContext } from "react"
-import { ThemeContext } from "providers"
+import { useTheme } from "hooks"
 
 const TwoSections = ({ div1, div2 }) => {
-    const { sectionClassNames } = useContext(ThemeContext)
+    const { sectionClassNames } = useTheme()
 
     const div1Styles = [styles.div1, ...sectionClassNames].join(" ")
     const div2Styles = [styles.div2, ...sectionClassNames].join(" ")

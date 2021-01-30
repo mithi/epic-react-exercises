@@ -1,7 +1,7 @@
-import { useContext } from "react"
-import { ThemeContext } from "providers"
 import { TextButton } from "components/button"
 import { PrettyHeader } from "components/pretty-defaults"
+import { useTheme } from "hooks"
+import { SpinnerDots } from "components/spinner"
 
 const TOTALLY_CENTERED = {
     display: "flex",
@@ -47,7 +47,7 @@ const ROW_STYLE = {
 }
 
 const usePokemonDataViewStyles = dataViewType => {
-    const { primaryColor } = useContext(ThemeContext)
+    const { primaryColor } = useTheme()
 
     let border = (border = `1px dashed ${primaryColor}`)
 
@@ -77,7 +77,7 @@ const PokemonLoadingView = ({ pokemonName }) => {
         <PokemonDataView
             {...{
                 name: `Loading ${pokemonName.slice(0, 15)}...`,
-                imageAlternative: "Loading...",
+                imageAlternative: <SpinnerDots />,
                 dataViewType: "loading",
             }}
         />
