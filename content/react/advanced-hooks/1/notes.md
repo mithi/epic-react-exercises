@@ -1,12 +1,14 @@
 # [The useSafeAsyncHook Exercise](https://advanced-react-hooks.netlify.app/2)
 
--   This is a variation of [Kent's exercise](https://github.com/kentcdodds/advanced-react-hooks/blob/main/src/final/02.extra-3.js), in his Advanced React Hooks workshop (2.3).
+-   This is a variation of [Kent's exercise 2.3](https://github.com/kentcdodds/advanced-react-hooks/blob/main/src/final/02.extra-3.js) of his Advanced React Hooks workshop.
 -   Write an component that fetches a unique character from the [Rick and Morty API](https://rickandmortyapi.com/) given a number that's supplied by the user (the character ID).
 -   There should also be a "random button", such that when clicked, will fetch a random Rick and Morty character.
 -   If the number that was submitted does not correspond to a character, show the error.
 -   While fetching a new character, the input field, random button, and submit button should be disabled.
 -   When the number currently in the input field has been submitted has been either `resolved` or `rejected`, disable the submit button unless the input the user changes it to a new value. The user shoudn't be able to click the submit button if the character corresponding to the number in the input field is currently loaded.
 -   The app must also enable the user to mount and unmount this component (via a checkbox).
+-   [Kent's Implementation](https://github.com/kentcdodds/advanced-react-hooks/blob/main/src/final/02.extra-3.js)
+-   My Implementation: The [top level app](https://github.com/mithi/epic-notes/blob/main/content/react/advanced-hooks/1/app.js) and its [components](https://github.com/mithi/epic-notes/tree/main/content/react/advanced-hooks/1/components)
 
 ## Notice
 
