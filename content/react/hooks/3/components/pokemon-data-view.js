@@ -1,6 +1,7 @@
 import { TextButton } from "components/button"
 import { PrettyHeader } from "components/pretty-defaults"
 import { useTheme } from "hooks"
+import { SpinnerDots } from "components/spinner"
 
 const TOTALLY_CENTERED = {
     display: "flex",
@@ -76,7 +77,7 @@ const PokemonLoadingView = ({ pokemonName }) => {
         <PokemonDataView
             {...{
                 name: `Loading ${pokemonName.slice(0, 15)}...`,
-                imageAlternative: "Loading...",
+                imageAlternative: <SpinnerDots />,
                 dataViewType: "loading",
             }}
         />

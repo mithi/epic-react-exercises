@@ -1,3 +1,4 @@
+import { SpinnerDots } from "components/spinner"
 import MortyColoredSvg from "../svg/morty-smith-colored.svg"
 import RickColoredSvg from "../svg/rick-sanchez-colored.svg"
 import MortyBwSvg from "../svg/morty-smith-bw.svg"
@@ -14,12 +15,7 @@ const IdleView = () => (
 const PendingView = () => (
     <>
         <div style={{ display: "flex", justifyContent: "center" }}>
-            <div className="lds-ellipsis">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
+            <SpinnerDots />
         </div>
         <p style={{ margin: "10px", fontSize: "20px" }}>{getRandomRickAndMortyQuote()}</p>
         <div style={{ display: "flex", justifyContent: "center" }}>

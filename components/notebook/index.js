@@ -4,6 +4,7 @@ import { useMemo } from "react"
 import { FiGithub } from "react-icons/fi"
 import { BiRocket } from "react-icons/bi"
 import { BsPencilSquare } from "react-icons/bs"
+import { SpinnerDots } from "components/spinner"
 import { LinkAwayIconButton, DefaultLinkButton } from "../button"
 import Main from "../main"
 import NotebookLayout from "../main/two-sections"
@@ -94,7 +95,9 @@ const PageLayout = ({
     const App = useMemo(
         () =>
             hasApp
-                ? dynamic(() => import(`content/${topic}/${section}/${pageId}/app`))
+                ? dynamic(() => import(`content/${topic}/${section}/${pageId}/app`), {
+                      loading: () => <SpinnerDots />,
+                  })
                 : () => null,
         [hasApp, topic, section, pageId]
     )

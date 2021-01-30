@@ -1,9 +1,10 @@
 import dynamic from "next/dynamic"
-import PageLayout from "components/notebook"
 import { sectionProperties, pageContents } from "utils"
+import PageLayout from "components/notebook"
+import { SpinnerDots } from "components/spinner"
 
 const DynamicMarkdownRender = dynamic(() => import("components/markdown-render"), {
-    loading: () => <p>Loading..</p>,
+    loading: () => <SpinnerDots />,
 })
 
 export const PageLayoutHelper = ({
