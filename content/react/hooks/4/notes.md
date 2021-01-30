@@ -1,6 +1,6 @@
 ## Additional Notes
 
-1.  [Why React hooks? (Kent's 35 minute talk)](https://www.youtube.com/watch?v=zWsZcBiwgVE&list=PLV5CVI1eNcJgNqzNwcs4UKrlJdhfDjshf)
+1.  [Why React hooks? (35 minute talk)](https://www.youtube.com/watch?v=zWsZcBiwgVE&list=PLV5CVI1eNcJgNqzNwcs4UKrlJdhfDjshf)
 
 2.  [What are React hooks?](https://reactjs.org/docs/hooks-intro.html)
 
@@ -15,14 +15,13 @@
 
     -   Technique to share code between two sibling components
 
-5.  State Colocation
+5.  State [Colocation](https://kentcdodds.com/blog/colocation)
 
     -   It means to put your state as close as possible to where it's being used
-    -   [State Colocation will make your React app faster](https://kentcdodds.com/blog/state-colocation-will-make-your-react-app-faster) by Kent
-    -   [Colocation](https://kentcdodds.com/blog/colocation) by Kent
-    -   One of the leading causes to slow React applications is global state, especially the rapidly changing variety.
+    -   [State Colocation will make your React app faster](https://kentcdodds.com/blog/state-colocation-will-make-your-react-app-faster)
+    -   "One of the leading causes to slow React applications is global state, especially the rapidly changing variety."
 
-6.  [Don't sync states, derive it!](https://kentcdodds.com/blog/dont-sync-state-derive-it) by Kent
+6.  [Don't sync states, derive it!](https://kentcdodds.com/blog/dont-sync-state-derive-it)
 
     -   It's usually better to calculate states (deriving) based on other states when you can as opposed to storing them
 

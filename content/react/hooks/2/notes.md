@@ -48,7 +48,7 @@ function App() {
     -   To access the dom, use a special prop called `ref`
     -   A component that has rendered is said to be `mounted`. That's when `useEffect` callback is called. By that point `ref.current` is set to the dom node which you can directly do interactions, manipulations...
 
-2.  ❗ ❗[Ref Forwarding[(https://reactjs.org/docs/forwarding-refs.html)]
+2.  ❗ ❗[Ref Forwarding](https://reactjs.org/docs/forwarding-refs.html)
 
     -   ❗ ❗You CANNOT pass `ref` to a component as a prop the usual way that you might think
     -   Ref forwarding is an opt-in feature that lets some components take a ref they receive, and pass it further down (in other words, “forward” it) to a child.

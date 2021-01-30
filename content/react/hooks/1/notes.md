@@ -142,4 +142,11 @@ const App = () => {
 }
 ```
 
+### How to implement a generic `useLocalStorage` or `useStickyState` hook ?
+
+-   [Kent C Dodds: UseLocalStorage Implementation](https://github.com/kentcdodds/react-hooks/blob/main/src/final/02.extra-4.js)
+-   [usehooks.com: useLocalStorage](https://usehooks.com/useLocalStorage/)
+-   [donavon/use-persisted-state](https://github.com/donavon/use-persisted-state)
+-   [Josh W Comeau: Persisting React State in localStorage](https://www.joshwcomeau.com/react/persisting-react-state-in-localstorage/)
+
 # END

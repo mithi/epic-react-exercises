@@ -1,6 +1,6 @@
 ## [The Http Request Exercise](https://react-hooks.netlify.app/6)
 
--   [Fetch pokemon using this API](https://graphql-pokemon2.vercel.app). See also: [repository](https://github.com/lucasbento/graphql-pokemon/pull/14)
+-   [Fetch pokemons using this API](https://graphql-pokemon2.vercel.app). See also: [repository](https://github.com/lucasbento/graphql-pokemon/pull/14)
 -   A form where users can enter the pokemon name and your app fetches and displays that pokemon's data
 -   When a request hasn't been made yet, show `no pokemon yet, please submit a pokemon!`
 -   While fetching the pokemon data, show a `loading` screen
@@ -122,8 +122,5 @@ class CustomErrorBoundary extends Component {
 
 -   Refactor the [data views module](https://github.com/mithi/epic-notes/blob/main/content/react/hooks/3/components/pokemon-data-view.js)
 -   How to refactor to use local storage so that the previously fetched pokemon data will still be displayed on refresh?
-    -   [Kent C Dodd's UseLocalStorage Implementation](https://github.com/kentcdodds/react-hooks/blob/main/src/final/02.extra-4.js)
-    -   [usehooks.com: useLocalStorage](https://usehooks.com/useLocalStorage/)
-    -   [donavon/use-persisted-state](https://github.com/donavon/use-persisted-state)
 
 # END
