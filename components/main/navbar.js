@@ -1,7 +1,7 @@
 import "@reach/dialog/styles.css"
 import styles from "./Styles.module.css"
-import { GlobalStateProvider } from "providers"
-import { useTheme, useGlobalState } from "hooks"
+import { MenuStateProvider } from "providers"
+import { useTheme, useMenuState } from "hooks"
 import { DialogOverlay, DialogContent } from "@reach/dialog"
 import { GoOctoface } from "react-icons/go"
 import { MdSettings } from "react-icons/md"
@@ -13,7 +13,7 @@ import ReactMenu from "./react-menu"
 import ThemeMenu from "./theme-menu"
 
 const MenuModal = () => {
-    const { changeMenuState, menuState } = useGlobalState()
+    const { changeMenuState, menuState } = useMenuState()
     return (
         <>
             <DialogOverlay
@@ -44,7 +44,7 @@ const MenuModal = () => {
     )
 }
 const NavInner = () => {
-    const { changeMenuState } = useGlobalState()
+    const { changeMenuState } = useMenuState()
     const { sectionClassNames } = useTheme()
 
     return (
@@ -79,8 +79,8 @@ const NavInner = () => {
 }
 
 const Nav = () => (
-    <GlobalStateProvider>
+    <MenuStateProvider>
         <NavInner />
-    </GlobalStateProvider>
+    </MenuStateProvider>
 )
 export default Nav

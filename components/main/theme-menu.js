@@ -5,7 +5,7 @@ import { CgFormatColor } from "react-icons/cg"
 import { BiText } from "react-icons/bi"
 import { IconButton } from "../button"
 import { PrettyAnchor, PrettyHeader } from "../pretty-defaults"
-import { useTheme, useGlobalState } from "hooks"
+import { useTheme, useMenuState } from "hooks"
 
 const ICON_BUTTON_STYLE = { margin: "10px 5px" }
 const SAMPLE_CODE = "```python\n def hello():\n    return 'world!'"
@@ -18,7 +18,7 @@ const DynamicMarkdownRender = dynamic(() => import("components/markdown-render")
 })
 
 const Menu = ({ style } = {}) => {
-    const { changeMenuState } = useGlobalState()
+    const { changeMenuState } = useMenuState()
     const {
         nextColor,
         nextHeaderFont,

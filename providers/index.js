@@ -1,4 +1,4 @@
-import { GlobalStateContext, GlobalStateProvider } from "./global-state"
+import { MenuStateContext, MenuStateProvider } from "./menu-state"
 import { ThemeContext, ThemeProvider } from "./theme"
 
-export { GlobalStateContext, GlobalStateProvider, ThemeContext, ThemeProvider }
+export { MenuStateContext, MenuStateProvider, ThemeContext, ThemeProvider }

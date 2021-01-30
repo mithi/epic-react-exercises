@@ -1,6 +1,6 @@
 import useStickyState from "./use-sticky-state"
 import { useContext } from "react"
-import { ThemeContext, GlobalStateContext } from "providers"
+import { ThemeContext, MenuStateContext } from "providers"
 
 function useCustomContext(_context, name) {
     const context = useContext(_context)
@@ -16,8 +16,8 @@ function useTheme() {
     return useCustomContext(ThemeContext, "Theme")
 }
 
-function useGlobalState() {
-    return useCustomContext(GlobalStateContext, "GlobalState")
+function useMenuState() {
+    return useCustomContext(MenuStateContext, "MenuState")
 }
 
-export { useStickyState, useTheme, useGlobalState }
+export { useStickyState, useTheme, useMenuState }
