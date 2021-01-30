@@ -40,7 +40,7 @@ const PositiveIntegerSearchbar = ({
             <TextButton
                 isInvertedColor={true}
                 type="submit"
-                disable={disableButton}
+                disabled={disableButton}
                 style={{
                     width: "auto",
                     borderRadius: "10px",
