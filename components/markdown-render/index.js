@@ -1,8 +1,9 @@
+import Link from "next/link"
 import { useContext } from "react"
 import ReactMarkdown from "react-markdown"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import { ThemeContext } from "providers"
-import { PrettyHeader, PrettyAnchor } from "components/pretty-defaults"
+import { PrettyHeader, PrettyLink, PrettyAnchor } from "components/pretty-defaults"
 
 const LINE_NUMBER_STYLE = {
     minWidth: "25px",
@@ -48,7 +49,6 @@ const CustomHeading = ({ children, level }) => {
         case 1:
             return (
                 <PrettyHeader Component="h1" {...{ style }}>
-                    {" "}
                     {children}
                 </PrettyHeader>
             )
@@ -70,11 +70,19 @@ const CustomHeading = ({ children, level }) => {
     }
 }
 
-const LinkAwayText = ({ href, children }) => {
-    return (
-        <PrettyAnchor {...{ href, target: "_blank", rel: "noopener noreferrer" }}>
-            {children}
-        </PrettyAnchor>
+const DefaultLink = ({ href, children }) => {
+    if (href.slice(0, 4) === "http") {
+        return (
+            <PrettyAnchor {...{ href, target: "_blank", rel: "noopener noreferrer" }}>
+                {children}
+            </PrettyAnchor>
+        )
+    } else if (href.slice(0, 1) === "/") {
+        return <PrettyLink {...{ href }}>{children}</PrettyLink>
+    }
+
+    return new Error(
+        `Link in markdown does not start with "http" or "/", href=${href}, children=${children}`
     )
 }
 
@@ -86,7 +94,7 @@ const renderers = {
         return <CustomHeading {...props} />
     },
     link: props => {
-        return <LinkAwayText {...props} />
+        return <DefaultLink {...props} />
     },
 
     paragraph: props => {

@@ -1,5 +1,8 @@
 import axios from "axios"
 
+// delay for a while before starting to fetch
+// because I want the use to be able to read the
+// rick and morty quotes available at the loading screen :D
 const DELAY = 1500
 
 function wait(ms, value) {

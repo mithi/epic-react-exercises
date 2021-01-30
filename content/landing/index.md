@@ -1,6 +1,18 @@
-# Hello.
+# Hello World! [![buy me coffee](https://img.shields.io/badge/Buy%20me%20-coffee!-orange.svg?logo=buy-me-a-coffee&color=795548)](https://ko-fi.com/minimithi)
 
-This is a site I made in my quest to become a really good frontend engineer. If you find this site useful, consider [buying me a few cups of coffee (or tea) 🍵🍵🍵](https://ko-fi.com/minimithi)!
+This site is for front-end web engineers and developers. It contains notes and practical exercises with detailed solutions for real-world use cases.
+
+## List of Exercises
+
+1.  [TicTacToe](/react/hooks/1) and avoiding state management complexity
+2.  [Vanilla Tilt](/react/hooks/2) and accessing DOM nodes while avoiding memory leaks
+3.  [Fetching Pokemons](/react/hooks/3) and error boundaries
+4.  Safely [fetch Rick and Morty Characters](/react/advanced-hooks/1) by handling unmounting while dispatching
+5.  ToDo: [Caching Rick and Morty Characters](/react/advanced-hooks/2)
+6.  ToDo: [Navigating a tv script](/react/advanced-hooks/3) with `useImperativeHandle`
+7.  ToDo: Debugging [detecting user's screen sizes](/react/advanced-hooks/4) with `useDebugValue` and `useMedia`
+
+## References
 
 1. Books
 

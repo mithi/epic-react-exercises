@@ -8,7 +8,7 @@
 -   There should be a button to `try again` after an error. Upon clicking this , the `no pokemon yet, please submit a pokemon!` will be shown and the current string on the search bar would be removed.
 -   After an error, the user should be able to use the search bar to search for a new pokemon without having to click the `try again` button.
 -   [Kent's Implementation](https://github.com/kentcdodds/react-hooks/blob/main/src/final/04.extra-3.js)
--   [My Implementation](https://github.com/mithi/epic-notes/blob/main/content/react/hooks/3/app.js)
+-   [My Implementation]: The [top level app](https://github.com/mithi/epic-notes/blob/main/content/react/hooks/3/app.js) and its [components](https://github.com/mithi/epic-notes/tree/main/content/react/hooks/3/components)
 
 ## A Few Code Snippets
 

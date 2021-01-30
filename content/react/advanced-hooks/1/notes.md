@@ -1,19 +1,20 @@
 # [The useSafeAsyncHook Exercise](https://advanced-react-hooks.netlify.app/2)
 
--   This is a variation of [Kent C Dodd's exercise](https://github.com/kentcdodds/advanced-react-hooks/blob/main/src/final/02.extra-3.js), in the Advanced React Hooks workshop, exercise two extra credit three.
+-   This is a variation of [Kent's exercise 2.3](https://github.com/kentcdodds/advanced-react-hooks/blob/main/src/final/02.extra-3.js) of his Advanced React Hooks workshop.
 -   Write an component that fetches a unique character from the [Rick and Morty API](https://rickandmortyapi.com/) given a number that's supplied by the user (the character ID).
 -   There should also be a "random button", such that when clicked, will fetch a random Rick and Morty character.
 -   If the number that was submitted does not correspond to a character, show the error.
--   While fetching a new character, the random button and submit button should be disabled.
--   When the number currently in the input field has been submitted and has been `resolved` or `rejected`
-    disable the input field until the user changes a new value.
+-   While fetching a new character, the input field, random button, and submit button should be disabled.
+-   When the number currently in the input field has been submitted has been either `resolved` or `rejected`, disable the submit button unless the input the user changes it to a new value. The user shoudn't be able to click the submit button if the character corresponding to the number in the input field is currently loaded.
 -   The app must also enable the user to mount and unmount this component (via a checkbox).
+-   [Kent's Implementation](https://github.com/kentcdodds/advanced-react-hooks/blob/main/src/final/02.extra-3.js)
+-   My Implementation: The [top level app](https://github.com/mithi/epic-notes/blob/main/content/react/advanced-hooks/1/app.js) and its [components](https://github.com/mithi/epic-notes/tree/main/content/react/advanced-hooks/1/components)
 
-## Background
+## Notice
 
-(The paragraph below is copied from [this page](https://advanced-react-hooks.netlify.app/2))
+(The paragraph below is paraphrased from [this page](https://advanced-react-hooks.netlify.app/2))
 
-> Consider the scenario where we fetch a Rick and Morty Character, and before the request finishes, we change our mind and navigate to a different page (or uncheck the mount checkbox). In that case, the component would get removed from the page ("unmounted") and when the request finally does complete, because the component has been removed from the page, we’ll get this warning from React:
+> Consider the scenario where we send an http request, and before the request finishes, we change our mind and navigate to a different page (or uncheck the mount checkbox). In that case, the component would get removed from the page ("unmounted") and when the request finally does complete, because the component has been removed from the page, we’ll get this warning from React:
 
 ```
 Warning: Can't perform a React state update on an unmounted component.
@@ -172,13 +173,13 @@ function App() {
         setState({ submittedValue: id, incompleteValue: id })
     }
 
-    const randomButtonDisabled = fetchStatus === "pending"
+    const disabledByPending = fetchStatus === "pending"
     // the submit button is disabled when
     // 1. We are process of fetching data
     // 2. the input field value has already been resolved or rejected
     // 3. There is no value in the input field
     const submitButtonDisabled =
-        randomButtonDisabled ||
+        disabledByPending ||
         !incompleteValue ||
         (incompleteValue === submittedValue &&
             ["resolved", "rejected"].includes(fetchStatus))
@@ -190,12 +191,12 @@ function App() {
                 onSubmit={value => setSubmittedValue(value)}
                 {...{ incompleteValue, setIncompleteValue }}
                 placeholder={"Pick a number!"}
-                disabled={submitButtonDisabled}
+                disableButton={submitButtonDisabled}
+                disableInputField={disabledByPending}
             />
-            <DefaultButton onClick={setRandomValue} disabled={randomButtonDisabled}>
+            <DefaultButton onClick={setRandomValue} disabled={disabledByPending}>
                 <GiPerspectiveDiceSixFacesRandom />
             </DefaultButton>
-
             <RickAndMortyInfoCard
                 characterId={submittedValue}
                 {...{ getStatus: setFetchStatus }}

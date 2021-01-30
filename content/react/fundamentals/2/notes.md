@@ -1,166 +1,67 @@
-## Ex0: Built in functions
+## Additional Notes
 
-```js
-let node = document.getElementById("root")
-let otherNode = document.createElement("div")
-otherNode.textContent = "Hello World"
-otherNode.className = "container"
-document.body.append(node)
-node.append(otherNode)
-```
+1.  The raw React API
 
-## Ex1: Pure JS
+    -   `React`: Responsible for creating elements (like `document.createElement`)
+    -   `ReactDom`: Responsible for rendering React elements to the dom (like `node.append`)
+    -   ❗ Understand in more detail how that function works`React.createElement()`,
+    -   [Kent's Blog: Javascript to Know for React](https://kentcdodds.com/blog/javascript-to-know-for-react)
+    -   [MDN Webdocs: DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction)
+    -   [React Source Code](https://github.com/facebook/react/blob/48907797294340b6d5d8fecfbcf97edf0691888d/packages/react-dom/src/client/ReactDOMComponent.js#L416)
+    -   [UI.dev: Imperative vs Declarative Programming](https://ui.dev/imperative-vs-declarative-programming/)
+    -   [unpkg](https://unpkg.com/)
 
-Create and append dom elements in vanilla javascript. Write a javascript code between `<script>` tags to produce this.
+2.  `React.createElement()`
 
-```html
-<div id="root">
-    <div class="container">Hello World</div>
-</div>
-```
+    -   The first argument is either a function (that returns something renderable) or a string that represents an html element (`div`, `h1`, `span`)
+    -   The second argument of `React.createElement` is an object or `null`.
+        -   It is `null` if the element doesn't have any other properties
+        -   If it is an object, The object's keys are property names like like `className`, `style`, and `children`.
+    -   The `children` property can be one element or an array of elements.
+    -   An element of children can be another react element or something you can directly displayed in the dom like a string or number.
+    -   You don't have to pass children as part of the object you pass in the second argument of `React.createElement`, you can pass it on its own as the third argument.
 
-Here is an example html file
+3.  JSX
 
-```html
-<body>
-    <!-- html elements can already exist before running your code -->
-    <div id="root"></div>
-    <script type="module">
-        // write your javascript code here,
-        // this is below all the existing html nodes
-        const node = document.getElementById("root")
-    </script>
-</body>
-```
+    -   Train your brain to look at JSX and see the compiled version of the code!
+    -   [React docs: Introducing JSX](https://reactjs.org/docs/introducing-jsx.html)
+    -   [React docs: JSX in depth](https://reactjs.org/docs/jsx-in-depth.html)
+    -   [Babel](https://babeljs.io/), [online Babel Repl](https://babeljs.io/repl)
+        -   Babel is written is javascript so you can add a script tag with babel in your html, run it on the browser it can compile jsx on the fly
 
-Solution:
+4.  Custom Components
 
-```js
-// case 0
-// If the root element doesn't exist yet we must creat and append it to the dom first
-let rootElement = document.createElement("div")
-rootElement.setAttribute("id", "root")
-document.body.append(rootElement)
+    -   Components are basically functions that returns something that is 'renderable' (IE more react elements strings, null, numbers, etc)
+    -   The first argument of `React.createElement()` can be a string, but that first argument can also be a function that returns something renderable.
+    -   ❗ Familiarize yourself on examples on what babel outputs for jsx based on how it appears (`<Capitalized />`, `<property.access />`)
 
-// case 1
-// If the element with an id of `root` already exists in the document
-// we just need to grab it
-rootElement = document.getElementById("root")
+5.  PropTypes, Fragments, and Styling
 
-// for both case 0 and 1
-// create the child element, set properties, append to the dom
-const element = document.createElement("div")
-element.textContent = "Hello World"
-element.className = "container"
-rootElement.append(element)
-```
+    -   [React Docs: Fragment](https://reactjs.org/docs/fragments.html)
+    -   [React Docs: Type Checking with PropTypes](https://reactjs.org/docs/typechecking-with-proptypes.html)
+    -   [MDN Docs: CSSStyleDeclaration](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration)
+    -   A nice pattern: make a custom `<Box />` component that renders a div, accepts all the props and merges the given style and className props with the shared values. You can also put a default style that can be overridden. You can also add your custom props for styling conventions (example: `size` prop that takes `small`, `medium`, or `large`)
 
-## Ex2: Babel for inline JSX
+6.  Forms
 
-You can actually use react (and optionality the babel compiler to add jsx) directly on your html file like this:
+    -   How forms work:
+        -   Attach a submit handler with `onSubmit` prop.
+        -   It will be called with the `submit event` which has a `target`.
+        -   The `target` has a reference to the `<form>` dom node.
+        -   The form node has references to the elements of the form which can be used to get the values out of the form.
+    -   Some ways to get the value of from input field node `onChange`:
+        -   via index: `event.target.elements[0].value`
+        -   via their name or id attribute: `event.target.elements.usernameInput.value`
+        -   via ref [useRef (React Docs)](https://reactjs.org/docs/hooks-reference.html#useref)
+    -   ❗ Learn good practices for validating lower-case on input fields
+    -   ❗ Controlled vs Uncontrolled
+        -   “uncontrolled” - means that the browser is maintaining the state of the input by itself, we can be notified of changes and “query” for the value from the DOM node.
 
-```html
-<body>
-    <div id="root"></div>
-    <!-- You can import react directly on your html document via unpkg -->
-    <script src="https://unpkg.com/react@17.0.0/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@17.0.0/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
-    <script type="text/babel">
-        // write your script here!
-    </script>
-</body>
-```
+7.  Rendering an array
 
-Example 2a
+    -   [Kent's Blog :Understanding React's Key Prop](https://kentcdodds.com/blog/understanding-reacts-key-prop)
+    -   [Stackoverflow: What is the significance of keys in ReactJS?](https://stackoverflow.com/questions/42801343/what-is-the-significance-of-keys-in-reactjs)
 
-```js
-const element = <div className="container">Hello World</div>
-ReactDOM.render(element, document.getElementById("root"))
-```
-
-Example 2b
-
-```js
-const rootElement = document.getElementById("root")
-const element = React.createElement("div", {
-    className: "container",
-    children: "Hello World",
-})
-ReactDOM.render(element, rootElement)
-```
-
-## Ex3: Multiple children
-
-To make this
-
-```html
-<div id="root">
-    <div class="container">
-        <span>Hello</span>
-        <span>World</span>
-    </div>
-</div>
-```
-
-You can do
-
-```js
-const helloElement = React.createElement("span", null, "Hello")
-const worldElement = React.createElement("span", null, "World")
-const rootElement = document.getElementById("root")
-const element = React.createElement("div", {
-    className: "container",
-    children: [helloElement, " ", worldElement],
-})
-ReactDOM.render(element, rootElement)
-```
-
-## Ex4 createElement's first argument
-
-How can we render this?
-
-```html
-<div className="container">
-    <div className="myMessage">Hello World</div>
-    <div className="myMessage">Goodbye World</div>
-</div>
-```
-
-You can do something like this and it will work, but it's not following
-the convention the the Babel compiler recognizes.
-
-```js
-// **********
-//  (NOT FOLLOWING BABEL'S CONVENTION)
-// **********
-function message({ children }) {
-    return <div className="myMessage">{children}</div>
-}
-
-const element = (
-    <div className="container">
-        {React.createElement(message, { children: "Hello World" })}
-        {React.createElement(message, { children: "Goodbye World" })}
-    </div>
-)
-```
-
-In this case, it is being used as a component. It works but not best practice. You should use capitalized `Message` instead of `message`. That way, you'd be following the convention which the babel compiler understands
-
-How babel parses JSX based on appearance...
-Notice that `lowercase`, `kebab` and `snake_case` are compiled into strings. while `Capitalized` and `property.access` is seen as a function
-
-```js
-ui = <Capitalized /> // React.createElement(Capitalized)
-ui = <property.access /> // React.createElement(property.access)
-ui = <Property.Access />// React.createElement(Property.Access)
-ui = <Property['Access'] />// SyntaxError
-ui = <lowercase />// React.createElement('lowercase')
-ui = <kebab-case />// React.createElement('kebab-case')
-ui = <Upper-Kebab-Case />// React.createElement('Upper-Kebab-Case')
-ui = <Upper_Snake_Case />// React.createElement(Upper_Snake_Case)
-ui = <lower_snake_case />// React.createElement('lower_snake_case')
-```
-
-# END
+8.  Misc
+    -   [My old notes](https://github.com/mithi/digital-garden/blob/page/web-dev/public/markdown-notes/epic-react-1-react-fundamentals.md)
+    -   [Matt Zabriskie: React Workshop Exercises](https://github.com/mzabriskie/react-workshop)
