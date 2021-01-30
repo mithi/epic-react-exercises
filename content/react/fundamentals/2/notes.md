@@ -59,7 +59,7 @@
 
 7.  Rendering an array
 
-    -   [Kent's Blog :Understanding React's Key Prop](https://kentcdodds.com/blog/understanding-reacts-key-prop)
+    -   [Kent's Blog: Understanding React's Key Prop](https://kentcdodds.com/blog/understanding-reacts-key-prop)
     -   [Stackoverflow: What is the significance of keys in ReactJS?](https://stackoverflow.com/questions/42801343/what-is-the-significance-of-keys-in-reactjs)
 
 8.  Misc

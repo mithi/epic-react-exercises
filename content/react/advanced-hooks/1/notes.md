@@ -1,4 +1,4 @@
-# [The useSafeAsyncHook Exercise](https://advanced-react-hooks.netlify.app/2)
+# [The useSafeAsync Exercise](https://advanced-react-hooks.netlify.app/2)
 
 -   This is a variation of [Kent's exercise 2.3](https://github.com/kentcdodds/advanced-react-hooks/blob/main/src/final/02.extra-3.js) of his Advanced React Hooks workshop.
 -   Write an component that fetches a unique character from the [Rick and Morty API](https://rickandmortyapi.com/) given a number that's supplied by the user (the character ID).
