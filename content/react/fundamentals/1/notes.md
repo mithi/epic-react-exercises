@@ -1,8 +1,10 @@
+## Additional Notes
+
 1.  The raw React API
 
     -   `React`: Responsible for creating elements (like `document.createElement`)
     -   `ReactDom`: Responsible for rendering React elements to the dom (like `node.append`)
-    -   ❗ Checkout examples on how to use `React.createElement()`, understand in more detail how that function works
+    -   ❗ Understand in more detail how that function works`React.createElement()`,
     -   [Kent's Blog: Javascript to Know for React](https://kentcdodds.com/blog/javascript-to-know-for-react)
     -   [MDN Webdocs: DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction)
     -   [React Source Code](https://github.com/facebook/react/blob/48907797294340b6d5d8fecfbcf97edf0691888d/packages/react-dom/src/client/ReactDOMComponent.js#L416)
@@ -22,11 +24,10 @@
 3.  JSX
 
     -   Train your brain to look at JSX and see the compiled version of the code!
-    -   Convert JSX to javascript with [Babel](https://babeljs.io/), a javascript compiler
     -   [React docs: Introducing JSX](https://reactjs.org/docs/introducing-jsx.html)
     -   [React docs: JSX in depth](https://reactjs.org/docs/jsx-in-depth.html)
-    -   [online Babel Repl](https://babeljs.io/repl)
-    -   Babel is written is javascript so you can add a script tag with babel in your html, run it on the browser it can compile jsx on the fly
+    -   [Babel](https://babeljs.io/), [online Babel Repl](https://babeljs.io/repl)
+        -   Babel is written is javascript so you can add a script tag with babel in your html, run it on the browser it can compile jsx on the fly
 
 4.  Custom Components
 
@@ -43,14 +44,18 @@
 
 6.  Forms
 
-    -   Attach a submit handler with `onSubmit` prop. It will be called with the `submit event` which has a `target`. The `target` has a reference to the `<form>` dom node. The form node has references to the elements of the form which can be used to get the values out of the form.
-    -   Some ways to get the value of the name input:
+    -   How forms work:
+        -   Attach a submit handler with `onSubmit` prop.
+        -   It will be called with the `submit event` which has a `target`.
+        -   The `target` has a reference to the `<form>` dom node.
+        -   The form node has references to the elements of the form which can be used to get the values out of the form.
+    -   Some ways to get the value of from input field node `onChange`:
         -   via index: `event.target.elements[0].value`
         -   via their name or id attribute: `event.target.elements.usernameInput.value`
         -   via ref [useRef (React Docs)](https://reactjs.org/docs/hooks-reference.html#useref)
     -   ❗ Learn good practices for validating lower-case on input fields
     -   ❗ Controlled vs Uncontrolled
-    -   “uncontrolled” - means that the browser is maintaining the state of the input by itself, we can be notified of changes and “query” for the value from the DOM node.
+        -   “uncontrolled” - means that the browser is maintaining the state of the input by itself, we can be notified of changes and “query” for the value from the DOM node.
 
 7.  Rendering an array
 
