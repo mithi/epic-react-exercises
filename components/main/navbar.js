@@ -1,19 +1,18 @@
 import "@reach/dialog/styles.css"
 import styles from "./Styles.module.css"
-import { useContext } from "react"
+import { useTheme, useGlobalState } from "hooks"
 import { DialogOverlay, DialogContent } from "@reach/dialog"
 import { GoOctoface } from "react-icons/go"
 import { MdSettings } from "react-icons/md"
 import { BiCoffeeTogo } from "react-icons/bi"
 import { FaReact } from "react-icons/fa"
-import { GlobalStateContext, ThemeContext } from "providers"
 
 import { IconButton, LinkAwayIconButton } from "../button"
 import ReactMenu from "./react-menu"
 import ThemeMenu from "./theme-menu"
 
 const MenuModal = () => {
-    const { changeMenuState, menuState } = useContext(GlobalStateContext)
+    const { changeMenuState, menuState } = useGlobalState()
     return (
         <>
             <DialogOverlay
@@ -44,8 +43,8 @@ const MenuModal = () => {
     )
 }
 const Nav = () => {
-    const { changeMenuState } = useContext(GlobalStateContext)
-    const { sectionClassNames } = useContext(ThemeContext)
+    const { changeMenuState } = useGlobalState()
+    const { sectionClassNames } = useTheme()
 
     return (
         <>

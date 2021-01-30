@@ -1,7 +1,7 @@
 import styles from "./Styles.module.css"
 import Link from "next/link"
-import { useContext, useLayoutEffect, useEffect, useState } from "react"
-import { ThemeContext } from "providers"
+import { useLayoutEffect, useEffect, useState } from "react"
+import { useTheme } from "hooks"
 
 // ***************
 // IMPORTANT: Use isomorphic effect
@@ -13,9 +13,7 @@ import { ThemeContext } from "providers"
 // a render is actually committed to the DOM.
 
 const useButtonClasses = (className, isIcon, disabled, isInvertedColor) => {
-    const { buttonClassNames, invertedButtonClassName, disabledClassName } = useContext(
-        ThemeContext
-    )
+    const { buttonClassNames, invertedButtonClassName, disabledClassName } = useTheme()
     const [buttonClasses, setButtonClasses] = useState(buttonClassNames)
     const useIsomorphicLayoutEffect =
         typeof window !== "undefined" ? useLayoutEffect : useEffect
@@ -96,7 +94,7 @@ const TextButton = ({
     ...otherprops
 }) => {
     const buttonClass = useButtonClasses(className, true, disabled, isInvertedColor)
-    const { bodyFont, primaryColor } = useContext(ThemeContext)
+    const { bodyFont, primaryColor } = useTheme()
     style = { fontFamily: bodyFont, ...style }
     style = useBgPrimaryColor ? { ...style, backgroundColor: primaryColor } : style
 
@@ -121,7 +119,7 @@ const DEFAULT_BUTTON_STYLE = {
 }
 
 const useDefaultButtonStyle = (disabled, style) => {
-    const { headerFont, primaryColor } = useContext(ThemeContext)
+    const { headerFont, primaryColor } = useTheme()
     const border = disabled ? `2px solid ${primaryColor}` : null
 
     return {

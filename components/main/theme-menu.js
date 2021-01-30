@@ -1,12 +1,11 @@
 import dynamic from "next/dynamic"
 import styles from "./Styles.module.css"
-import { useContext } from "react"
 import { FaCloudSun, FaCode, FaPaintBrush } from "react-icons/fa"
 import { CgFormatColor } from "react-icons/cg"
 import { BiText } from "react-icons/bi"
-import { ThemeContext, GlobalStateContext } from "providers"
 import { IconButton } from "../button"
 import { PrettyAnchor, PrettyHeader } from "../pretty-defaults"
+import { useTheme, useGlobalState } from "hooks"
 
 const ICON_BUTTON_STYLE = { margin: "10px 5px" }
 const SAMPLE_CODE = "```python\n def hello():\n    return 'world!'"
@@ -19,7 +18,7 @@ const DynamicMarkdownRender = dynamic(() => import("components/markdown-render")
 })
 
 const Menu = ({ style } = {}) => {
-    const { changeMenuState } = useContext(GlobalStateContext)
+    const { changeMenuState } = useGlobalState()
     const {
         nextColor,
         nextHeaderFont,
@@ -31,7 +30,7 @@ const Menu = ({ style } = {}) => {
         onHoverClassName,
         bodyClassNames,
         sectionClassNames,
-    } = useContext(ThemeContext)
+    } = useTheme()
 
     return (
         <section className={styles.menu} style={{ ...style }}>
