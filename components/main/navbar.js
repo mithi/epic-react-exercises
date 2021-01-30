@@ -1,5 +1,6 @@
 import "@reach/dialog/styles.css"
 import styles from "./Styles.module.css"
+import { GlobalStateProvider } from "providers"
 import { useTheme, useGlobalState } from "hooks"
 import { DialogOverlay, DialogContent } from "@reach/dialog"
 import { GoOctoface } from "react-icons/go"
@@ -42,7 +43,7 @@ const MenuModal = () => {
         </>
     )
 }
-const Nav = () => {
+const NavInner = () => {
     const { changeMenuState } = useGlobalState()
     const { sectionClassNames } = useTheme()
 
@@ -77,4 +78,9 @@ const Nav = () => {
     )
 }
 
+const Nav = () => (
+    <GlobalStateProvider>
+        <NavInner />
+    </GlobalStateProvider>
+)
 export default Nav
