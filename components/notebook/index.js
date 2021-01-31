@@ -2,13 +2,17 @@ import styles from "./Styles.module.css"
 import dynamic from "next/dynamic"
 import { useMemo } from "react"
 import { FiGithub } from "react-icons/fi"
-import { BiRocket } from "react-icons/bi"
+import { BiRocket, BiCoffeeTogo } from "react-icons/bi"
 import { BsPencilSquare } from "react-icons/bs"
+import { GoOctoface } from "react-icons/go"
+import { FaHome, FaBug } from "react-icons/fa"
 import { SpinnerDots } from "components/spinner"
-import { LinkAwayIconButton, DefaultLinkButton } from "../button"
+import { LinkAwayIconButton, DefaultLinkButton, LinkButton } from "../button"
 import Main from "../main"
 import NotebookLayout from "../main/two-sections"
 import { PrettyHeader } from "../pretty-defaults"
+
+const EPIC_NOTES_REPO_URL = "https://github.com/mithi/epic-notes"
 
 const Pagination = ({ numberOfPages, currentPageId, pathname }) => {
     return (
@@ -22,7 +26,7 @@ const Pagination = ({ numberOfPages, currentPageId, pathname }) => {
                     <DefaultLinkButton
                         key={buttonPathname}
                         disabled={disabled}
-                        page={buttonPathname}
+                        href={buttonPathname}
                         children={pageId}
                     />
                 )
@@ -42,6 +46,32 @@ const BUTTON_STYLE = {
 }
 
 const Header = ({ title, deployedSite, repository, editPath }) => {
+    let repositoryButton = null
+    if (repository) {
+        repositoryButton = (
+            <LinkAwayIconButton
+                href={repository}
+                style={BUTTON_STYLE}
+                aria-label={"go to source repository"}
+            >
+                <FiGithub />
+            </LinkAwayIconButton>
+        )
+    }
+
+    let deployedSiteButton = null
+    if (deployedSite) {
+        deployedSiteButton = (
+            <LinkAwayIconButton
+                href={deployedSite}
+                style={BUTTON_STYLE}
+                aria-label={"go to source deployed site"}
+            >
+                <BiRocket />
+            </LinkAwayIconButton>
+        )
+    }
+
     return (
         <div className={styles.header}>
             <PrettyHeader Component="h1" style={{ marginRight: "10px" }}>
@@ -54,28 +84,46 @@ const Header = ({ title, deployedSite, repository, editPath }) => {
                     marginBottom: "10px",
                 }}
             >
+                {deployedSiteButton}
+                {repositoryButton}
                 <LinkAwayIconButton
-                    page={repository}
-                    style={BUTTON_STYLE}
-                    aria-label={"go to source repository"}
-                >
-                    <FiGithub />
-                </LinkAwayIconButton>
-                <LinkAwayIconButton
-                    page={deployedSite}
-                    style={BUTTON_STYLE}
-                    aria-label={"go to source deployed site"}
-                >
-                    <BiRocket />
-                </LinkAwayIconButton>
-                <LinkAwayIconButton
-                    page={`https://github.com/mithi/epic-notes/edit/main/content/${editPath}`}
+                    href={`${EPIC_NOTES_REPO_URL}/edit/main/content/${editPath}`}
                     style={BUTTON_STYLE}
                     aria-label={"edit this page"}
                 >
                     <BsPencilSquare />
                 </LinkAwayIconButton>
             </div>
+        </div>
+    )
+}
+
+const ArticleFooter = ({ editPath }) => {
+    const issueUrl = `${EPIC_NOTES_REPO_URL}/issues/new?title=Something%20wrong%20in:%20${editPath}`
+    return (
+        <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
+            <LinkAwayIconButton aria-label={"report a bug"} href={issueUrl}>
+                <FaBug />
+            </LinkAwayIconButton>
+            <LinkAwayIconButton
+                href={`${EPIC_NOTES_REPO_URL}/edit/main/content/${editPath}`}
+                aria-label={"edit this page"}
+            >
+                <BsPencilSquare />
+            </LinkAwayIconButton>
+            <LinkAwayIconButton
+                href={EPIC_NOTES_REPO_URL}
+                children={<GoOctoface />}
+                aria-label={"star me on github"}
+            />
+            <LinkAwayIconButton
+                href="https://ko-fi.com/minimithi"
+                children={<BiCoffeeTogo />}
+                aria-label={"buy me a coffee"}
+            />
+            <LinkButton aria-label={"home"} href="/" isIconButton={true}>
+                <FaHome />
+            </LinkButton>
         </div>
     )
 }
@@ -102,6 +150,14 @@ const PageLayout = ({
         [hasApp, topic, section, pageId]
     )
 
+    const editPath = `${topic}/${section}/${pageId}/notes.md`
+    const article = (
+        <article>
+            {notes}
+            <ArticleFooter {...{ editPath }} />
+        </article>
+    )
+
     const div1 = (
         <>
             <Header
@@ -109,7 +165,7 @@ const PageLayout = ({
                     title,
                     deployedSite,
                     repository,
-                    editPath: `${topic}/${section}/${pageId}/notes.md`,
+                    editPath,
                 }}
             />
             <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -121,11 +177,11 @@ const PageLayout = ({
                     }}
                 />
             </div>
-            {hasApp ? <App /> : <article>{notes}</article>}
+            {hasApp ? <App /> : article}
         </>
     )
 
-    const div2 = hasApp ? <article>{notes}</article> : null
+    const div2 = hasApp ? article : null
 
     return (
         <Main>

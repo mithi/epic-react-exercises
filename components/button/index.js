@@ -47,11 +47,18 @@ const useButtonClasses = (className, isIcon, disabled, isInvertedColor) => {
     return buttonClasses
 }
 
-const LinkButton = ({ children, page, className, disabled, ...otherprops }) => {
-    const buttonClass = useButtonClasses(className, false, disabled)
+const LinkButton = ({
+    children,
+    href,
+    className,
+    disabled,
+    isIconButton,
+    ...otherprops
+}) => {
+    const buttonClass = useButtonClasses(className, isIconButton, disabled)
     return (
         <>
-            <Link href={page}>
+            <Link {...{ href }}>
                 <a style={{ textDecoration: "none" }}>
                     <button
                         tabIndex="-1"
@@ -64,10 +71,10 @@ const LinkButton = ({ children, page, className, disabled, ...otherprops }) => {
     )
 }
 
-const LinkAwayIconButton = ({ children, page, className, ...otherProps }) => {
+const LinkAwayIconButton = ({ children, href, className, ...otherProps }) => {
     const buttonClass = useButtonClasses(className, true)
     return (
-        <a href={page} tabIndex="-1" target="_blank" rel="noopener noreferrer">
+        <a {...{ href }} tabIndex="-1" target="_blank" rel="noopener noreferrer">
             <button className={buttonClass} {...otherProps}>
                 {children}
             </button>
