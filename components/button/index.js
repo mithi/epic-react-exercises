@@ -47,8 +47,15 @@ const useButtonClasses = (className, isIcon, disabled, isInvertedColor) => {
     return buttonClasses
 }
 
-const LinkButton = ({ children, page, className, disabled, ...otherprops }) => {
-    const buttonClass = useButtonClasses(className, false, disabled)
+const LinkButton = ({
+    children,
+    page,
+    className,
+    disabled,
+    isIconButton,
+    ...otherprops
+}) => {
+    const buttonClass = useButtonClasses(className, isIconButton, disabled)
     return (
         <>
             <Link href={page}>

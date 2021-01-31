@@ -1,7 +1,7 @@
 import Main from "components/main"
 import { PrettyHeader } from "components/pretty-defaults"
-import { LinkAwayIconButton } from "components/button"
-import { FaBug } from "react-icons/fa"
+import { LinkAwayIconButton, LinkButton } from "components/button"
+import { FaBug, FaHome } from "react-icons/fa"
 
 export default function FourOhfour() {
     return (
@@ -26,10 +26,19 @@ export default function FourOhfour() {
                     </PrettyHeader>
                     <LinkAwayIconButton
                         aria-label={"report a bug"}
-                        page="https://github.com/mithi/epic-react-notes/issues/new"
+                        page="https://github.com/mithi/epic-react-notes/issues/new?title=Unexpected%20404:%20file%20not%20found"
+                        style={{ margin: "3px" }}
                     >
                         <FaBug />
                     </LinkAwayIconButton>
+                    <LinkButton
+                        aria-label={"home"}
+                        page="/"
+                        isIconButton={true}
+                        style={{ margin: "3px" }}
+                    >
+                        <FaHome />
+                    </LinkButton>
                 </div>
             </div>
         </Main>
