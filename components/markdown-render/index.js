@@ -34,6 +34,7 @@ const Code = ({ children, language }) => {
                     ...LINE_NUMBER_STYLE,
                     borderRight: `1px solid ${primaryColor}`,
                 }}
+                {...{ tabIndex: "0" }}
             >
                 {children}
             </SyntaxHighlighter>
