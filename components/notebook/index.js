@@ -44,6 +44,32 @@ const BUTTON_STYLE = {
 }
 
 const Header = ({ title, deployedSite, repository, editPath }) => {
+    let repositoryButton = null
+    if (repository) {
+        repositoryButton = (
+            <LinkAwayIconButton
+                page={repository}
+                style={BUTTON_STYLE}
+                aria-label={"go to source repository"}
+            >
+                <FiGithub />
+            </LinkAwayIconButton>
+        )
+    }
+
+    let deployedSiteButton = null
+    if (deployedSite) {
+        deployedSiteButton = (
+            <LinkAwayIconButton
+                page={deployedSite}
+                style={BUTTON_STYLE}
+                aria-label={"go to source deployed site"}
+            >
+                <BiRocket />
+            </LinkAwayIconButton>
+        )
+    }
+
     return (
         <div className={styles.header}>
             <PrettyHeader Component="h1" style={{ marginRight: "10px" }}>
@@ -56,20 +82,8 @@ const Header = ({ title, deployedSite, repository, editPath }) => {
                     marginBottom: "10px",
                 }}
             >
-                <LinkAwayIconButton
-                    page={repository}
-                    style={BUTTON_STYLE}
-                    aria-label={"go to source repository"}
-                >
-                    <FiGithub />
-                </LinkAwayIconButton>
-                <LinkAwayIconButton
-                    page={deployedSite}
-                    style={BUTTON_STYLE}
-                    aria-label={"go to source deployed site"}
-                >
-                    <BiRocket />
-                </LinkAwayIconButton>
+                {deployedSiteButton}
+                {repositoryButton}
                 <LinkAwayIconButton
                     page={`https://github.com/mithi/epic-notes/edit/main/content/${editPath}`}
                     style={BUTTON_STYLE}
