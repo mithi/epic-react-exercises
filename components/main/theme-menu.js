@@ -6,15 +6,39 @@ import { BiText } from "react-icons/bi"
 import { IconButton } from "../button"
 import { PrettyAnchor, PrettyHeader } from "../pretty-defaults"
 import { useTheme, useMenuState } from "hooks"
+import { SpinnerDots } from "components/spinner"
 
 const ICON_BUTTON_STYLE = { margin: "10px 5px" }
+const ICONS_CONTAINER_STYLE = {
+    margin: "5px",
+    padding: "5px",
+    borderRadius: "15px",
+    display: "flex",
+    justifyContent: "center",
+}
+const PARAGRAPH_STYLE = {
+    padding: "10px",
+    borderRadius: "5px",
+    lineHeight: "1.3",
+    margin: "10px",
+    marginTop: "0",
+}
+const HEADER_STYLE = {
+    padding: "10px",
+    borderRadius: "5px",
+    margin: "10px",
+    marginBottom: "0",
+}
+
+const COLOR_LINE_STYLE = { width: "100%", height: "5px" }
+
 const SAMPLE_CODE = "```python\n def hello():\n    return 'world!'"
 const SAMPLE_PARAGRAPH = `Click on any of the sample elements
 to change its style. Customize its primary color, header font, body font, code
 theme, and page theme!`
 
 const DynamicMarkdownRender = dynamic(() => import("components/markdown-render"), {
-    loading: () => <p>Loading..</p>,
+    loading: () => <SpinnerDots />,
 })
 
 const Menu = ({ style } = {}) => {
@@ -42,29 +66,26 @@ const Menu = ({ style } = {}) => {
                 className={[bodyClassNames[0], styles.themeMenu].join(" ")}
                 aria-label={"change main color"}
             >
+                {/** for accessibility **/}
+                <PrettyHeader Component="h1" style={{ fontSize: "15px", margin: "10px" }}>
+                    Theme Menu
+                </PrettyHeader>
+
                 <div
                     onClick={nextColor}
                     className={onHoverClassName}
                     style={{ height: "10px", marginTop: "5px" }}
                 >
                     <div
-                        style={{
-                            width: "100%",
-                            height: "5px",
-                            backgroundColor: primaryColor,
-                        }}
+                        style={{ ...COLOR_LINE_STYLE, backgroundColor: primaryColor }}
                     ></div>
                 </div>
+
                 <PrettyHeader
                     onClick={nextHeaderFont}
                     className={onHoverClassName}
-                    style={{
-                        padding: "10px",
-                        borderRadius: "5px",
-                        margin: "10px",
-                        marginBottom: "0",
-                    }}
-                    Component="h1"
+                    style={HEADER_STYLE}
+                    Component="h2"
                 >
                     Heading
                 </PrettyHeader>
@@ -72,14 +93,7 @@ const Menu = ({ style } = {}) => {
                 <p
                     onClick={nextBodyFont}
                     className={onHoverClassName}
-                    style={{
-                        padding: "10px",
-                        borderRadius: "5px",
-                        lineHeight: "1.3",
-                        margin: "10px",
-                        marginTop: "0",
-                        fontFamily: bodyFont,
-                    }}
+                    style={{ ...PARAGRAPH_STYLE, fontFamily: bodyFont }}
                 >
                     {SAMPLE_PARAGRAPH}
                 </p>
@@ -92,16 +106,7 @@ const Menu = ({ style } = {}) => {
                     <DynamicMarkdownRender>{SAMPLE_CODE}</DynamicMarkdownRender>
                 </div>
 
-                <div
-                    className={sectionClassNames[0]}
-                    style={{
-                        margin: "5px",
-                        padding: "5px",
-                        borderRadius: "15px",
-                        display: "flex",
-                        justifyContent: "center",
-                    }}
-                >
+                <div className={sectionClassNames[0]} style={ICONS_CONTAINER_STYLE}>
                     <IconButton
                         onClick={nextPageTheme}
                         style={ICON_BUTTON_STYLE}

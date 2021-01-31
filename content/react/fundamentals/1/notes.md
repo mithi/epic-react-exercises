@@ -123,7 +123,7 @@ Write a function `message` that you can reuse to produce the code below. This fu
 Solution:
 
 You can do something like this and it will work, but it's not following
-the convention the the Babel compiler recognizes.
+the convention the Babel compiler recognizes.
 
 ```js
 // **********
@@ -150,12 +150,13 @@ In order words, how would `babel` compile the following components?
 
 ```jsx
 <Capitalized />
-<property.access />
 <lowercase />
 <kebab-case />
 <Upper-Kebab-Case />
 <Upper_Snake_Case />
 <lower_snake_case />
+<property.access />
+<Property.Access />
 <Property['Access']/>
 
 ```
@@ -164,13 +165,13 @@ Solution:
 
 ```js
 React.createElement(Capitalized)
-React.createElement(property.access)
-React.createElement(Property.Access)
 React.createElement("lowercase")
 React.createElement("kebab-case")
 React.createElement("Upper-Kebab-Case")
 React.createElement(Upper_Snake_Case)
 React.createElement("lower_snake_case")
+React.createElement(property.access)
+React.createElement(Property.Access)
 // SyntaxError
 ```
 

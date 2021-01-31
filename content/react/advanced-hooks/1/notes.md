@@ -7,10 +7,10 @@
 -   While fetching a new character, the input field, random button, and submit button should be disabled.
 -   When the number currently in the input field has been submitted has been either `resolved` or `rejected`, disable the submit button unless the input the user changes it to a new value. The user shoudn't be able to click the submit button if the character corresponding to the number in the input field is currently loaded.
 -   The app must also enable the user to mount and unmount this component (via a checkbox).
--   [Kent's Implementation](https://github.com/kentcdodds/advanced-react-hooks/blob/main/src/final/02.extra-3.js)
+-   [Kent's Implementation](https://github.com/kentcdodds/advanced-react-hooks/blob/main/src/final/02.extra-3.js). NOTE: his `utils` directory houses a slightly different [implementation](https://github.com/kentcdodds/advanced-react-hooks/blob/main/src/utils.js), giving the user two additional functions `setError` and `setData`, which allows the user to (you guessed it) set the `data` and `error` stored in the `useAsync` hook.
 -   My Implementation: The [top level app](https://github.com/mithi/epic-notes/blob/main/content/react/advanced-hooks/1/app.js) and its [components](https://github.com/mithi/epic-notes/tree/main/content/react/advanced-hooks/1/components)
 
-## Notice
+## Important!
 
 (The paragraph below is paraphrased from [this page](https://advanced-react-hooks.netlify.app/2))
 

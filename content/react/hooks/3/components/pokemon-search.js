@@ -28,7 +28,7 @@ const FetchSubmitButton = ({ disabled }) => (
             Fetch <br /> that
         </span>
         <span style={SUBMIT_BUTTON_STYLE}>
-            <SiPokemon />
+            <SiPokemon aria-label="pokemon-icon" />
         </span>
     </TextButton>
 )

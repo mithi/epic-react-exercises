@@ -12,7 +12,8 @@ input:focus,
 textarea:focus,
 select:focus,
 a:focus,
-button:focus {
+button:focus,
+pre:focus {
     outline-color: #c0c0c0;
     outline-width: 1px;
     outline-style: dashed;

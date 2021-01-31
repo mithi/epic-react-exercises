@@ -14,10 +14,13 @@ My top level component basically renders the following:
 ```js
 // info about the current state of the board)
 <BoardStatus {...{ winnerIfAny, gameFinished, playerToMove }} />
+
 // `Board` is the clickable board
 <Board {...{ currentBoard, onPlayerMove, disableButtons: gameFinished }} />
+
 // buttons that you can click to move forward and backward in time
 <MoveHistory {...{ numberOfSnapshots, onLoadBoardSnapshot, currentSnapshotId }} />
+
 <RestartButton {...{ onRestart: restart }} />
 
 ```
@@ -148,5 +151,6 @@ const App = () => {
 -   [usehooks.com: useLocalStorage](https://usehooks.com/useLocalStorage/)
 -   [donavon/use-persisted-state](https://github.com/donavon/use-persisted-state)
 -   [Josh W Comeau: Persisting React State in localStorage](https://www.joshwcomeau.com/react/persisting-react-state-in-localstorage/)
+-   [`localStorage` in JavaScript: A complete guide](https://blog.logrocket.com/localstorage-javascript-complete-guide/) - [Using custom hooks to reduce component complexity](https://monoglot.dev/articles/using-custom-hooks-to-reduce-component-complexity/)
 
 # END

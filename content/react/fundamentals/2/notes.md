@@ -26,6 +26,7 @@
     -   Train your brain to look at JSX and see the compiled version of the code!
     -   [React docs: Introducing JSX](https://reactjs.org/docs/introducing-jsx.html)
     -   [React docs: JSX in depth](https://reactjs.org/docs/jsx-in-depth.html)
+    -   [Kent's What is JSX](https://kentcdodds.com/blog/what-is-jsx)
     -   [Babel](https://babeljs.io/), [online Babel Repl](https://babeljs.io/repl)
         -   Babel is written is javascript so you can add a script tag with babel in your html, run it on the browser it can compile jsx on the fly
 
