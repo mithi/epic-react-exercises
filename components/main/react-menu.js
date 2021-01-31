@@ -8,7 +8,7 @@ const Button = ({ children, section }) => {
         <div>
             <LinkButton
                 {...{
-                    page: `/react/${section}`,
+                    href: `/react/${section}`,
                     className: styles.reactMenuButton,
                 }}
             >

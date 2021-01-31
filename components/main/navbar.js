@@ -61,12 +61,12 @@ const NavInner = () => {
                         children={<MdSettings />}
                     />
                     <LinkAwayIconButton
-                        page="https://github.com/mithi"
+                        href="https://github.com/mithi"
                         children={<GoOctoface />}
                         aria-label={"follow me on github"}
                     />
                     <LinkAwayIconButton
-                        page="https://ko-fi.com/minimithi"
+                        href="https://ko-fi.com/minimithi"
                         children={<BiCoffeeTogo />}
                         aria-label={"buy me a coffee"}
                     />

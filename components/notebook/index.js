@@ -26,7 +26,7 @@ const Pagination = ({ numberOfPages, currentPageId, pathname }) => {
                     <DefaultLinkButton
                         key={buttonPathname}
                         disabled={disabled}
-                        page={buttonPathname}
+                        href={buttonPathname}
                         children={pageId}
                     />
                 )
@@ -50,7 +50,7 @@ const Header = ({ title, deployedSite, repository, editPath }) => {
     if (repository) {
         repositoryButton = (
             <LinkAwayIconButton
-                page={repository}
+                href={repository}
                 style={BUTTON_STYLE}
                 aria-label={"go to source repository"}
             >
@@ -63,7 +63,7 @@ const Header = ({ title, deployedSite, repository, editPath }) => {
     if (deployedSite) {
         deployedSiteButton = (
             <LinkAwayIconButton
-                page={deployedSite}
+                href={deployedSite}
                 style={BUTTON_STYLE}
                 aria-label={"go to source deployed site"}
             >
@@ -87,7 +87,7 @@ const Header = ({ title, deployedSite, repository, editPath }) => {
                 {deployedSiteButton}
                 {repositoryButton}
                 <LinkAwayIconButton
-                    page={`${EPIC_NOTES_REPO_URL}/edit/main/content/${editPath}`}
+                    href={`${EPIC_NOTES_REPO_URL}/edit/main/content/${editPath}`}
                     style={BUTTON_STYLE}
                     aria-label={"edit this page"}
                 >
@@ -102,26 +102,26 @@ const ArticleFooter = ({ editPath }) => {
     const issueUrl = `${EPIC_NOTES_REPO_URL}/issues/new?title=Something%20wrong%20in:%20${editPath}`
     return (
         <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
-            <LinkAwayIconButton aria-label={"report a bug"} page={issueUrl}>
+            <LinkAwayIconButton aria-label={"report a bug"} href={issueUrl}>
                 <FaBug />
             </LinkAwayIconButton>
             <LinkAwayIconButton
-                page={`${EPIC_NOTES_REPO_URL}/edit/main/content/${editPath}`}
+                href={`${EPIC_NOTES_REPO_URL}/edit/main/content/${editPath}`}
                 aria-label={"edit this page"}
             >
                 <BsPencilSquare />
             </LinkAwayIconButton>
             <LinkAwayIconButton
-                page={EPIC_NOTES_REPO_URL}
+                href={EPIC_NOTES_REPO_URL}
                 children={<GoOctoface />}
                 aria-label={"star me on github"}
             />
             <LinkAwayIconButton
-                page="https://ko-fi.com/minimithi"
+                href="https://ko-fi.com/minimithi"
                 children={<BiCoffeeTogo />}
                 aria-label={"buy me a coffee"}
             />
-            <LinkButton aria-label={"home"} page="/" isIconButton={true}>
+            <LinkButton aria-label={"home"} href="/" isIconButton={true}>
                 <FaHome />
             </LinkButton>
         </div>
