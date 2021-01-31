@@ -122,5 +122,3 @@ class CustomErrorBoundary extends Component {
 
 -   Refactor the [data views module](https://github.com/mithi/epic-notes/blob/main/content/react/hooks/3/components/pokemon-data-view.js)
 -   How to refactor to use local storage so that the previously fetched pokemon data will still be displayed on refresh?
-
-# END

@@ -1,6 +1,6 @@
 ## Exercise One: Pure Javascript
 
-Create and append dom elements in vanilla javascript. Write a javascript code between `<script>` tags to produce the codeblock below on an html file
+Create and append dom elements in vanilla javascript. Write javascript code between `<script>` tags to produce the codeblock below on an html file
 
 ```html
 <div id="root">

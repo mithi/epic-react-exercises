@@ -152,5 +152,3 @@ const App = () => {
 -   [donavon/use-persisted-state](https://github.com/donavon/use-persisted-state)
 -   [Josh W Comeau: Persisting React State in localStorage](https://www.joshwcomeau.com/react/persisting-react-state-in-localstorage/)
 -   [`localStorage` in JavaScript: A complete guide](https://blog.logrocket.com/localstorage-javascript-complete-guide/) - [Using custom hooks to reduce component complexity](https://monoglot.dev/articles/using-custom-hooks-to-reduce-component-complexity/)
-
-# END

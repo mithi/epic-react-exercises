@@ -1,14 +1,7 @@
-# Epic React Notes
+# Epic Notes [![buy me coffee](https://img.shields.io/badge/Buy%20me%20-coffee!-orange.svg?logo=buy-me-a-coffee&color=795548)](https://ko-fi.com/minimithi) [![View Deployed Site](https://img.shields.io/badge/View%20-Deployed%20Site-orange.svg?logo=react&color=0abde3)](https://epic-notes.vercel.app/)
 
-> These are my interactive notes that I made when as I was taking the Epic React course by Kent C Dodds.
+Notes about front-end development and practical exercises with detailed solutions designed for real-world use cases
 
-If this benefited you in some way, consider buying me coffee! Thanks!
+## Contributing [![PRs welcome!](https://img.shields.io/badge/PRs-welcome-yellow.svg?style=flat)](https://github.com/mithi/hexapod/blob/master/CONTRIBUTING.md)
 
-1.  React Fundamentals
-2.  React Hooks
-3.  Advanced React Hooks
-4.  Advanced React Patterns
-5.  React Performance
-6.  Testing React Apps
-7.  React Suspense
-8.  Build an Epic React App
+Please read the [contributing guidelines](https://github.com/mithi/hexapod/blob/master/CONTRIBUTING.md) and the recommended [commit style guide](https://github.com/mithi/hexapod/wiki/A-Commit-Style-Guide)! Thank you!
