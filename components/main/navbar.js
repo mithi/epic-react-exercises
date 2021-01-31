@@ -7,7 +7,6 @@ import { GoOctoface } from "react-icons/go"
 import { MdSettings } from "react-icons/md"
 import { BiCoffeeTogo } from "react-icons/bi"
 import { FaReact } from "react-icons/fa"
-
 import { IconButton, LinkAwayIconButton } from "../button"
 import ReactMenu from "./react-menu"
 import ThemeMenu from "./theme-menu"

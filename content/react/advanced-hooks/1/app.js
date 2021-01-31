@@ -112,6 +112,7 @@ function App() {
                     onClick={setRandomValue}
                     style={{ height: "35px", width: "35px" }}
                     disabled={disabledByPending}
+                    aria-label="random-button"
                 >
                     <GiPerspectiveDiceSixFacesRandom />
                 </DefaultButton>

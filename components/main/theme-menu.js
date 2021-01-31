@@ -42,6 +42,11 @@ const Menu = ({ style } = {}) => {
                 className={[bodyClassNames[0], styles.themeMenu].join(" ")}
                 aria-label={"change main color"}
             >
+                {/** for accessibility **/}
+                <PrettyHeader Component="h1" style={{ fontSize: "15px", margin: "10px" }}>
+                    Theme Menu
+                </PrettyHeader>
+
                 <div
                     onClick={nextColor}
                     className={onHoverClassName}
@@ -55,6 +60,7 @@ const Menu = ({ style } = {}) => {
                         }}
                     ></div>
                 </div>
+
                 <PrettyHeader
                     onClick={nextHeaderFont}
                     className={onHoverClassName}
@@ -64,7 +70,7 @@ const Menu = ({ style } = {}) => {
                         margin: "10px",
                         marginBottom: "0",
                     }}
-                    Component="h1"
+                    Component="h2"
                 >
                     Heading
                 </PrettyHeader>

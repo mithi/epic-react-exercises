@@ -1,6 +1,6 @@
 import styles from "./Styles.module.css"
 import { LinkButton } from "../button"
-import { PrettyHeader, PrettyAnchor } from "../pretty-defaults"
+import { PrettyHeader, PrettyAnchor, PrettyLink } from "../pretty-defaults"
 import { useMenuState } from "hooks"
 
 const Button = ({ children, section }) => {
@@ -37,6 +37,13 @@ const Menu = ({ style, showCloseButton = true } = {}) => {
             className={styles.menu}
             style={{ paddingRight: "30px", ...style }}
         >
+            {/** for accessibility **/}
+            <PrettyHeader Component="h1" style={{ fontSize: "15px", margin: "10px" }}>
+                <PrettyLink style={{ marginTop: "5px", marginLeft: "10px" }} href="/">
+                    (React Menu)
+                </PrettyLink>
+            </PrettyHeader>
+
             <Button section="fundamentals" children="1. React Fundamentals" />
             <Button section="hooks" children="2. React Hooks" />
             <Button section="advanced-hooks" children="3. Advanced Hooks" />
