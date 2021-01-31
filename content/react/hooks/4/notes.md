@@ -34,3 +34,4 @@
 -   What is the difference between `fetch().then(result => result, error => error)` and `fetch().then(result => result).catch(error => error)` ?
 -   [Public Class Fields with React Components](https://egghead.io/lessons/javascript-public-class-fields-with-react-components)
 -   The npm package [bvaughn/react-error-boundary](https://github.com/bvaughn/react-error-boundary)
+-   [React Hooks Best Practices](https://www.smashingmagazine.com/2020/04/react-hooks-best-practices/)
