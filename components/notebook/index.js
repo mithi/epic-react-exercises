@@ -12,6 +12,8 @@ import Main from "../main"
 import NotebookLayout from "../main/two-sections"
 import { PrettyHeader } from "../pretty-defaults"
 
+const EPIC_NOTES_REPO_URL = "https://github.com/mithi/epic-notes"
+
 const Pagination = ({ numberOfPages, currentPageId, pathname }) => {
     return (
         <div className={styles.pagination}>
@@ -85,7 +87,7 @@ const Header = ({ title, deployedSite, repository, editPath }) => {
                 {deployedSiteButton}
                 {repositoryButton}
                 <LinkAwayIconButton
-                    page={`https://github.com/mithi/epic-notes/edit/main/content/${editPath}`}
+                    page={`${EPIC_NOTES_REPO_URL}/edit/main/content/${editPath}`}
                     style={BUTTON_STYLE}
                     aria-label={"edit this page"}
                 >
@@ -97,22 +99,22 @@ const Header = ({ title, deployedSite, repository, editPath }) => {
 }
 
 const ArticleFooter = ({ editPath }) => {
-    const issueUrl = `https://github.com/mithi/epic-react-notes/issues/new?title=Something%20wrong%20in%:20${editPath}`
+    const issueUrl = `${EPIC_NOTES_REPO_URL}/issues/new?title=Something%20wrong%20in:%20${editPath}`
     return (
         <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
             <LinkAwayIconButton aria-label={"report a bug"} page={issueUrl}>
                 <FaBug />
             </LinkAwayIconButton>
             <LinkAwayIconButton
-                page={`https://github.com/mithi/epic-notes/edit/main/content/${editPath}`}
+                page={`${EPIC_NOTES_REPO_URL}/edit/main/content/${editPath}`}
                 aria-label={"edit this page"}
             >
                 <BsPencilSquare />
             </LinkAwayIconButton>
             <LinkAwayIconButton
-                page="https://github.com/mithi"
+                page={EPIC_NOTES_REPO_URL}
                 children={<GoOctoface />}
-                aria-label={"follow me on github"}
+                aria-label={"star me on github"}
             />
             <LinkAwayIconButton
                 page="https://ko-fi.com/minimithi"
@@ -149,6 +151,13 @@ const PageLayout = ({
     )
 
     const editPath = `${topic}/${section}/${pageId}/notes.md`
+    const article = (
+        <article>
+            {notes}
+            <ArticleFooter {...{ editPath }} />
+        </article>
+    )
+
     const div1 = (
         <>
             <Header
@@ -168,22 +177,11 @@ const PageLayout = ({
                     }}
                 />
             </div>
-            {hasApp ? (
-                <App />
-            ) : (
-                <article>
-                    {notes}
-                    <ArticleFooter {...{ editPath }} />
-                </article>
-            )}
+            {hasApp ? <App /> : article}
         </>
     )
 
-    const div2 = hasApp ? (
-        <article>
-            {notes} <ArticleFooter {...{ editPath }} />
-        </article>
-    ) : null
+    const div2 = hasApp ? article : null
 
     return (
         <Main>
