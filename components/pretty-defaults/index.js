@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { useTheme } from "hooks"
+import { TextButton } from "../button"
 
 const PrettyHeader = ({ style, children, Component, ...otherProps }) => {
     Component = Component ? Component : "div"
@@ -65,4 +66,63 @@ const BorderedDiv = ({ style, children, ...otherProps }) => {
         </div>
     )
 }
-export { PrettyHeader, PrettyAnchor, PrettyInputField, BorderedDiv, PrettyLink }
+
+const PositiveIntegerSearchbar = ({
+    style,
+    onSubmit,
+    setIncompleteValue,
+    incompleteValue,
+    placeholder,
+    disableButton,
+    disableInputField,
+    submitButtonStyle,
+    inputFieldStyle,
+    submitButtonContent,
+}) => {
+    function handleSubmit(e) {
+        e.preventDefault()
+        onSubmit(incompleteValue)
+    }
+
+    return (
+        <form
+            onSubmit={handleSubmit}
+            style={{
+                display: "flex",
+                alignItems: "center",
+                flexWrap: "wrap",
+                ...style,
+            }}
+        >
+            <PrettyInputField
+                type="number"
+                pattern="^[0-9]"
+                min="1"
+                step="1"
+                placeholder={placeholder}
+                value={incompleteValue}
+                onChange={e => setIncompleteValue(e.target.value)}
+                style={inputFieldStyle}
+                disabled={disableInputField}
+            />
+            <TextButton
+                type="submit"
+                disabled={disableButton}
+                useBgPrimaryColor={true}
+                isInvertedColor={true}
+                style={submitButtonStyle}
+            >
+                {submitButtonContent ? submitButtonContent : "submit"}
+            </TextButton>
+        </form>
+    )
+}
+
+export {
+    PrettyHeader,
+    PrettyAnchor,
+    PrettyInputField,
+    BorderedDiv,
+    PrettyLink,
+    PositiveIntegerSearchbar,
+}

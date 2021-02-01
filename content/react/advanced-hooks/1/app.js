@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react"
-import { GiPerspectiveDiceSixFacesRandom } from "react-icons/gi"
-import useSafeAsync from "./components/use-async"
-import delayedFetchRickAndMortyCharacterById from "./components/fetch-rick-and-morty"
-import PositiveIntegerSearchbar from "./components/positive-integer-search-bar"
+import { GiPerspectiveDiceSixFacesRandom, GiClick } from "react-icons/gi"
+import { delayedFetchRickAndMorty } from "fetch-utils"
+import { DefaultButton } from "components/button"
+import { BorderedDiv, PositiveIntegerSearchbar } from "components/pretty-defaults"
 import { ErrorView, PendingView, IdleView } from "./components/views"
 import InfoView from "./components/info-view"
-import { DefaultButton } from "components/button"
-import { BorderedDiv } from "components/pretty-defaults"
+import useSafeAsync from "./components/use-async"
+
 /*
 This`RickAndMortyInfoCard` uses a `useSafeAsync` hook that's responsible for managing the state,
 and fetching the data.
@@ -36,7 +36,7 @@ function RickAndMortyInfoCard({ characterId, getStatus }) {
         if (!characterId) {
             return
         }
-        runFunction(delayedFetchRickAndMortyCharacterById(characterId))
+        runFunction(delayedFetchRickAndMorty(characterId))
     }, [characterId, runFunction])
 
     if (status === "idle") {
@@ -64,12 +64,10 @@ function App() {
     })
 
     const [fetchStatus, setFetchStatus] = useState("idle")
-
     const { incompleteValue, submittedValue } = state
 
     const setIncompleteValue = value => setState({ ...state, incompleteValue: value })
     const setSubmittedValue = value => setState({ ...state, submittedValue: value })
-
     const setRandomValue = () => {
         const id = getRandomRickAndMortyCharacterId()
         setState({ submittedValue: id, incompleteValue: id })
@@ -78,7 +76,7 @@ function App() {
     const disabledByPending = fetchStatus === "pending"
     // the submit button is disabled when
     // 1. We are process of fetching data
-    // 2. the input field value has already been resolved or rejected
+    // 2. The input field value has already been resolved or rejected
     // 3. There is no value in the input field
     const submitButtonDisabled =
         disabledByPending ||
@@ -89,7 +87,8 @@ function App() {
     return (
         <div style={{ margin: "20px" }}>
             <p style={{ fontSize: "12px" }}>
-                Only positive integers from 1 to 671 correspond to a Rick and Morty
+                ❗ Only positive integers from 1 to{" "}
+                {NUMBER_OF_RICK_AND_MORTY_CHARACTERS - 1} correspond to a Rick and Morty
                 character.
             </p>
 
@@ -107,6 +106,21 @@ function App() {
                     placeholder={"Pick a number!"}
                     disableButton={submitButtonDisabled}
                     disableInputField={disabledByPending}
+                    submitButtonStyle={{
+                        width: "auto",
+                        borderRadius: "10px",
+                        margin: "0px 5px",
+                        height: "auto",
+                        padding: "10px 10px",
+                        fontSize: "12px",
+                    }}
+                    inputFieldStyle={{ height: "40px", width: "140px" }}
+                    submitButtonContent={
+                        <>
+                            <GiClick />
+                            Submit
+                        </>
+                    }
                 />
                 <DefaultButton
                     onClick={setRandomValue}
@@ -120,7 +134,7 @@ function App() {
 
             <RickAndMortyInfoCard
                 characterId={submittedValue}
-                {...{ getStatus: setFetchStatus }}
+                getStatus={setFetchStatus}
             />
         </div>
     )

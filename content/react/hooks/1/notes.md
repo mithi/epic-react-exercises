@@ -2,7 +2,7 @@
 
 -   Be able to pause a game, close the tab, and then resume the game later
 -   Include a restart button (disabled before starting the game)
--   Display the status of the game (winner, who's turn is it, if the game is finished etc)
+-   Display the status of the game (winner, whose turn is it, if the game is finished etc)
 -   Be able to keep a history of the game; allow players to go backward and forward in time
 -   [Kent's Implementation](https://github.com/kentcdodds/react-hooks/blob/main/src/final/04.extra-3.js)
 -   [My Implementation](https://github.com/mithi/epic-notes/blob/main/content/react/hooks/1/app.js)
@@ -151,4 +151,5 @@ const App = () => {
 -   [usehooks.com: useLocalStorage](https://usehooks.com/useLocalStorage/)
 -   [donavon/use-persisted-state](https://github.com/donavon/use-persisted-state)
 -   [Josh W Comeau: Persisting React State in localStorage](https://www.joshwcomeau.com/react/persisting-react-state-in-localstorage/)
--   [`localStorage` in JavaScript: A complete guide](https://blog.logrocket.com/localstorage-javascript-complete-guide/) - [Using custom hooks to reduce component complexity](https://monoglot.dev/articles/using-custom-hooks-to-reduce-component-complexity/)
+-   [`localStorage` in JavaScript: A complete guide](https://blog.logrocket.com/localstorage-javascript-complete-guide/)
+-   [Using custom hooks to reduce component complexity](https://monoglot.dev/articles/using-custom-hooks-to-reduce-component-complexity/)
