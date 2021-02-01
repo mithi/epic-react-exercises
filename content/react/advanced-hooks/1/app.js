@@ -2,11 +2,10 @@ import { useEffect, useState } from "react"
 import { GiPerspectiveDiceSixFacesRandom, GiClick } from "react-icons/gi"
 import useSafeAsync from "./components/use-async"
 import delayedFetchRickAndMortyCharacterById from "./components/fetch-rick-and-morty"
-import PositiveIntegerSearchbar from "./components/positive-integer-search-bar"
 import { ErrorView, PendingView, IdleView } from "./components/views"
 import InfoView from "./components/info-view"
 import { DefaultButton } from "components/button"
-import { BorderedDiv } from "components/pretty-defaults"
+import { BorderedDiv, PositiveIntegerSearchbar } from "components/pretty-defaults"
 /*
 This`RickAndMortyInfoCard` uses a `useSafeAsync` hook that's responsible for managing the state,
 and fetching the data.
