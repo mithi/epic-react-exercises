@@ -174,5 +174,3 @@ React.createElement(property.access)
 React.createElement(Property.Access)
 // SyntaxError
 ```
-
-# END
