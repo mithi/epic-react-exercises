@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react"
 import { GiPerspectiveDiceSixFacesRandom, GiClick } from "react-icons/gi"
-import useSafeAsync from "./components/use-async"
-import delayedFetchRickAndMortyCharacterById from "./components/fetch-rick-and-morty"
-import { ErrorView, PendingView, IdleView } from "./components/views"
-import InfoView from "./components/info-view"
+import { delayedFetchRickAndMorty } from "fetch-utils"
 import { DefaultButton } from "components/button"
 import { BorderedDiv, PositiveIntegerSearchbar } from "components/pretty-defaults"
+import { ErrorView, PendingView, IdleView } from "./components/views"
+import InfoView from "./components/info-view"
+import useSafeAsync from "./components/use-async"
+
 /*
 This`RickAndMortyInfoCard` uses a `useSafeAsync` hook that's responsible for managing the state,
 and fetching the data.
@@ -35,7 +36,7 @@ function RickAndMortyInfoCard({ characterId, getStatus }) {
         if (!characterId) {
             return
         }
-        runFunction(delayedFetchRickAndMortyCharacterById(characterId))
+        runFunction(delayedFetchRickAndMorty(characterId))
     }, [characterId, runFunction])
 
     if (status === "idle") {
@@ -133,7 +134,7 @@ function App() {
 
             <RickAndMortyInfoCard
                 characterId={submittedValue}
-                {...{ getStatus: setFetchStatus }}
+                getStatus={setFetchStatus}
             />
         </div>
     )
