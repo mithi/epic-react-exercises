@@ -44,14 +44,14 @@ const Menu = ({ style, showCloseButton = true } = {}) => {
                 </PrettyLink>
             </PrettyHeader>
 
-            <Button section="fundamentals" children="1. React Fundamentals" />
-            <Button section="hooks" children="2. React Hooks" />
-            <Button section="advanced-hooks" children="3. Advanced Hooks" />
-            <Button section="patterns" children="4. Advanced React Patterns" />
-            <Button section="performance" children="5. React Performance" />
-            <Button section="testing" children="6. Testing React Apps" />
-            <Button section="suspense" children="7. React Suspense" />
-            <Button section="app" children="8. Build Epic React App" />
+            <Button section="fundamentals">1. React Fundamentals</Button>
+            <Button section="hooks">2. React Hooks</Button>
+            <Button section="advanced-hooks">3. Advanced Hooks</Button>
+            <Button section="patterns">Advanced React Patterns</Button>
+            <Button section="performance">5. React Performance</Button>
+            <Button section="testing">Testing React Apps</Button>
+            <Button section="suspense">7. React Suspense</Button>
+            <Button section="app"> Build Epic React App</Button>
             {maybeCloseButton}
         </section>
     )

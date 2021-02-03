@@ -52,24 +52,28 @@ const NavInner = () => {
                 <div className={styles.navButtonsContainer}>
                     <IconButton
                         onClick={() => changeMenuState("react")}
-                        children={<FaReact />}
                         aria-label={"react menu"}
-                    />
+                    >
+                        <FaReact />
+                    </IconButton>
                     <IconButton
                         onClick={() => changeMenuState("theme")}
                         aria-label={"theme menu"}
-                        children={<MdSettings />}
-                    />
+                    >
+                        <MdSettings />
+                    </IconButton>
                     <LinkAwayIconButton
                         href="https://github.com/mithi"
-                        children={<GoOctoface />}
                         aria-label={"follow me on github"}
-                    />
+                    >
+                        <GoOctoface />
+                    </LinkAwayIconButton>
                     <LinkAwayIconButton
                         href="https://ko-fi.com/minimithi"
-                        children={<BiCoffeeTogo />}
                         aria-label={"buy me a coffee"}
-                    />
+                    >
+                        <BiCoffeeTogo />
+                    </LinkAwayIconButton>
                 </div>
             </nav>
             <MenuModal />

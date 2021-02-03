@@ -4,6 +4,7 @@ import PageLayout from "components/notebook"
 import { SpinnerDots } from "components/spinner"
 
 const DynamicMarkdownRender = dynamic(() => import("components/markdown-render"), {
+    // eslint-disable-next-line react/display-name
     loading: () => <SpinnerDots />,
 })
 
@@ -17,7 +18,7 @@ export const PageLayoutHelper = ({
 }) => (
     <PageLayout
         {...{
-            notes: <DynamicMarkdownRender children={notesString} />,
+            notes: <DynamicMarkdownRender>{notesString}</DynamicMarkdownRender>,
             pageId,
             numberOfPages,
             properties,

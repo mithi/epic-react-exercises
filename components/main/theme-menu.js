@@ -38,6 +38,7 @@ to change its style. Customize its primary color, header font, body font, code
 theme, and page theme!`
 
 const DynamicMarkdownRender = dynamic(() => import("components/markdown-render"), {
+    // eslint-disable-next-line react/display-name
     loading: () => <SpinnerDots />,
 })
 

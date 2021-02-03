@@ -10,7 +10,7 @@ export async function getServerSideProps() {
 }
 
 function Page() {
-    return <Main>This shouldn't be possible.</Main>
+    return <Main>This {`shouldn't`} be possible.</Main>
 }
 
 export default Page

@@ -83,7 +83,7 @@ const MoveHistory = ({ numberOfSnapshots, onLoadBoardSnapshot, currentSnapshotId
     const buttons = buttonIterator.map((_, i) => {
         const disabled = i === currentSnapshotId
         const onClick = disabled ? null : () => onLoadBoardSnapshot(i)
-        return <DefaultButton {...{ key: i, onClick, disabled, children: i }} />
+        return <DefaultButton key={i} {...{ onClick, disabled, children: i }} />
     })
 
     return (
