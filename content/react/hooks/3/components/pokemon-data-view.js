@@ -156,7 +156,7 @@ const PokemonDataView = ({
     if (abilities) {
         tableBody = abilities.map(abilityData => {
             const { name, type, damage } = abilityData
-            return <PrettyTr {...{ key: name, content: [name, type, damage] }} />
+            return <PrettyTr key={name} {...{ content: [name, type, damage] }} />
         })
     }
 

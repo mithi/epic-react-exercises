@@ -6,7 +6,8 @@
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
-        "stage": "next build && next start"
+        "stage": "next build && next start",
+        "check-lint": "eslint ."
     },
     "dependencies": {
         "@reach/dialog": "^0.12.1",
@@ -20,5 +21,11 @@
         "react-markdown": "^5.0.3",
         "react-syntax-highlighter": "^15.4.3",
         "vanilla-tilt": "^1.7.0"
+    },
+    "devDependencies": {
+        "babel-eslint": "^10.1.0",
+        "eslint": "^7.19.0",
+        "eslint-plugin-react": "^7.22.0",
+        "eslint-plugin-react-hooks": "^4.2.0"
     }
 }

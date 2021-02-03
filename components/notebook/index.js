@@ -27,8 +27,9 @@ const Pagination = ({ numberOfPages, currentPageId, pathname }) => {
                         key={buttonPathname}
                         disabled={disabled}
                         href={buttonPathname}
-                        children={pageId}
-                    />
+                    >
+                        {pageId}
+                    </DefaultLinkButton>
                 )
             })}
         </div>
@@ -113,14 +114,16 @@ const ArticleFooter = ({ editPath }) => {
             </LinkAwayIconButton>
             <LinkAwayIconButton
                 href={EPIC_NOTES_REPO_URL}
-                children={<GoOctoface />}
                 aria-label={"star me on github"}
-            />
+            >
+                <GoOctoface />
+            </LinkAwayIconButton>
             <LinkAwayIconButton
                 href="https://ko-fi.com/minimithi"
-                children={<BiCoffeeTogo />}
                 aria-label={"buy me a coffee"}
-            />
+            >
+                <BiCoffeeTogo />
+            </LinkAwayIconButton>
             <LinkButton aria-label={"home"} href="/" isIconButton={true}>
                 <FaHome />
             </LinkButton>
@@ -144,6 +147,7 @@ const PageLayout = ({
         () =>
             hasApp
                 ? dynamic(() => import(`content/${topic}/${section}/${pageId}/app`), {
+                      // eslint-disable-next-line react/display-name
                       loading: () => <SpinnerDots />,
                   })
                 : () => null,

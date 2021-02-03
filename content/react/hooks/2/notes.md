@@ -16,7 +16,7 @@ function Tilt({ children, setData }) {
         VanillaTilt.init(node, vanillaTiltOptions)
         node.addEventListener("tiltChange", event => setData(event.detail))
         return () => node.vanillaTilt.destroy()
-    }, [])
+    }, [setData])
 
     return (
         <div>

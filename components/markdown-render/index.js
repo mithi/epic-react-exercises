@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import { useTheme } from "hooks"
 import ReactMarkdown from "react-markdown"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
@@ -87,7 +88,7 @@ const DefaultLink = ({ href, children }) => {
 
 const renderers = {
     code: ({ language, value }) => {
-        return <Code children={value} language={language} />
+        return <Code language={language}>{value}</Code>
     },
     heading: props => {
         return <CustomHeading {...props} />
