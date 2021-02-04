@@ -54,7 +54,7 @@ let NotInCacheMessage = ({ value, onClickFetch }) => (
 
 let ErrorMessage = ({ value, onClickReload }) => (
     <GenericMessage>
-        There was an error while fetching the id {`"`}
+        {"❗❗"} There was an error while fetching the id {`"`}
         {value} {`". `}
         <PrettyAnchor onClick={onClickReload}>Try fetching it again?</PrettyAnchor>
     </GenericMessage>
@@ -66,7 +66,7 @@ let GenericMessage = ({ children }) => (
 
 let SuccessMessage = ({ data }) => (
     <GenericMessage>
-        Successfully fetched {data.name}! (#{data.id})
+        The character {data.name}! (#{data.id}) is in your cache! {"🎉🥳"}
     </GenericMessage>
 )
 
