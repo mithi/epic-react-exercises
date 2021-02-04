@@ -11,6 +11,8 @@
 9. [Kent's `useEffect` vs `useLayoutEffect`](https://kentcdodds.com/blog/useeffect-vs-uselayouteffect)
 10. [React docs: hook reference](https://reactjs.org/docs/hooks-reference.html)
 11. [[ESLint] Feedback for 'exhaustive-deps' lint rule #14920](https://github.com/facebook/react/issues/14920)
+12. [Gupta Garuda: React Hooks - Understanding Component Re-renders](https://medium.com/@guptagaruda/react-hooks-understanding-component-re-renders-9708ddee9928)
+13. [StackOverFlow: When to use `useImperativeHandle`](https://stackoverflow.com/questions/57005663/when-to-use-useimperativehandle-uselayouteffect-and-usedebugvalue)
 
 ## Things you should know
 
@@ -23,7 +25,7 @@
 
 ## Hooks you can try to implement from scratch
 
-1. From [streamich/react-use](https://github.com/streamich/react-use)
+1. From [`streamich/react-use`](https://github.com/streamich/react-use)
     - [`useAsync`](https://github.com/streamich/react-use/blob/master/docs/useAsync.md)
     - [`useAsyncRetry`](https://github.com/streamich/react-use/blob/master/docs/useAsyncRetry.md)
     - `useAsyncFn`
@@ -34,3 +36,14 @@
     - `UseUnmount`
     - `UseLifecycle`
     - `UseIsomorphicLayoutEffect`
+2. From [Gabe Ragland: `useHooks`](https://usehooks.com/)
+    - [`useKonamiCode`](https://usehooks.com/useKonamiCode/)
+    - [`useToggle`](https://usehooks.com/useToggle/)
+    - `useMemoCompare`
+    - `useEventListener`
+    - `useWhyYouDidUpdate`
+    - `useMedia`
+    - `useTheme`
+    - `useHistory`
+    - `usePrevious`
+    - `useWindowSize`
