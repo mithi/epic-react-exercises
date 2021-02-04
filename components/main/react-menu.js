@@ -10,6 +10,12 @@ const Button = ({ children, section }) => {
                 {...{
                     href: `/react/${section}`,
                     className: styles.reactMenuButton,
+                    style: {
+                        width: "auto",
+                        height: "auto",
+                        borderRadius: "15px",
+                        margin: "0px",
+                    },
                 }}
             >
                 <PrettyHeader Component="span">{children}</PrettyHeader>

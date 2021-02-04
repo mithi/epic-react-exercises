@@ -7,7 +7,7 @@ import { BsPencilSquare } from "react-icons/bs"
 import { GoOctoface } from "react-icons/go"
 import { FaHome, FaBug } from "react-icons/fa"
 import { SpinnerDots } from "components/spinner"
-import { LinkAwayIconButton, DefaultLinkButton, LinkButton } from "../button"
+import { LinkAwayIconButton, LinkButton } from "../button"
 import Main from "../main"
 import NotebookLayout from "../main/two-sections"
 import { PrettyHeader } from "../pretty-defaults"
@@ -23,13 +23,13 @@ const Pagination = ({ numberOfPages, currentPageId, pathname }) => {
                 const disabled = pageId === currentPageId
 
                 return (
-                    <DefaultLinkButton
+                    <LinkButton
                         key={buttonPathname}
                         disabled={disabled}
                         href={buttonPathname}
                     >
                         {pageId}
-                    </DefaultLinkButton>
+                    </LinkButton>
                 )
             })}
         </div>

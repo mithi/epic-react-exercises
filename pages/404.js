@@ -35,7 +35,7 @@ export default function FourOhfour() {
                         aria-label={"home"}
                         href="/"
                         isIconButton={true}
-                        style={{ margin: "3px" }}
+                        style={{ margin: "3px", width: "50px", height: "50px" }}
                     >
                         <FaHome />
                     </LinkButton>

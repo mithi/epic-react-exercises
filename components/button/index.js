@@ -47,30 +47,6 @@ const useButtonClasses = (className, isIcon, disabled, isInvertedColor) => {
     return buttonClasses
 }
 
-const LinkButton = ({
-    children,
-    href,
-    className,
-    disabled,
-    isIconButton,
-    ...otherprops
-}) => {
-    const buttonClass = useButtonClasses(className, isIconButton, disabled)
-    return (
-        <>
-            <Link {...{ href }}>
-                <a style={{ textDecoration: "none" }}>
-                    <button
-                        tabIndex="-1"
-                        className={buttonClass}
-                        {...{ ...otherprops, disabled, children }}
-                    />
-                </a>
-            </Link>
-        </>
-    )
-}
-
 const LinkAwayIconButton = ({ children, href, className, ...otherProps }) => {
     const buttonClass = useButtonClasses(className, true)
     return (
@@ -137,9 +113,28 @@ const useDefaultButtonStyle = (disabled, style) => {
     }
 }
 
-const DefaultLinkButton = ({ style, disabled, ...otherProps }) => {
+const LinkButton = ({
+    style,
+    children,
+    href,
+    className,
+    disabled,
+    isIconButton,
+    ...otherProps
+}) => {
     style = useDefaultButtonStyle(disabled, style)
-    return <LinkButton {...{ ...otherProps, disabled, style }} />
+    className = useButtonClasses(className, isIconButton, disabled)
+
+    return (
+        <Link {...{ href }}>
+            <a style={{ textDecoration: "none" }}>
+                <button
+                    tabIndex="-1"
+                    {...{ className, disabled, children, style, ...otherProps }}
+                />
+            </a>
+        </Link>
+    )
 }
 
 const DefaultButton = ({ style, children, disabled, ...otherProps }) => {
@@ -147,11 +142,4 @@ const DefaultButton = ({ style, children, disabled, ...otherProps }) => {
     return <TextButton {...{ ...otherProps, disabled, style, children }} />
 }
 
-export {
-    LinkButton,
-    LinkAwayIconButton,
-    IconButton,
-    TextButton,
-    DefaultButton,
-    DefaultLinkButton,
-}
+export { LinkAwayIconButton, IconButton, TextButton, DefaultButton, LinkButton }
