@@ -14,13 +14,18 @@ const IdleView = () => (
 
 const PendingView = () => (
     <>
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        <div
+            style={{
+                display: "flex",
+                justifyContent: "center",
+                flexDirection: "column",
+            }}
+        >
             <SpinnerDots />
-        </div>
-        <p style={{ margin: "10px", fontSize: "20px" }}>{getRandomRickAndMortyQuote()}</p>
-        <div style={{ display: "flex", justifyContent: "center" }}>
-            <MortyColoredSvg />
-            <RickColoredSvg />
+            <p style={{ margin: "10px", fontSize: "20px" }}>
+                {getRandomRickAndMortyQuote()}
+            </p>
+            <SpinnerDots />
         </div>
     </>
 )
@@ -31,8 +36,7 @@ const ErrorView = ({ message }) => (
             style={{
                 display: "flex",
                 justifyContent: "center",
-                marginTop: "50px",
-                marginBottom: "10px",
+                marginTop: "30px",
             }}
         >
             <div
@@ -52,6 +56,7 @@ const ErrorView = ({ message }) => (
             style={{
                 display: "flex",
                 justifyContent: "center",
+                margin: "30px",
             }}
         >
             Error! {message}
