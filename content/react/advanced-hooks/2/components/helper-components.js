@@ -54,8 +54,7 @@ let NotInCacheMessage = ({ value, onClickFetch }) => (
 
 let ErrorMessage = ({ value, onClickReload }) => (
     <GenericMessage>
-        {"❗❗"} There was an error while fetching the id {`"`}
-        {value} {`". `}
+        {"❗❗"} There was an error while fetching the id {`"${value}". `}
         <PrettyAnchor onClick={onClickReload}>Try fetching it again?</PrettyAnchor>
     </GenericMessage>
 )
@@ -79,7 +78,7 @@ const BUTTON_STYLE = {
     borderRadius: "10px",
     display: "flex",
     alignItems: "center",
-    marginRight: "5px",
+    margin: "5px",
 }
 
 const SubmitButton = ({ onClick, disabled, children }) => (

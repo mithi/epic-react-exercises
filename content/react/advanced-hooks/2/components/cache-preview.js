@@ -6,7 +6,7 @@ import { useRickAndMortyCache } from "./use-rick-and-morty"
 const CacheButton = ({ imageUrl, onClick, active }) => (
     <DefaultButton
         disabled={active}
-        style={{ width: "33px", height: "33px", margin: "2px" }}
+        style={{ width: "35px", height: "35px", margin: "2px", borderRadius: "5px" }}
         onClick={onClick}
     >
         <img
@@ -14,7 +14,8 @@ const CacheButton = ({ imageUrl, onClick, active }) => (
             height="30px"
             width="30px"
             style={{
-                borderRadius: "8px",
+                borderRadius: "5px",
+                margin: "5px",
             }}
         />
     </DefaultButton>

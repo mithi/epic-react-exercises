@@ -9,7 +9,7 @@ const PrettyHeader = ({ style, children, Component, ...otherProps }) => {
     return <Component {...{ style, ...otherProps }}>{children}</Component>
 }
 
-const PrettyAnchor = ({ style, children, onClick, href, ...otherProps }) => {
+const PrettyAnchor = ({ children, onClick, href, style, ...otherProps }) => {
     const { primaryColor } = useTheme()
     return (
         <a
@@ -21,7 +21,7 @@ const PrettyAnchor = ({ style, children, onClick, href, ...otherProps }) => {
     )
 }
 
-const PrettyLink = ({ style, children, href, ...otherProps }) => {
+const PrettyLink = ({ children, href, style, ...otherProps }) => {
     const { primaryColor } = useTheme()
     return (
         <Link {...{ href }}>
@@ -50,7 +50,7 @@ const PrettyInputField = ({ placeholder, value, onChange, style, ...otherProps }
     )
 }
 
-const BorderedDiv = ({ style, children, ...otherProps }) => {
+const BorderedDiv = ({ children, style, ...otherProps }) => {
     const { primaryColor } = useTheme()
     return (
         <div
@@ -68,16 +68,16 @@ const BorderedDiv = ({ style, children, ...otherProps }) => {
 }
 
 const PositiveIntegerSearchbar = ({
-    style,
     onSubmit,
     setIncompleteValue,
     incompleteValue,
-    placeholder,
     disableButton,
     disableInputField,
     submitButtonStyle,
-    inputFieldStyle,
     submitButtonContent,
+    inputFieldStyle,
+    placeholder,
+    style,
 }) => {
     function handleSubmit(e) {
         e.preventDefault()

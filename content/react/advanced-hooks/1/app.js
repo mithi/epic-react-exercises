@@ -107,14 +107,14 @@ function App() {
                     disableButton={submitButtonDisabled}
                     disableInputField={disabledByPending}
                     submitButtonStyle={{
+                        height: "35px",
                         width: "auto",
                         borderRadius: "10px",
-                        margin: "0px 5px",
-                        height: "auto",
+                        margin: "0px",
                         padding: "10px 10px",
                         fontSize: "12px",
                     }}
-                    inputFieldStyle={{ height: "40px", width: "140px" }}
+                    inputFieldStyle={{ height: "35px", width: "140px", margin: "5px" }}
                     submitButtonContent={
                         <>
                             <GiClick />
@@ -124,7 +124,7 @@ function App() {
                 />
                 <DefaultButton
                     onClick={setRandomValue}
-                    style={{ height: "35px", width: "35px" }}
+                    style={{ height: "35px", width: "35px", marginLeft: "5px" }}
                     disabled={disabledByPending}
                     aria-label="random-button"
                 >

@@ -1,6 +1,6 @@
 import { TextButton } from "components/button"
-import { SiPokemon } from "react-icons/si"
 import { PrettyAnchor, PrettyInputField } from "components/pretty-defaults"
+// import { SiPokemon } from "react-icons/si"
 
 const ICON_STYLE = {
     width: "32%",
@@ -26,12 +26,7 @@ const FetchSubmitButton = ({ disabled }) => (
                 padding: "0px",
             }}
         >
-            <div style={{ fontSize: "10px", marginRight: "5px" }}>
-                Fetch <br /> that!{" "}
-            </div>
-            <div style={{ fontSize: "40px" }}>
-                <SiPokemon aria-label="pokemon-icon" />
-            </div>
+            Fetch!
         </div>
     </TextButton>
 )

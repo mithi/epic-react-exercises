@@ -106,11 +106,15 @@ const LinkAwayIconButton = ({ children, href, className, style, ...otherProps })
     )
 }
 
-const IconButton = ({ children, className, style, ...otherProps }) => {
-    className = useButtonClasses(className)
-    style = useDefaultButtonStyle(false, { ...ICON_STYLE, style })
-    return <button {...{ className, style, ...otherProps }}>{children}</button>
-}
+/*
+
+    0. LinkButton
+    1. LinkAwayIconButton -----> LinkAwayButton
+    2. TextButton ----> OnClickButton
+        IconButton
+        DefaultButton
+    3. PrettyAnchor ---> InvisibleButton
+ */
 
 const TextButton = ({
     children,
@@ -122,10 +126,15 @@ const TextButton = ({
     isInvertedColor,
     ...otherProps
 }) => {
+    const { headerFont, primaryColor } = useTheme()
     className = useButtonClasses(className, disabled, isInvertedColor)
-    const { bodyFont, primaryColor } = useTheme()
-    style = { fontFamily: bodyFont, ...style }
-    style = useBgPrimaryColor ? { ...style, backgroundColor: primaryColor } : style
+    style = useDefaultButtonStyle(disabled, {
+        ...ICON_STYLE,
+        fontFamily: headerFont,
+        backgroundColor: useBgPrimaryColor ? primaryColor : null,
+        ...style,
+    })
+
     return (
         <button {...{ onClick, disabled, className, style, ...otherProps }}>
             {children}
@@ -133,9 +142,12 @@ const TextButton = ({
     )
 }
 
-const DefaultButton = ({ children, disabled, style, ...otherProps }) => {
-    style = useDefaultButtonStyle(disabled, style)
-    return <TextButton {...{ disabled, style, ...otherProps }}>{children}</TextButton>
+const IconButton = ({ ...props }) => {
+    return <TextButton {...props} />
+}
+
+const DefaultButton = ({ ...props }) => {
+    return <TextButton {...props} />
 }
 
 export { LinkAwayIconButton, IconButton, TextButton, DefaultButton, LinkButton }

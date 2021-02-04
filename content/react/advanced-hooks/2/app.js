@@ -34,7 +34,7 @@ const RickAndMortySearchbar = ({
     return (
         <>
             <div style={{ display: "flex", alignItems: "center" }} {...otherProps}>
-                <form onSubmit={onSubmitHandler} style={{ marginRight: "10px" }}>
+                <form onSubmit={onSubmitHandler} style={{ marginRight: "5px" }}>
                     <PrettyInputField
                         type="number"
                         pattern="^[0-9]"
