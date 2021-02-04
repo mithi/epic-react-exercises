@@ -8,7 +8,7 @@ This site is for front-end web engineers and developers. It contains notes and p
 2.  [Vanilla Tilt](/react/hooks/2) and accessing DOM nodes while avoiding memory leaks
 3.  [Fetching Pokemons](/react/hooks/3) and error boundaries
 4.  Safely [fetch Rick and Morty Characters](/react/advanced-hooks/1) by handling unmounting while dispatching
-5.  ToDo: [Caching Rick and Morty Characters](/react/advanced-hooks/2)
+5.  Simple [Caching of Rick and Morty Characters](/react/advanced-hooks/2)
 6.  ToDo: [Navigating a TV script](/react/advanced-hooks/3) with `useImperativeHandle`
 7.  ToDo: Debugging [detecting user's screen sizes](/react/advanced-hooks/4) with `useDebugValue` and `useMedia`
 
