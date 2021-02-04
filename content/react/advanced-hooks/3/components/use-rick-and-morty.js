@@ -31,11 +31,7 @@ const cacheReducer = (cache, action) => {
 const useCache = localStorageKey => {
     const [localData, setLocalData] = useLocalStorageState(localStorageKey)
     const [cache, dispatch] = useReducer(cacheReducer, localData)
-
-    useEffect(() => {
-        setLocalData(cache)
-    }, [cache, setLocalData])
-
+    useEffect(() => setLocalData(cache), [cache, setLocalData])
     return { cache, dispatch }
 }
 
@@ -69,9 +65,11 @@ function useRickAndMorty({ key = "", useCacheOnlyWhenNotReloading = false } = {}
         status: asyncStatus,
         error: asyncError,
         runFunction,
+        reset,
     } = useAsync()
 
     useEffect(() => {
+        reset()
         if (!key) {
             return
         }
@@ -79,7 +77,7 @@ function useRickAndMorty({ key = "", useCacheOnlyWhenNotReloading = false } = {}
         if (!cache[key] && !useCacheOnlyWhenNotReloading) {
             load()
         }
-    }, [key, load, cache, useCacheOnlyWhenNotReloading])
+    }, [key, load, cache, useCacheOnlyWhenNotReloading, reset])
 
     const load = useCallback(() => {
         runFunction(
@@ -102,6 +100,11 @@ function useRickAndMorty({ key = "", useCacheOnlyWhenNotReloading = false } = {}
     if (cache[key]) {
         return { data: cache[key], status: "resolved", reload }
     }
+
+    if (useCacheOnlyWhenNotReloading && !cache[key]) {
+        return { status: "notInCache" }
+    }
+
     return { status: asyncStatus, data: asyncData, error: asyncError, reload }
 }
 
