@@ -119,7 +119,9 @@ const useSafeAsync = initialState => {
         [dispatch]
     )
 
-    return { error, status, data, runFunction }
+    const reset = useCallback(() => dispatch({ status: "idle" }), [dispatch])
+
+    return { error, status, data, runFunction, reset }
 }
 
 export default useSafeAsync
