@@ -124,7 +124,11 @@ const ArticleFooter = ({ editPath }) => {
             >
                 <BiCoffeeTogo />
             </LinkAwayIconButton>
-            <LinkButton aria-label={"home"} href="/" isIconButton={true}>
+            <LinkButton
+                aria-label={"home"}
+                href="/"
+                style={{ height: "50px", width: "50px", margin: "10px" }}
+            >
                 <FaHome />
             </LinkButton>
         </div>

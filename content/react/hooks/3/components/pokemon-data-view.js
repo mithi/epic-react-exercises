@@ -37,6 +37,7 @@ const ERROR_BUTTON_STYLE = {
     width: "auto",
     padding: "5px",
     height: "auto",
+    margin: "5px",
 }
 
 const ROW_STYLE = {

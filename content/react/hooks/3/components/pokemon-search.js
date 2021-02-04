@@ -6,14 +6,7 @@ const ICON_STYLE = {
     width: "32%",
     borderRadius: "10px",
     margin: "5px",
-    padding: "10px",
     height: "3rem",
-}
-
-const SUBMIT_BUTTON_STYLE = {
-    fontSize: "4rem",
-    paddingTop: "15px",
-    margin: "10px 5px",
 }
 
 const FetchSubmitButton = ({ disabled }) => (
@@ -24,12 +17,22 @@ const FetchSubmitButton = ({ disabled }) => (
         disabled={disabled}
         useBgPrimaryColor={true}
     >
-        <span style={{ fontSize: "0.6rem" }}>
-            Fetch <br /> that
-        </span>
-        <span style={SUBMIT_BUTTON_STYLE}>
-            <SiPokemon aria-label="pokemon-icon" />
-        </span>
+        <div
+            style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                margin: "0px",
+                padding: "0px",
+            }}
+        >
+            <div style={{ fontSize: "10px", marginRight: "5px" }}>
+                Fetch <br /> that!{" "}
+            </div>
+            <div style={{ fontSize: "40px" }}>
+                <SiPokemon aria-label="pokemon-icon" />
+            </div>
+        </div>
     </TextButton>
 )
 

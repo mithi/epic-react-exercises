@@ -1,4 +1,3 @@
-import styles from "./Styles.module.css"
 import Link from "next/link"
 import { useLayoutEffect, useEffect, useState } from "react"
 import { useTheme } from "hooks"
@@ -12,7 +11,7 @@ import { useTheme } from "hooks"
 // `connect` to perform sync updates to a ref to save the latest props after
 // a render is actually committed to the DOM.
 
-const useButtonClasses = (className, isIcon, disabled, isInvertedColor) => {
+const useButtonClasses = (className, disabled, isInvertedColor) => {
     const { buttonClassNames, invertedButtonClassName, disabledClassName } = useTheme()
     const [buttonClasses, setButtonClasses] = useState(buttonClassNames)
     const useIsomorphicLayoutEffect =
@@ -35,36 +34,14 @@ const useButtonClasses = (className, isIcon, disabled, isInvertedColor) => {
     useIsomorphicLayoutEffect(() => {
         let final = [
             ...moreClassNames,
-            styles.button,
-            isIcon ? styles.buttonIcon : "",
             className,
             disabled ? disabledClassName : "",
         ].join(" ")
 
         setButtonClasses(final)
-    }, [className, isIcon, disabled, isInvertedColor, buttonClassNames])
+    }, [className, disabled, isInvertedColor, buttonClassNames])
 
     return buttonClasses
-}
-
-const LinkAwayIconButton = ({ children, href, className, ...otherProps }) => {
-    const buttonClass = useButtonClasses(className, true)
-    return (
-        <a {...{ href }} tabIndex="-1" target="_blank" rel="noopener noreferrer">
-            <button className={buttonClass} {...otherProps}>
-                {children}
-            </button>
-        </a>
-    )
-}
-
-const IconButton = ({ children, className, ...otherprops }) => {
-    const buttonClass = useButtonClasses(className, true)
-    return (
-        <button className={buttonClass} {...otherprops}>
-            {children}
-        </button>
-    )
 }
 
 const TextButton = ({
@@ -76,7 +53,7 @@ const TextButton = ({
     useBgPrimaryColor,
     ...otherprops
 }) => {
-    const buttonClass = useButtonClasses(className, true, disabled, isInvertedColor)
+    const buttonClass = useButtonClasses(className, disabled, isInvertedColor)
     const { bodyFont, primaryColor } = useTheme()
     style = { fontFamily: bodyFont, ...style }
     style = useBgPrimaryColor ? { ...style, backgroundColor: primaryColor } : style
@@ -99,39 +76,36 @@ const DEFAULT_BUTTON_STYLE = {
     fontSize: "20px",
     textDecoration: "none",
     borderRadius: "25%",
+    borderStyle: "none",
 }
 
 const useDefaultButtonStyle = (disabled, style) => {
     const { headerFont, primaryColor } = useTheme()
-    const border = disabled ? `2px solid ${primaryColor}` : null
+    const disabledBorder = {
+        borderWidth: "2px",
+        borderStyle: "solid",
+        borderColor: primaryColor,
+    }
+    const border = disabled ? disabledBorder : null
 
     return {
         ...DEFAULT_BUTTON_STYLE,
-        border,
+        ...border,
         fontFamily: headerFont,
         ...style,
     }
 }
 
-const LinkButton = ({
-    style,
-    children,
-    href,
-    className,
-    disabled,
-    isIconButton,
-    ...otherProps
-}) => {
+const LinkButton = ({ style, children, href, className, disabled, ...otherProps }) => {
+    className = useButtonClasses(className, disabled)
     style = useDefaultButtonStyle(disabled, style)
-    className = useButtonClasses(className, isIconButton, disabled)
 
     return (
         <Link {...{ href }}>
             <a style={{ textDecoration: "none" }}>
-                <button
-                    tabIndex="-1"
-                    {...{ className, disabled, children, style, ...otherProps }}
-                />
+                <button tabIndex="-1" {...{ className, disabled, style, ...otherProps }}>
+                    {children}
+                </button>
             </a>
         </Link>
     )
@@ -139,7 +113,31 @@ const LinkButton = ({
 
 const DefaultButton = ({ style, children, disabled, ...otherProps }) => {
     style = useDefaultButtonStyle(disabled, style)
-    return <TextButton {...{ ...otherProps, disabled, style, children }} />
+    return <TextButton {...{ ...otherProps, disabled, style }}>{children}</TextButton>
+}
+
+const ICON_STYLE = {
+    width: "50px",
+    height: "50px",
+    margin: "10px",
+}
+
+const IconButton = ({ children, className, style, ...otherProps }) => {
+    className = useButtonClasses(className)
+    style = useDefaultButtonStyle(false, { ...ICON_STYLE, style })
+
+    return <button {...{ className, style, ...otherProps }}>{children}</button>
+}
+
+const LinkAwayIconButton = ({ children, href, className, style, ...otherProps }) => {
+    className = useButtonClasses(className)
+    style = useDefaultButtonStyle(false, { ...ICON_STYLE, ...style })
+
+    return (
+        <a {...{ href }} tabIndex="-1" target="_blank" rel="noopener noreferrer">
+            <button {...{ className, style, ...otherProps }}>{children}</button>
+        </a>
+    )
 }
 
 export { LinkAwayIconButton, IconButton, TextButton, DefaultButton, LinkButton }

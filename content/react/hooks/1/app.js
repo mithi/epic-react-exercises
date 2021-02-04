@@ -63,8 +63,8 @@ const RestartButton = ({ onRestart }) => {
                 disabled={!onRestart}
                 style={{
                     width: "auto",
-                    height: "20px",
-                    padding: "20px",
+                    height: "auto",
+                    padding: "10px",
                     fontSize: "14px",
                     borderRadius: "10px",
                     margin: "10px",
