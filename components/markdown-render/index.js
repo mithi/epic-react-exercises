@@ -1,20 +1,24 @@
 /* eslint-disable react/display-name */
+import { useState } from "react"
 import { useTheme } from "hooks"
 import ReactMarkdown from "react-markdown"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import { PrettyHeader, PrettyLink, PrettyAnchor } from "components/pretty-defaults"
 
-const LINE_NUMBER_STYLE = {
-    minWidth: "25px",
-    width: "25px",
-    paddingRight: "10px",
-    paddingLeft: "0",
-    marginRight: "20px",
-    marginLeft: 0,
-}
-
 const Code = ({ children, language }) => {
-    const { codeTheme, primaryColor } = useTheme()
+    const { codeTheme } = useTheme()
+    const [showCode, setShowCode] = useState(true)
+    const codeBlock = (
+        <SyntaxHighlighter
+            language={language}
+            style={codeTheme}
+            wrapLongLines={false}
+            wrapLines={false}
+            {...{ tabIndex: "0" }}
+        >
+            {children}
+        </SyntaxHighlighter>
+    )
 
     return (
         <div
@@ -25,20 +29,12 @@ const Code = ({ children, language }) => {
                 marginBottom: "20px",
             }}
         >
-            <SyntaxHighlighter
-                language={language}
-                style={codeTheme}
-                showLineNumbers={false}
-                wrapLongLines={false}
-                wrapLines={false}
-                lineNumberStyle={{
-                    ...LINE_NUMBER_STYLE,
-                    borderRight: `1px solid ${primaryColor}`,
-                }}
-                {...{ tabIndex: "0" }}
-            >
-                {children}
-            </SyntaxHighlighter>
+            <PrettyAnchor onClick={() => setShowCode(!showCode)}>
+                <PrettyHeader style={{ paddingLeft: "5px" }}>
+                    {showCode ? "Hide Code" : "Show Code"}
+                </PrettyHeader>
+            </PrettyAnchor>
+            {showCode ? codeBlock : null}
         </div>
     )
 }
@@ -98,7 +94,7 @@ const renderers = {
     },
 
     paragraph: props => {
-        return <p style={{ marginBottom: "15px" }}>{props.children}</p>
+        return <p style={{ marginBottom: "10px", fontSize: "18px" }}>{props.children}</p>
     },
 }
 

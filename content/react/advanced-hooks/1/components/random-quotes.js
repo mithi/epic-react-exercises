@@ -52,7 +52,7 @@ const RICK_AND_MORTY_FUNNY_QUOTES = [
 const getRandomRickAndMortyQuote = () => {
     const numberOfQuotes = RICK_AND_MORTY_FUNNY_QUOTES.length
     const r = randomIntegerBetween(0, numberOfQuotes)
-    return `“${RICK_AND_MORTY_FUNNY_QUOTES[r]}”"`
+    return `“${RICK_AND_MORTY_FUNNY_QUOTES[r]}”`
 }
 
 export default getRandomRickAndMortyQuote

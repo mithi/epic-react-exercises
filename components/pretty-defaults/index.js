@@ -14,7 +14,7 @@ const PrettyAnchor = ({ style, children, onClick, href, ...otherProps }) => {
     return (
         <a
             style={{ color: primaryColor, ...style }}
-            {...{ onClick, href, ...otherProps }}
+            {...{ onClick, href: href ? href : "#", ...otherProps }}
         >
             {children}
         </a>

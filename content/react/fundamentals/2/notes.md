@@ -66,3 +66,10 @@
 8.  Misc
     -   [My old notes](https://github.com/mithi/digital-garden/blob/page/web-dev/public/markdown-notes/epic-react-1-react-fundamentals.md)
     -   [Matt Zabriskie: React Workshop Exercises](https://github.com/mzabriskie/react-workshop)
+
+## Readings
+
+-   [Alex Kondov: Tao of React - Software Design, Architecture & Best Practices](https://alexkondov.com/tao-of-react/#write-consistent-components)
+-   [Dmitri Pavlutin: 5 Differences Between Arrow and Regular Functions](https://dmitripavlutin.com/differences-between-arrow-and-regular-functions)
+-   [Kent C Dodds: Function forms](https://kentcdodds.com/blog/function-forms)
+    > Practice SOLID principles, Test-driven development (TDD), Domain-Driven Design, careful organization of system design in daily coding challenges

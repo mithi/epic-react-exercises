@@ -51,7 +51,7 @@ const Menu = ({ style, showCloseButton = true } = {}) => {
             <Button section="performance">5. React Performance</Button>
             <Button section="testing">Testing React Apps</Button>
             <Button section="suspense">7. React Suspense</Button>
-            <Button section="app"> Build Epic React App</Button>
+            <Button section="app"> 8. Build Epic React App</Button>
             {maybeCloseButton}
         </section>
     )

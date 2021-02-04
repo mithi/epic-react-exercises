@@ -55,6 +55,7 @@ a:hover {
 }
 
 ol {
+    font-size: 16px;
     list-style-type: decimal;
     margin-left: 20px;
     padding-left: 10px;

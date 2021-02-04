@@ -101,7 +101,6 @@ const Menu = ({ style } = {}) => {
 
                 <div
                     style={{ padding: "5px", borderRadius: "5px", marginBottom: "10px" }}
-                    className={onHoverClassName}
                     onClick={nextCodeTheme}
                 >
                     <DynamicMarkdownRender>{SAMPLE_CODE}</DynamicMarkdownRender>
