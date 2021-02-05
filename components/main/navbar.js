@@ -11,39 +11,19 @@ import { LinkOutButton, OnClickButton } from "../button"
 import ReactMenu from "./react-menu"
 import ThemeMenu from "./theme-menu"
 
-const MenuModal = () => {
-    const { changeMenuState, menuState } = useMenuState()
-    return (
-        <>
-            <DialogOverlay
-                isOpen={menuState === "theme"}
-                onDismiss={() => changeMenuState("none")}
-                style={{ background: "hsla(0, 0%, 0%, 0.75)" }}
-            >
-                <DialogContent
-                    aria-label="theme-menu"
-                    style={{ width: "100%", padding: 0 }}
-                >
-                    <ThemeMenu />
-                </DialogContent>
-            </DialogOverlay>
-            <DialogOverlay
-                isOpen={menuState === "react"}
-                onDismiss={() => changeMenuState("none")}
-                style={{ background: "hsla(0, 0%, 0%, 0.75)" }}
-            >
-                <DialogContent
-                    aria-label="react-menu"
-                    style={{ width: "100%", padding: 0 }}
-                >
-                    <ReactMenu />
-                </DialogContent>
-            </DialogOverlay>
-        </>
-    )
-}
+const Dialog = ({ onDismiss, isOpen, label, children }) => (
+    <DialogOverlay
+        {...{ isOpen, onDismiss }}
+        style={{ background: "hsla(0, 0%, 0%, 0.75)" }}
+    >
+        <DialogContent aria-label={label} style={{ width: "100%", padding: 0 }}>
+            {children}
+        </DialogContent>
+    </DialogOverlay>
+)
+
 const NavInner = () => {
-    const { changeMenuState } = useMenuState()
+    const { changeMenuState, menuState } = useMenuState()
     const { sectionClassNames } = useTheme()
 
     return (
@@ -52,31 +32,44 @@ const NavInner = () => {
                 <div className={styles.navButtonsContainer}>
                     <OnClickButton
                         onClick={() => changeMenuState("react")}
-                        aria-label={"react menu"}
+                        aria-label="react menu"
                     >
                         <FaReact />
                     </OnClickButton>
                     <OnClickButton
                         onClick={() => changeMenuState("theme")}
-                        aria-label={"theme menu"}
+                        aria-label="theme menu"
                     >
                         <MdSettings />
                     </OnClickButton>
                     <LinkOutButton
                         href="https://github.com/mithi"
-                        aria-label={"follow me on github"}
+                        aria-label="follow me on github"
                     >
                         <GoOctoface />
                     </LinkOutButton>
                     <LinkOutButton
                         href="https://ko-fi.com/minimithi"
-                        aria-label={"buy me a coffee"}
+                        aria-label="buy me a coffee"
                     >
                         <BiCoffeeTogo />
                     </LinkOutButton>
                 </div>
             </nav>
-            <MenuModal />
+            <Dialog
+                onDismiss={() => changeMenuState("none")}
+                isOpen={menuState === "theme"}
+                label="theme menu"
+            >
+                <ThemeMenu />
+            </Dialog>
+            <Dialog
+                onDismiss={() => changeMenuState("none")}
+                isOpen={menuState === "react"}
+                label="react menu"
+            >
+                <ReactMenu />
+            </Dialog>
         </>
     )
 }
