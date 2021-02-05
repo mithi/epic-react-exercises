@@ -52,7 +52,7 @@ const useButtonClasses = (className, disabled, isInvertedColor) => {
     return [...final, className].join(" ")
 }
 
-const useDefaultButtonStyle = (style, disabled) => {
+const useDefaultButtonStyle = (style, disabled, useBgPrimaryColor) => {
     const { headerFont, primaryColor } = useTheme()
     const disabledBorder = {
         borderWidth: "2px",
@@ -65,11 +65,10 @@ const useDefaultButtonStyle = (style, disabled) => {
         ...DEFAULT_BUTTON_STYLE,
         ...border,
         fontFamily: headerFont,
+        backgroundColor: useBgPrimaryColor ? primaryColor : null,
         ...style,
     }
 }
-
-// children, href, onClick, disabled, className, style, otherProps
 
 const LinkButton = ({ children, href, disabled, className, style, ...otherProps }) => {
     className = useButtonClasses(className, disabled)
@@ -107,16 +106,8 @@ const OnClickButton = ({
     isInvertedColor,
     ...otherProps
 }) => {
-    const { primaryColor } = useTheme()
     className = useButtonClasses(className, disabled, isInvertedColor)
-    style = useDefaultButtonStyle(
-        {
-            backgroundColor: useBgPrimaryColor ? primaryColor : null,
-            ...style,
-        },
-        disabled
-    )
-
+    style = useDefaultButtonStyle(style, disabled, useBgPrimaryColor)
     return (
         <button {...{ onClick, disabled, className, style, ...otherProps }}>
             {children}
