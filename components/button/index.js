@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { useLayoutEffect, useEffect, useState } from "react"
 import { useTheme } from "hooks"
 
 const DEFAULT_BUTTON_STYLE = {
@@ -21,46 +20,31 @@ const ICON_STYLE = {
     margin: "10px",
 }
 
-// ***************
-// IMPORTANT: Use isomorphic effect
-// ***************
-// React currently throws a warning when using useLayoutEffect on the server.
-// To get around it, we can conditionally useEffect on the server (no-op) and
-// useLayoutEffect in the browser. We need useLayoutEffect because we want
-// `connect` to perform sync updates to a ref to save the latest props after
-// a render is actually committed to the DOM.
-
 const useButtonClasses = (className, disabled, isInvertedColor) => {
     const { buttonClassNames, invertedButtonClassName, disabledClassName } = useTheme()
-    const [buttonClasses, setButtonClasses] = useState(buttonClassNames)
-    const useIsomorphicLayoutEffect =
-        typeof window !== "undefined" ? useLayoutEffect : useEffect
 
     const [
         themeButtonClass,
         onHoverClass,
-        colorClass,
+        colorClass, // the color of the element inside
         themeButtonClassOnHover,
     ] = buttonClassNames
-    let moreClassNames = isInvertedColor
-        ? [invertedButtonClassName]
-        : [themeButtonClass, colorClass]
 
-    moreClassNames = disabled
-        ? moreClassNames
-        : [...moreClassNames, onHoverClass, themeButtonClassOnHover]
+    /* IMPORTANT: The order of classnames here might be important, need to test... */
+    let final = null
+    final = isInvertedColor ? [invertedButtonClassName] : [themeButtonClass, colorClass]
 
-    useIsomorphicLayoutEffect(() => {
-        let final = [
-            ...moreClassNames,
-            className,
-            disabled ? disabledClassName : "",
-        ].join(" ")
+    if (!disabled) {
+        final = [...final, onHoverClass, themeButtonClassOnHover]
+    }
 
-        setButtonClasses(final)
-    }, [className, disabled, isInvertedColor, buttonClassNames])
+    final = [...final, className]
 
-    return buttonClasses
+    if (disabled) {
+        final = [...final, disabledClassName]
+    }
+
+    return final.join(" ")
 }
 
 const useDefaultButtonStyle = (disabled, style) => {
@@ -88,7 +72,7 @@ const LinkButton = ({ children, href, disabled, className, style, ...otherProps 
     return (
         <Link {...{ href }}>
             <a style={{ textDecoration: "none" }}>
-                <button tabIndex="-1" {...{ disabled, className, style, ...otherProps }}>
+                <button {...{ disabled, className, style, ...otherProps }} tabIndex="-1">
                     {children}
                 </button>
             </a>
@@ -100,8 +84,10 @@ const LinkOutButton = ({ children, href, className, style, ...otherProps }) => {
     className = useButtonClasses(className)
     style = useDefaultButtonStyle(false, { ...ICON_STYLE, ...style })
     return (
-        <a {...{ href }} tabIndex="-1" target="_blank" rel="noopener noreferrer">
-            <button {...{ className, style, ...otherProps }}>{children}</button>
+        <a {...{ href }} target="_blank" rel="noopener noreferrer">
+            <button {...{ className, style, ...otherProps }} tabIndex="-1">
+                {children}
+            </button>
         </a>
     )
 }
