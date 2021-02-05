@@ -1,4 +1,4 @@
-## Exercise One: Pure Javascript
+## 💻 Exercise One: Pure Javascript
 
 Create and append dom elements in vanilla javascript. Write javascript code between `<script>` tags to produce the codeblock below on an html file
 
@@ -44,7 +44,7 @@ element.className = "container"
 rootElement.append(element)
 ```
 
-## Exercise Two: Babel for inline JSX
+## 💻 Exercise Two: Babel for inline JSX
 
 Exercise 2a: Create an `div` element with a `class` of `container` with `Hello World` written on it. Use `jsx` syntax. Assume that a `div` with an `id` of `root` already exists in the page. Put the `div` with a `class` of container inside the `root` node. Use `ReactDom` to render this on the browser.
 
@@ -83,7 +83,7 @@ Fun fact: you can actually use React (and optionally the babel compiler to add j
 </body>
 ```
 
-## Exercise Three: Multiple children
+## 💻 Exercise Three: Multiple children
 
 Write code using `React` to generate the `html` code below.
 
@@ -109,7 +109,7 @@ const element = React.createElement("div", {
 ReactDOM.render(element, rootElement)
 ```
 
-## Exercise Four: Function Components
+## 💻 Exercise Four: Function Components
 
 Write a function `message` that you can reuse to produce the code below. This function must be fed to `React.createElement()` Will this work if the first letter is not a capital letter? What is the difference between using writing the function to be `const message = () => {}` and `const Message = () => {}` ?
 
@@ -143,7 +143,7 @@ const element = (
 
 In this case, it is being used as a component. It works but not best practice. You should use capitalized `Message` instead of `message`. That way, you'd be following the convention which the babel compiler understands.
 
-## Exercise Five: How babel compiles jsx
+## 💻 Exercise Five: How babel compiles jsx
 
 Understand how `babel` compiles `jsx` based on the appearance of the component name.
 In order words, how would `babel` compile the following components?

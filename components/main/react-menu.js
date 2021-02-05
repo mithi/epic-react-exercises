@@ -7,7 +7,7 @@ const Button = ({ children, section }) => {
     return (
         <LinkButton
             {...{
-                href: `/react/${section}`,
+                href: `/react/${section}/1`,
                 style: {
                     width: "auto",
                     height: "auto",
