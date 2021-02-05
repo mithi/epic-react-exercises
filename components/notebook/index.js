@@ -7,7 +7,7 @@ import { BsPencilSquare } from "react-icons/bs"
 import { GoOctoface } from "react-icons/go"
 import { FaHome, FaBug } from "react-icons/fa"
 import { SpinnerDots } from "components/spinner"
-import { LinkAwayIconButton, DefaultLinkButton, LinkButton } from "../button"
+import { LinkOutButton, LinkButton } from "../button"
 import Main from "../main"
 import NotebookLayout from "../main/two-sections"
 import { PrettyHeader } from "../pretty-defaults"
@@ -21,15 +21,17 @@ const Pagination = ({ numberOfPages, currentPageId, pathname }) => {
                 const pageId = i + 1
                 const buttonPathname = `${pathname}/${pageId === 1 ? "" : pageId}`
                 const disabled = pageId === currentPageId
-
+                const label = `go to page ${pageId} of section: ${pathname}`
                 return (
-                    <DefaultLinkButton
+                    <LinkButton
                         key={buttonPathname}
                         disabled={disabled}
                         href={buttonPathname}
+                        aria-label={label}
+                        style={{ height: "30px", width: "30px", margin: "2px" }}
                     >
                         {pageId}
-                    </DefaultLinkButton>
+                    </LinkButton>
                 )
             })}
         </div>
@@ -50,26 +52,26 @@ const Header = ({ title, deployedSite, repository, editPath }) => {
     let repositoryButton = null
     if (repository) {
         repositoryButton = (
-            <LinkAwayIconButton
+            <LinkOutButton
                 href={repository}
                 style={BUTTON_STYLE}
                 aria-label={"go to source repository"}
             >
                 <FiGithub />
-            </LinkAwayIconButton>
+            </LinkOutButton>
         )
     }
 
     let deployedSiteButton = null
     if (deployedSite) {
         deployedSiteButton = (
-            <LinkAwayIconButton
+            <LinkOutButton
                 href={deployedSite}
                 style={BUTTON_STYLE}
                 aria-label={"go to source deployed site"}
             >
                 <BiRocket />
-            </LinkAwayIconButton>
+            </LinkOutButton>
         )
     }
 
@@ -87,13 +89,13 @@ const Header = ({ title, deployedSite, repository, editPath }) => {
             >
                 {deployedSiteButton}
                 {repositoryButton}
-                <LinkAwayIconButton
+                <LinkOutButton
                     href={`${EPIC_NOTES_REPO_URL}/edit/main/content/${editPath}`}
                     style={BUTTON_STYLE}
                     aria-label={"edit this page"}
                 >
                     <BsPencilSquare />
-                </LinkAwayIconButton>
+                </LinkOutButton>
             </div>
         </div>
     )
@@ -103,28 +105,29 @@ const ArticleFooter = ({ editPath }) => {
     const issueUrl = `${EPIC_NOTES_REPO_URL}/issues/new?title=Something%20wrong%20in:%20${editPath}`
     return (
         <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
-            <LinkAwayIconButton aria-label={"report a bug"} href={issueUrl}>
+            <LinkOutButton aria-label={"report a bug"} href={issueUrl}>
                 <FaBug />
-            </LinkAwayIconButton>
-            <LinkAwayIconButton
+            </LinkOutButton>
+            <LinkOutButton
                 href={`${EPIC_NOTES_REPO_URL}/edit/main/content/${editPath}`}
                 aria-label={"edit this page"}
             >
                 <BsPencilSquare />
-            </LinkAwayIconButton>
-            <LinkAwayIconButton
-                href={EPIC_NOTES_REPO_URL}
-                aria-label={"star me on github"}
-            >
+            </LinkOutButton>
+            <LinkOutButton href={EPIC_NOTES_REPO_URL} aria-label={"star me on github"}>
                 <GoOctoface />
-            </LinkAwayIconButton>
-            <LinkAwayIconButton
+            </LinkOutButton>
+            <LinkOutButton
                 href="https://ko-fi.com/minimithi"
                 aria-label={"buy me a coffee"}
             >
                 <BiCoffeeTogo />
-            </LinkAwayIconButton>
-            <LinkButton aria-label={"home"} href="/" isIconButton={true}>
+            </LinkOutButton>
+            <LinkButton
+                aria-label={"home"}
+                href="/"
+                style={{ height: "50px", width: "50px", margin: "10px" }}
+            >
                 <FaHome />
             </LinkButton>
         </div>

@@ -1,8 +1,8 @@
 import { BiRefresh } from "react-icons/bi"
 import { GiPerspectiveDiceSixFacesRandom } from "react-icons/gi"
 import { FaSearch } from "react-icons/fa"
-import { PrettyAnchor } from "components/pretty-defaults"
-import { DefaultButton, TextButton } from "components/button"
+import { OnClickText } from "components/pretty-defaults"
+import { OnClickButton } from "components/button"
 import { PendingView } from "../../1/components/views"
 import InfoView, { IdleView, ErrorView } from "./info-view"
 
@@ -34,13 +34,13 @@ const FETCH_BUTTON_CONTENT = (
 )
 
 const RandomButton = ({ onClick, disabled }) => (
-    <DefaultButton
+    <OnClickButton
         style={{ height: "35px", width: "35px", margin: "0px" }}
-        aria-label="random-button"
+        aria-label="fetch a random rick and morty character"
         {...{ onClick, disabled }}
     >
         <GiPerspectiveDiceSixFacesRandom />
-    </DefaultButton>
+    </OnClickButton>
 )
 
 let NotInCacheMessage = ({ value, onClickFetch }) => (
@@ -48,15 +48,14 @@ let NotInCacheMessage = ({ value, onClickFetch }) => (
         The id {`"`}
         {value}
         {`"`} is not in your cache yet.{" "}
-        <PrettyAnchor onClick={onClickFetch}>Fetch it?</PrettyAnchor>
+        <OnClickText onClick={onClickFetch}>Fetch it?</OnClickText>
     </GenericMessage>
 )
 
 let ErrorMessage = ({ value, onClickReload }) => (
     <GenericMessage>
-        {"❗❗"} There was an error while fetching the id {`"`}
-        {value} {`". `}
-        <PrettyAnchor onClick={onClickReload}>Try fetching it again?</PrettyAnchor>
+        {"❗❗"} There was an error while fetching the id {`"${value}". `}
+        <OnClickText onClick={onClickReload}>Try fetching it again?</OnClickText>
     </GenericMessage>
 )
 
@@ -79,18 +78,18 @@ const BUTTON_STYLE = {
     borderRadius: "10px",
     display: "flex",
     alignItems: "center",
-    marginRight: "5px",
+    margin: "5px",
 }
 
 const SubmitButton = ({ onClick, disabled, children }) => (
-    <TextButton
+    <OnClickButton
         useBgPrimaryColor={true}
         isInvertedColor={true}
         {...{ onClick, disabled }}
         style={BUTTON_STYLE}
     >
         {children}
-    </TextButton>
+    </OnClickButton>
 )
 
 export {

@@ -1,157 +1,118 @@
-import styles from "./Styles.module.css"
 import Link from "next/link"
-import { useLayoutEffect, useEffect, useState } from "react"
 import { useTheme } from "hooks"
 
-// ***************
-// IMPORTANT: Use isomorphic effect
-// ***************
-// React currently throws a warning when using useLayoutEffect on the server.
-// To get around it, we can conditionally useEffect on the server (no-op) and
-// useLayoutEffect in the browser. We need useLayoutEffect because we want
-// `connect` to perform sync updates to a ref to save the latest props after
-// a render is actually committed to the DOM.
-
-const useButtonClasses = (className, isIcon, disabled, isInvertedColor) => {
-    const { buttonClassNames, invertedButtonClassName, disabledClassName } = useTheme()
-    const [buttonClasses, setButtonClasses] = useState(buttonClassNames)
-    const useIsomorphicLayoutEffect =
-        typeof window !== "undefined" ? useLayoutEffect : useEffect
-
-    const [
-        themeButtonClass,
-        onHoverClass,
-        colorClass,
-        themeButtonClassOnHover,
-    ] = buttonClassNames
-    let moreClassNames = isInvertedColor
-        ? [invertedButtonClassName]
-        : [themeButtonClass, colorClass]
-
-    moreClassNames = disabled
-        ? moreClassNames
-        : [...moreClassNames, onHoverClass, themeButtonClassOnHover]
-
-    useIsomorphicLayoutEffect(() => {
-        let final = [
-            ...moreClassNames,
-            styles.button,
-            isIcon ? styles.buttonIcon : "",
-            className,
-            disabled ? disabledClassName : "",
-        ].join(" ")
-
-        setButtonClasses(final)
-    }, [className, isIcon, disabled, isInvertedColor, buttonClassNames])
-
-    return buttonClasses
+const TOTALLY_CENTERED = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
 }
 
-const LinkButton = ({
-    children,
-    href,
-    className,
-    disabled,
-    isIconButton,
-    ...otherprops
-}) => {
-    const buttonClass = useButtonClasses(className, isIconButton, disabled)
+const BIG_ICON_STYLE = {
+    width: "50px",
+    height: "50px",
+    margin: "10px",
+    fontSize: "20px",
+    borderRadius: "25%",
+}
+
+const DEFAULT_BUTTON_STYLE = {
+    ...TOTALLY_CENTERED,
+    ...BIG_ICON_STYLE,
+    textDecoration: "none",
+    borderStyle: "none",
+}
+
+const useButtonClasses = (className, disabled, isInvertedColor) => {
+    const { buttonClassNames, invertedButtonClassName, disabledClassName } = useTheme()
+
+    // invertedButtonClassName
+    //      - normal, opacity: slightly less than 1.0
+    //      - hovered, opacity: 1.0
+    //      - backgroundColor: UNDEFINED
+    //      - color: based on theme (light (white), dark (black), funky (red))
+    // disabledClassName
+    //     - normal: opacity: around 0.3
+    //     - hovered: opacity: name as normal
+    const [
+        defaultBackground, // default button background color when not hovered (light (white), dark (black), funky (red))
+        defaultColorOnHover, // default color of the element when hovered (light (white), dark (black), funky (red))
+        defaultColor, // default color of element when not hovered (primaryColor)
+        defaultBackgroundOnHover, // default background color when hovered (primary color)
+    ] = buttonClassNames
+
+    let final = isInvertedColor
+        ? [invertedButtonClassName]
+        : [defaultBackground, defaultColor]
+
+    final = disabled
+        ? [...final, disabledClassName]
+        : [...final, defaultColorOnHover, defaultBackgroundOnHover]
+
+    return [...final, className].join(" ")
+}
+
+const useDefaultButtonStyle = (style, disabled, useBgPrimaryColor) => {
+    const { headerFont, primaryColor } = useTheme()
+    const disabledBorder = {
+        borderWidth: "2px",
+        borderStyle: "solid",
+        borderColor: primaryColor,
+    }
+    const border = disabled ? disabledBorder : null
+
+    return {
+        ...DEFAULT_BUTTON_STYLE,
+        ...border,
+        fontFamily: headerFont,
+        backgroundColor: useBgPrimaryColor ? primaryColor : null,
+        ...style,
+    }
+}
+
+const LinkButton = ({ children, href, disabled, className, style, ...otherProps }) => {
+    className = useButtonClasses(className, disabled)
+    style = useDefaultButtonStyle(style, disabled)
     return (
-        <>
-            <Link {...{ href }}>
-                <a style={{ textDecoration: "none" }}>
-                    <button
-                        tabIndex="-1"
-                        className={buttonClass}
-                        {...{ ...otherprops, disabled, children }}
-                    />
-                </a>
-            </Link>
-        </>
+        <Link {...{ href }}>
+            <a style={{ textDecoration: "none" }}>
+                <button {...{ disabled, className, style, ...otherProps }} tabIndex="-1">
+                    {children}
+                </button>
+            </a>
+        </Link>
     )
 }
 
-const LinkAwayIconButton = ({ children, href, className, ...otherProps }) => {
-    const buttonClass = useButtonClasses(className, true)
+const LinkOutButton = ({ children, href, className, style, ...otherProps }) => {
+    className = useButtonClasses(className)
+    style = useDefaultButtonStyle(style, false)
     return (
-        <a {...{ href }} tabIndex="-1" target="_blank" rel="noopener noreferrer">
-            <button className={buttonClass} {...otherProps}>
+        <a {...{ href }} target="_blank" rel="noopener noreferrer">
+            <button {...{ className, style, ...otherProps }} tabIndex="-1">
                 {children}
             </button>
         </a>
     )
 }
 
-const IconButton = ({ children, className, ...otherprops }) => {
-    const buttonClass = useButtonClasses(className, true)
+const OnClickButton = ({
+    children,
+    onClick,
+    disabled,
+    className,
+    style,
+    useBgPrimaryColor,
+    isInvertedColor,
+    ...otherProps
+}) => {
+    className = useButtonClasses(className, disabled, isInvertedColor)
+    style = useDefaultButtonStyle(style, disabled, useBgPrimaryColor)
     return (
-        <button className={buttonClass} {...otherprops}>
+        <button {...{ onClick, disabled, className, style, ...otherProps }}>
             {children}
         </button>
     )
 }
 
-const TextButton = ({
-    children,
-    className,
-    isInvertedColor,
-    disabled,
-    style,
-    useBgPrimaryColor,
-    ...otherprops
-}) => {
-    const buttonClass = useButtonClasses(className, true, disabled, isInvertedColor)
-    const { bodyFont, primaryColor } = useTheme()
-    style = { fontFamily: bodyFont, ...style }
-    style = useBgPrimaryColor ? { ...style, backgroundColor: primaryColor } : style
-
-    return (
-        <button
-            className={buttonClass}
-            {...{ ...otherprops, style, disabled, children }}
-        />
-    )
-}
-
-const DEFAULT_BUTTON_STYLE = {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    margin: "3px",
-    width: "30px",
-    height: "30px",
-    fontSize: "20px",
-    textDecoration: "none",
-    borderRadius: "25%",
-}
-
-const useDefaultButtonStyle = (disabled, style) => {
-    const { headerFont, primaryColor } = useTheme()
-    const border = disabled ? `2px solid ${primaryColor}` : null
-
-    return {
-        ...DEFAULT_BUTTON_STYLE,
-        border,
-        fontFamily: headerFont,
-        ...style,
-    }
-}
-
-const DefaultLinkButton = ({ style, disabled, ...otherProps }) => {
-    style = useDefaultButtonStyle(disabled, style)
-    return <LinkButton {...{ ...otherProps, disabled, style }} />
-}
-
-const DefaultButton = ({ style, children, disabled, ...otherProps }) => {
-    style = useDefaultButtonStyle(disabled, style)
-    return <TextButton {...{ ...otherProps, disabled, style, children }} />
-}
-
-export {
-    LinkButton,
-    LinkAwayIconButton,
-    IconButton,
-    TextButton,
-    DefaultButton,
-    DefaultLinkButton,
-}
+export { LinkOutButton, OnClickButton, LinkButton }

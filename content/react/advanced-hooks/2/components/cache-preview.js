@@ -1,30 +1,32 @@
-import { PrettyAnchor } from "components/pretty-defaults"
-import { DefaultButton } from "components/button"
+import { OnClickText } from "components/pretty-defaults"
+import { OnClickButton } from "components/button"
 
 import { useRickAndMortyCache } from "./use-rick-and-morty"
 
-const CacheButton = ({ imageUrl, onClick, active }) => (
-    <DefaultButton
+const CacheButton = ({ label, imageUrl, onClick, active }) => (
+    <OnClickButton
         disabled={active}
-        style={{ width: "33px", height: "33px", margin: "2px" }}
+        style={{ width: "35px", height: "35px", margin: "2px", borderRadius: "5px" }}
         onClick={onClick}
+        aria-label={`load ${label}`}
     >
         <img
             src={imageUrl}
             height="30px"
             width="30px"
             style={{
-                borderRadius: "8px",
+                borderRadius: "5px",
+                margin: "5px",
             }}
         />
-    </DefaultButton>
+    </OnClickButton>
 )
 
 const CacheAction = ({ onClick, children }) => (
     <>
-        <PrettyAnchor style={{ fontSize: "12px" }} onClick={onClick}>
+        <OnClickText style={{ fontSize: "12px" }} onClick={onClick}>
             {children}
-        </PrettyAnchor>
+        </OnClickText>
         <br />
     </>
 )
@@ -46,6 +48,7 @@ const RickAndMortyCachePreview = ({ setId, id }) => {
     const buttons = cacheKeys.map(i => (
         <CacheButton
             key={cache[i].name}
+            label={cache[i].name}
             imageUrl={cache[i].imageUrl}
             onClick={() => setId(i)}
             active={i === id}

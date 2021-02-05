@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { useTheme } from "hooks"
-import { TextButton } from "../button"
+import { OnClickButton } from "../button"
 
 const PrettyHeader = ({ style, children, Component, ...otherProps }) => {
     Component = Component ? Component : "div"
@@ -9,19 +9,28 @@ const PrettyHeader = ({ style, children, Component, ...otherProps }) => {
     return <Component {...{ style, ...otherProps }}>{children}</Component>
 }
 
-const PrettyAnchor = ({ style, children, onClick, href, ...otherProps }) => {
+const PrettyAnchor = ({ children, href, style, ...otherProps }) => {
     const { primaryColor } = useTheme()
     return (
-        <a
-            style={{ color: primaryColor, ...style }}
-            {...{ onClick, href: href ? href : "#", ...otherProps }}
-        >
+        <a style={{ color: primaryColor, ...style }} {...{ href, ...otherProps }}>
             {children}
         </a>
     )
 }
 
-const PrettyLink = ({ style, children, href, ...otherProps }) => {
+const OnClickText = ({ children, onClick, style, ...otherProps }) => {
+    const { primaryColor, bodyFont } = useTheme()
+    return (
+        <button
+            {...{ onClick, ...otherProps }}
+            style={{ color: primaryColor, fontFamily: bodyFont, ...style }}
+        >
+            {children}
+        </button>
+    )
+}
+
+const PrettyLink = ({ children, href, style, ...otherProps }) => {
     const { primaryColor } = useTheme()
     return (
         <Link {...{ href }}>
@@ -50,7 +59,7 @@ const PrettyInputField = ({ placeholder, value, onChange, style, ...otherProps }
     )
 }
 
-const BorderedDiv = ({ style, children, ...otherProps }) => {
+const BorderedDiv = ({ children, style, ...otherProps }) => {
     const { primaryColor } = useTheme()
     return (
         <div
@@ -68,16 +77,16 @@ const BorderedDiv = ({ style, children, ...otherProps }) => {
 }
 
 const PositiveIntegerSearchbar = ({
-    style,
     onSubmit,
     setIncompleteValue,
     incompleteValue,
-    placeholder,
     disableButton,
     disableInputField,
     submitButtonStyle,
-    inputFieldStyle,
     submitButtonContent,
+    inputFieldStyle,
+    placeholder,
+    style,
 }) => {
     function handleSubmit(e) {
         e.preventDefault()
@@ -105,7 +114,7 @@ const PositiveIntegerSearchbar = ({
                 style={inputFieldStyle}
                 disabled={disableInputField}
             />
-            <TextButton
+            <OnClickButton
                 type="submit"
                 disabled={disableButton}
                 useBgPrimaryColor={true}
@@ -113,7 +122,7 @@ const PositiveIntegerSearchbar = ({
                 style={submitButtonStyle}
             >
                 {submitButtonContent ? submitButtonContent : "submit"}
-            </TextButton>
+            </OnClickButton>
         </form>
     )
 }
@@ -125,4 +134,5 @@ export {
     BorderedDiv,
     PrettyLink,
     PositiveIntegerSearchbar,
+    OnClickText,
 }

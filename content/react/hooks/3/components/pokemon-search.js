@@ -1,44 +1,37 @@
-import { TextButton } from "components/button"
-import { SiPokemon } from "react-icons/si"
-import { PrettyAnchor, PrettyInputField } from "components/pretty-defaults"
+import { OnClickButton } from "components/button"
+import { OnClickText, PrettyInputField } from "components/pretty-defaults"
 
 const ICON_STYLE = {
     width: "32%",
     borderRadius: "10px",
     margin: "5px",
-    padding: "10px",
     height: "3rem",
 }
 
-const SUBMIT_BUTTON_STYLE = {
-    fontSize: "4rem",
-    paddingTop: "15px",
-    margin: "10px 5px",
-}
-
 const FetchSubmitButton = ({ disabled }) => (
-    <TextButton
+    <OnClickButton
         isInvertedColor={true}
         style={ICON_STYLE}
         type="submit"
         disabled={disabled}
         useBgPrimaryColor={true}
     >
-        <span style={{ fontSize: "0.6rem" }}>
-            Fetch <br /> that
-        </span>
-        <span style={SUBMIT_BUTTON_STYLE}>
-            <SiPokemon aria-label="pokemon-icon" />
-        </span>
-    </TextButton>
+        <div
+            style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                margin: "0px",
+                padding: "0px",
+            }}
+        >
+            Fetch!
+        </div>
+    </OnClickButton>
 )
 
 const PokemonSuggestion = ({ name, buttonSubmit }) => {
-    return (
-        <PrettyAnchor onClick={() => buttonSubmit(name)} href="#">
-            {name}
-        </PrettyAnchor>
-    )
+    return <OnClickText onClick={() => buttonSubmit(name)}>{name}</OnClickText>
 }
 
 const PokemonSearchSection = ({ onSubmit, setIncompleteName, incompleteName }) => {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { GiPerspectiveDiceSixFacesRandom, GiClick } from "react-icons/gi"
 import { delayedFetchRickAndMorty } from "fetch-utils"
-import { DefaultButton } from "components/button"
+import { OnClickButton } from "components/button"
 import { BorderedDiv, PositiveIntegerSearchbar } from "components/pretty-defaults"
 import { ErrorView, PendingView, IdleView } from "./components/views"
 import InfoView from "./components/info-view"
@@ -107,14 +107,15 @@ function App() {
                     disableButton={submitButtonDisabled}
                     disableInputField={disabledByPending}
                     submitButtonStyle={{
-                        width: "auto",
+                        height: "35px",
+                        width: "45%",
                         borderRadius: "10px",
-                        margin: "0px 5px",
-                        height: "auto",
+                        margin: "0px",
                         padding: "10px 10px",
                         fontSize: "12px",
                     }}
-                    inputFieldStyle={{ height: "40px", width: "140px" }}
+                    style={{ width: "auto" }}
+                    inputFieldStyle={{ height: "35px", width: "50%", margin: "5px" }}
                     submitButtonContent={
                         <>
                             <GiClick />
@@ -122,14 +123,14 @@ function App() {
                         </>
                     }
                 />
-                <DefaultButton
+                <OnClickButton
                     onClick={setRandomValue}
-                    style={{ height: "35px", width: "35px" }}
+                    style={{ height: "35px", width: "35px", marginLeft: "5px" }}
                     disabled={disabledByPending}
-                    aria-label="random-button"
+                    aria-label="fetch a random rick and morty character"
                 >
                     <GiPerspectiveDiceSixFacesRandom />
-                </DefaultButton>
+                </OnClickButton>
             </div>
 
             <RickAndMortyInfoCard

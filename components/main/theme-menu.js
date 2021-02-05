@@ -3,8 +3,8 @@ import styles from "./Styles.module.css"
 import { FaCloudSun, FaCode, FaPaintBrush } from "react-icons/fa"
 import { CgFormatColor } from "react-icons/cg"
 import { BiText } from "react-icons/bi"
-import { IconButton } from "../button"
-import { PrettyAnchor, PrettyHeader } from "../pretty-defaults"
+import { OnClickButton } from "../button"
+import { OnClickText, PrettyHeader } from "../pretty-defaults"
 import { useTheme, useMenuState } from "hooks"
 import { SpinnerDots } from "components/spinner"
 
@@ -94,7 +94,7 @@ const Menu = ({ style } = {}) => {
                 <p
                     onClick={nextBodyFont}
                     className={onHoverClassName}
-                    style={{ ...PARAGRAPH_STYLE, fontFamily: bodyFont }}
+                    style={{ ...PARAGRAPH_STYLE, fontFamily: bodyFont, margin: "0px" }}
                 >
                     {SAMPLE_PARAGRAPH}
                 </p>
@@ -107,47 +107,47 @@ const Menu = ({ style } = {}) => {
                 </div>
 
                 <div className={sectionClassNames[0]} style={ICONS_CONTAINER_STYLE}>
-                    <IconButton
+                    <OnClickButton
                         onClick={nextPageTheme}
                         style={ICON_BUTTON_STYLE}
                         aria-label={"change page theme"}
                     >
                         <FaCloudSun />
-                    </IconButton>
+                    </OnClickButton>
 
-                    <IconButton
+                    <OnClickButton
                         onClick={nextColor}
                         style={ICON_BUTTON_STYLE}
                         aria-label={"change main color"}
                     >
                         <FaPaintBrush />
-                    </IconButton>
-                    <IconButton
+                    </OnClickButton>
+                    <OnClickButton
                         onClick={nextHeaderFont}
                         style={ICON_BUTTON_STYLE}
                         aria-label={"change header font"}
                     >
                         <CgFormatColor />
-                    </IconButton>
-                    <IconButton
+                    </OnClickButton>
+                    <OnClickButton
                         onClick={nextBodyFont}
                         style={ICON_BUTTON_STYLE}
                         aria-label={"change body font"}
                     >
                         <BiText />
-                    </IconButton>
-                    <IconButton
+                    </OnClickButton>
+                    <OnClickButton
                         onClick={nextCodeTheme}
                         style={ICON_BUTTON_STYLE}
                         aria-label={"change code theme"}
                     >
                         <FaCode />
-                    </IconButton>
+                    </OnClickButton>
                 </div>
                 <div style={{ margin: "15px", textAlign: "center" }}>
-                    <PrettyAnchor href="#" onClick={() => changeMenuState("none")}>
+                    <OnClickText onClick={() => changeMenuState("none")}>
                         [close]
-                    </PrettyAnchor>
+                    </OnClickText>
                 </div>
             </div>
         </section>

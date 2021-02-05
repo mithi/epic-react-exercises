@@ -1,4 +1,4 @@
-import { TextButton } from "components/button"
+import { OnClickButton } from "components/button"
 import { PrettyHeader } from "components/pretty-defaults"
 import { useTheme } from "hooks"
 import { SpinnerDots } from "components/spinner"
@@ -37,11 +37,12 @@ const ERROR_BUTTON_STYLE = {
     width: "auto",
     padding: "5px",
     height: "auto",
+    margin: "5px",
 }
 
 const ROW_STYLE = {
     padding: "10px",
-    minWidth: "100px",
+    minWidth: "75px",
     fontSize: "14px",
     textAlign: "center",
 }
@@ -101,13 +102,13 @@ function PokemonErrorView({ error, resetFunction }) {
         <div role="alert" style={{ fontSize: "15px", padding: "10px" }}>
             <span>{error.message}</span>
             <div style={TOTALLY_CENTERED}>
-                <TextButton
+                <OnClickButton
                     onClick={resetFunction}
                     style={ERROR_BUTTON_STYLE}
                     isInvertedColor={true}
                 >
                     <PrettyHeader> Try again </PrettyHeader>
-                </TextButton>
+                </OnClickButton>
                 <div> This error was caught by the error boundary!</div>
             </div>
         </div>
@@ -171,7 +172,7 @@ const PokemonDataView = ({
             {image}
             <table>
                 <thead>
-                    <tr style={{ ...trStyle, fontSize: "20px" }}>
+                    <tr style={{ ...trStyle, fontSize: "15px" }}>
                         <PrettyHeader Component="th">Ability</PrettyHeader>
                         <PrettyHeader Component="th">Type</PrettyHeader>
                         <PrettyHeader Component="th">Damage</PrettyHeader>

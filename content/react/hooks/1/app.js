@@ -1,5 +1,5 @@
 import { useStickyState } from "hooks"
-import { TextButton, DefaultButton } from "components/button"
+import { OnClickButton } from "components/button"
 import { PrettyHeader } from "components/pretty-defaults"
 const X_PLAYER = "X"
 const O_PLAYER = "O"
@@ -11,7 +11,12 @@ const Board = ({ currentBoard, onPlayerMove, disableButtons }) => {
         const onClick = disabled ? null : () => onPlayerMove(i)
         const children = player ? player : "."
         const style = { fontSize: "50px", height: "75px", width: "75px", margin: "5px" }
-        return <DefaultButton {...{ onClick, disabled, style, children }} />
+        const label = `TictacToe button # ${i}`
+        return (
+            <OnClickButton {...{ onClick, disabled, style }} aria-label={label}>
+                {children}
+            </OnClickButton>
+        )
     }
 
     return (
@@ -58,22 +63,23 @@ const BoardStatus = ({ winnerIfAny, gameFinished, playerToMove }) => {
 const RestartButton = ({ onRestart }) => {
     return (
         <div style={{ display: "flex", width: "100%", justifyContent: "center" }}>
-            <TextButton
+            <OnClickButton
                 isInvertedColor={true}
                 disabled={!onRestart}
                 style={{
                     width: "auto",
-                    height: "20px",
-                    padding: "20px",
+                    height: "auto",
+                    padding: "10px",
                     fontSize: "14px",
                     borderRadius: "10px",
                     margin: "10px",
                 }}
                 useBgPrimaryColor={true}
                 onClick={onRestart}
+                aria-label={"restart tictactoe game"}
             >
-                <PrettyHeader Component={"span"}>Restart!</PrettyHeader>
-            </TextButton>
+                Restart!
+            </OnClickButton>
         </div>
     )
 }
@@ -83,7 +89,13 @@ const MoveHistory = ({ numberOfSnapshots, onLoadBoardSnapshot, currentSnapshotId
     const buttons = buttonIterator.map((_, i) => {
         const disabled = i === currentSnapshotId
         const onClick = disabled ? null : () => onLoadBoardSnapshot(i)
-        return <DefaultButton key={i} {...{ onClick, disabled, children: i }} />
+        const style = { width: "30px", height: "30px", margin: "3px" }
+        const label = `go to board state move # ${i}`
+        return (
+            <OnClickButton key={i} {...{ onClick, disabled, style }} aria-label={label}>
+                {i}
+            </OnClickButton>
+        )
     })
 
     return (
