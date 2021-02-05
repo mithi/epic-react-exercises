@@ -33,8 +33,8 @@
 
 .menu {
     position: absolute;
-    top: 5px;
-    left: 80px;
+    top: 20px;
+    left: 90px;
     z-index: 1;
     display: flex;
     flex-direction: column;
@@ -121,11 +121,11 @@
     }
 
     .menu {
-        width: 100%;
-        top: 80px;
-        margin: 0px;
-        padding: 10px 0px;
         left: 0px;
+        top: 80px;
+        width: 100%;
+        margin: 0px;
+        padding: 10px;
         z-index: 1;
         composes: div0;
     }

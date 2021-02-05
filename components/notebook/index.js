@@ -13,29 +13,34 @@ import NotebookLayout from "../main/two-sections"
 import { PrettyHeader } from "../pretty-defaults"
 
 const EPIC_NOTES_REPO_URL = "https://github.com/mithi/epic-notes"
+const KOFI_URL = "https://ko-fi.com/minimithi"
+
+const PageButton = ({ pageId, pathname, currentPageId }) => {
+    const buttonPathname = `${pathname}/${pageId === 1 ? "" : pageId}`
+    const disabled = pageId === currentPageId
+    const label = `go to page ${pageId} of section: ${pathname}`
+
+    return (
+        <LinkButton
+            key={buttonPathname}
+            disabled={disabled}
+            href={buttonPathname}
+            aria-label={label}
+            style={{ height: "30px", width: "30px", margin: "2px" }}
+        >
+            {pageId}
+        </LinkButton>
+    )
+}
 
 const Pagination = ({ numberOfPages, currentPageId, pathname }) => {
-    return (
-        <div className={styles.pagination}>
-            {Array.from(Array(numberOfPages).keys()).map(i => {
-                const pageId = i + 1
-                const buttonPathname = `${pathname}/${pageId === 1 ? "" : pageId}`
-                const disabled = pageId === currentPageId
-                const label = `go to page ${pageId} of section: ${pathname}`
-                return (
-                    <LinkButton
-                        key={buttonPathname}
-                        disabled={disabled}
-                        href={buttonPathname}
-                        aria-label={label}
-                        style={{ height: "30px", width: "30px", margin: "2px" }}
-                    >
-                        {pageId}
-                    </LinkButton>
-                )
-            })}
-        </div>
-    )
+    const pageButtons = Array.from(Array(numberOfPages).keys()).map(key => (
+        <PageButton
+            key={pathname + key}
+            {...{ pageId: key + 1, pathname, currentPageId }}
+        />
+    ))
+    return <div className={styles.pagination}>{pageButtons}</div>
 }
 
 const BUTTON_STYLE = {
@@ -48,7 +53,14 @@ const BUTTON_STYLE = {
     fontSize: "15px",
 }
 
-const Header = ({ title, deployedSite, repository, editPath }) => {
+const BUTTON_CONTAINER_STYLE = {
+    display: "flex",
+    justifyContent: "flex-start",
+    marginBottom: "10px",
+}
+
+const Header = ({ properties, editPath }) => {
+    const { deployedSite, repository, title } = properties
     let repositoryButton = null
     if (repository) {
         repositoryButton = (
@@ -75,59 +87,56 @@ const Header = ({ title, deployedSite, repository, editPath }) => {
         )
     }
 
+    const editButton = (
+        <LinkOutButton
+            href={`${EPIC_NOTES_REPO_URL}/edit/main/content/${editPath}`}
+            style={BUTTON_STYLE}
+            aria-label={"edit this page"}
+        >
+            <BsPencilSquare />
+        </LinkOutButton>
+    )
+
     return (
         <div className={styles.header}>
             <PrettyHeader Component="h1" style={{ marginRight: "10px" }}>
                 {title}
             </PrettyHeader>
-            <div
-                style={{
-                    display: "flex",
-                    justifyContent: "flex-start",
-                    marginBottom: "10px",
-                }}
-            >
+            <div style={BUTTON_CONTAINER_STYLE}>
                 {deployedSiteButton}
                 {repositoryButton}
-                <LinkOutButton
-                    href={`${EPIC_NOTES_REPO_URL}/edit/main/content/${editPath}`}
-                    style={BUTTON_STYLE}
-                    aria-label={"edit this page"}
-                >
-                    <BsPencilSquare />
-                </LinkOutButton>
+                {editButton}
             </div>
         </div>
     )
 }
 
+const FOOTER_CONTAINER_STYLE = {
+    display: "flex",
+    justifyContent: "center",
+    marginTop: "20px",
+}
+
+const HOME_STYLE = { height: "50px", width: "50px", margin: "10px" }
+
 const ArticleFooter = ({ editPath }) => {
     const issueUrl = `${EPIC_NOTES_REPO_URL}/issues/new?title=Something%20wrong%20in:%20${editPath}`
+    const editUrl = `${EPIC_NOTES_REPO_URL}/edit/main/content/${editPath}/notes.url`
     return (
-        <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
-            <LinkOutButton aria-label={"report a bug"} href={issueUrl}>
+        <div style={FOOTER_CONTAINER_STYLE}>
+            <LinkOutButton aria-label="report a bug" href={issueUrl}>
                 <FaBug />
             </LinkOutButton>
-            <LinkOutButton
-                href={`${EPIC_NOTES_REPO_URL}/edit/main/content/${editPath}`}
-                aria-label={"edit this page"}
-            >
+            <LinkOutButton href={editUrl} aria-label="edit this page">
                 <BsPencilSquare />
             </LinkOutButton>
-            <LinkOutButton href={EPIC_NOTES_REPO_URL} aria-label={"star me on github"}>
+            <LinkOutButton href={EPIC_NOTES_REPO_URL} aria-label="star me on github">
                 <GoOctoface />
             </LinkOutButton>
-            <LinkOutButton
-                href="https://ko-fi.com/minimithi"
-                aria-label={"buy me a coffee"}
-            >
+            <LinkOutButton href={KOFI_URL} aria-label="buy me a coffee">
                 <BiCoffeeTogo />
             </LinkOutButton>
-            <LinkButton
-                aria-label={"home"}
-                href="/"
-                style={{ height: "50px", width: "50px", margin: "10px" }}
-            >
+            <LinkButton aria-label="home" href="/" style={HOME_STYLE}>
                 <FaHome />
             </LinkButton>
         </div>
@@ -144,7 +153,6 @@ const PageLayout = ({
     section,
 }) => {
     const currentPageId = Math.max(1, Math.min(Number(pageId) || 1, numberOfPages))
-    const { deployedSite, repository, title } = properties
 
     const App = useMemo(
         () =>
@@ -157,7 +165,7 @@ const PageLayout = ({
         [hasApp, topic, section, pageId]
     )
 
-    const editPath = `${topic}/${section}/${pageId}/notes.md`
+    const editPath = `${topic}/${section}/${pageId}/`
     const article = (
         <article>
             {notes}
@@ -169,9 +177,7 @@ const PageLayout = ({
         <>
             <Header
                 {...{
-                    title,
-                    deployedSite,
-                    repository,
+                    properties,
                     editPath,
                 }}
             />

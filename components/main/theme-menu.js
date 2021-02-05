@@ -32,124 +32,175 @@ const HEADER_STYLE = {
 
 const COLOR_LINE_STYLE = { width: "100%", height: "5px" }
 
-const SAMPLE_CODE = "```python\n def hello():\n    return 'world!'"
-const SAMPLE_PARAGRAPH = `Click on any of the sample elements
-to change its style. Customize its primary color, header font, body font, code
-theme, and page theme!`
-
 const DynamicMarkdownRender = dynamic(() => import("components/markdown-render"), {
     // eslint-disable-next-line react/display-name
     loading: () => <SpinnerDots />,
 })
 
-const Menu = ({ style } = {}) => {
-    const { changeMenuState } = useMenuState()
+const ChooseThemeIcons = () => {
     const {
         nextColor,
         nextHeaderFont,
         nextCodeTheme,
         nextBodyFont,
         nextPageTheme,
-        primaryColor,
-        bodyFont,
-        onHoverClassName,
-        bodyClassNames,
         sectionClassNames,
     } = useTheme()
 
     return (
-        <section className={styles.menu} style={{ ...style }}>
-            <div
-                style={{
-                    border: `1px dotted ${primaryColor}`,
-                    marginBottom: "30px",
-                }}
-                className={[bodyClassNames[0], styles.themeMenu].join(" ")}
-                aria-label={"change main color"}
+        <div className={sectionClassNames[0]} style={ICONS_CONTAINER_STYLE}>
+            <OnClickButton
+                onClick={nextPageTheme}
+                style={ICON_BUTTON_STYLE}
+                aria-label="change page theme"
             >
-                {/** for accessibility **/}
-                <PrettyHeader Component="h1" style={{ fontSize: "15px", margin: "10px" }}>
-                    Theme Menu
-                </PrettyHeader>
+                <FaCloudSun />
+            </OnClickButton>
 
-                <div
-                    onClick={nextColor}
-                    className={onHoverClassName}
-                    style={{ height: "10px", marginTop: "5px" }}
-                >
-                    <div
-                        style={{ ...COLOR_LINE_STYLE, backgroundColor: primaryColor }}
-                    ></div>
-                </div>
+            <OnClickButton
+                onClick={nextColor}
+                style={ICON_BUTTON_STYLE}
+                aria-label="change main color"
+            >
+                <FaPaintBrush />
+            </OnClickButton>
+            <OnClickButton
+                onClick={nextHeaderFont}
+                style={ICON_BUTTON_STYLE}
+                aria-label="change header font"
+            >
+                <CgFormatColor />
+            </OnClickButton>
+            <OnClickButton
+                onClick={nextBodyFont}
+                style={ICON_BUTTON_STYLE}
+                aria-label="change body font"
+            >
+                <BiText />
+            </OnClickButton>
+            <OnClickButton
+                onClick={nextCodeTheme}
+                style={ICON_BUTTON_STYLE}
+                aria-label="change code theme"
+            >
+                <FaCode />
+            </OnClickButton>
+        </div>
+    )
+}
 
-                <PrettyHeader
-                    onClick={nextHeaderFont}
-                    className={onHoverClassName}
-                    style={HEADER_STYLE}
-                    Component="h2"
-                >
-                    Heading
-                </PrettyHeader>
+const ChooseColor = () => {
+    const { nextColor, primaryColor, onHoverClassName } = useTheme()
+    return (
+        <div
+            onClick={nextColor}
+            className={onHoverClassName}
+            style={{ height: "10px", marginTop: "5px" }}
+        >
+            <div style={{ ...COLOR_LINE_STYLE, backgroundColor: primaryColor }}></div>
+        </div>
+    )
+}
 
-                <p
-                    onClick={nextBodyFont}
-                    className={onHoverClassName}
-                    style={{ ...PARAGRAPH_STYLE, fontFamily: bodyFont, margin: "0px" }}
-                >
-                    {SAMPLE_PARAGRAPH}
-                </p>
+const ChooseHeader = () => {
+    const { nextHeaderFont, onHoverClassName } = useTheme()
+    return (
+        <PrettyHeader
+            onClick={nextHeaderFont}
+            className={onHoverClassName}
+            style={HEADER_STYLE}
+            Component="h2"
+        >
+            Heading
+        </PrettyHeader>
+    )
+}
 
-                <div
-                    style={{ padding: "5px", borderRadius: "5px", marginBottom: "10px" }}
-                    onClick={nextCodeTheme}
-                >
-                    <DynamicMarkdownRender>{SAMPLE_CODE}</DynamicMarkdownRender>
-                </div>
+const SAMPLE_PARAGRAPH = `Click on any of the sample elements
+to change its style. Customize its primary color, header font, body font, code
+theme, and page theme!`
 
-                <div className={sectionClassNames[0]} style={ICONS_CONTAINER_STYLE}>
-                    <OnClickButton
-                        onClick={nextPageTheme}
-                        style={ICON_BUTTON_STYLE}
-                        aria-label={"change page theme"}
-                    >
-                        <FaCloudSun />
-                    </OnClickButton>
+const ChooseParagraph = () => {
+    const { nextBodyFont, bodyFont, onHoverClassName } = useTheme()
 
-                    <OnClickButton
-                        onClick={nextColor}
-                        style={ICON_BUTTON_STYLE}
-                        aria-label={"change main color"}
-                    >
-                        <FaPaintBrush />
-                    </OnClickButton>
-                    <OnClickButton
-                        onClick={nextHeaderFont}
-                        style={ICON_BUTTON_STYLE}
-                        aria-label={"change header font"}
-                    >
-                        <CgFormatColor />
-                    </OnClickButton>
-                    <OnClickButton
-                        onClick={nextBodyFont}
-                        style={ICON_BUTTON_STYLE}
-                        aria-label={"change body font"}
-                    >
-                        <BiText />
-                    </OnClickButton>
-                    <OnClickButton
-                        onClick={nextCodeTheme}
-                        style={ICON_BUTTON_STYLE}
-                        aria-label={"change code theme"}
-                    >
-                        <FaCode />
-                    </OnClickButton>
-                </div>
-                <div style={{ margin: "15px", textAlign: "center" }}>
-                    <OnClickText onClick={() => changeMenuState("none")}>
-                        [close]
-                    </OnClickText>
-                </div>
-            </div>
+    return (
+        <p
+            onClick={nextBodyFont}
+            className={onHoverClassName}
+            style={{ ...PARAGRAPH_STYLE, fontFamily: bodyFont, margin: "0px" }}
+        >
+            {SAMPLE_PARAGRAPH}
+        </p>
+    )
+}
+
+const SAMPLE_CODE = "```python\n def hello():\n    return 'world!'"
+
+const ChooseCode = () => {
+    const { nextCodeTheme } = useTheme()
+
+    return (
+        <div
+            style={{ padding: "5px", borderRadius: "5px", marginBottom: "10px" }}
+            onClick={nextCodeTheme}
+        >
+            <DynamicMarkdownRender>{SAMPLE_CODE}</DynamicMarkdownRender>
+        </div>
+    )
+}
+
+const CloseThemeMenu = () => {
+    const { changeMenuState } = useMenuState()
+    return (
+        <div style={{ margin: "15px", textAlign: "center" }}>
+            <OnClickText onClick={() => changeMenuState("none")}>[close]</OnClickText>
+        </div>
+    )
+}
+
+const ChooseTheme = () => {
+    const themes = ["DARK, LIGHT", "FUNKY"]
+    const { themeId, nextPageTheme } = useTheme()
+
+    return (
+        <PrettyHeader
+            Component="h1"
+            onClick={nextPageTheme}
+            style={{ fontSize: "15px", margin: "10px" }}
+        >
+            Theme Menu: {themes[themeId]}
+        </PrettyHeader>
+    )
+}
+
+const MenuContainer = ({ children }) => {
+    const { primaryColor, bodyClassNames } = useTheme()
+
+    return (
+        <div
+            style={{
+                border: `1px dotted ${primaryColor}`,
+                marginBottom: "30px",
+            }}
+            className={[bodyClassNames[0], styles.themeMenu].join(" ")}
+        >
+            {children}
+        </div>
+    )
+}
+
+const Menu = ({ style } = {}) => {
+    return (
+        <section className={styles.menu} style={{ ...style }}>
+            <MenuContainer>
+                <ChooseTheme />
+                <ChooseColor />
+                <ChooseHeader />
+                <ChooseParagraph />
+                <ChooseCode />
+                <ChooseThemeIcons />
+                <CloseThemeMenu />
+            </MenuContainer>
         </section>
     )
 }
