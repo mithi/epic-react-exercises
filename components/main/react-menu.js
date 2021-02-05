@@ -11,8 +11,9 @@ const Button = ({ children, section }) => {
                 style: {
                     width: "auto",
                     height: "auto",
-                    borderRadius: "15px",
-                    padding: "20px",
+                    borderRadius: "10px",
+                    fontSize: "20px",
+                    padding: "14px",
                     margin: "5px",
                     textAlign: "left",
                     lineHeight: "1",
