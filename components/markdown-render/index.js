@@ -3,7 +3,12 @@ import { useState } from "react"
 import { useTheme } from "hooks"
 import ReactMarkdown from "react-markdown"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
-import { PrettyHeader, PrettyLink, PrettyAnchor } from "components/pretty-defaults"
+import {
+    PrettyHeader,
+    PrettyLink,
+    PrettyAnchor,
+    OnClickText,
+} from "components/pretty-defaults"
 
 const Code = ({ children, language }) => {
     const { codeTheme } = useTheme()
@@ -29,11 +34,11 @@ const Code = ({ children, language }) => {
                 marginBottom: "20px",
             }}
         >
-            <PrettyAnchor onClick={() => setShowCode(!showCode)}>
+            <OnClickText onClick={() => setShowCode(!showCode)}>
                 <PrettyHeader style={{ paddingLeft: "5px" }}>
                     {showCode ? "Hide Code" : "Show Code"}
                 </PrettyHeader>
-            </PrettyAnchor>
+            </OnClickText>
             {showCode ? codeBlock : null}
         </div>
     )

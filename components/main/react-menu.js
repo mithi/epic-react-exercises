@@ -1,6 +1,6 @@
 import styles from "./Styles.module.css"
 import { LinkButton } from "../button"
-import { PrettyHeader, PrettyAnchor, PrettyLink } from "../pretty-defaults"
+import { PrettyHeader, PrettyLink, OnClickText } from "../pretty-defaults"
 import { useMenuState } from "hooks"
 
 const Button = ({ children, section }) => {
@@ -29,13 +29,12 @@ const Menu = ({ style, showCloseButton = true } = {}) => {
     const { changeMenuState } = useMenuState()
 
     const maybeCloseButton = showCloseButton ? (
-        <PrettyAnchor
+        <OnClickText
             style={{ marginTop: "5px", marginLeft: "10px" }}
-            href="#"
             onClick={() => changeMenuState("none")}
         >
             [close]
-        </PrettyAnchor>
+        </OnClickText>
     ) : null
     return (
         <section

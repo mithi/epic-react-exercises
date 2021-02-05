@@ -1,6 +1,5 @@
 import { OnClickButton } from "components/button"
-import { PrettyAnchor, PrettyInputField } from "components/pretty-defaults"
-// import { SiPokemon } from "react-icons/si"
+import { OnClickText, PrettyInputField } from "components/pretty-defaults"
 
 const ICON_STYLE = {
     width: "32%",
@@ -32,11 +31,7 @@ const FetchSubmitButton = ({ disabled }) => (
 )
 
 const PokemonSuggestion = ({ name, buttonSubmit }) => {
-    return (
-        <PrettyAnchor onClick={() => buttonSubmit(name)} href="#">
-            {name}
-        </PrettyAnchor>
-    )
+    return <OnClickText onClick={() => buttonSubmit(name)}>{name}</OnClickText>
 }
 
 const PokemonSearchSection = ({ onSubmit, setIncompleteName, incompleteName }) => {

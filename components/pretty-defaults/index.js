@@ -9,15 +9,24 @@ const PrettyHeader = ({ style, children, Component, ...otherProps }) => {
     return <Component {...{ style, ...otherProps }}>{children}</Component>
 }
 
-const PrettyAnchor = ({ children, onClick, href, style, ...otherProps }) => {
+const PrettyAnchor = ({ children, href, style, ...otherProps }) => {
     const { primaryColor } = useTheme()
     return (
-        <a
-            style={{ color: primaryColor, ...style }}
-            {...{ onClick, href: href ? href : "#", ...otherProps }}
-        >
+        <a style={{ color: primaryColor, ...style }} {...{ href, ...otherProps }}>
             {children}
         </a>
+    )
+}
+
+const OnClickText = ({ children, onClick, style, ...otherProps }) => {
+    const { primaryColor, bodyFont } = useTheme()
+    return (
+        <button
+            {...{ onClick, ...otherProps }}
+            style={{ color: primaryColor, fontFamily: bodyFont, ...style }}
+        >
+            {children}
+        </button>
     )
 }
 
@@ -125,4 +134,5 @@ export {
     BorderedDiv,
     PrettyLink,
     PositiveIntegerSearchbar,
+    OnClickText,
 }

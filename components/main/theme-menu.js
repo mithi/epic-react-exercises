@@ -4,7 +4,7 @@ import { FaCloudSun, FaCode, FaPaintBrush } from "react-icons/fa"
 import { CgFormatColor } from "react-icons/cg"
 import { BiText } from "react-icons/bi"
 import { OnClickButton } from "../button"
-import { PrettyAnchor, PrettyHeader } from "../pretty-defaults"
+import { OnClickText, PrettyHeader } from "../pretty-defaults"
 import { useTheme, useMenuState } from "hooks"
 import { SpinnerDots } from "components/spinner"
 
@@ -145,9 +145,9 @@ const Menu = ({ style } = {}) => {
                     </OnClickButton>
                 </div>
                 <div style={{ margin: "15px", textAlign: "center" }}>
-                    <PrettyAnchor href="#" onClick={() => changeMenuState("none")}>
+                    <OnClickText onClick={() => changeMenuState("none")}>
                         [close]
-                    </PrettyAnchor>
+                    </OnClickText>
                 </div>
             </div>
         </section>

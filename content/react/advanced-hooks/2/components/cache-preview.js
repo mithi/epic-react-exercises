@@ -1,4 +1,4 @@
-import { PrettyAnchor } from "components/pretty-defaults"
+import { OnClickText } from "components/pretty-defaults"
 import { OnClickButton } from "components/button"
 
 import { useRickAndMortyCache } from "./use-rick-and-morty"
@@ -24,9 +24,9 @@ const CacheButton = ({ label, imageUrl, onClick, active }) => (
 
 const CacheAction = ({ onClick, children }) => (
     <>
-        <PrettyAnchor style={{ fontSize: "12px" }} onClick={onClick}>
+        <OnClickText style={{ fontSize: "12px" }} onClick={onClick}>
             {children}
-        </PrettyAnchor>
+        </OnClickText>
         <br />
     </>
 )
