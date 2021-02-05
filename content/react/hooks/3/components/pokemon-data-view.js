@@ -42,7 +42,7 @@ const ERROR_BUTTON_STYLE = {
 
 const ROW_STYLE = {
     padding: "10px",
-    minWidth: "100px",
+    minWidth: "75px",
     fontSize: "14px",
     textAlign: "center",
 }
@@ -172,7 +172,7 @@ const PokemonDataView = ({
             {image}
             <table>
                 <thead>
-                    <tr style={{ ...trStyle, fontSize: "20px" }}>
+                    <tr style={{ ...trStyle, fontSize: "15px" }}>
                         <PrettyHeader Component="th">Ability</PrettyHeader>
                         <PrettyHeader Component="th">Type</PrettyHeader>
                         <PrettyHeader Component="th">Damage</PrettyHeader>

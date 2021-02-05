@@ -94,7 +94,7 @@ const Menu = ({ style } = {}) => {
                 <p
                     onClick={nextBodyFont}
                     className={onHoverClassName}
-                    style={{ ...PARAGRAPH_STYLE, fontFamily: bodyFont }}
+                    style={{ ...PARAGRAPH_STYLE, fontFamily: bodyFont, margin: "0px" }}
                 >
                     {SAMPLE_PARAGRAPH}
                 </p>

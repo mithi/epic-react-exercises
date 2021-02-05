@@ -108,13 +108,14 @@ function App() {
                     disableInputField={disabledByPending}
                     submitButtonStyle={{
                         height: "35px",
-                        width: "auto",
+                        width: "45%",
                         borderRadius: "10px",
                         margin: "0px",
                         padding: "10px 10px",
                         fontSize: "12px",
                     }}
-                    inputFieldStyle={{ height: "35px", width: "140px", margin: "5px" }}
+                    style={{ width: "auto" }}
+                    inputFieldStyle={{ height: "35px", width: "50%", margin: "5px" }}
                     submitButtonContent={
                         <>
                             <GiClick />
