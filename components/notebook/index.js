@@ -16,7 +16,7 @@ const EPIC_NOTES_REPO_URL = "https://github.com/mithi/epic-notes"
 const KOFI_URL = "https://ko-fi.com/minimithi"
 
 const PageButton = ({ pageId, pathname, currentPageId }) => {
-    const buttonPathname = `${pathname}/${pageId === 1 ? "" : pageId}`
+    const buttonPathname = `${pathname}/${pageId}`
     const disabled = pageId === currentPageId
     const label = `go to page ${pageId} of section: ${pathname}`
 
