@@ -28,6 +28,7 @@ const Pagination = ({ numberOfPages, currentPageId, pathname }) => {
                         disabled={disabled}
                         href={buttonPathname}
                         aria-label={label}
+                        style={{ height: "30px", width: "30px", margin: "2px" }}
                     >
                         {pageId}
                     </LinkButton>
