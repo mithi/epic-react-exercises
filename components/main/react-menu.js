@@ -49,7 +49,6 @@ const Menu = ({ style, showCloseButton = true } = {}) => {
             style={{ paddingRight: "30px", ...style }}
         >
             {REACT_MENU_HEADER}
-
             <Button section="fundamentals">1. React Fundamentals</Button>
             <Button section="hooks">2. React Hooks</Button>
             <Button section="advanced-hooks">3. Advanced React Hooks</Button>

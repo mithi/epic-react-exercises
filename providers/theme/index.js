@@ -108,6 +108,7 @@ const ThemeProvider = ({ children }) => {
                 headerFont,
                 primaryColor,
                 codeTheme,
+                themeId,
                 nextBodyFont,
                 nextPageTheme,
                 nextColor,
