@@ -9,7 +9,7 @@ function MyApp({ Component, pageProps }) {
     return (
         <ThemeProvider>
             <Head>
-                <title>🌷 {`Mithi's`} Epic Notes</title>
+                <title>{`Mithi's`} Epic Notes: Javascript, React and More</title>
                 <link
                     rel="icon"
                     type="image/png"
