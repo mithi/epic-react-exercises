@@ -36,7 +36,7 @@ const FETCH_BUTTON_CONTENT = (
 const RandomButton = ({ onClick, disabled }) => (
     <OnClickButton
         style={{ height: "35px", width: "35px", margin: "0px" }}
-        aria-label="random-button"
+        aria-label="fetch a random rick and morty character"
         {...{ onClick, disabled }}
     >
         <GiPerspectiveDiceSixFacesRandom />

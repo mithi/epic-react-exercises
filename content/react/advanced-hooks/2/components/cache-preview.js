@@ -3,11 +3,12 @@ import { OnClickButton } from "components/button"
 
 import { useRickAndMortyCache } from "./use-rick-and-morty"
 
-const CacheButton = ({ imageUrl, onClick, active }) => (
+const CacheButton = ({ label, imageUrl, onClick, active }) => (
     <OnClickButton
         disabled={active}
         style={{ width: "35px", height: "35px", margin: "2px", borderRadius: "5px" }}
         onClick={onClick}
+        aria-label={`load ${label}`}
     >
         <img
             src={imageUrl}
@@ -47,6 +48,7 @@ const RickAndMortyCachePreview = ({ setId, id }) => {
     const buttons = cacheKeys.map(i => (
         <CacheButton
             key={cache[i].name}
+            label={cache[i].name}
             imageUrl={cache[i].imageUrl}
             onClick={() => setId(i)}
             active={i === id}

@@ -21,12 +21,13 @@ const Pagination = ({ numberOfPages, currentPageId, pathname }) => {
                 const pageId = i + 1
                 const buttonPathname = `${pathname}/${pageId === 1 ? "" : pageId}`
                 const disabled = pageId === currentPageId
-
+                const label = `go to page ${pageId} of section: ${pathname}`
                 return (
                     <LinkButton
                         key={buttonPathname}
                         disabled={disabled}
                         href={buttonPathname}
+                        aria-label={label}
                     >
                         {pageId}
                     </LinkButton>

@@ -11,7 +11,12 @@ const Board = ({ currentBoard, onPlayerMove, disableButtons }) => {
         const onClick = disabled ? null : () => onPlayerMove(i)
         const children = player ? player : "."
         const style = { fontSize: "50px", height: "75px", width: "75px", margin: "5px" }
-        return <OnClickButton {...{ onClick, disabled, style }}>{children}</OnClickButton>
+        const label = `TictacToe button # ${i}`
+        return (
+            <OnClickButton {...{ onClick, disabled, style }} aria-label={label}>
+                {children}
+            </OnClickButton>
+        )
     }
 
     return (
@@ -71,6 +76,7 @@ const RestartButton = ({ onRestart }) => {
                 }}
                 useBgPrimaryColor={true}
                 onClick={onRestart}
+                aria-label={"restart tictactoe game"}
             >
                 Restart!
             </OnClickButton>
@@ -84,8 +90,9 @@ const MoveHistory = ({ numberOfSnapshots, onLoadBoardSnapshot, currentSnapshotId
         const disabled = i === currentSnapshotId
         const onClick = disabled ? null : () => onLoadBoardSnapshot(i)
         const style = { width: "30px", height: "30px", margin: "3px" }
+        const label = `go to board state move # ${i}`
         return (
-            <OnClickButton key={i} {...{ onClick, disabled, style }}>
+            <OnClickButton key={i} {...{ onClick, disabled, style }} aria-label={label}>
                 {i}
             </OnClickButton>
         )

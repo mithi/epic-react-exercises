@@ -126,7 +126,7 @@ function App() {
                     onClick={setRandomValue}
                     style={{ height: "35px", width: "35px", marginLeft: "5px" }}
                     disabled={disabledByPending}
-                    aria-label="random-button"
+                    aria-label="fetch a random rick and morty character"
                 >
                     <GiPerspectiveDiceSixFacesRandom />
                 </OnClickButton>
