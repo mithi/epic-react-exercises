@@ -89,6 +89,21 @@ const ChooseThemeIcons = () => {
     )
 }
 
+const ChooseTheme = () => {
+    const themes = ["(dark) 🌙", "(light) 🔆", "(funky) 🏖️"]
+    const { themeId, nextPageTheme } = useTheme()
+
+    return (
+        <PrettyHeader
+            Component="h1"
+            onClick={nextPageTheme}
+            style={{ fontSize: "15px", margin: "10px" }}
+        >
+            Theme Menu {themes[themeId]}
+        </PrettyHeader>
+    )
+}
+
 const ChooseColor = () => {
     const { nextColor, primaryColor, onHoverClassName } = useTheme()
     return (
@@ -155,21 +170,6 @@ const CloseThemeMenu = () => {
         <div style={{ margin: "15px", textAlign: "center" }}>
             <OnClickText onClick={() => changeMenuState("none")}>[close]</OnClickText>
         </div>
-    )
-}
-
-const ChooseTheme = () => {
-    const themes = ["DARK, LIGHT", "FUNKY"]
-    const { themeId, nextPageTheme } = useTheme()
-
-    return (
-        <PrettyHeader
-            Component="h1"
-            onClick={nextPageTheme}
-            style={{ fontSize: "15px", margin: "10px" }}
-        >
-            Theme Menu: {themes[themeId]}
-        </PrettyHeader>
     )
 }
 
