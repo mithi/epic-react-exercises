@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { useTheme } from "hooks"
-import { TextButton } from "../button"
+import { OnClickButton } from "../button"
 
 const PrettyHeader = ({ style, children, Component, ...otherProps }) => {
     Component = Component ? Component : "div"
@@ -105,7 +105,7 @@ const PositiveIntegerSearchbar = ({
                 style={inputFieldStyle}
                 disabled={disableInputField}
             />
-            <TextButton
+            <OnClickButton
                 type="submit"
                 disabled={disableButton}
                 useBgPrimaryColor={true}
@@ -113,7 +113,7 @@ const PositiveIntegerSearchbar = ({
                 style={submitButtonStyle}
             >
                 {submitButtonContent ? submitButtonContent : "submit"}
-            </TextButton>
+            </OnClickButton>
         </form>
     )
 }

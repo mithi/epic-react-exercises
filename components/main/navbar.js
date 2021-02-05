@@ -7,7 +7,7 @@ import { GoOctoface } from "react-icons/go"
 import { MdSettings } from "react-icons/md"
 import { BiCoffeeTogo } from "react-icons/bi"
 import { FaReact } from "react-icons/fa"
-import { IconButton, LinkAwayIconButton } from "../button"
+import { LinkOutButton, OnClickButton } from "../button"
 import ReactMenu from "./react-menu"
 import ThemeMenu from "./theme-menu"
 
@@ -50,30 +50,30 @@ const NavInner = () => {
         <>
             <nav className={[styles.nav, ...sectionClassNames].join(" ")}>
                 <div className={styles.navButtonsContainer}>
-                    <IconButton
+                    <OnClickButton
                         onClick={() => changeMenuState("react")}
                         aria-label={"react menu"}
                     >
                         <FaReact />
-                    </IconButton>
-                    <IconButton
+                    </OnClickButton>
+                    <OnClickButton
                         onClick={() => changeMenuState("theme")}
                         aria-label={"theme menu"}
                     >
                         <MdSettings />
-                    </IconButton>
-                    <LinkAwayIconButton
+                    </OnClickButton>
+                    <LinkOutButton
                         href="https://github.com/mithi"
                         aria-label={"follow me on github"}
                     >
                         <GoOctoface />
-                    </LinkAwayIconButton>
-                    <LinkAwayIconButton
+                    </LinkOutButton>
+                    <LinkOutButton
                         href="https://ko-fi.com/minimithi"
                         aria-label={"buy me a coffee"}
                     >
                         <BiCoffeeTogo />
-                    </LinkAwayIconButton>
+                    </LinkOutButton>
                 </div>
             </nav>
             <MenuModal />

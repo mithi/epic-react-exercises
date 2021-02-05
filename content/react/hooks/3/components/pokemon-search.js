@@ -1,4 +1,4 @@
-import { TextButton } from "components/button"
+import { OnClickButton } from "components/button"
 import { PrettyAnchor, PrettyInputField } from "components/pretty-defaults"
 // import { SiPokemon } from "react-icons/si"
 
@@ -10,7 +10,7 @@ const ICON_STYLE = {
 }
 
 const FetchSubmitButton = ({ disabled }) => (
-    <TextButton
+    <OnClickButton
         isInvertedColor={true}
         style={ICON_STYLE}
         type="submit"
@@ -28,7 +28,7 @@ const FetchSubmitButton = ({ disabled }) => (
         >
             Fetch!
         </div>
-    </TextButton>
+    </OnClickButton>
 )
 
 const PokemonSuggestion = ({ name, buttonSubmit }) => {

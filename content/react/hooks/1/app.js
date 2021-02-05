@@ -1,5 +1,5 @@
 import { useStickyState } from "hooks"
-import { TextButton, DefaultButton } from "components/button"
+import { OnClickButton } from "components/button"
 import { PrettyHeader } from "components/pretty-defaults"
 const X_PLAYER = "X"
 const O_PLAYER = "O"
@@ -11,7 +11,7 @@ const Board = ({ currentBoard, onPlayerMove, disableButtons }) => {
         const onClick = disabled ? null : () => onPlayerMove(i)
         const children = player ? player : "."
         const style = { fontSize: "50px", height: "75px", width: "75px", margin: "5px" }
-        return <DefaultButton {...{ onClick, disabled, style, children }} />
+        return <OnClickButton {...{ onClick, disabled, style }}>{children}</OnClickButton>
     }
 
     return (
@@ -58,7 +58,7 @@ const BoardStatus = ({ winnerIfAny, gameFinished, playerToMove }) => {
 const RestartButton = ({ onRestart }) => {
     return (
         <div style={{ display: "flex", width: "100%", justifyContent: "center" }}>
-            <TextButton
+            <OnClickButton
                 isInvertedColor={true}
                 disabled={!onRestart}
                 style={{
@@ -72,8 +72,8 @@ const RestartButton = ({ onRestart }) => {
                 useBgPrimaryColor={true}
                 onClick={onRestart}
             >
-                <PrettyHeader Component={"span"}>Restart!</PrettyHeader>
-            </TextButton>
+                Restart!
+            </OnClickButton>
         </div>
     )
 }
@@ -85,9 +85,9 @@ const MoveHistory = ({ numberOfSnapshots, onLoadBoardSnapshot, currentSnapshotId
         const onClick = disabled ? null : () => onLoadBoardSnapshot(i)
         const style = { width: "30px", height: "30px", margin: "3px" }
         return (
-            <DefaultButton key={i} {...{ onClick, disabled, style }}>
+            <OnClickButton key={i} {...{ onClick, disabled, style }}>
                 {i}
-            </DefaultButton>
+            </OnClickButton>
         )
     })
 

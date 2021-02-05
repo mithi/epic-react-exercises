@@ -80,7 +80,7 @@ const useDefaultButtonStyle = (disabled, style) => {
     }
 }
 
-// children, href, onclick, disabled, classname, style, otherprops
+// children, href, onClick, disabled, className, style, otherProps
 
 const LinkButton = ({ children, href, disabled, className, style, ...otherProps }) => {
     className = useButtonClasses(className, disabled)
@@ -96,7 +96,7 @@ const LinkButton = ({ children, href, disabled, className, style, ...otherProps 
     )
 }
 
-const LinkAwayIconButton = ({ children, href, className, style, ...otherProps }) => {
+const LinkOutButton = ({ children, href, className, style, ...otherProps }) => {
     className = useButtonClasses(className)
     style = useDefaultButtonStyle(false, { ...ICON_STYLE, ...style })
     return (
@@ -106,17 +106,7 @@ const LinkAwayIconButton = ({ children, href, className, style, ...otherProps })
     )
 }
 
-/*
-
-    0. LinkButton
-    1. LinkAwayIconButton -----> LinkAwayButton
-    2. TextButton ----> OnClickButton
-        IconButton
-        DefaultButton
-    3. PrettyAnchor ---> InvisibleButton
- */
-
-const TextButton = ({
+const OnClickButton = ({
     children,
     onClick,
     disabled,
@@ -142,12 +132,4 @@ const TextButton = ({
     )
 }
 
-const IconButton = ({ ...props }) => {
-    return <TextButton {...props} />
-}
-
-const DefaultButton = ({ ...props }) => {
-    return <TextButton {...props} />
-}
-
-export { LinkAwayIconButton, IconButton, TextButton, DefaultButton, LinkButton }
+export { LinkOutButton, OnClickButton, LinkButton }

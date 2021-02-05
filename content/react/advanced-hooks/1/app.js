@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { GiPerspectiveDiceSixFacesRandom, GiClick } from "react-icons/gi"
 import { delayedFetchRickAndMorty } from "fetch-utils"
-import { DefaultButton } from "components/button"
+import { OnClickButton } from "components/button"
 import { BorderedDiv, PositiveIntegerSearchbar } from "components/pretty-defaults"
 import { ErrorView, PendingView, IdleView } from "./components/views"
 import InfoView from "./components/info-view"
@@ -122,14 +122,14 @@ function App() {
                         </>
                     }
                 />
-                <DefaultButton
+                <OnClickButton
                     onClick={setRandomValue}
                     style={{ height: "35px", width: "35px", marginLeft: "5px" }}
                     disabled={disabledByPending}
                     aria-label="random-button"
                 >
                     <GiPerspectiveDiceSixFacesRandom />
-                </DefaultButton>
+                </OnClickButton>
             </div>
 
             <RickAndMortyInfoCard

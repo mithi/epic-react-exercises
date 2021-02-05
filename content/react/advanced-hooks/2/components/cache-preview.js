@@ -1,10 +1,10 @@
 import { PrettyAnchor } from "components/pretty-defaults"
-import { DefaultButton } from "components/button"
+import { OnClickButton } from "components/button"
 
 import { useRickAndMortyCache } from "./use-rick-and-morty"
 
 const CacheButton = ({ imageUrl, onClick, active }) => (
-    <DefaultButton
+    <OnClickButton
         disabled={active}
         style={{ width: "35px", height: "35px", margin: "2px", borderRadius: "5px" }}
         onClick={onClick}
@@ -18,7 +18,7 @@ const CacheButton = ({ imageUrl, onClick, active }) => (
                 margin: "5px",
             }}
         />
-    </DefaultButton>
+    </OnClickButton>
 )
 
 const CacheAction = ({ onClick, children }) => (

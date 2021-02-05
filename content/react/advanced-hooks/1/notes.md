@@ -196,9 +196,9 @@ function App() {
                 disableButton={submitButtonDisabled}
                 disableInputField={disabledByPending}
             />
-            <DefaultButton onClick={setRandomValue} disabled={disabledByPending}>
+            <OnClickButton onClick={setRandomValue} disabled={disabledByPending}>
                 <GiPerspectiveDiceSixFacesRandom />
-            </DefaultButton>
+            </OnClickButton>
             <RickAndMortyInfoCard
                 characterId={submittedValue}
                 {...{ getStatus: setFetchStatus }}

@@ -2,7 +2,7 @@ import { BiRefresh } from "react-icons/bi"
 import { GiPerspectiveDiceSixFacesRandom } from "react-icons/gi"
 import { FaSearch } from "react-icons/fa"
 import { PrettyAnchor } from "components/pretty-defaults"
-import { DefaultButton, TextButton } from "components/button"
+import { OnClickButton } from "components/button"
 import { PendingView } from "../../1/components/views"
 import InfoView, { IdleView, ErrorView } from "./info-view"
 
@@ -34,13 +34,13 @@ const FETCH_BUTTON_CONTENT = (
 )
 
 const RandomButton = ({ onClick, disabled }) => (
-    <DefaultButton
+    <OnClickButton
         style={{ height: "35px", width: "35px", margin: "0px" }}
         aria-label="random-button"
         {...{ onClick, disabled }}
     >
         <GiPerspectiveDiceSixFacesRandom />
-    </DefaultButton>
+    </OnClickButton>
 )
 
 let NotInCacheMessage = ({ value, onClickFetch }) => (
@@ -82,14 +82,14 @@ const BUTTON_STYLE = {
 }
 
 const SubmitButton = ({ onClick, disabled, children }) => (
-    <TextButton
+    <OnClickButton
         useBgPrimaryColor={true}
         isInvertedColor={true}
         {...{ onClick, disabled }}
         style={BUTTON_STYLE}
     >
         {children}
-    </TextButton>
+    </OnClickButton>
 )
 
 export {
