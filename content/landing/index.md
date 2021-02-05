@@ -1,6 +1,6 @@
 # Hello World! [![buy me coffee](https://img.shields.io/badge/Buy%20me%20-coffee!-orange.svg?logo=buy-me-a-coffee&color=795548)](https://ko-fi.com/minimithi)
 
-This site is for front-end web engineers and developers. It contains notes and practical exercises with detailed solutions for real-world use cases.
+This site should be useful for front-end web engineers and developers of all shapes and sizes! It contains practical exercises with detailed solutions for real-world use cases.
 
 ## List of Exercises
 
