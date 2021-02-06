@@ -1,4 +1,4 @@
-## Simple Caching Exercise
+## The Simple Caching Exercise
 
 -   In this exercise, the user should be able to fetch Rick and Morty characters and store them locally in some sort of cache. If the character was fetched before, it should be loaded instantly without making a network request.
 -   While the user types in the input field, the app should be getting data from the cache on each change. When the input field contains an id that is on the cache, instantaneously display the cached data on the screen.

@@ -1,5 +1,5 @@
 import { useStickyState } from "hooks"
-import { OnClickButton } from "components/button"
+import { DefaultButton, OnClickButton } from "components/button"
 import { PrettyHeader } from "components/pretty-defaults"
 const X_PLAYER = "X"
 const O_PLAYER = "O"
@@ -63,23 +63,14 @@ const BoardStatus = ({ winnerIfAny, gameFinished, playerToMove }) => {
 const RestartButton = ({ onRestart }) => {
     return (
         <div style={{ display: "flex", width: "100%", justifyContent: "center" }}>
-            <OnClickButton
-                isInvertedColor={true}
+            <DefaultButton
                 disabled={!onRestart}
-                style={{
-                    width: "auto",
-                    height: "auto",
-                    padding: "10px",
-                    fontSize: "14px",
-                    borderRadius: "10px",
-                    margin: "10px",
-                }}
                 useBgPrimaryColor={true}
                 onClick={onRestart}
-                aria-label={"restart tictactoe game"}
+                aria-label="restart tictactoe game"
             >
                 Restart!
-            </OnClickButton>
+            </DefaultButton>
         </div>
     )
 }

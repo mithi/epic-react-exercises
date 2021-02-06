@@ -1,49 +1,134 @@
-## Additional Notes
+## A scrollable component
 
-1. [Kent's Should I `useState` or `useReducer`?](https://kentcdodds.com/blog/should-i-usestate-or-usereducer)
-2. [Kent's How to implement `useState` with `useReducer`](https://kentcdodds.com/blog/how-to-implement-usestate-with-usereducer)
-3. [`useTypescript` — A Complete Guide to React Hooks and TypeScript](https://levelup.gitconnected.com/usetypescript-a-complete-guide-to-react-hooks-and-typescript-db1858d1fb9c) by Trey Huffine
-4. [Kent's When to `useMemo` and `useCallback`](https://kentcdodds.com/blog/usememo-and-usecallback)
-5. [Memoization and React](https://epicreact.dev/memoization-and-react/)
-6. [What the Fork is Closure](https://whatthefork.is/closure)
-7. [Lifting state up](https://reactjs.org/docs/lifting-state-up.html)
-8. [Michael Jackson Tweet: Composition](https://twitter.com/mjackson/status/1195495535483817984)
-9. [Kent's `useEffect` vs `useLayoutEffect`](https://kentcdodds.com/blog/useeffect-vs-uselayouteffect)
-10. [React docs: hook reference](https://reactjs.org/docs/hooks-reference.html)
-11. [[ESLint] Feedback for 'exhaustive-deps' lint rule #14920](https://github.com/facebook/react/issues/14920)
-12. [Gupta Garuda: React Hooks - Understanding Component Re-renders](https://medium.com/@guptagaruda/react-hooks-understanding-component-re-renders-9708ddee9928)
-13. [StackOverFlow: When to use `useImperativeHandle`](https://stackoverflow.com/questions/57005663/when-to-use-useimperativehandle-uselayouteffect-and-usedebugvalue)
+-   Write a `scrollable` component that, that takes in a specific `width` and `height` as props (via the `style` prop),.
+-   The content (passed through `children`) of that component must be larger than its width and height.
+-   Each time the component mounts, the user should see the most bottom content, NOT the top of the middle.
+-   The parent of this `scrollable` component, must have two buttons one for scrolling to the top and the bottom and the component.
+-   Try implementing the same functionality twice. One using `useImperativeHandle` and `forwardRef` and the other, without using the two.
+-   Explain the difference between the two implementations.
+-   Will you use `useLayoutEffect` or `useEffect` for this? Explain why.
 
-## Things you should know
+### My Implementation
 
-1. How to do lazy initialization with `useReducer` and `useState`
-2. Abortable fetch
-3. Is `setState` from `useState` and `dispatch` from `useReducer` guaranteed to be stable? What does that mean?
-4. What does it mean when the React docs say: "You may rely on `useMemo` as a performance optimization, not as a semantic guarantee."
-5. How does [`Object.is` comparison algorithm](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is#description) work?
-6. React docs says "we recommend starting with `useEffect` first and only trying `useLayoutEffect` if that causes a problem"
+By using `useImperativeHandle` and `forwardRef` my implementation is like this:
 
-## Hooks you can try to implement from scratch
+```js
+const ScrollableImperative = forwardRef(function Scrollable({ children, style }, ref) {
+    const divRef = useRef()
 
-1. From [`streamich/react-use`](https://github.com/streamich/react-use)
-    - [`useAsync`](https://github.com/streamich/react-use/blob/master/docs/useAsync.md)
-    - [`useAsyncRetry`](https://github.com/streamich/react-use/blob/master/docs/useAsyncRetry.md)
-    - `useAsyncFn`
-    - [`useLocalStorage`](https://github.com/streamich/react-use/blob/master/docs/useLocalStorage.md)
-    - [`useMount`](https://github.com/streamich/react-use/blob/master/docs/useMount.md)
-    - [`useMountedState`](https://github.com/streamich/react-use/blob/master/docs/useMountedState.md)
-    - `useLocalStorage`
-    - `UseUnmount`
-    - `UseLifecycle`
-    - `UseIsomorphicLayoutEffect`
-2. From [Gabe Ragland: `useHooks`](https://usehooks.com/)
-    - [`useKonamiCode`](https://usehooks.com/useKonamiCode/)
-    - [`useToggle`](https://usehooks.com/useToggle/)
-    - `useMemoCompare`
-    - `useEventListener`
-    - `useWhyYouDidUpdate`
-    - `useMedia`
-    - `useTheme`
-    - `useHistory`
-    - `usePrevious`
-    - `useWindowSize`
+    useLayoutEffect(() => {
+        scrollToBottom()
+    }, [])
+
+    const scrollToTop = () => (divRef.current.scrollTop = 0)
+    const scrollToBottom = () => (divRef.current.scrollTop = divRef.current.scrollHeight)
+
+    useImperativeHandle(ref, () => ({ scrollToTop, scrollToBottom }))
+
+    return (
+        <div ref={divRef} tabIndex="0" style={{ ...style, overflowY: "auto" }}>
+            {children}
+        </div>
+    )
+})
+```
+
+You call the component like this:
+
+```js
+const AppImperative = () => {
+    const sRef = useRef()
+    return (
+        <AppContainer>
+            <DefaultButton onClick={() => sRef.current.scrollToTop()}>
+                go to top
+            </DefaultButton>
+            <Section>
+                <ScrollableImperative
+                    ref={sRef}
+                    style={{ height: "200px", paddingRight: "15px" }}
+                >
+                    <Content />
+                </ScrollableImperative>
+            </Section>
+            <DefaultButton onClick={() => sRef.current.scrollToBottom()}>
+                go to bottom
+            </DefaultButton>
+        </AppContainer>
+    )
+}
+```
+
+If you don't use `useImperativeHandle` and `forwardRef` you may end up with a component like this:
+
+```js
+const ScrollableNormal = ({ children, scroll, style }) => {
+    const divRef = useRef()
+
+    useLayoutEffect(() => {
+        divRef.current.scrollTop = divRef.current.scrollHeight
+    }, [])
+
+    useLayoutEffect(() => {
+        if (scroll === "top") {
+            divRef.current.scrollTop = 0
+        } else if (scroll === "bottom") {
+            divRef.current.scrollTop = divRef.current.scrollHeight
+        }
+    }, [scroll])
+
+    return (
+        <div ref={divRef} tabIndex="0" style={{ ...style, overflowY: "auto" }}>
+            {children}
+        </div>
+    )
+}
+```
+
+And you will call the above like this:
+
+```js
+const AppNormal = () => {
+    const [scroll, setScroll] = useState({ scroll: "top" })
+
+    return (
+        <AppContainer>
+            <DefaultButton onClick={() => setScroll("top")}>go to top</DefaultButton>
+            <Section>
+                <ScrollableNormal
+                    style={{ height: "200px", paddingRight: "15px" }}
+                    scroll={scroll}
+                >
+                    <Content />
+                </ScrollableNormal>
+            </Section>
+            <DefaultButton onClick={() => setScroll("bottom")}>
+                go to bottom
+            </DefaultButton>
+        </AppContainer>
+    )
+}
+```
+
+-   If we don't use `useImperativeHandle`, the parent component would be the one that would manage
+    the state of the `scrollable` component.
+-   Not using `useImperativeHandle` would also cause rerendering of both the `scrollable` component and its parent component every single time we scroll up and down. Normal this things are okay, but it's added unnecessary complexity especially if the parent is also managing alot of things.
+-   Also, a component not using `useImperativeHandle` would not be very reusable, will be adding an additional state everytime to any component who wants to use it as their child.
+-   Use `useImperativeHandle` if you want to let the parent component customize an instance value that belongs to the child component.
+-   The child component can expose them via `useImperativeHandle`. The parent component must forward a `ref` (in this case we call it `sRef`) to the child component (`scrollable`) and the child uses that `sRef` to expose the properties that the parents could have access to.
+-   In this case, the properties are the functions `scrollToTop` and `scrollToBottom` functions... Both functions manipulate the dom node the child renders, these functions make use of variables local only to `scrollable` (that normally the parent won't have access to).
+-   These properties are exposed via the line `useImperativeHandle(ref, () => ({ scrollToTop, scrollToBottom }))`.
+-   The parent will be able to access the functions exposed to it (by `useImperativeHandle`) like this ` sRef.current.scrollToBottom()` where `sRef` is the `ref` that the parent forwarded to the `scrollable` child.
+
+-   On another note, this example, is one of the few cases that `useLayoutEffect` should be used instead of `useEffect`. If `useEffect` is used to scroll to the bottom when the component mounts, you would see a flicker, jumpy behavior. Briefly the screen will flash to show the contents prior to scrolling to the bottom on each rerender, which is not what we want. This won't happen with `useLayoutEffect` as the affect will be applied before the browser repaints, NOT after.
+
+### You should know this
+
+-   `forwardRef` is a React feature that lets a component take a `ref` from its parent component
+-   Keep in mind that `useRef` doesn’t notify you when its content changes. Mutating the `.current` property doesn’t cause a re-render
+
+### Other useImperativeHandle examples
+
+-   [Sophie Au: React Hooks: `useImperativeHandle`](https://sophieau.com/article/use-imperative-handle/)
+-   [Mehdi Namvar: React’s `useImperativeHandle` by Examples](https://medium.com/@ilxanlar/useimperativehandle-by-examples-99cbdc8e3c3a)
+-   [Chris: When to use `useImperativeHandle`, `useLayoutEffect`, and `useDebugValue`](https://stackoverflow.com/questions/57005663/when-to-use-useimperativehandle-uselayouteffect-and-usedebugvalue)

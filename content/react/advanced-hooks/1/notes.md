@@ -128,16 +128,12 @@ const asyncReducer = (_, nextState) => nextState
 const useSafeDispatch = unsafeDispatchFunction => {
     const isMountedRef = useRef(false)
 
-    // on the server side, we cannot call useLayoutEffect
-    // so make sure to call it only when on the client
-    const useNextEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect
-
     // why use layout effect ?
     // this effect is called before the component is
     // shown on the screen, while use effect is called after
     // in our case:
     // we would want to switch (or ignore updates) as quickly as possible
-    useNextEffect(() => {
+    useLayoutEffect(() => {
         isMountedRef.current = true
         return () => (isMountedRef.current = false)
     })

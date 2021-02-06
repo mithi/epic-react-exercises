@@ -9,7 +9,7 @@ This site should be useful for front-end web engineers and developers of all sha
 3.  [Fetching Pokemons](/react/hooks/3) and error boundaries
 4.  Safely [fetch Rick and Morty Characters](/react/advanced-hooks/1) by handling unmounting while dispatching
 5.  Simple Caching with [Rick and Morty Characters](/react/advanced-hooks/2)
-6.  ToDo: [Navigating a TV script](/react/advanced-hooks/3) with `useImperativeHandle`
+6.  A [scrollable component](/react/advanced-hooks/3) with `forwardRef` and `useImperativeHandle`
 7.  ToDo: Debugging [detecting user's screen sizes](/react/advanced-hooks/4) with `useDebugValue` and `useMedia`
 
 ## References

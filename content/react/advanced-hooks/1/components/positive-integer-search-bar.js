@@ -1,5 +1,5 @@
 import { PrettyInputField } from "components/pretty-defaults"
-import { OnClickButton } from "components/button"
+import { DefaultButton } from "components/button"
 
 const PositiveIntegerSearchbar = ({
     style,
@@ -39,15 +39,13 @@ const PositiveIntegerSearchbar = ({
                 style={inputFieldStyle}
                 disabled={disableInputField}
             />
-            <OnClickButton
+            <DefaultButton
                 type="submit"
                 disabled={disableButton}
-                useBgPrimaryColor={true}
-                isInvertedColor={true}
                 style={submitButtonStyle}
             >
-                {submitButtonContent ? submitButtonContent : "submit"}
-            </OnClickButton>
+                {submitButtonContent || "submit"}
+            </DefaultButton>
         </form>
     )
 }

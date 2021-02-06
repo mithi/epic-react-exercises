@@ -1,4 +1,4 @@
-import { OnClickButton } from "components/button"
+import { DefaultButton } from "components/button"
 import { PrettyHeader } from "components/pretty-defaults"
 import { useTheme } from "hooks"
 import { SpinnerDots } from "components/spinner"
@@ -27,17 +27,6 @@ const POKEMON_IMAGE_STYLE = {
     fontSize: "20px",
     marginBottom: "20px",
     ...TOTALLY_CENTERED,
-}
-
-const ERROR_BUTTON_STYLE = {
-    border: "1px solid red",
-    fontSize: "16px",
-    borderRadius: "8px",
-    backgroundColor: "red",
-    width: "auto",
-    padding: "5px",
-    height: "auto",
-    margin: "5px",
 }
 
 const ROW_STYLE = {
@@ -102,13 +91,9 @@ function PokemonErrorView({ error, resetFunction }) {
         <div role="alert" style={{ fontSize: "15px", padding: "10px" }}>
             <span>{error.message}</span>
             <div style={TOTALLY_CENTERED}>
-                <OnClickButton
-                    onClick={resetFunction}
-                    style={ERROR_BUTTON_STYLE}
-                    isInvertedColor={true}
-                >
+                <DefaultButton onClick={resetFunction} style={{ backgroundColor: "red" }}>
                     <PrettyHeader> Try again </PrettyHeader>
-                </OnClickButton>
+                </DefaultButton>
                 <div> This error was caught by the error boundary!</div>
             </div>
         </div>

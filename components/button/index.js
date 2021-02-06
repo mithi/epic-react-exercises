@@ -23,6 +23,15 @@ const DEFAULT_BUTTON_STYLE = {
     borderStyle: "none",
 }
 
+const AUTO_SIZE_STYLE = {
+    height: "auto",
+    width: "auto",
+    margin: "10px",
+    padding: "10px",
+    fontSize: "12px",
+    borderRadius: "8px",
+}
+
 const useButtonClasses = (className, disabled, isInvertedColor) => {
     const { buttonClassNames, invertedButtonClassName, disabledClassName } = useTheme()
 
@@ -52,20 +61,28 @@ const useButtonClasses = (className, disabled, isInvertedColor) => {
     return [...final, className].join(" ")
 }
 
-const useDefaultButtonStyle = (style, disabled, useBgPrimaryColor) => {
+const useDefaultButtonStyle = (
+    style,
+    disabled,
+    useBgPrimaryColor,
+    isAutoSize,
+    noDisabledBorder
+) => {
     const { headerFont, primaryColor } = useTheme()
     const disabledBorder = {
         borderWidth: "2px",
         borderStyle: "solid",
         borderColor: primaryColor,
     }
-    const border = disabled ? disabledBorder : null
+    const border = disabled && !noDisabledBorder ? disabledBorder : null
+    const autoStyle = isAutoSize ? AUTO_SIZE_STYLE : null
 
     return {
         ...DEFAULT_BUTTON_STYLE,
         ...border,
         fontFamily: headerFont,
         backgroundColor: useBgPrimaryColor ? primaryColor : null,
+        ...autoStyle,
         ...style,
     }
 }
@@ -104,10 +121,18 @@ const OnClickButton = ({
     style,
     useBgPrimaryColor,
     isInvertedColor,
+    isAutoSize,
+    noDisabledBorder,
     ...otherProps
 }) => {
     className = useButtonClasses(className, disabled, isInvertedColor)
-    style = useDefaultButtonStyle(style, disabled, useBgPrimaryColor)
+    style = useDefaultButtonStyle(
+        style,
+        disabled,
+        useBgPrimaryColor,
+        isAutoSize,
+        noDisabledBorder
+    )
     return (
         <button {...{ onClick, disabled, className, style, ...otherProps }}>
             {children}
@@ -115,4 +140,16 @@ const OnClickButton = ({
     )
 }
 
-export { LinkOutButton, OnClickButton, LinkButton }
+const DefaultButton = ({ onClick, children, style, disabled, ...otherProps }) => (
+    <OnClickButton
+        isAutoSize={true}
+        useBgPrimaryColor={true}
+        isInvertedColor={true}
+        noDisabledBorder={true}
+        {...{ onClick, style, disabled, ...otherProps }}
+    >
+        {children}
+    </OnClickButton>
+)
+
+export { LinkOutButton, OnClickButton, LinkButton, DefaultButton }
