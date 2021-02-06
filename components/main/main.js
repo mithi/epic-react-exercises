@@ -1,5 +1,5 @@
 import styles from "./Styles.module.css"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useLayoutEffect } from "react"
 import { useTheme } from "hooks"
 import Nav from "./navbar"
 
@@ -11,21 +11,24 @@ import Nav from "./navbar"
 const Home = ({ children } = {}) => {
     const { bodyClassNames, bodyFont } = useTheme()
     const [visible, setVisible] = useState(false)
-
-    useEffect(() => setVisible(true), [])
+    const useNextEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect
+    useNextEffect(() => setVisible(true), [])
 
     return (
-        <div
-            className={[styles.grid, ...bodyClassNames].join(" ")}
-            style={{
-                overflow: "auto",
-                fontFamily: bodyFont,
-                visibility: visible ? "visible" : "hidden",
-            }}
-        >
-            <Nav />
-            <main className={styles.main}>{children}</main>
-        </div>
+        <>
+            <div
+                className={[styles.grid, ...bodyClassNames].join(" ")}
+                style={{
+                    overflow: "auto",
+                    fontFamily: bodyFont,
+                    visibility: visible ? "visible" : "hidden",
+                }}
+            >
+                <Nav />
+                <main className={styles.main}>{children}</main>
+            </div>
+        </>
     )
 }
+
 export default Home
