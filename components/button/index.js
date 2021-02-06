@@ -61,14 +61,20 @@ const useButtonClasses = (className, disabled, isInvertedColor) => {
     return [...final, className].join(" ")
 }
 
-const useDefaultButtonStyle = (style, disabled, useBgPrimaryColor, isAutoSize) => {
+const useDefaultButtonStyle = (
+    style,
+    disabled,
+    useBgPrimaryColor,
+    isAutoSize,
+    noDisabledBorder
+) => {
     const { headerFont, primaryColor } = useTheme()
     const disabledBorder = {
         borderWidth: "2px",
         borderStyle: "solid",
         borderColor: primaryColor,
     }
-    const border = disabled ? disabledBorder : null
+    const border = disabled && !noDisabledBorder ? disabledBorder : null
     const autoStyle = isAutoSize ? AUTO_SIZE_STYLE : null
 
     return {
@@ -116,10 +122,17 @@ const OnClickButton = ({
     useBgPrimaryColor,
     isInvertedColor,
     isAutoSize,
+    noDisabledBorder,
     ...otherProps
 }) => {
     className = useButtonClasses(className, disabled, isInvertedColor)
-    style = useDefaultButtonStyle(style, disabled, useBgPrimaryColor, isAutoSize)
+    style = useDefaultButtonStyle(
+        style,
+        disabled,
+        useBgPrimaryColor,
+        isAutoSize,
+        noDisabledBorder
+    )
     return (
         <button {...{ onClick, disabled, className, style, ...otherProps }}>
             {children}
@@ -132,6 +145,7 @@ const DefaultButton = ({ onClick, children, style, disabled, ...otherProps }) =>
         isAutoSize={true}
         useBgPrimaryColor={true}
         isInvertedColor={true}
+        noDisabledBorder={true}
         {...{ onClick, style, disabled, ...otherProps }}
     >
         {children}
