@@ -13,7 +13,8 @@ textarea:focus,
 select:focus,
 a:focus,
 button:focus,
-pre:focus {
+pre:focus,
+div:focus {
     outline-color: #c0c0c0;
     outline-width: 1px;
     outline-style: dashed;
@@ -35,9 +36,6 @@ input[type="reset"] {
     outline: inherit;
 }
 
-div:focus {
-    outline: 0;
-}
 ::-webkit-input-placeholder {
     /* Edge */
     color: #c0c0c0;
