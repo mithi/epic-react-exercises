@@ -127,12 +127,12 @@ const OnClickButton = ({
     )
 }
 
-const DefaultButton = ({ onClick, children }) => (
+const DefaultButton = ({ onClick, children, style, disabled, ...otherProps }) => (
     <OnClickButton
         isAutoSize={true}
         useBgPrimaryColor={true}
         isInvertedColor={true}
-        onClick={onClick}
+        {...{ onClick, style, disabled, ...otherProps }}
     >
         {children}
     </OnClickButton>
