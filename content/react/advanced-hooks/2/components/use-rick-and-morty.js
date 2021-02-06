@@ -1,5 +1,5 @@
 import { useEffect, createContext, useContext, useReducer, useCallback } from "react"
-import useAsync from "../../1/components/use-async"
+import useAsync from "hooks/use-async"
 import useLocalStorageState from "hooks/use-local-storage"
 import { delayedFetchRickAndMorty } from "fetch-utils"
 
