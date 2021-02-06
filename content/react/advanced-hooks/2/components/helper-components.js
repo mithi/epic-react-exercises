@@ -2,7 +2,7 @@ import { BiRefresh } from "react-icons/bi"
 import { GiPerspectiveDiceSixFacesRandom } from "react-icons/gi"
 import { FaSearch } from "react-icons/fa"
 import { OnClickText } from "components/pretty-defaults"
-import { OnClickButton } from "components/button"
+import { OnClickButton, DefaultButton } from "components/button"
 import { PendingView } from "../../1/components/views"
 import InfoView, { IdleView, ErrorView } from "./info-view"
 
@@ -69,27 +69,10 @@ let SuccessMessage = ({ data }) => (
     </GenericMessage>
 )
 
-const BUTTON_STYLE = {
-    width: "auto",
-    height: "35px",
-    minWidth: "85px",
-    padding: "10px",
-    fontSize: "20px",
-    borderRadius: "10px",
-    display: "flex",
-    alignItems: "center",
-    margin: "5px",
-}
-
 const SubmitButton = ({ onClick, disabled, children }) => (
-    <OnClickButton
-        useBgPrimaryColor={true}
-        isInvertedColor={true}
-        {...{ onClick, disabled }}
-        style={BUTTON_STYLE}
-    >
+    <DefaultButton {...{ onClick, disabled }} style={{ height: "35px" }}>
         {children}
-    </OnClickButton>
+    </DefaultButton>
 )
 
 export {

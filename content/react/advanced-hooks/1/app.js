@@ -97,6 +97,7 @@ function App() {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "flex-start",
+                    width: "100%",
                 }}
             >
                 <PositiveIntegerSearchbar
@@ -106,26 +107,18 @@ function App() {
                     placeholder={"Pick a number!"}
                     disableButton={submitButtonDisabled}
                     disableInputField={disabledByPending}
-                    submitButtonStyle={{
-                        height: "35px",
-                        width: "45%",
-                        borderRadius: "10px",
-                        margin: "0px",
-                        padding: "10px 10px",
-                        fontSize: "12px",
-                    }}
-                    style={{ width: "auto" }}
-                    inputFieldStyle={{ height: "35px", width: "50%", margin: "5px" }}
+                    submitButtonStyle={{ height: "35px", width: "70px", margin: "3px" }}
+                    inputFieldStyle={{ height: "35px", width: "130px", margin: "3px" }}
                     submitButtonContent={
                         <>
                             <GiClick />
-                            Submit
+                            Fetch
                         </>
                     }
                 />
                 <OnClickButton
                     onClick={setRandomValue}
-                    style={{ height: "35px", width: "35px", marginLeft: "5px" }}
+                    style={{ height: "35px", width: "35px", margin: "3px" }}
                     disabled={disabledByPending}
                     aria-label="fetch a random rick and morty character"
                 >
