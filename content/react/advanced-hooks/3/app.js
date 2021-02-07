@@ -1,5 +1,6 @@
 import React from "react"
 import dynamic from "next/dynamic"
+import { FaArrowAltCircleUp, FaArrowAltCircleDown } from "react-icons/fa"
 import { DefaultButton } from "components/button"
 import Content from "./components/content"
 import { useTheme } from "hooks"
@@ -31,6 +32,7 @@ const Section = ({ children }) => {
                 borderRadius: "15px",
                 margin: "0px 10px",
                 width: "90%",
+                maxWidth: "300px",
             }}
         >
             {children}
@@ -55,12 +57,27 @@ const AppContainer = ({ children }) => {
     )
 }
 
+const TopButton = ({ onClick }) => (
+    <DefaultButton {...{ onClick }}>
+        <FaArrowAltCircleUp />
+        <span style={{ margin: "0px 10px" }}>scroll to top</span>
+        <FaArrowAltCircleUp />
+    </DefaultButton>
+)
+
+const BottomButton = ({ onClick }) => (
+    <DefaultButton {...{ onClick }}>
+        <FaArrowAltCircleDown />
+        <span style={{ margin: "0px 10px" }}>scroll to bottom</span>
+        <FaArrowAltCircleDown />
+    </DefaultButton>
+)
+
 const ScrollableImperative = forwardRef(function Scrollable({ children, style }, ref) {
     const divRef = useRef()
     const useNextEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect
-    // if you comment out the line above and uncomment the line below, you will see flickering
+    // if you use useEffect instead, you'd see the flicker
     // when switching from ScrollableImplerative to ScrollableNormal and back
-    //const useNextEffect = useEffect
 
     useNextEffect(() => {
         scrollToBottom()
@@ -82,9 +99,8 @@ const ScrollableNormal = ({ children, scroll, style }) => {
     const divRef = useRef()
 
     const useNextEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect
-    // if you comment out the line above and uncomment the line below, you will see flickering
+    // if you use useEffect instead, you'd see the flicker
     // when switching from ScrollableImplerative to ScrollableNormal and back
-    //const useNextEffect = useEffect
 
     useNextEffect(() => {
         divRef.current.scrollTop = divRef.current.scrollHeight
@@ -109,40 +125,35 @@ const AppImperative = () => {
     const sRef = useRef()
     return (
         <AppContainer>
-            <DefaultButton onClick={() => sRef.current.scrollToTop()}>
-                go to top
-            </DefaultButton>
+            <TopButton onClick={() => sRef.current.scrollToTop()} />
             <Section>
                 <ScrollableImperative
                     ref={sRef}
-                    style={{ height: "200px", paddingRight: "15px" }}
+                    style={{ height: "225px", paddingRight: "15px" }}
                 >
                     {<Content />}
                 </ScrollableImperative>
             </Section>
-            <DefaultButton onClick={() => sRef.current.scrollToBottom()}>
-                go to bottom
-            </DefaultButton>
+            <BottomButton onClick={() => sRef.current.scrollToBottom()} />
         </AppContainer>
     )
 }
+
 const AppNormal = () => {
     const [scroll, setScroll] = useState({ scroll: "top" })
 
     return (
         <AppContainer>
-            <DefaultButton onClick={() => setScroll("top")}>go to top</DefaultButton>
+            <TopButton onClick={() => setScroll("top")} />
             <Section>
                 <ScrollableNormal
-                    style={{ height: "200px", paddingRight: "15px" }}
+                    style={{ height: "225px", paddingRight: "15px" }}
                     scroll={scroll}
                 >
                     <Content />
                 </ScrollableNormal>
             </Section>
-            <DefaultButton onClick={() => setScroll("bottom")}>
-                go to bottom
-            </DefaultButton>
+            <BottomButton onClick={() => setScroll("bottom")} />
         </AppContainer>
     )
 }
@@ -157,7 +168,7 @@ const App = () => {
     return (
         <div
             style={{
-                marginTop: "20px",
+                marginTop: "0px",
                 display: "flex",
                 flexDirection: "column",
                 fontSize: "12px",
@@ -167,7 +178,7 @@ const App = () => {
             <DynamicMarkdownRender>{title}</DynamicMarkdownRender>
             <p style={{ fontSize: "12px" }}>
                 <OnClickText onClick={() => setIsImperativeApp(!isImperativeApp)}>
-                    Load the other component...
+                    Click this to load the other component.
                 </OnClickText>{" "}
                 <br />
                 (There should be no observable difference between the two components)
