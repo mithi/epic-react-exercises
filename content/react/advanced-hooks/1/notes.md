@@ -1,4 +1,4 @@
-# [The useSafeAsync Exercise](https://advanced-react-hooks.netlify.app/2)
+## [The useSafeAsync Exercise](https://advanced-react-hooks.netlify.app/2)
 
 -   This is a variation of [Kent's exercise 2.3](https://github.com/kentcdodds/advanced-react-hooks/blob/main/src/final/02.extra-3.js) of his Advanced React Hooks workshop.
 -   Write an component that fetches a unique character from the [Rick and Morty API](https://rickandmortyapi.com/) given a number that's supplied by the user (the character ID).
@@ -34,7 +34,7 @@ This warning should NOT pop up in our app.
 -   In our case, the promise that we feed to the `runFunction` is the return value of the `fetchFunction`
     we call whenever we need to fetch something.
 
-```js
+```jsx
 function RickAndMortyInfoCard({ characterId, getStatus }) {
     const { data, status, error, runFunction } = useSafeAsync({
         status: characterId ? "pending" : "idle",
@@ -71,7 +71,7 @@ function RickAndMortyInfoCard({ characterId, getStatus }) {
 -   This dispatch function is safe, meaning that it will not run if the component that called it is unmounted
 -   Notice that `useSafeAsync` uses `asyncReducer` and `useSafeDispatch` which i will discuss next.
 
-```js
+```jsx
 const useSafeAsync = initialState => {
     const [state, unsafeDispatch] = useReducer(asyncReducer, {
         status: "idle",
@@ -113,7 +113,7 @@ resolved: { data, error: null}
 
 ⚠️❗❗⚠️ WARNING ⚠️❗❗⚠️: Be careful with this, you might want to write an asyncReducer that is more explicit like [how Kent implemented it](https://github.com/kentcdodds/advanced-react-hooks/blob/a449a2119e0b8ea9d90065cc80a00e68a6d4db8b/src/final/02.extra-3.js#L33).
 
-```js
+```jsx
 const asyncReducer = (_, nextState) => nextState
 ```
 
@@ -124,7 +124,7 @@ const asyncReducer = (_, nextState) => nextState
     -   `useSafeDispatch` takes an `unsafeDispatchFunction` and returns a `safeDispatchFunction`
     -   The `unsafeDispatchFunction` is unsafe because it will run regardless of whether or not the component is mouted
 
-```js
+```jsx
 const useSafeDispatch = unsafeDispatchFunction => {
     const isMountedRef = useRef(false)
 
@@ -152,7 +152,7 @@ const useSafeDispatch = unsafeDispatchFunction => {
 And btw, the component that calls `RickAndMortyInfoCard`
 is something like this.
 
-```js
+```jsx
 function App() {
     const [state, setState] = useState({
         submittedValue: "",

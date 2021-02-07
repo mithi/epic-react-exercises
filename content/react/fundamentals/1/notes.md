@@ -24,7 +24,7 @@ Use the code block below as your starting point.
 
 Solution:
 
-```js
+```jsx
 // case 0
 // If the root element doesn't exist yet we must creat and append it to the dom first
 let rootElement = document.createElement("div")
@@ -50,7 +50,7 @@ Exercise 2a: Create an `div` element with a `class` of `container` with `Hello W
 
 Solution:
 
-```js
+```jsx
 const element = <div className="container">Hello World</div>
 ReactDOM.render(element, document.getElementById("root"))
 ```
@@ -59,7 +59,7 @@ Exercise 2b: Do the same as in Exercise 2a, but instead of using `jsx` syntax, u
 
 Solution:
 
-```js
+```jsx
 const rootElement = document.getElementById("root")
 const element = React.createElement("div", {
     className: "container",
@@ -98,7 +98,7 @@ Write code using `React` to generate the `html` code below.
 
 Solution:
 
-```js
+```jsx
 const helloElement = React.createElement("span", null, "Hello")
 const worldElement = React.createElement("span", null, "World")
 const rootElement = document.getElementById("root")
@@ -125,7 +125,7 @@ Solution:
 You can do something like this and it will work, but it's not following
 the convention the Babel compiler recognizes.
 
-```js
+```jsx
 // **********
 //  (NOT FOLLOWING BABEL'S CONVENTION)
 // **********
@@ -163,7 +163,7 @@ In order words, how would `babel` compile the following components?
 
 Solution:
 
-```js
+```jsx
 React.createElement(Capitalized)
 React.createElement("lowercase")
 React.createElement("kebab-case")

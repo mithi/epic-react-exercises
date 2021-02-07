@@ -23,7 +23,7 @@
 
 ### The App Component
 
-```js
+```jsx
 const App = () => {
     const [{ inputFieldValue, submitted, submittedValue }, setState] = useState({
         inputFieldValue: "",
@@ -109,7 +109,7 @@ const Home = () => (
 
 ### CachePreview
 
-```js
+```jsx
 const RickAndMortyCachePreview = ({ setId, id }) => {
     const { cache, dispatch } = useRickAndMortyCache()
 
@@ -156,7 +156,7 @@ const RickAndMortyCachePreview = ({ setId, id }) => {
 
 ### useCache
 
-```js
+```jsx
 const cacheReducer = (cache, action) => {
     const { type, key, data } = action
 
@@ -192,7 +192,7 @@ const useCache = localStorageKey => {
 
 ### useRickAndMortyCache
 
-```js
+```jsx
 const RickAndMortyCacheContext = createContext()
 
 function RickAndMortyCacheProvider({ children }) {
@@ -218,7 +218,7 @@ function useRickAndMortyCache() {
 
 ### useRickAndMorty
 
-```js
+```jsx
 function useRickAndMorty({ key = "", useCacheOnlyWhenNotReloading = false } = {}) {
     const { cache, dispatch: cacheDispatch } = useRickAndMortyCache()
 
