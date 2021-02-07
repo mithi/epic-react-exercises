@@ -11,7 +11,7 @@
 
 My top level component basically renders the following:
 
-```js
+```jsx
 // info about the current state of the board)
 <BoardStatus {...{ winnerIfAny, gameFinished, playerToMove }} />
 
@@ -44,7 +44,7 @@ const state = {
 
 Whenever the state changes we analyze the current board with this helper function:
 
-```js
+```jsx
 /*
 
     +---+---+---+

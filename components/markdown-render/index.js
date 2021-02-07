@@ -13,6 +13,7 @@ import {
 const Code = ({ children, language }) => {
     const { codeTheme } = useTheme()
     const [showCode, setShowCode] = useState(true)
+
     const codeBlock = (
         <SyntaxHighlighter
             language={language}
