@@ -1,5 +1,5 @@
 import React from "react"
-import { BorderedDiv, PrettyHeader } from "components/pretty-defaults"
+import { BorderedDiv, PrettyHeader, SmallSpan } from "components/pretty-defaults"
 
 const TOWERS = [
     {
@@ -168,11 +168,13 @@ const KingdomRushTowersDisplay = () => {
     const towers = TOWERS.map(tower => <KingdomRushTower key={tower.name} data={tower} />)
     return (
         <div style={{ textAlign: "center" }}>
+            <SmallSpan>(TOP)</SmallSpan>
             <PrettyHeader>Kingdom Rush Towers!</PrettyHeader>
-            <span style={{ fontSize: "12px" }}>(TOP)</span>
             {towers}
-            <p> There are no more towers to display.</p>
-            <span style={{ fontSize: "12px" }}>(BOTTOM)</span>
+            <SmallSpan>
+                There are no more towers to display <br />
+                (BOTTOM)
+            </SmallSpan>
         </div>
     )
 }

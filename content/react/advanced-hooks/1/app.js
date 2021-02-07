@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react"
-import { GiPerspectiveDiceSixFacesRandom, GiClick } from "react-icons/gi"
+import { GiPerspectiveDiceSixFacesRandom } from "react-icons/gi"
 import { delayedFetchRickAndMorty } from "fetch-utils"
 import { OnClickButton } from "components/button"
-import { BorderedDiv, PositiveIntegerSearchbar } from "components/pretty-defaults"
+import {
+    BorderedDiv,
+    PositiveIntegerSearchbar,
+    SmallSpan,
+} from "components/pretty-defaults"
 import { ErrorView, PendingView, IdleView } from "./components/views"
 import InfoView from "./components/info-view"
 import useSafeAsync from "./components/use-async"
@@ -86,11 +90,11 @@ function App() {
 
     return (
         <div style={{ margin: "20px" }}>
-            <p style={{ fontSize: "12px" }}>
+            <SmallSpan>
                 ❗ Only positive integers from 1 to{" "}
                 {NUMBER_OF_RICK_AND_MORTY_CHARACTERS - 1} correspond to a Rick and Morty
                 character.
-            </p>
+            </SmallSpan>
 
             <div
                 style={{
@@ -109,12 +113,7 @@ function App() {
                     disableInputField={disabledByPending}
                     submitButtonStyle={{ height: "35px", width: "70px", margin: "3px" }}
                     inputFieldStyle={{ height: "35px", width: "130px", margin: "3px" }}
-                    submitButtonContent={
-                        <>
-                            <GiClick />
-                            Fetch
-                        </>
-                    }
+                    submitButtonContent="Fetch"
                 />
                 <OnClickButton
                     onClick={setRandomValue}

@@ -1,7 +1,7 @@
 import { BiRefresh } from "react-icons/bi"
 import { GiPerspectiveDiceSixFacesRandom } from "react-icons/gi"
 import { FaSearch } from "react-icons/fa"
-import { OnClickText } from "components/pretty-defaults"
+import { OnClickText, SmallSpan } from "components/pretty-defaults"
 import { OnClickButton, DefaultButton } from "components/button"
 import { PendingView } from "../../1/components/views"
 import InfoView, { IdleView, ErrorView } from "./info-view"
@@ -23,13 +23,13 @@ const RickAndMortyInfoCard = ({ status, error, data }) => {
 const RELOAD_BUTTON_CONTENT = (
     <>
         <BiRefresh />
-        <span style={{ fontSize: "12px" }}> Refetch</span>
+        <SmallSpan> Refetch</SmallSpan>
     </>
 )
 const FETCH_BUTTON_CONTENT = (
     <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
         <FaSearch />
-        <span style={{ fontSize: "12px", paddingLeft: "5px" }}>Fetch</span>
+        <SmallSpan style={{ paddingLeft: "5px" }}>Fetch</SmallSpan>
     </div>
 )
 
@@ -60,7 +60,7 @@ let ErrorMessage = ({ value, onClickReload }) => (
 )
 
 let GenericMessage = ({ children }) => (
-    <span style={{ fontSize: "14px", margin: "5px" }}>{children}</span>
+    <SmallSpan style={{ margin: "10px" }}>{children}</SmallSpan>
 )
 
 let SuccessMessage = ({ data }) => (

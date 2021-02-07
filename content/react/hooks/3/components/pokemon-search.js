@@ -1,5 +1,5 @@
 import { DefaultButton } from "components/button"
-import { OnClickText, PrettyInputField } from "components/pretty-defaults"
+import { OnClickText, PrettyInputField, SmallSpan } from "components/pretty-defaults"
 
 const PokemonSuggestion = ({ name, buttonSubmit }) => {
     return <OnClickText onClick={() => buttonSubmit(name)}>{name}</OnClickText>
@@ -18,12 +18,12 @@ const PokemonSearchSection = ({ onSubmit, setIncompleteName, incompleteName }) =
 
     return (
         <>
-            <p style={{ fontSize: "12px" }}>
+            <SmallSpan>
                 Out of ideas? Try{" "}
                 <PokemonSuggestion {...{ name: "Pikachu", buttonSubmit }} />,{" "}
                 <PokemonSuggestion {...{ name: "Charizard", buttonSubmit }} />, or{" "}
                 <PokemonSuggestion {...{ name: "Ninetales", buttonSubmit }} />
-            </p>
+            </SmallSpan>
             <form style={{ display: "flex" }} onSubmit={handleSubmit}>
                 <PrettyInputField
                     style={{ width: "68%" }}

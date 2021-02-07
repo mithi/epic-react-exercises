@@ -1,4 +1,4 @@
-import { OnClickText } from "components/pretty-defaults"
+import { OnClickText, SmallSpan } from "components/pretty-defaults"
 import { OnClickButton } from "components/button"
 
 import { useRickAndMortyCache } from "./use-rick-and-morty"
@@ -24,8 +24,8 @@ const CacheButton = ({ label, imageUrl, onClick, active }) => (
 
 const CacheAction = ({ onClick, children }) => (
     <>
-        <OnClickText style={{ fontSize: "12px" }} onClick={onClick}>
-            {children}
+        <OnClickText onClick={onClick}>
+            <SmallSpan>{children}</SmallSpan>
         </OnClickText>
         <br />
     </>
