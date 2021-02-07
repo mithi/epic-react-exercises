@@ -125,7 +125,7 @@ const TOWERS = [
 ]
 
 const KingdomRushTower = ({ data }) => {
-    const { name, imageUrl, towerType, buildCost } = data
+    const { name, imageUrl, towerType, kingdom, buildCost } = data
 
     return (
         <BorderedDiv
@@ -147,15 +147,17 @@ const KingdomRushTower = ({ data }) => {
                     margin: "5px",
                 }}
             />
-            <div style={{ margin: "5px 5px" }}>
-                <PrettyHeader style={{ fontSize: "20px", margin: "2px" }}>
+            <div style={{ margin: "5px 5px", maxWidth: "100px" }}>
+                <PrettyHeader style={{ fontSize: "18px", margin: "0px" }}>
                     {name}
                 </PrettyHeader>
 
-                <div>
-                    {towerType}
+                <div style={{ fontSize: "10px", margin: "2px", lineHeight: "1.5" }}>
+                    ({towerType})
                     <br />
-                    cost: {buildCost}
+                    buildCost: {buildCost}
+                    <br />
+                    kingdom: {kingdom}
                 </div>
             </div>
         </BorderedDiv>
