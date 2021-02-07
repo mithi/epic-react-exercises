@@ -1,4 +1,4 @@
-import { PrettyHeader, BorderedDiv } from "components/pretty-defaults"
+import { PrettyHeader, BorderedDiv, SmallSpan } from "components/pretty-defaults"
 import { FaUser, FaUserTimes } from "react-icons/fa"
 
 const TOTALLY_CENTERED = {
@@ -43,7 +43,7 @@ const InfoCard = ({ children, header, style }) => (
         <PrettyHeader style={{ fontSize: "30px", marginTop: "10px" }}>
             {header}
         </PrettyHeader>
-        <span style={{ fontSize: "14px", lineHeight: "1" }}>{children}</span>
+        <SmallSpan>{children}</SmallSpan>
     </div>
 )
 
