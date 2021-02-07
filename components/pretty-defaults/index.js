@@ -125,6 +125,9 @@ const PositiveIntegerSearchbar = ({
     )
 }
 
+const SmallSpan = ({ children, style }) => (
+    <span style={{ fontSize: "12px", ...style }}>{children}</span>
+)
 export {
     PrettyHeader,
     PrettyAnchor,
@@ -133,4 +136,5 @@ export {
     PrettyLink,
     PositiveIntegerSearchbar,
     OnClickText,
+    SmallSpan,
 }
