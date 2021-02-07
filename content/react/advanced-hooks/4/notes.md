@@ -1,49 +1,126 @@
+## The UseWindowSize and UseDebugValue Exercise
+
+-   Show the current size of the window (`height` and `width`)
+-   Checkout the [RobertBroersma/bigheads](https://github.com/RobertBroersma/bigheads) package, you'll use this in this exercise!
+-   Generate three specific avatars, you can name it whatever you want. I named mine, `Mithi`, `Diana`, and `Mikong`. Each specific avatar must have fixed properties but except for `hat`, `hatColor`, `accessory`, `clothing`, `clothingColor` and `graphic`
+-   Every time the screen size changes, an avatar's `hat`, `hatColor`, `accessory`, `clothing`, `clothingColor` and `graphic` should change (randomly).
+-   Only one avatar should be shown for each screen width type, In my case, I show `Mithi` when the screen size is `big`, and `Diana` and `Mikong` for `medium` and `small` respectively. A big screen has a width above `1000px`, a small screen has a width below `700px` the rest are medium screens.
+-   `useDebugValugValue` used to display a label for custom hooks in React DevTools. The custom hook should take in a minimum and maximum width, and return whether the current window size satisfies the condition.
+
+## My implementation
+
+Create a `useWindowSize` hook
+
+```jsx
+// Adapted from: https://usehooks.com/useWindowSize/
+function useWindowSize() {
+    // Initialize state with undefined width/height so server and client renders match
+    const [windowSize, setWindowSize] = useState({ width: undefined, height: undefined })
+    useDebugValue(`width: ${windowSize.width}px, height: ${windowSize.height}px`)
+
+    useEffect(() => {
+        const handleResize = () =>
+            setWindowSize({
+                width: window.innerWidth,
+                height: window.innerHeight,
+            })
+
+        window.addEventListener("resize", handleResize)
+        handleResize() // call it right away!
+
+        return () => window.removeEventListener("resize", handleResize)
+    }, [])
+
+    return windowSize
+}
+```
+
+And a `useWithinWindowWidth` hook
+
+```jsx
+function useWithinWindowWidth(minWidth, maxWidth) {
+    const { width } = useWindowSize()
+
+    const isWithin = width && width >= minWidth && width <= maxWidth
+    useDebugValue({ minWidth, maxWidth, isWithin }, formatDebugValueWithinWindow)
+    return isWithin
+}
+
+export { useWithinWindowWidth, useWindowSize }
+```
+
+Here's the function `useDebugValue` calls
+
+```jsx
+const formatDebugValueWithinWindow = ({ minWidth, maxWidth, isWithin }) => {
+    if (maxWidth === Infinity) {
+        return `(min-width: ${minWidth}px) => ${isWithin}`
+    }
+    if (minWidth === 0) {
+        return `(max-width: ${maxWidth}px) => ${isWithin}`
+    }
+    return `(max-width: ${maxWidth}px) and (min-width: ${minWidth}px) => ${isWithin}`
+}
+```
+
+Here's the component calling `useWithinWindowWidth`:
+
+```jsx
+const POSSIBLE_STATES = {
+    small: { name: "Mikong", size: "small", icon: <MdTabletMac /> },
+    medium: { name: "Diana", size: "medium", icon: <MdLaptopMac /> },
+    big: { name: "Mithi", size: "big", icon: <MdDesktopMac /> },
+}
+
+function PersonByWindowSize() {
+    const isBig = useWithinWindowWidth(1000, Infinity)
+    const isMedium = useWithinWindowWidth(700, 999)
+    const isSmall = useWithinWindowWidth(0, 699)
+
+    let person = null
+    let state = null
+    if (isBig) {
+        person = <RandomHead person={MITHI} />
+        state = POSSIBLE_STATES.big
+    } else if (isMedium) {
+        person = <RandomHead person={DIANA} />
+        state = POSSIBLE_STATES.medium
+    } else if (isSmall) {
+        person = <RandomHead person={MIKONG} />
+        state = POSSIBLE_STATES.small
+    }
+
+    return (
+        <div>
+            {person}
+            <PersonMessage {...{ state }} />
+        </div>
+    )
+}
+```
+
+And finally the top level component:
+
+```jsx
+function App() {
+    const { width, height } = useWindowSize()
+
+    return (
+        <div>
+            <DisplaySize {...{ width, height }} />
+            <PersonByWindowSize />
+            <p>
+                Resizing your window changes the clothes and accessories of the avatar. A
+                specific avatar is shown depending whether your window is big, medium, or
+                small.
+            </p>
+        </div>
+    )
+}
+```
+
 ## Additional Notes
 
-1. [Kent's Should I `useState` or `useReducer`?](https://kentcdodds.com/blog/should-i-usestate-or-usereducer)
-2. [Kent's How to implement `useState` with `useReducer`](https://kentcdodds.com/blog/how-to-implement-usestate-with-usereducer)
-3. [`useTypescript` — A Complete Guide to React Hooks and TypeScript](https://levelup.gitconnected.com/usetypescript-a-complete-guide-to-react-hooks-and-typescript-db1858d1fb9c) by Trey Huffine
-4. [Kent's When to `useMemo` and `useCallback`](https://kentcdodds.com/blog/usememo-and-usecallback)
-5. [Memoization and React](https://epicreact.dev/memoization-and-react/)
-6. [What the Fork is Closure](https://whatthefork.is/closure)
-7. [Lifting state up](https://reactjs.org/docs/lifting-state-up.html)
-8. [Michael Jackson Tweet: Composition](https://twitter.com/mjackson/status/1195495535483817984)
-9. [Kent's `useEffect` vs `useLayoutEffect`](https://kentcdodds.com/blog/useeffect-vs-uselayouteffect)
-10. [React docs: hook reference](https://reactjs.org/docs/hooks-reference.html)
-11. [[ESLint] Feedback for 'exhaustive-deps' lint rule #14920](https://github.com/facebook/react/issues/14920)
-12. [Gupta Garuda: React Hooks - Understanding Component Re-renders](https://medium.com/@guptagaruda/react-hooks-understanding-component-re-renders-9708ddee9928)
-13. [StackOverFlow: When to use `useImperativeHandle`](https://stackoverflow.com/questions/57005663/when-to-use-useimperativehandle-uselayouteffect-and-usedebugvalue)
+From [React Docs](https://reactjs.org/docs/hooks-reference.html#usedebugvalue)
 
-## Things you should know
-
-1. How to do lazy initialization with `useReducer` and `useState`
-2. Abortable fetch
-3. Is `setState` from `useState` and `dispatch` from `useReducer` guaranteed to be stable? What does that mean?
-4. What does it mean when the React docs say: "You may rely on `useMemo` as a performance optimization, not as a semantic guarantee."
-5. How does [`Object.is` comparison algorithm](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is#description) work?
-6. React docs says "we recommend starting with `useEffect` first and only trying `useLayoutEffect` if that causes a problem"
-
-## Hooks you can try to implement from scratch
-
-1. From [`streamich/react-use`](https://github.com/streamich/react-use)
-    - [`useAsync`](https://github.com/streamich/react-use/blob/master/docs/useAsync.md)
-    - [`useAsyncRetry`](https://github.com/streamich/react-use/blob/master/docs/useAsyncRetry.md)
-    - `useAsyncFn`
-    - [`useLocalStorage`](https://github.com/streamich/react-use/blob/master/docs/useLocalStorage.md)
-    - [`useMount`](https://github.com/streamich/react-use/blob/master/docs/useMount.md)
-    - [`useMountedState`](https://github.com/streamich/react-use/blob/master/docs/useMountedState.md)
-    - `useLocalStorage`
-    - `UseUnmount`
-    - `UseLifecycle`
-    - `UseIsomorphicLayoutEffect`
-2. From [Gabe Ragland: `useHooks`](https://usehooks.com/)
-    - [`useKonamiCode`](https://usehooks.com/useKonamiCode/)
-    - [`useToggle`](https://usehooks.com/useToggle/)
-    - `useMemoCompare`
-    - `useEventListener`
-    - `useWhyYouDidUpdate`
-    - `useMedia`
-    - `useTheme`
-    - `useHistory`
-    - `usePrevious`
-    - `useWindowSize`
+> We don’t recommend adding debug values to every custom Hook. It’s most valuable for custom Hooks that are part of shared libraries.
