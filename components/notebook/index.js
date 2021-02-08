@@ -10,7 +10,8 @@ import { SpinnerDots } from "components/spinner"
 import { LinkOutButton, LinkButton } from "../button"
 import Main from "../main"
 import NotebookLayout from "../main/two-sections"
-import { PrettyHeader } from "../pretty-defaults"
+import { PrettyHeader, PrettyAnchor, PrettyLink } from "../pretty-defaults"
+import { BigHeadNotice } from "../big-head-girl"
 
 const EPIC_NOTES_REPO_URL = "https://github.com/mithi/epic-notes"
 const KOFI_URL = "https://ko-fi.com/minimithi"
@@ -22,7 +23,7 @@ const issueUrl = (prefix, editPath) => {
 const editUrl = editPath =>
     `${EPIC_NOTES_REPO_URL}/edit/main/content/${editPath}/notes.md`
 
-//const solutionUrl = editPath => `${EPIC_NOTES_REPO_URL}/edit/main/content/${editPath}`
+const solutionUrl = editPath => `${EPIC_NOTES_REPO_URL}/edit/main/content/${editPath}`
 
 const PageButton = ({ pageId, pathname, currentPageId }) => {
     const buttonPathname = `${pathname}/${pageId}`
@@ -134,6 +135,26 @@ const ArticleFooter = ({ editPath }) => {
     )
 }
 
+const CallToActionBox = ({ editPath }) => {
+    return (
+        <BigHeadNotice>
+            <PrettyAnchor href={solutionUrl(editPath)}>
+                View this deployed code
+            </PrettyAnchor>{" "}
+            on Github. <br /> Not happy with the solution {"🐞🐛"}?{" "}
+            <PrettyAnchor href={issueUrl("Better solution! Suggestion for:", editPath)}>
+                Suggest a change.
+            </PrettyAnchor>
+            <br />
+            Grammar errors? {"✏️ "}
+            <PrettyAnchor href={editUrl(editPath)}>Edit</PrettyAnchor> this page.
+            <br />
+            You might want to <PrettyLink href="/">go back home</PrettyLink> {"🏠"} or
+            <PrettyAnchor href={KOFI_URL}> buy me a coffee</PrettyAnchor> {"☕"}.
+        </BigHeadNotice>
+    )
+}
+
 const PageLayout = ({
     properties,
     pageId,
@@ -159,7 +180,7 @@ const PageLayout = ({
     const editPath = `${topic}/${section}/${pageId}`
     const article = (
         <article>
-            {hasApp}
+            {hasApp && <CallToActionBox {...{ editPath }} />}
             {notes}
             <ArticleFooter {...{ editPath }} />
         </article>
