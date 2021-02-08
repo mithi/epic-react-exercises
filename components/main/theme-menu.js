@@ -37,6 +37,12 @@ const DynamicMarkdownRender = dynamic(() => import("components/markdown-render")
     loading: () => <SpinnerDots />,
 })
 
+const SquareIcon = ({ onClick, children, ...otherProps }) => (
+    <OnClickButton style={ICON_BUTTON_STYLE} {...{ onClick, ...otherProps }}>
+        {children}
+    </OnClickButton>
+)
+
 const ChooseThemeIcons = () => {
     const {
         nextColor,
@@ -49,42 +55,22 @@ const ChooseThemeIcons = () => {
 
     return (
         <div className={sectionClassNames[0]} style={ICONS_CONTAINER_STYLE}>
-            <OnClickButton
-                onClick={nextPageTheme}
-                style={ICON_BUTTON_STYLE}
-                aria-label="change page theme"
-            >
+            <SquareIcon onClick={nextPageTheme} aria-label="change page theme">
                 <FaCloudSun />
-            </OnClickButton>
+            </SquareIcon>
 
-            <OnClickButton
-                onClick={nextColor}
-                style={ICON_BUTTON_STYLE}
-                aria-label="change main color"
-            >
+            <SquareIcon onClick={nextColor} aria-label="change main color">
                 <FaPaintBrush />
-            </OnClickButton>
-            <OnClickButton
-                onClick={nextHeaderFont}
-                style={ICON_BUTTON_STYLE}
-                aria-label="change header font"
-            >
+            </SquareIcon>
+            <SquareIcon onClick={nextHeaderFont} aria-label="change header font">
                 <CgFormatColor />
-            </OnClickButton>
-            <OnClickButton
-                onClick={nextBodyFont}
-                style={ICON_BUTTON_STYLE}
-                aria-label="change body font"
-            >
+            </SquareIcon>
+            <SquareIcon onClick={nextBodyFont} aria-label="change body font">
                 <BiText />
-            </OnClickButton>
-            <OnClickButton
-                onClick={nextCodeTheme}
-                style={ICON_BUTTON_STYLE}
-                aria-label="change code theme"
-            >
+            </SquareIcon>
+            <SquareIcon onClick={nextCodeTheme} aria-label="change code theme">
                 <FaCode />
-            </OnClickButton>
+            </SquareIcon>
         </div>
     )
 }

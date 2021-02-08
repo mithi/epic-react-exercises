@@ -15,11 +15,10 @@ const BigHeadMessage = ({ state }) => {
         <div
             style={{
                 fontSize: "15px",
-                margin: "25px",
-                display: "flex",
+                margin: "15px",
             }}
         >
-            <div style={{ lineHeight: "1" }}>
+            <div style={{ lineHeight: "1", maxWidth: "250px" }}>
                 You are seeing
                 <PrettyHeader
                     Component="span"
@@ -27,11 +26,8 @@ const BigHeadMessage = ({ state }) => {
                 >
                     {state.name}
                 </PrettyHeader>
-                because your screen size is
-                <PrettyHeader
-                    Component="span"
-                    style={{ fontSize: "20px", margin: "5px" }}
-                >
+                because your screen size is{" "}
+                <PrettyHeader Component="span" style={{ fontSize: "20px" }}>
                     {state.size}!
                 </PrettyHeader>
                 <br />

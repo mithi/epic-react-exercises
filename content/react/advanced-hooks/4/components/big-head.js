@@ -51,8 +51,15 @@ const DIANA = {
 
 const RandomHead = ({ person }) => (
     <div>
-        <BorderedDiv style={{ borderRadius: "25%", width: "125px", height: "125px" }}>
-            <BigHead {...person} circleColor="blue" />
+        <BorderedDiv
+            style={{
+                borderRadius: "25%",
+                width: "125px",
+                height: "125px",
+                marginBottom: "10px",
+            }}
+        >
+            <BigHead {...person} />
         </BorderedDiv>
     </div>
 )

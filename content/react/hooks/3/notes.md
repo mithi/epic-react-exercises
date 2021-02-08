@@ -1,6 +1,6 @@
 ## [The Http Request Exercise](https://react-hooks.netlify.app/6)
 
--   [Fetch pokemons using this API](https://graphql-pokemon2.vercel.app). See also: [repository](https://github.com/lucasbento/graphql-pokemon/pull/14)
+-   [Fetch pokemons](https://graphql-pokemon2.vercel.app) from [this project](https://github.com/lucasbento/graphql-pokemon/pull/14)!
 -   A form where users can enter the pokemon name and your app fetches and displays that pokemon's data
 -   When a request hasn't been made yet, show `no pokemon yet, please submit a pokemon!`
 -   While fetching the pokemon data, show a `loading` screen

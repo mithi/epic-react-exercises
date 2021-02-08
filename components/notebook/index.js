@@ -10,10 +10,20 @@ import { SpinnerDots } from "components/spinner"
 import { LinkOutButton, LinkButton } from "../button"
 import Main from "../main"
 import NotebookLayout from "../main/two-sections"
-import { PrettyHeader } from "../pretty-defaults"
+import { PrettyHeader, PrettyAnchor, PrettyLink } from "../pretty-defaults"
+import { BigHeadNotice } from "../big-head-girl"
 
 const EPIC_NOTES_REPO_URL = "https://github.com/mithi/epic-notes"
 const KOFI_URL = "https://ko-fi.com/minimithi"
+
+const issueUrl = (prefix, editPath) => {
+    prefix = prefix.split(" ").join("%20")
+    return `${EPIC_NOTES_REPO_URL}/issues/new?title=${prefix}%20${editPath}`
+}
+const editUrl = editPath =>
+    `${EPIC_NOTES_REPO_URL}/edit/main/content/${editPath}/notes.md`
+
+const solutionUrl = editPath => `${EPIC_NOTES_REPO_URL}/edit/main/content/${editPath}`
 
 const PageButton = ({ pageId, pathname, currentPageId }) => {
     const buttonPathname = `${pathname}/${pageId}`
@@ -44,9 +54,6 @@ const Pagination = ({ numberOfPages, currentPageId, pathname }) => {
 }
 
 const BUTTON_STYLE = {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
     margin: "3px",
     width: "30px",
     height: "30px",
@@ -59,42 +66,30 @@ const BUTTON_CONTAINER_STYLE = {
     marginBottom: "10px",
 }
 
-const Header = ({ properties, editPath }) => {
+const HeaderSection = ({ properties, editPath }) => {
     const { deployedSite, repository, title } = properties
-    let repositoryButton = null
-    if (repository) {
-        repositoryButton = (
-            <LinkOutButton
-                href={repository}
-                style={BUTTON_STYLE}
-                aria-label={"go to source repository"}
-            >
-                <FiGithub />
-            </LinkOutButton>
-        )
+
+    let repositoryButton = repository && {
+        "href": repository,
+        "aria-label": "go to source repository",
+        "children": <FiGithub />,
     }
 
-    let deployedSiteButton = null
-    if (deployedSite) {
-        deployedSiteButton = (
-            <LinkOutButton
-                href={deployedSite}
-                style={BUTTON_STYLE}
-                aria-label={"go to source deployed site"}
-            >
-                <BiRocket />
-            </LinkOutButton>
-        )
+    let deployedSiteButton = deployedSite && {
+        "href": deployedSite,
+        "aria-label": "go to source deployed site",
+        "children": <BiRocket />,
     }
 
-    const editButton = (
-        <LinkOutButton
-            href={`${EPIC_NOTES_REPO_URL}/edit/main/content/${editPath}`}
-            style={BUTTON_STYLE}
-            aria-label={"edit this page"}
-        >
-            <BsPencilSquare />
-        </LinkOutButton>
+    const editButton = {
+        "href": editUrl(editPath),
+        "aria-label": "edit this page",
+        "children": <BsPencilSquare />,
+    }
+
+    const buttons = [repositoryButton, deployedSiteButton, editButton].map(
+        props =>
+            props && <LinkOutButton style={BUTTON_STYLE} key={props.href} {...props} />
     )
 
     return (
@@ -102,11 +97,7 @@ const Header = ({ properties, editPath }) => {
             <PrettyHeader Component="h1" style={{ marginRight: "10px" }}>
                 {title}
             </PrettyHeader>
-            <div style={BUTTON_CONTAINER_STYLE}>
-                {deployedSiteButton}
-                {repositoryButton}
-                {editButton}
-            </div>
+            <div style={BUTTON_CONTAINER_STYLE}>{buttons}</div>
         </div>
     )
 }
@@ -120,14 +111,15 @@ const FOOTER_CONTAINER_STYLE = {
 const HOME_STYLE = { height: "50px", width: "50px", margin: "10px" }
 
 const ArticleFooter = ({ editPath }) => {
-    const issueUrl = `${EPIC_NOTES_REPO_URL}/issues/new?title=Something%20wrong%20in:%20${editPath}`
-    const editUrl = `${EPIC_NOTES_REPO_URL}/edit/main/content/${editPath}/notes.url`
     return (
         <div style={FOOTER_CONTAINER_STYLE}>
-            <LinkOutButton aria-label="report a bug" href={issueUrl}>
+            <LinkOutButton
+                href={issueUrl("Something is wrong in:", editPath)}
+                aria-label="report a bug"
+            >
                 <FaBug />
             </LinkOutButton>
-            <LinkOutButton href={editUrl} aria-label="edit this page">
+            <LinkOutButton href={editUrl(editPath)} aria-label="edit this page">
                 <BsPencilSquare />
             </LinkOutButton>
             <LinkOutButton href={EPIC_NOTES_REPO_URL} aria-label="star me on github">
@@ -140,6 +132,26 @@ const ArticleFooter = ({ editPath }) => {
                 <FaHome />
             </LinkButton>
         </div>
+    )
+}
+
+const CallToActionBox = ({ editPath }) => {
+    return (
+        <BigHeadNotice>
+            <PrettyAnchor href={solutionUrl(editPath)}>
+                View this deployed code
+            </PrettyAnchor>{" "}
+            on Github. <br /> Not happy with the solution {"🐞🐛"}?{" "}
+            <PrettyAnchor href={issueUrl("Better solution! Suggestion for:", editPath)}>
+                Suggest a change.
+            </PrettyAnchor>
+            <br />
+            Grammar errors? {"✏️ "}
+            <PrettyAnchor href={editUrl(editPath)}>Edit</PrettyAnchor> this page.
+            <br />
+            You might want to <PrettyLink href="/">go back home</PrettyLink> {"🏠"} or
+            <PrettyAnchor href={KOFI_URL}> buy me a coffee</PrettyAnchor> {"☕"}.
+        </BigHeadNotice>
     )
 }
 
@@ -165,9 +177,10 @@ const PageLayout = ({
         [hasApp, topic, section, pageId]
     )
 
-    const editPath = `${topic}/${section}/${pageId}/`
+    const editPath = `${topic}/${section}/${pageId}`
     const article = (
         <article>
+            {hasApp && <CallToActionBox {...{ editPath }} />}
             {notes}
             <ArticleFooter {...{ editPath }} />
         </article>
@@ -175,12 +188,7 @@ const PageLayout = ({
 
     const div1 = (
         <>
-            <Header
-                {...{
-                    properties,
-                    editPath,
-                }}
-            />
+            <HeaderSection {...{ properties, editPath }} />
             <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <Pagination
                     {...{
@@ -194,7 +202,7 @@ const PageLayout = ({
         </>
     )
 
-    const div2 = hasApp ? article : null
+    const div2 = hasApp && article
 
     return (
         <Main>
