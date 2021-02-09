@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { useTheme } from "hooks"
+import { useButtonThemeClasses, ButtonThemeProvider } from "providers/theme"
 
 const TOTALLY_CENTERED = {
     display: "flex",
@@ -32,35 +33,6 @@ const AUTO_SIZE_STYLE = {
     borderRadius: "8px",
 }
 
-const useButtonClasses = (className, disabled, isInvertedColor) => {
-    const { buttonClassNames, invertedButtonClassName, disabledClassName } = useTheme()
-
-    // invertedButtonClassName
-    //      - normal, opacity: slightly less than 1.0
-    //      - hovered, opacity: 1.0
-    //      - backgroundColor: UNDEFINED
-    //      - color: based on theme (light (white), dark (black), funky (red))
-    // disabledClassName
-    //     - normal: opacity: around 0.3
-    //     - hovered: opacity: name as normal
-    const [
-        defaultBackground, // default button background color when not hovered (light (white), dark (black), funky (red))
-        defaultColorOnHover, // default color of the element when hovered (light (white), dark (black), funky (red))
-        defaultColor, // default color of element when not hovered (primaryColor)
-        defaultBackgroundOnHover, // default background color when hovered (primary color)
-    ] = buttonClassNames
-
-    let final = isInvertedColor
-        ? [invertedButtonClassName]
-        : [defaultBackground, defaultColor]
-
-    final = disabled
-        ? [...final, disabledClassName]
-        : [...final, defaultColorOnHover, defaultBackgroundOnHover]
-
-    return [...final, className].join(" ")
-}
-
 const useDefaultButtonStyle = (
     style,
     disabled,
@@ -87,8 +59,15 @@ const useDefaultButtonStyle = (
     }
 }
 
-const LinkButton = ({ children, href, disabled, className, style, ...otherProps }) => {
-    className = useButtonClasses(className, disabled)
+const LinkButtonInner = ({
+    children,
+    href,
+    disabled,
+    className,
+    style,
+    ...otherProps
+}) => {
+    className = useButtonThemeClasses(className, disabled)
     style = useDefaultButtonStyle(style, disabled)
     return (
         <Link {...{ href }}>
@@ -101,8 +80,8 @@ const LinkButton = ({ children, href, disabled, className, style, ...otherProps 
     )
 }
 
-const LinkOutButton = ({ children, href, className, style, ...otherProps }) => {
-    className = useButtonClasses(className)
+const LinkOutButtonInner = ({ children, href, className, style, ...otherProps }) => {
+    className = useButtonThemeClasses(className)
     style = useDefaultButtonStyle(style, false)
     return (
         <a {...{ href }} target="_blank" rel="noopener noreferrer">
@@ -113,7 +92,7 @@ const LinkOutButton = ({ children, href, className, style, ...otherProps }) => {
     )
 }
 
-const OnClickButton = ({
+const OnClickButtonInner = ({
     children,
     onClick,
     disabled,
@@ -125,7 +104,7 @@ const OnClickButton = ({
     noDisabledBorder,
     ...otherProps
 }) => {
-    className = useButtonClasses(className, disabled, isInvertedColor)
+    className = useButtonThemeClasses(className, disabled, isInvertedColor)
     style = useDefaultButtonStyle(
         style,
         disabled,
@@ -141,15 +120,35 @@ const OnClickButton = ({
 }
 
 const DefaultButton = ({ onClick, children, style, disabled, ...otherProps }) => (
-    <OnClickButton
-        isAutoSize={true}
-        useBgPrimaryColor={true}
-        isInvertedColor={true}
-        noDisabledBorder={true}
-        {...{ onClick, style, disabled, ...otherProps }}
-    >
-        {children}
-    </OnClickButton>
+    <ButtonThemeProvider>
+        <OnClickButton
+            isAutoSize={true}
+            useBgPrimaryColor={true}
+            isInvertedColor={true}
+            noDisabledBorder={true}
+            {...{ onClick, style, disabled, ...otherProps }}
+        >
+            {children}
+        </OnClickButton>
+    </ButtonThemeProvider>
+)
+
+const LinkButton = props => (
+    <ButtonThemeProvider>
+        <LinkButtonInner {...props} />
+    </ButtonThemeProvider>
+)
+
+const LinkOutButton = props => (
+    <ButtonThemeProvider>
+        <LinkOutButtonInner {...props} />
+    </ButtonThemeProvider>
+)
+
+const OnClickButton = props => (
+    <ButtonThemeProvider>
+        <OnClickButtonInner {...props} />
+    </ButtonThemeProvider>
 )
 
 export { LinkOutButton, OnClickButton, LinkButton, DefaultButton }
