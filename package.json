@@ -21,6 +21,7 @@
         "react-icons": "^4.1.0",
         "react-markdown": "^5.0.3",
         "react-syntax-highlighter": "^15.4.3",
+        "sharp": "^0.26.2",
         "vanilla-tilt": "^1.7.0"
     },
     "devDependencies": {
