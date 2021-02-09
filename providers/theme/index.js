@@ -1,11 +1,9 @@
 import { createContext } from "react"
 import { useStickyState } from "hooks"
 import styles from "./Theme.module.css"
-import codeThemes from "./code-themes"
 
 export const NUMBER_OF_BODY_FONTS = 5
 export const NUMBER_OF_HEADER_FONTS = 5
-export const NUMBER_OF_CODE_THEMES = codeThemes.length
 
 export const COLORS = ["blue", "pink", "green", "purple", "orange"]
 export const NUMBER_OF_COLORS = COLORS.length
@@ -48,7 +46,6 @@ const DEFAULT = {
     bodyFont: "var(--body-font-02)",
     headerFont: "var(--header-font-01)",
     primaryColor: colored(COLORS[0]).var,
-    codeTheme: codeThemes[0],
 }
 
 const ThemeContext = createContext(DEFAULT)
@@ -58,7 +55,6 @@ const ThemeProvider = ({ children }) => {
     const [colorId, setColorId] = useStickyState(0, "colorId")
     const [headerFontId, setHeaderFontId] = useStickyState(0, "headerId")
     const [bodyFontId, setBodyFontId] = useStickyState(0, "bodyFontId")
-    const [codeThemeId, setCodeThemeId] = useStickyState(0, "codeThemeId")
     const theme = THEMES[themeId]
     const bodyClassNames = [theme.body]
     const sectionClassNames = [theme.section]
@@ -70,7 +66,6 @@ const ThemeProvider = ({ children }) => {
         theme.buttonOnHover,
     ]
     const invertedButtonClassName = theme.invertedButton
-    const codeTheme = codeThemes[codeThemeId]
 
     const nextColor = () => {
         const n = (Number(colorId) + 1) % NUMBER_OF_COLORS
@@ -85,11 +80,6 @@ const ThemeProvider = ({ children }) => {
     const nextHeaderFont = () => {
         const n = (Number(headerFontId) + 1) % NUMBER_OF_HEADER_FONTS
         setHeaderFontId(n)
-    }
-
-    const nextCodeTheme = () => {
-        const n = (Number(codeThemeId) + 1) % NUMBER_OF_CODE_THEMES
-        setCodeThemeId(n)
     }
 
     const nextPageTheme = () => {
@@ -107,13 +97,11 @@ const ThemeProvider = ({ children }) => {
                 bodyFont,
                 headerFont,
                 primaryColor,
-                codeTheme,
                 themeId,
                 nextBodyFont,
                 nextPageTheme,
                 nextColor,
                 nextHeaderFont,
-                nextCodeTheme,
                 bodyClassNames,
                 sectionClassNames,
                 buttonClassNames,
