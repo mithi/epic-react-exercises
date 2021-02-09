@@ -1,8 +1,7 @@
 import React from "react"
-import dynamic from "next/dynamic"
+import DynamicMarkdownRender from "components/markdown-render/dynamic"
 import Content from "./components/content"
 import { OnClickText } from "components/pretty-defaults"
-import { SpinnerDots } from "components/spinner"
 import { TopButton, BottomButton, AppContainer, Section } from "./components/helpers"
 import { SmallSpan } from "components/pretty-defaults"
 const {
@@ -13,11 +12,6 @@ const {
     useImperativeHandle,
     forwardRef,
 } = React
-
-const DynamicMarkdownRender = dynamic(() => import("components/markdown-render"), {
-    // eslint-disable-next-line react/display-name
-    loading: () => <SpinnerDots />,
-})
 
 // if you use useEffect instead, you'd see the flicker
 // when switching from ScrollableImplerative to ScrollableNormal and back

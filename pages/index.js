@@ -1,12 +1,7 @@
-import dynamic from "next/dynamic"
+import DynamicMarkdownRender from "components/markdown-render/dynamic"
 import landingString from "content/landing/index.md"
 import Main from "components/main"
 import TwoSections from "components/main/two-sections"
-import { SpinnerDots } from "components/spinner"
-const DynamicMarkdownRender = dynamic(() => import("components/markdown-render"), {
-    // eslint-disable-next-line react/display-name
-    loading: () => <SpinnerDots />,
-})
 
 export default function Home() {
     const div1 = (
