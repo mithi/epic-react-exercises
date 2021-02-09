@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { useTheme } from "hooks"
 import { DefaultButton } from "../button"
 
@@ -128,6 +129,43 @@ const PositiveIntegerSearchbar = ({
 const SmallSpan = ({ children, style }) => (
     <span style={{ fontSize: "12px", ...style }}>{children}</span>
 )
+
+const RoundedImage = ({ src, width, height, style, alt, borderType }) => {
+    borderType = borderType || "border20percent"
+    return (
+        <div
+            style={{
+                width: `${width}px`,
+                height: `${height}px`,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                ...style,
+            }}
+        >
+            <Image
+                src={src}
+                alt={alt}
+                className={borderType}
+                height={height}
+                width={width}
+                quality={100}
+            />
+            <style jsx global>{`
+                .border20percent {
+                    border-radius: 20%;
+                }
+                .border15px {
+                    border-radius: 15px;
+                }
+                .border25percent {
+                    border-radius: 25%;
+                }
+            `}</style>
+        </div>
+    )
+}
+
 export {
     PrettyHeader,
     PrettyAnchor,
@@ -137,4 +175,5 @@ export {
     PositiveIntegerSearchbar,
     OnClickText,
     SmallSpan,
+    RoundedImage,
 }
