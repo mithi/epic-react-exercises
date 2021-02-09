@@ -1,6 +1,7 @@
 import styles from "./Styles.module.css"
 import { useState, useEffect, useLayoutEffect } from "react"
 import { useTheme } from "hooks"
+import { CodeThemeProvider } from "providers/code-theme"
 import Nav from "./navbar"
 
 /*
@@ -15,19 +16,19 @@ const Home = ({ children } = {}) => {
     useNextEffect(() => setVisible(true), [])
 
     return (
-        <>
-            <div
-                className={[styles.grid, ...bodyClassNames].join(" ")}
-                style={{
-                    overflow: "auto",
-                    fontFamily: bodyFont,
-                    visibility: visible ? "visible" : "hidden",
-                }}
-            >
+        <div
+            className={[styles.grid, ...bodyClassNames].join(" ")}
+            style={{
+                overflow: "auto",
+                fontFamily: bodyFont,
+                visibility: visible ? "visible" : "hidden",
+            }}
+        >
+            <CodeThemeProvider>
                 <Nav />
                 <main className={styles.main}>{children}</main>
-            </div>
-        </>
+            </CodeThemeProvider>
+        </div>
     )
 }
 

@@ -1,4 +1,4 @@
-import { MdDesktopMac, MdLaptopMac, MdTabletMac } from "react-icons/md"
+import { MdDesktopMac, MdLaptopMac, MdTabletMac } from "components/icons"
 import { SmallSpan } from "components/pretty-defaults"
 import { useWithinWindowWidth, useWindowSize } from "./components/hooks"
 import { RandomHead, MITHI, DIANA, MIKONG } from "./components/big-head"

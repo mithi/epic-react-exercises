@@ -1,12 +1,10 @@
 import DynamicMarkdownRender from "components/markdown-render/dynamic"
 import styles from "./Styles.module.css"
-import { FaCloudSun, FaCode, FaPaintBrush } from "react-icons/fa"
-import { CgFormatColor } from "react-icons/cg"
-import { BiText } from "react-icons/bi"
-import { OnClickButton } from "../button"
-import { OnClickText, PrettyHeader } from "../pretty-defaults"
 import { useTheme, useMenuState } from "hooks"
 import { useCodeTheme } from "providers/code-theme"
+import { OnClickButton } from "../button"
+import { OnClickText, PrettyHeader } from "../pretty-defaults"
+import { FaCloudSun, FaCode, FaPaintBrush, CgFormatColor, BiText } from "../icons"
 
 const ICON_BUTTON_STYLE = { margin: "10px 5px" }
 const ICONS_CONTAINER_STYLE = {

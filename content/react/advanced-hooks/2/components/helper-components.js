@@ -1,6 +1,4 @@
-import { BiRefresh } from "react-icons/bi"
-import { GiPerspectiveDiceSixFacesRandom } from "react-icons/gi"
-import { FaSearch } from "react-icons/fa"
+import { BiRefresh, GiPerspectiveDiceSixFacesRandom, FaSearch } from "components/icons"
 import { OnClickText, SmallSpan } from "components/pretty-defaults"
 import { OnClickButton, DefaultButton } from "components/button"
 import { PendingView } from "../../1/components/views"
