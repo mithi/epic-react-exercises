@@ -4,8 +4,7 @@ import {
     SmallSpan,
     RoundedImage,
 } from "components/pretty-defaults"
-import { FaUser, FaUserTimes } from "react-icons/fa"
-
+import { FaUser, FaUserTimes } from "components/icons"
 const TOTALLY_CENTERED = {
     display: "flex",
     justifyContent: "center",

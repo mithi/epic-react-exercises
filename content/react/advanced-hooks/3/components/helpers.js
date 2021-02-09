@@ -1,5 +1,5 @@
 import React from "react"
-import { FaArrowAltCircleUp, FaArrowAltCircleDown } from "react-icons/fa"
+import { FaArrowAltCircleUp, FaArrowAltCircleDown } from "components/icons"
 import { DefaultButton } from "components/button"
 import { useTheme } from "hooks"
 import { BorderedDiv } from "components/pretty-defaults"

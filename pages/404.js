@@ -1,7 +1,7 @@
 import Main from "components/main"
 import { PrettyHeader } from "components/pretty-defaults"
 import { LinkOutButton, LinkButton } from "components/button"
-import { FaBug, FaHome } from "react-icons/fa"
+import { FaBug, FaHome } from "components/icons"
 
 export default function FourOhfour() {
     return (

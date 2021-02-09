@@ -13,9 +13,9 @@ const BigHeadNotice = ({ children }) => {
             >
                 <div style={{ padding: "5px" }}>
                     <RoundedImage
-                        src="/android-chrome-512x512.png"
+                        src="/hi-res-big-head-girl-transparent.png"
                         alt="Big Head Girl Epic Notes Logo"
-                        width={75}
+                        width={60}
                         height={75}
                         quality={100}
                     />

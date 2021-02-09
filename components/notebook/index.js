@@ -1,12 +1,16 @@
 import styles from "./Styles.module.css"
 import dynamic from "next/dynamic"
 import { useMemo } from "react"
-import { FiGithub } from "react-icons/fi"
-import { BiRocket, BiCoffeeTogo } from "react-icons/bi"
-import { BsPencilSquare } from "react-icons/bs"
-import { GoOctoface } from "react-icons/go"
-import { FaHome, FaBug } from "react-icons/fa"
-import { SpinnerDots } from "components/spinner"
+import {
+    FiGithub,
+    BiRocket,
+    BiCoffeeTogo,
+    BsPencilSquare,
+    GoOctoface,
+    FaHome,
+    FaBug,
+} from "../icons"
+import { SpinnerDots } from "../spinner"
 import { LinkOutButton, LinkButton } from "../button"
 import Main from "../main"
 import NotebookLayout from "../main/two-sections"

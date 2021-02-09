@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
-import { GiPerspectiveDiceSixFacesRandom } from "react-icons/gi"
 import { delayedFetchRickAndMorty } from "fetch-utils"
 import { OnClickButton } from "components/button"
+import { GiPerspectiveDiceSixFacesRandom } from "components/icons"
 import {
     BorderedDiv,
     PositiveIntegerSearchbar,
