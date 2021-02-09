@@ -1,12 +1,6 @@
-import dynamic from "next/dynamic"
+import DynamicMarkdownRender from "components/markdown-render/dynamic"
 import { sectionProperties, pageContents } from "utils"
 import PageLayout from "components/notebook"
-import { SpinnerDots } from "components/spinner"
-
-const DynamicMarkdownRender = dynamic(() => import("components/markdown-render"), {
-    // eslint-disable-next-line react/display-name
-    loading: () => <SpinnerDots />,
-})
 
 export const PageLayoutHelper = ({
     notesString,

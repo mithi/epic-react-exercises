@@ -9,7 +9,6 @@
 -   There should be a button to `try again` after an error. Upon clicking this , the `no pokemon yet, please submit a pokemon!` will be shown and the current string on the search bar would be removed.
 -   After an error, the user should be able to use the search bar to search for a new pokemon without having to click the `try again` button.
 -   [Kent's Implementation](https://github.com/kentcdodds/react-hooks/blob/main/src/final/04.extra-3.js)
--   My Implementation: The [top level app](https://github.com/mithi/epic-notes/blob/main/content/react/hooks/3/app.js) and its [components](https://github.com/mithi/epic-notes/tree/main/content/react/hooks/3/components)
 
 ## A Few Code Snippets
 
@@ -108,12 +107,12 @@ class CustomErrorBoundary extends Component {
 
 1.  It's better to put all the states in one state object (ie `{status, pokemonData, error}`), instead of having several `useState()` declarations.
     -   Aside from simplicity, it's because each state change could trigger an immediate rerender, which we don't intend to do.
-2.  [PokemonInfoCard](https://github.com/mithi/epic-notes/blob/88e640ea4faa7ad7d536aa4f23a837c50abd3fd8/content/react/hooks/3/components/pokemon-info-card.js#L48) takes a `pokemonName` and fetches the data.
+2.  `PokemonInfoCard` takes a `pokemonName` and fetches the data.
     -   It contains the logic of what to render depending on its status (`idle`, `pending`, `rejected`, `resolved`). It manages three things: The current `status`, and the `error` or `pokemonData` if any.
-3.  [CustomErrorBoundary](https://github.com/mithi/epic-notes/blob/main/content/react/hooks/3/components/custom-error-boundary.js) wraps the `PokemonInfoCard` which takes a `key`, `FallbackComponent`, and `resetFunction`.
+3.  `CustomErrorBoundary` wraps the `PokemonInfoCard` which takes a `key`, `FallbackComponent`, and `resetFunction`.
     -   If an error occurs, the boundary will render the supplied `FallbackComponent`, instead of its children. - The `resetFunction` is a function (we define and provide) that's intended to be used by the `FallbackComponent` to trigger unmounting and mounting of a new `ErrorBoundary`.
     -   Modifying a component's `key` will trigger a rerender, and that's what the `resetFunction` (that we supplied) must do.
-4.  [Put it all together](https://github.com/mithi/epic-notes/blob/main/content/react/hooks/3/app.js), the overall component, only has two main components, the `pokemonSearchbar` and `pokemonInfoCard` wrapped by `CustomErrorBoundary`
+4.  Put it all together, the overall component, only has two main components, the `pokemonSearchbar` and `pokemonInfoCard` wrapped by `CustomErrorBoundary`
     -   It now only has two states which is `submittedName` and `incompleteName`. `submittedName` is NOT necessarily a real pokemon name, it is whatever the string is in the search bar when the submit button is clicked..
     -   `incompleteName` used to be handled by the search bar component, but this state was lifted up because, it is required to reset the boundary function.
     -   The `resetFunction` resets by setting the current `submittedName` to `""`. `""` would never be equal to a previous `submittedName` because our user interface would not allow that to be submitted. This guarantees that the error boundary would be remounted.

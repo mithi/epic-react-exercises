@@ -26,4 +26,7 @@ module.exports = {
         locales: ["en-US"],
         defaultLocale: "en-US",
     },
+    images: {
+        domains: ["rickandmortyapi.com", "img.pokemondb.net", "storage.googleapis.com"],
+    },
 }

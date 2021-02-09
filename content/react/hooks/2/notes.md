@@ -65,5 +65,3 @@ function App() {
     -   [MDN Docs: Events](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events)
     -   [MDN Docs: Events (refefence)](https://developer.mozilla.org/en-US/docs/Web/Events)
     -   [rehooks/awesome-react-hooks](https://github.com/rehooks/awesome-react-hooks)
-
-# END

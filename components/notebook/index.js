@@ -139,18 +139,18 @@ const CallToActionBox = ({ editPath }) => {
     return (
         <BigHeadNotice>
             <PrettyAnchor href={solutionUrl(editPath)}>
-                View this deployed code
+                {"👀"} View the deployed code
             </PrettyAnchor>{" "}
-            on Github. <br /> Not happy with the solution {"🐞🐛"}?{" "}
+            on Github. <br />
+            Not happy with the solution? {"🐞🐛 "}
             <PrettyAnchor href={issueUrl("Better solution! Suggestion for:", editPath)}>
                 Suggest a change.
-            </PrettyAnchor>
-            <br />
+                <br />
+            </PrettyAnchor>{" "}
             Grammar errors? {"✏️ "}
-            <PrettyAnchor href={editUrl(editPath)}>Edit</PrettyAnchor> this page.
-            <br />
-            You might want to <PrettyLink href="/">go back home</PrettyLink> {"🏠"} or
-            <PrettyAnchor href={KOFI_URL}> buy me a coffee</PrettyAnchor> {"☕"}.
+            <PrettyAnchor href={editUrl(editPath)}>Edit</PrettyAnchor> this page. <br />{" "}
+            Other options: <PrettyLink href="/">go back to main</PrettyLink> {"🏠"} or
+            <PrettyAnchor href={KOFI_URL}> {"☕"} buy me a coffee</PrettyAnchor>!
         </BigHeadNotice>
     )
 }

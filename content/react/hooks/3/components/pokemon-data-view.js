@@ -1,5 +1,5 @@
 import { DefaultButton } from "components/button"
-import { PrettyHeader } from "components/pretty-defaults"
+import { PrettyHeader, RoundedImage } from "components/pretty-defaults"
 import { useTheme } from "hooks"
 import { SpinnerDots } from "components/spinner"
 
@@ -23,7 +23,7 @@ const POKEMON_IMAGE_STYLE = {
     width: "200px",
     minHeight: "200px",
     borderRadius: "15px",
-    padding: "5px",
+    padding: "10px",
     fontSize: "20px",
     marginBottom: "20px",
     ...TOTALLY_CENTERED,
@@ -131,7 +131,17 @@ const PokemonDataView = ({
      ****************/
     let image = <div style={imgStyle}>{imageAlternative || "No image."}</div>
     if (imageUrl) {
-        image = <img src={imageUrl} alt={name} height={"200px"} style={imgStyle} />
+        image = (
+            <div style={imgStyle}>
+                <RoundedImage
+                    src={imageUrl}
+                    alt={name}
+                    height={180}
+                    width={180}
+                    borderType={"border15px"}
+                />
+            </div>
+        )
     }
 
     /****************

@@ -1,4 +1,4 @@
-import { PrettyHeader } from "components/pretty-defaults"
+import { PrettyHeader, RoundedImage } from "components/pretty-defaults"
 /*
 
 data: {
@@ -12,44 +12,30 @@ data: {
 }
  */
 
-const TOTALLY_CENTERED = {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "column",
-    textAlign: "center",
-}
-
-const IMAGE_STYLE = {
-    borderRadius: "25%",
-    padding: "5px",
-    fontSize: "20px",
-    marginBottom: "20px",
-    ...TOTALLY_CENTERED,
-}
+const Li = ({ children }) => <li style={{ margin: 0, padding: 0 }}>{children}</li>
 
 const InfoView = ({ data }) => {
     const { name, status, species, gender, origin, location, imageUrl, id } = data
     const info = (
         <ul>
-            <li>status: {status}</li>
-            <li>species: {species}</li>
-            <li>gender: {gender}</li>
-            <li>location: {location}</li>
-            <li>origin: {origin}</li>
+            <Li>status: {status}</Li>
+            <Li>species: {species}</Li>
+            <Li>gender: {gender}</Li>
+            <Li>location: {location}</Li>
+            <Li>origin: {origin}</Li>
         </ul>
     )
     return (
         <div style={{ display: "flex", margin: "20px 0px", flexWrap: "no-wrap" }}>
-            <img
+            <RoundedImage
                 src={imageUrl}
                 alt={name}
-                style={IMAGE_STYLE}
-                width="125px"
-                height="125px"
+                width="100px"
+                height="100px"
+                style={{ alignItems: "flex-start" }}
             />
             <div style={{ margin: "0px 20px" }}>
-                <PrettyHeader style={{ fontSize: "30px" }}>
+                <PrettyHeader style={{ fontSize: "25px" }}>
                     #{id}. {name}
                 </PrettyHeader>
                 {info}

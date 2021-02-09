@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
 import { useState } from "react"
-import { useTheme } from "hooks"
+import { useCodeTheme, CodeThemeProvider } from "providers/code-theme"
 import ReactMarkdown from "react-markdown"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import {
@@ -11,7 +11,7 @@ import {
 } from "components/pretty-defaults"
 
 const Code = ({ children, language }) => {
-    const { codeTheme } = useTheme()
+    const { codeTheme } = useCodeTheme()
     const [showCode, setShowCode] = useState(true)
 
     const codeBlock = (
@@ -104,6 +104,10 @@ const renderers = {
     },
 }
 
-const MarkdownRender = ({ children }) => <ReactMarkdown {...{ renderers, children }} />
+const MarkdownRender = ({ children }) => (
+    <CodeThemeProvider>
+        <ReactMarkdown {...{ renderers, children }} />
+    </CodeThemeProvider>
+)
 
 export default MarkdownRender

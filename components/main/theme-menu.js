@@ -1,4 +1,4 @@
-import dynamic from "next/dynamic"
+import DynamicMarkdownRender from "components/markdown-render/dynamic"
 import styles from "./Styles.module.css"
 import { FaCloudSun, FaCode, FaPaintBrush } from "react-icons/fa"
 import { CgFormatColor } from "react-icons/cg"
@@ -6,7 +6,7 @@ import { BiText } from "react-icons/bi"
 import { OnClickButton } from "../button"
 import { OnClickText, PrettyHeader } from "../pretty-defaults"
 import { useTheme, useMenuState } from "hooks"
-import { SpinnerDots } from "components/spinner"
+import { useCodeTheme } from "providers/code-theme"
 
 const ICON_BUTTON_STYLE = { margin: "10px 5px" }
 const ICONS_CONTAINER_STYLE = {
@@ -32,11 +32,6 @@ const HEADER_STYLE = {
 
 const COLOR_LINE_STYLE = { width: "100%", height: "5px" }
 
-const DynamicMarkdownRender = dynamic(() => import("components/markdown-render"), {
-    // eslint-disable-next-line react/display-name
-    loading: () => <SpinnerDots />,
-})
-
 const SquareIcon = ({ onClick, children, ...otherProps }) => (
     <OnClickButton style={ICON_BUTTON_STYLE} {...{ onClick, ...otherProps }}>
         {children}
@@ -47,11 +42,11 @@ const ChooseThemeIcons = () => {
     const {
         nextColor,
         nextHeaderFont,
-        nextCodeTheme,
         nextBodyFont,
         nextPageTheme,
         sectionClassNames,
     } = useTheme()
+    const { nextCodeTheme } = useCodeTheme()
 
     return (
         <div className={sectionClassNames[0]} style={ICONS_CONTAINER_STYLE}>
@@ -138,7 +133,7 @@ const ChooseParagraph = () => {
 const SAMPLE_CODE = "```python\n def hello():\n    return 'world!'"
 
 const ChooseCode = () => {
-    const { nextCodeTheme } = useTheme()
+    const { nextCodeTheme } = useCodeTheme()
 
     return (
         <div

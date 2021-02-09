@@ -1,5 +1,10 @@
 import React from "react"
-import { BorderedDiv, PrettyHeader, SmallSpan } from "components/pretty-defaults"
+import {
+    BorderedDiv,
+    PrettyHeader,
+    SmallSpan,
+    RoundedImage,
+} from "components/pretty-defaults"
 
 const TOWERS = [
     {
@@ -138,15 +143,7 @@ const KingdomRushTower = ({ data }) => {
                 flexWrap: "wrap",
             }}
         >
-            <img
-                src={imageUrl}
-                height="75px"
-                width="75px"
-                style={{
-                    borderRadius: "20%",
-                    margin: "5px",
-                }}
-            />
+            <RoundedImage src={imageUrl} alt={name} height={75} width={75} />
             <div style={{ margin: "5px 5px", maxWidth: "100px" }}>
                 <PrettyHeader style={{ fontSize: "18px", margin: "0px" }}>
                     {name}

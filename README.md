@@ -4,7 +4,7 @@ Notes about front-end development and practical exercises with detailed solution
 This site is very loosely based on [Kent C Dodd](https://kentcdodds.com/)'s [Epic React Workshops](https://epicreact.dev/).
 
 <p align="center">
-    <img src="https://bigheads.io/svg?accessory=none&body=breasts&circleColor=blue&clothing=vneck&clothingColor=red&eyebrows=serious&eyes=simple&faceMask=false&faceMaskColor=black&facialHair=none3&graphic=react&hair=long&hairColor=black&hat=beanie&hatColor=red&lashes=false&lipColor=turqoise&mask=false&mouth=serious&skinTone=brown" alt="Big Head" height="150px" width="150px" />
+    <Image src="https://bigheads.io/svg?accessory=none&body=breasts&circleColor=blue&clothing=vneck&clothingColor=red&eyebrows=serious&eyes=simple&faceMask=false&faceMaskColor=black&facialHair=none3&graphic=react&hair=long&hairColor=black&hat=beanie&hatColor=red&lashes=false&lipColor=turqoise&mask=false&mouth=serious&skinTone=brown" alt="Big Head" height="150px" width="150px" />
 </p>
 
 ## Contributing [![PRs welcome!](https://img.shields.io/badge/PRs-welcome-yellow.svg?style=flat)](https://github.com/mithi/hexapod/blob/master/CONTRIBUTING.md)

@@ -14,7 +14,6 @@
 
 ## My Implementation
 
--   My Implementation: [Top level component](https://github.com/mithi/epic-notes/blob/main/content/react/advanced-hooks/2/app.js) + other [components](https://github.com/mithi/epic-notes/tree/main/content/react/advanced-hooks/2/components)
 -   Create a `useCache` hook, that takes in a key (that will be used for storing data in the local storage using the `useLocalStorageState` hook) and returns the a `cache` object and a `dispatch` function. The `dispatch` function should be able to `CLEAR` the cache, add or `OVERRIDE` data in the cache, and `REMOVE` data from the `cache`
 -   Using `useCache`, create a `RickAndMortyCacheContext`, `RickAndMortyCacheProvider`, and a `useRickAndMortyCache` cache, to store all the fetched Rick and Morty Characters.
 -   On the old `useAsync` hook implementation add the option `reset` that when triggered will set the `useAsync` hook status to `idle`
