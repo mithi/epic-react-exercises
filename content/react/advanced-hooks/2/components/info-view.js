@@ -1,4 +1,9 @@
-import { PrettyHeader, BorderedDiv, SmallSpan } from "components/pretty-defaults"
+import {
+    PrettyHeader,
+    BorderedDiv,
+    SmallSpan,
+    RoundedImage,
+} from "components/pretty-defaults"
 import { FaUser, FaUserTimes } from "react-icons/fa"
 
 const TOTALLY_CENTERED = {
@@ -9,16 +14,8 @@ const TOTALLY_CENTERED = {
     textAlign: "center",
 }
 
-const IMAGE_STYLE = {
-    borderRadius: "25%",
-    margin: "5px",
-    fontSize: "20px",
-    marginBottom: "20px",
-    ...TOTALLY_CENTERED,
-}
-
 const Card = ({ children }) => (
-    <div style={{ display: "flex", margin: "20px 0px", flexWrap: "no-wrap" }}>
+    <div style={{ display: "flex", margin: "20px 0px", flexWrap: "nowrap" }}>
         {children}
     </div>
 )
@@ -26,11 +23,14 @@ const Card = ({ children }) => (
 const ImageCard = ({ children, style }) => (
     <BorderedDiv
         style={{
-            width: "125px",
-            height: "125px",
+            width: "90px",
+            height: "90px",
             borderStyle: "dashed",
             ...TOTALLY_CENTERED,
-            ...IMAGE_STYLE,
+            borderRadius: "20%",
+            margin: "5px",
+            fontSize: "20px",
+            marginBottom: "20px",
             ...style,
         }}
     >
@@ -39,10 +39,11 @@ const ImageCard = ({ children, style }) => (
 )
 
 const InfoCard = ({ children, header, style }) => (
-    <div style={{ margin: "0px 20px", ...style }}>
-        <PrettyHeader style={{ fontSize: "30px", marginTop: "10px" }}>
+    <div style={{ margin: "0px 10px", ...style }}>
+        <PrettyHeader Component="span" style={{ fontSize: "30px" }}>
             {header}
         </PrettyHeader>
+        <br />
         <SmallSpan>{children}</SmallSpan>
     </div>
 )
@@ -51,12 +52,12 @@ const InfoView = ({ data }) => {
     const { name, status, species, gender, origin, location, imageUrl, id } = data
     return (
         <Card>
-            <img
+            <RoundedImage
                 src={imageUrl}
                 alt={name}
-                style={IMAGE_STYLE}
-                width="125px"
-                height="125px"
+                width={100}
+                height={100}
+                style={{ padding: "5px" }}
             />
             <InfoCard header={name}>
                 #{id}, {status}, {species}, {gender}. <br />
