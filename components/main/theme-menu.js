@@ -1,7 +1,7 @@
 import DynamicMarkdownRender from "components/markdown-render/dynamic"
 import styles from "./Styles.module.css"
 import { useTheme, useMenuState } from "hooks"
-import { useCodeTheme, CodeThemeProvider } from "providers/code-theme"
+import { useCodeTheme } from "providers/code-theme"
 import { OnClickButton } from "../button"
 import { OnClickText, PrettyHeader } from "../pretty-defaults"
 import { FaCloudSun, FaCode, FaPaintBrush, CgFormatColor, BiText } from "../icons"
@@ -170,19 +170,17 @@ const MenuContainer = ({ children }) => {
 
 const Menu = ({ style } = {}) => {
     return (
-        <CodeThemeProvider>
-            <section className={styles.menu} style={{ ...style }}>
-                <MenuContainer>
-                    <ChooseTheme />
-                    <ChooseColor />
-                    <ChooseHeader />
-                    <ChooseParagraph />
-                    <ChooseCode />
-                    <ChooseThemeIcons />
-                    <CloseThemeMenu />
-                </MenuContainer>
-            </section>
-        </CodeThemeProvider>
+        <section className={styles.menu} style={{ ...style }}>
+            <MenuContainer>
+                <ChooseTheme />
+                <ChooseColor />
+                <ChooseHeader />
+                <ChooseParagraph />
+                <ChooseCode />
+                <ChooseThemeIcons />
+                <CloseThemeMenu />
+            </MenuContainer>
+        </section>
     )
 }
 

@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
 import { useState } from "react"
-import { useCodeTheme, CodeThemeProvider } from "providers/code-theme"
+import { useCodeTheme } from "providers/code-theme"
 import ReactMarkdown from "react-markdown"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import {
@@ -104,10 +104,6 @@ const renderers = {
     },
 }
 
-const MarkdownRender = ({ children }) => (
-    <CodeThemeProvider>
-        <ReactMarkdown {...{ renderers, children }} />
-    </CodeThemeProvider>
-)
+const MarkdownRender = ({ children }) => <ReactMarkdown {...{ renderers, children }} />
 
 export default MarkdownRender
