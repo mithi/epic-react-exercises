@@ -149,7 +149,7 @@ const CallToActionBox = ({ editPath }) => {
             </PrettyAnchor>{" "}
             Grammar errors? {"✏️ "}
             <PrettyAnchor href={editUrl(editPath)}>Edit</PrettyAnchor> this page. <br />{" "}
-            Other options: <PrettyLink href="/">go back main</PrettyLink> {"🏠"} or
+            Other options: <PrettyLink href="/">go back to main</PrettyLink> {"🏠"} or
             <PrettyAnchor href={KOFI_URL}> {"☕"} buy me a coffee</PrettyAnchor>!
         </BigHeadNotice>
     )
