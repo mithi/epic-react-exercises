@@ -1,24 +1,20 @@
-import { OnClickText, SmallSpan } from "components/pretty-defaults"
+import { OnClickText, SmallSpan, RoundedImage } from "components/pretty-defaults"
 import { OnClickButton } from "components/button"
-
 import { useRickAndMortyCache } from "./use-rick-and-morty"
 
 const CacheButton = ({ label, imageUrl, onClick, active }) => (
     <OnClickButton
         disabled={active}
-        style={{ width: "35px", height: "35px", margin: "2px", borderRadius: "5px" }}
+        style={{
+            width: "35px",
+            height: "35px",
+            margin: "2px",
+            borderRadius: "5px",
+        }}
         onClick={onClick}
         aria-label={`load ${label}`}
     >
-        <img
-            src={imageUrl}
-            height="30px"
-            width="30px"
-            style={{
-                borderRadius: "5px",
-                margin: "5px",
-            }}
-        />
+        <RoundedImage src={imageUrl} height={30} width={30} />
     </OnClickButton>
 )
 

@@ -1,5 +1,4 @@
-import Image from "next/image"
-import { SmallSpan, BorderedDiv } from "components/pretty-defaults"
+import { SmallSpan, BorderedDiv, RoundedImage } from "components/pretty-defaults"
 
 const BigHeadNotice = ({ children }) => {
     return (
@@ -13,7 +12,7 @@ const BigHeadNotice = ({ children }) => {
                 }}
             >
                 <div style={{ padding: "5px" }}>
-                    <Image
+                    <RoundedImage
                         src="/android-chrome-512x512.png"
                         alt="Big Head Girl Epic Notes Logo"
                         width={75}
