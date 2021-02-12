@@ -84,27 +84,18 @@ const ChooseTheme = () => {
 }
 
 const ChooseColor = () => {
-    const { nextColor, primaryColor, onHoverClassName } = useTheme()
+    const { nextColor, primaryColor } = useTheme()
     return (
-        <div
-            onClick={nextColor}
-            className={onHoverClassName}
-            style={{ height: "10px", marginTop: "5px" }}
-        >
+        <div onClick={nextColor} style={{ height: "10px", marginTop: "5px" }}>
             <div style={{ ...COLOR_LINE_STYLE, backgroundColor: primaryColor }}></div>
         </div>
     )
 }
 
 const ChooseHeader = () => {
-    const { nextHeaderFont, onHoverClassName } = useTheme()
+    const { nextHeaderFont } = useTheme()
     return (
-        <PrettyHeader
-            onClick={nextHeaderFont}
-            className={onHoverClassName}
-            style={HEADER_STYLE}
-            Component="h2"
-        >
+        <PrettyHeader onClick={nextHeaderFont} style={HEADER_STYLE} Component="h2">
             Heading
         </PrettyHeader>
     )
@@ -115,12 +106,11 @@ to change its style. Customize its primary color, header font, body font, code
 theme, and page theme!`
 
 const ChooseParagraph = () => {
-    const { nextBodyFont, bodyFont, onHoverClassName } = useTheme()
+    const { nextBodyFont, bodyFont } = useTheme()
 
     return (
         <p
             onClick={nextBodyFont}
-            className={onHoverClassName}
             style={{ ...PARAGRAPH_STYLE, fontFamily: bodyFont, margin: "0px" }}
         >
             {SAMPLE_PARAGRAPH}
