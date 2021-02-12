@@ -3,6 +3,33 @@ import Image from "next/image"
 import { useTheme } from "providers/hooks"
 import { DefaultButton } from "../button"
 
+const DivBg1 = ({ style, className, children, Component }) => {
+    const { bodyBg, bodyFont } = useTheme()
+    Component = Component || "div"
+    return (
+        <Component
+            className={[bodyBg, className].join(" ")}
+            style={{ fontFamily: bodyFont, ...style }}
+        >
+            {children}
+        </Component>
+    )
+}
+
+const DivBg2 = ({ style, className, children, Component }) => {
+    const { sectionBg, bodyFont } = useTheme()
+    Component = Component || "div"
+
+    return (
+        <Component
+            className={[sectionBg, className].join(" ")}
+            style={{ fontFamily: bodyFont, ...style }}
+        >
+            {children}
+        </Component>
+    )
+}
+
 const PrettyHeader = ({ style, children, Component, ...otherProps }) => {
     Component = Component ? Component : "div"
     const { headerFont } = useTheme()
@@ -176,4 +203,6 @@ export {
     OnClickText,
     SmallSpan,
     RoundedImage,
+    DivBg1,
+    DivBg2,
 }

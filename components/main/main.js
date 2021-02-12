@@ -1,9 +1,9 @@
 import styles from "./Styles.module.css"
 import { useState, useEffect } from "react"
-import { useTheme } from "providers/hooks"
 import { CodeThemeProvider } from "providers/code-theme"
 import Nav from "./navbar"
 import { SpinnerDots } from "../spinner"
+import { DivBg1 } from "../pretty-defaults"
 
 function useHasMounted() {
     const [hasMounted, setHasMounted] = useState(false)
@@ -20,7 +20,6 @@ function useHasMounted() {
     DON'T REMOVE IT!
  */
 const Home = ({ children } = {}) => {
-    const { bodyBg, bodyFont } = useTheme()
     const hasMounted = useHasMounted()
 
     if (!hasMounted) {
@@ -28,18 +27,17 @@ const Home = ({ children } = {}) => {
     }
 
     return (
-        <div
-            className={[styles.grid, bodyBg].join(" ")}
+        <DivBg1
+            className={styles.grid}
             style={{
                 overflow: "auto",
-                fontFamily: bodyFont,
             }}
         >
             <CodeThemeProvider>
                 <Nav />
                 <main className={styles.main}>{children}</main>
             </CodeThemeProvider>
-        </div>
+        </DivBg1>
     )
 }
 

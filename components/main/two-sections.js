@@ -1,16 +1,22 @@
 import styles from "./Styles.module.css"
-import { useTheme } from "providers/hooks"
+import { DivBg2 } from "../pretty-defaults"
 
 const TwoSections = ({ div1, div2 }) => {
-    const { sectionBg } = useTheme()
+    const section1 = (
+        <DivBg2 Component="section" className={styles.div1}>
+            {div1}
+        </DivBg2>
+    )
 
-    const div1Styles = [styles.div1, sectionBg].join(" ")
-    const div2Styles = [styles.div2, sectionBg].join(" ")
+    const section2 = div2 ? (
+        <DivBg2 Component="section" className={styles.div2}>
+            {div2}
+        </DivBg2>
+    ) : null
 
     return (
         <div className={styles.twoSectionsLayout}>
-            <section className={div1Styles}>{div1}</section>
-            {div2 ? <section className={div2Styles}>{div2}</section> : null}
+            {section1} {section2}
         </div>
     )
 }

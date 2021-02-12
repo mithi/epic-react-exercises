@@ -1,7 +1,7 @@
 import styles from "./Styles.module.css"
 import { useTheme, useMenuState } from "providers/hooks"
 import { OnClickButton } from "../button"
-import { OnClickText, PrettyHeader } from "../pretty-defaults"
+import { OnClickText, PrettyHeader, DivBg1, DivBg2 } from "../pretty-defaults"
 import { FaCloudSun, FaPaintBrush, CgFormatColor, BiText } from "../icons"
 
 const ICON_BUTTON_STYLE = { margin: "10px 5px" }
@@ -35,16 +35,10 @@ const SquareIcon = ({ onClick, children, ...otherProps }) => (
 )
 
 const ChooseThemeIcons = () => {
-    const {
-        nextColor,
-        nextHeaderFont,
-        nextBodyFont,
-        nextPageTheme,
-        sectionBg,
-    } = useTheme()
+    const { nextColor, nextHeaderFont, nextBodyFont, nextPageTheme } = useTheme()
 
     return (
-        <div className={sectionBg} style={ICONS_CONTAINER_STYLE}>
+        <DivBg2 style={ICONS_CONTAINER_STYLE}>
             <SquareIcon onClick={nextPageTheme} aria-label="change page theme">
                 <FaCloudSun />
             </SquareIcon>
@@ -57,7 +51,7 @@ const ChooseThemeIcons = () => {
             <SquareIcon onClick={nextBodyFont} aria-label="change body font">
                 <BiText />
             </SquareIcon>
-        </div>
+        </DivBg2>
     )
 }
 
@@ -112,19 +106,19 @@ const CloseThemeMenu = () => {
 }
 
 const MenuContainer = ({ children }) => {
-    const { primaryColor, bodyBg } = useTheme()
+    const { primaryColor } = useTheme()
 
     return (
-        <div
+        <DivBg1
             style={{
                 border: `1px dotted ${primaryColor}`,
                 marginBottom: "30px",
             }}
-            className={[bodyBg, styles.themeMenu].join(" ")}
+            className={styles.themeMenu}
             tabIndex="-1"
         >
             {children}
-        </div>
+        </DivBg1>
     )
 }
 
