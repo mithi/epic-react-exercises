@@ -77,13 +77,40 @@ const ThemeProvider = ({ children }) => {
     )
 }
 
-/********
- useBodyFont
- useHeaderFont
- usePrimaryColor
- useBg1
- useBg2
- */
+const useTheme = () => {
+    const context = useContext(ThemeContext)
+
+    if (!context) {
+        throw new Error(`hook: Please wrap your whole app with ThemeProvider`)
+    }
+
+    return context
+}
+
+const useBodyFont = () => {
+    const { bodyFont } = useTheme()
+    return bodyFont
+}
+
+const useHeaderFont = () => {
+    const { headerFont } = useTheme()
+    return headerFont
+}
+
+const usePrimaryColor = () => {
+    const { primaryColor } = useTheme()
+    return primaryColor
+}
+
+const useBg1 = () => {
+    const { bodyBg } = useTheme()
+    return bodyBg
+}
+
+const useBg2 = () => {
+    const { sectionBg } = useTheme()
+    return sectionBg
+}
 
 /******************************
 BUTTON THEME
@@ -153,4 +180,15 @@ const useButtonThemeClasses = (className, disabled, isInvertedColor) => {
     return [...final, className].join(" ")
 }
 
-export { ThemeProvider, ThemeContext, ButtonThemeProvider, useButtonThemeClasses }
+export {
+    ThemeProvider,
+    ThemeContext,
+    ButtonThemeProvider,
+    useButtonThemeClasses,
+    useBodyFont,
+    useHeaderFont,
+    useBg1,
+    useBg2,
+    usePrimaryColor,
+    useTheme,
+}

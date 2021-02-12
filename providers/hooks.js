@@ -1,5 +1,6 @@
 import { useContext } from "react"
-import { ThemeContext, MenuStateContext } from "providers"
+import { MenuStateContext } from "providers"
+import { useTheme } from "providers/theme"
 
 function useCustomContext(_context, name) {
     const context = useContext(_context)
@@ -9,10 +10,6 @@ function useCustomContext(_context, name) {
         )
     }
     return context
-}
-
-function useTheme() {
-    return useCustomContext(ThemeContext, "Theme")
 }
 
 function useMenuState() {
