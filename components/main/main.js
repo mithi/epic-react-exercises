@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 import { useTheme } from "hooks"
 import { CodeThemeProvider } from "providers/code-theme"
 import Nav from "./navbar"
+import { SpinnerDots } from "../spinner"
 
 function useHasMounted() {
     const [hasMounted, setHasMounted] = useState(false)
@@ -23,7 +24,7 @@ const Home = ({ children } = {}) => {
     const hasMounted = useHasMounted()
 
     if (!hasMounted) {
-        return null
+        return <SpinnerDots />
     }
 
     return (
