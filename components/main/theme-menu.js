@@ -1,10 +1,8 @@
-import DynamicMarkdownRender from "components/markdown-render/dynamic"
 import styles from "./Styles.module.css"
 import { useTheme, useMenuState } from "providers/hooks"
-import { useCodeTheme } from "providers/code-theme"
 import { OnClickButton } from "../button"
 import { OnClickText, PrettyHeader } from "../pretty-defaults"
-import { FaCloudSun, FaCode, FaPaintBrush, CgFormatColor, BiText } from "../icons"
+import { FaCloudSun, FaPaintBrush, CgFormatColor, BiText } from "../icons"
 
 const ICON_BUTTON_STYLE = { margin: "10px 5px" }
 const ICONS_CONTAINER_STYLE = {
@@ -44,7 +42,6 @@ const ChooseThemeIcons = () => {
         nextPageTheme,
         sectionClassNames,
     } = useTheme()
-    const { nextCodeTheme } = useCodeTheme()
 
     return (
         <div className={sectionClassNames[0]} style={ICONS_CONTAINER_STYLE}>
@@ -61,75 +58,48 @@ const ChooseThemeIcons = () => {
             <SquareIcon onClick={nextBodyFont} aria-label="change body font">
                 <BiText />
             </SquareIcon>
-            <SquareIcon onClick={nextCodeTheme} aria-label="change code theme">
-                <FaCode />
-            </SquareIcon>
         </div>
     )
 }
 
 const ChooseTheme = () => {
     const themes = ["(dark) 🌙", "(light) 🔆", "(funky) 🏖️"]
-    const { themeId, nextPageTheme } = useTheme()
+    const { themeId } = useTheme()
 
     return (
-        <PrettyHeader
-            Component="h1"
-            onClick={nextPageTheme}
-            style={{ fontSize: "15px", margin: "10px" }}
-        >
+        <PrettyHeader Component="h1" style={{ fontSize: "15px", margin: "10px" }}>
             Theme Menu {themes[themeId]}
         </PrettyHeader>
     )
 }
 
 const ChooseColor = () => {
-    const { nextColor, primaryColor } = useTheme()
+    const { primaryColor } = useTheme()
     return (
-        <div onClick={nextColor} style={{ height: "10px", marginTop: "5px" }}>
+        <div style={{ height: "10px", marginTop: "5px" }}>
             <div style={{ ...COLOR_LINE_STYLE, backgroundColor: primaryColor }}></div>
         </div>
     )
 }
 
 const ChooseHeader = () => {
-    const { nextHeaderFont } = useTheme()
     return (
-        <PrettyHeader onClick={nextHeaderFont} style={HEADER_STYLE} Component="h2">
+        <PrettyHeader style={HEADER_STYLE} Component="h2">
             Heading
         </PrettyHeader>
     )
 }
 
-const SAMPLE_PARAGRAPH = `Click on any of the sample elements
-to change its style. Customize its primary color, header font, body font, code
-theme, and page theme!`
+const SAMPLE_PARAGRAPH = `Click on the icons below to
+customize the theme! You can set the primary color, header font, body font, and page theme!`
 
 const ChooseParagraph = () => {
-    const { nextBodyFont, bodyFont } = useTheme()
+    const { bodyFont } = useTheme()
 
     return (
-        <p
-            onClick={nextBodyFont}
-            style={{ ...PARAGRAPH_STYLE, fontFamily: bodyFont, margin: "0px" }}
-        >
+        <p style={{ ...PARAGRAPH_STYLE, fontFamily: bodyFont, margin: "0px" }}>
             {SAMPLE_PARAGRAPH}
         </p>
-    )
-}
-
-const SAMPLE_CODE = "```python\n def hello():\n    return 'world!'"
-
-const ChooseCode = () => {
-    const { nextCodeTheme } = useCodeTheme()
-
-    return (
-        <div
-            style={{ padding: "5px", borderRadius: "5px", marginBottom: "10px" }}
-            onClick={nextCodeTheme}
-        >
-            <DynamicMarkdownRender>{SAMPLE_CODE}</DynamicMarkdownRender>
-        </div>
     )
 }
 
@@ -152,6 +122,7 @@ const MenuContainer = ({ children }) => {
                 marginBottom: "30px",
             }}
             className={[bodyClassNames[0], styles.themeMenu].join(" ")}
+            tabIndex="-1"
         >
             {children}
         </div>
@@ -166,7 +137,6 @@ const Menu = ({ style } = {}) => {
                 <ChooseColor />
                 <ChooseHeader />
                 <ChooseParagraph />
-                <ChooseCode />
                 <ChooseThemeIcons />
                 <CloseThemeMenu />
             </MenuContainer>
