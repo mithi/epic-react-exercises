@@ -21,11 +21,11 @@ const Dialog = ({ onDismiss, isOpen, label, children }) => (
 
 const NavInner = () => {
     const { changeMenuState, menuState } = useMenuState()
-    const { sectionClassNames } = useTheme()
+    const { sectionBg } = useTheme()
 
     return (
         <>
-            <nav className={[styles.nav, ...sectionClassNames].join(" ")}>
+            <nav className={[styles.nav, sectionBg].join(" ")}>
                 <div className={styles.navButtonsContainer}>
                     <OnClickButton
                         onClick={() => changeMenuState("react")}

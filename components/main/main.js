@@ -20,7 +20,7 @@ function useHasMounted() {
     DON'T REMOVE IT!
  */
 const Home = ({ children } = {}) => {
-    const { bodyClassNames, bodyFont } = useTheme()
+    const { bodyBg, bodyFont } = useTheme()
     const hasMounted = useHasMounted()
 
     if (!hasMounted) {
@@ -29,7 +29,7 @@ const Home = ({ children } = {}) => {
 
     return (
         <div
-            className={[styles.grid, ...bodyClassNames].join(" ")}
+            className={[styles.grid, bodyBg].join(" ")}
             style={{
                 overflow: "auto",
                 fontFamily: bodyFont,

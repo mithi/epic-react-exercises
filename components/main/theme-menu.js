@@ -40,15 +40,14 @@ const ChooseThemeIcons = () => {
         nextHeaderFont,
         nextBodyFont,
         nextPageTheme,
-        sectionClassNames,
+        sectionBg,
     } = useTheme()
 
     return (
-        <div className={sectionClassNames[0]} style={ICONS_CONTAINER_STYLE}>
+        <div className={sectionBg} style={ICONS_CONTAINER_STYLE}>
             <SquareIcon onClick={nextPageTheme} aria-label="change page theme">
                 <FaCloudSun />
             </SquareIcon>
-
             <SquareIcon onClick={nextColor} aria-label="change main color">
                 <FaPaintBrush />
             </SquareIcon>
@@ -113,7 +112,7 @@ const CloseThemeMenu = () => {
 }
 
 const MenuContainer = ({ children }) => {
-    const { primaryColor, bodyClassNames } = useTheme()
+    const { primaryColor, bodyBg } = useTheme()
 
     return (
         <div
@@ -121,7 +120,7 @@ const MenuContainer = ({ children }) => {
                 border: `1px dotted ${primaryColor}`,
                 marginBottom: "30px",
             }}
-            className={[bodyClassNames[0], styles.themeMenu].join(" ")}
+            className={[bodyBg, styles.themeMenu].join(" ")}
             tabIndex="-1"
         >
             {children}

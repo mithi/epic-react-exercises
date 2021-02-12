@@ -2,10 +2,10 @@ import styles from "./Styles.module.css"
 import { useTheme } from "providers/hooks"
 
 const TwoSections = ({ div1, div2 }) => {
-    const { sectionClassNames } = useTheme()
+    const { sectionBg } = useTheme()
 
-    const div1Styles = [styles.div1, ...sectionClassNames].join(" ")
-    const div2Styles = [styles.div2, ...sectionClassNames].join(" ")
+    const div1Styles = [styles.div1, sectionBg].join(" ")
+    const div2Styles = [styles.div2, sectionBg].join(" ")
 
     return (
         <div className={styles.twoSectionsLayout}>

@@ -50,10 +50,10 @@ const INPUT_STYLE = {
 }
 
 const PrettyInputField = ({ placeholder, value, onChange, style, ...otherProps }) => {
-    const { bodyClassNames, bodyFont } = useTheme()
+    const { bodyBg, bodyFont } = useTheme()
     return (
         <input
-            className={bodyClassNames[0]}
+            className={bodyBg}
             style={{ ...INPUT_STYLE, ...style, fontFamily: bodyFont }}
             {...{ placeholder, value, onChange, ...otherProps }}
         />

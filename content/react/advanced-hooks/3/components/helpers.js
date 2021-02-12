@@ -5,11 +5,11 @@ import { useTheme } from "providers/hooks"
 import { BorderedDiv } from "components/pretty-defaults"
 
 const Section = ({ children }) => {
-    const { bodyClassNames } = useTheme()
+    const { bodyBg } = useTheme()
 
     return (
         <div
-            className={bodyClassNames[0]}
+            className={bodyBg}
             style={{
                 padding: "15px 10px",
                 borderRadius: "15px",

@@ -30,9 +30,6 @@ const ThemeProvider = ({ children }) => {
     const [colorId, setColorId] = useStickyState(0, "colorId")
     const [headerFontId, setHeaderFontId] = useStickyState(0, "headerId")
     const [bodyFontId, setBodyFontId] = useStickyState(0, "bodyFontId")
-    const theme = THEMES[themeId]
-    const bodyClassNames = [theme.body]
-    const sectionClassNames = [theme.section]
 
     const nextColor = () => {
         const n = (Number(colorId) + 1) % NUMBER_OF_COLORS
@@ -54,6 +51,7 @@ const ThemeProvider = ({ children }) => {
         setThemeId(n)
     }
 
+    const theme = THEMES[themeId]
     const primaryColor = colored(colorId).var
     const headerFont = `var(--header-font-0${headerFontId})`
     const bodyFont = `var(--body-font-0${bodyFontId})`
@@ -61,23 +59,31 @@ const ThemeProvider = ({ children }) => {
     return (
         <ThemeContext.Provider
             value={{
-                bodyFont,
-                headerFont,
-                primaryColor,
-                themeId,
-                colorId,
                 nextBodyFont,
                 nextPageTheme,
                 nextColor,
                 nextHeaderFont,
-                bodyClassNames,
-                sectionClassNames,
+                themeId,
+                colorId,
+                bodyFont,
+                headerFont,
+                primaryColor,
+                bodyBg: theme.body,
+                sectionBg: theme.section,
             }}
         >
             {children}
         </ThemeContext.Provider>
     )
 }
+
+/********
+ useBodyFont
+ useHeaderFont
+ usePrimaryColor
+ useBg1
+ useBg2
+ */
 
 /******************************
 BUTTON THEME
