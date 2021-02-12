@@ -12,7 +12,7 @@ function useLocalStorageState(
         const valueInLocalStorage = window.localStorage.getItem(key)
         if (valueInLocalStorage) {
             // the try/catch is here in case the localStorage value was set before
-            // we had the serialization in place (like we do in previous extra credits)
+
             try {
                 return deserialize(valueInLocalStorage)
             } catch (error) {

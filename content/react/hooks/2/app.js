@@ -1,6 +1,6 @@
 import VanillaTilt from "vanilla-tilt"
 import { useEffect, useRef, useState } from "react"
-import { useTheme } from "hooks"
+import { useTheme } from "providers/hooks"
 const centeredStyle = {
     display: "flex",
     justifyContent: "center",

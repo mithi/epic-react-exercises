@@ -1,6 +1,6 @@
 import DynamicMarkdownRender from "components/markdown-render/dynamic"
 import styles from "./Styles.module.css"
-import { useTheme, useMenuState } from "hooks"
+import { useTheme, useMenuState } from "providers/hooks"
 import { useCodeTheme } from "providers/code-theme"
 import { OnClickButton } from "../button"
 import { OnClickText, PrettyHeader } from "../pretty-defaults"

@@ -12,9 +12,9 @@ import {
 
 const Code = ({ children, language }) => {
     const { codeTheme } = useCodeTheme()
-    const [showCode, setShowCode] = useState(true)
+    const [showCode, setShowCode] = useState(false)
 
-    const codeBlock = (
+    const codeBlock = showCode && (
         <SyntaxHighlighter
             language={language}
             style={codeTheme}
@@ -40,7 +40,7 @@ const Code = ({ children, language }) => {
                     {showCode ? "Hide Code" : "Show Code"}
                 </PrettyHeader>
             </OnClickText>
-            {showCode ? codeBlock : null}
+            {codeBlock}
         </div>
     )
 }

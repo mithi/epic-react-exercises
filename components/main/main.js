@@ -1,6 +1,6 @@
 import styles from "./Styles.module.css"
 import { useState, useEffect } from "react"
-import { useTheme } from "hooks"
+import { useTheme } from "providers/hooks"
 import { CodeThemeProvider } from "providers/code-theme"
 import Nav from "./navbar"
 import { SpinnerDots } from "../spinner"

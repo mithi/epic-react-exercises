@@ -1,7 +1,7 @@
 import "@reach/dialog/styles.css"
 import styles from "./Styles.module.css"
 import { MenuStateProvider } from "providers"
-import { useTheme, useMenuState } from "hooks"
+import { useTheme, useMenuState } from "providers/hooks"
 import { DialogOverlay, DialogContent } from "@reach/dialog"
 import { LinkOutButton, OnClickButton } from "../button"
 import { GoOctoface, MdSettings, BiCoffeeTogo, FaReact } from "../icons"

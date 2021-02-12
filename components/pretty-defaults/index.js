@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { useTheme } from "hooks"
+import { useTheme } from "providers/hooks"
 import { DefaultButton } from "../button"
 
 const PrettyHeader = ({ style, children, Component, ...otherProps }) => {

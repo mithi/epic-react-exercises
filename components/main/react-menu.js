@@ -1,7 +1,7 @@
 import styles from "./Styles.module.css"
 import { LinkButton } from "../button"
 import { PrettyHeader, PrettyLink, OnClickText } from "../pretty-defaults"
-import { useMenuState } from "hooks"
+import { useMenuState } from "providers/hooks"
 
 const Button = ({ children, section }) => {
     return (

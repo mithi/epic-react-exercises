@@ -1,4 +1,4 @@
-import { useTheme } from "hooks"
+import { useTheme } from "providers/hooks"
 
 const SpinnerDots = () => {
     const { primaryColor } = useTheme()

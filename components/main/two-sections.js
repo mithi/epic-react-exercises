@@ -1,5 +1,5 @@
 import styles from "./Styles.module.css"
-import { useTheme } from "hooks"
+import { useTheme } from "providers/hooks"
 
 const TwoSections = ({ div1, div2 }) => {
     const { sectionClassNames } = useTheme()
