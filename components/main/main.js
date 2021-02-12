@@ -1,19 +1,30 @@
 import styles from "./Styles.module.css"
-import { useState, useEffect, useLayoutEffect } from "react"
+import { useState, useEffect } from "react"
 import { useTheme } from "hooks"
 import { CodeThemeProvider } from "providers/code-theme"
 import Nav from "./navbar"
 
+function useHasMounted() {
+    const [hasMounted, setHasMounted] = useState(false)
+
+    useEffect(() => {
+        setHasMounted(true)
+    }, [])
+    return hasMounted
+}
+
 /*
     ❗❗❗❗ IMPORTANT ❗❗❗❗
-    the setVisible hack is important to address FOUC ( flash of unstyled content )
+    hasMounted is important to address FOUC ( flash of unstyled content )
     DON'T REMOVE IT!
  */
 const Home = ({ children } = {}) => {
     const { bodyClassNames, bodyFont } = useTheme()
-    const [visible, setVisible] = useState(false)
-    const useNextEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect
-    useNextEffect(() => setVisible(true), [])
+    const hasMounted = useHasMounted()
+
+    if (!hasMounted) {
+        return null
+    }
 
     return (
         <div
@@ -21,7 +32,6 @@ const Home = ({ children } = {}) => {
             style={{
                 overflow: "auto",
                 fontFamily: bodyFont,
-                visibility: visible ? "visible" : "hidden",
             }}
         >
             <CodeThemeProvider>
