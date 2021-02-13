@@ -6,5 +6,6 @@ import {
 } from "react-syntax-highlighter/dist/cjs/styles/prism"
 
 const CODE_THEMES = [tomorrow, prism, synthwave84, dark]
+const NUMBER_OF_CODE_THEMES = CODE_THEMES.length
 
-export default CODE_THEMES
+export { CODE_THEMES, NUMBER_OF_CODE_THEMES }

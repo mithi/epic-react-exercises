@@ -1,8 +1,10 @@
 import { useCodeTheme } from "providers/code-theme"
+import getCodeTheme from "providers/code-theme/get-code-theme"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 
 const Code = ({ children, language }) => {
-    const { codeTheme } = useCodeTheme()
+    const { codeThemeId } = useCodeTheme()
+    const codeTheme = getCodeTheme(codeThemeId)
 
     return (
         <div
