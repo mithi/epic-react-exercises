@@ -100,7 +100,7 @@ const renderers = {
     },
 
     paragraph: props => {
-        return <p style={{ marginBottom: "10px", fontSize: "18px" }}>{props.children}</p>
+        return <p style={{ marginBottom: "10px" }}>{props.children}</p>
     },
 }
 

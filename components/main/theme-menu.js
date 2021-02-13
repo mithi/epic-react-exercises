@@ -45,7 +45,6 @@ const ChooseThemeIcons = () => {
             <SquareIcon onClick={nextPageTheme} aria-label="change page theme">
                 <FaCloudSun />
             </SquareIcon>
-
             <SquareIcon onClick={nextColor} aria-label="change main color">
                 <FaPaintBrush />
             </SquareIcon>
@@ -64,13 +63,14 @@ const ChooseThemeIcons = () => {
 
 const ChooseTheme = () => {
     const themes = ["(dark) 🌙", "(light) 🔆", "(funky) 🏖️"]
-    const { themeId, nextPageTheme } = useTheme()
+    const { themeId, nextPageTheme, onHoverClassName } = useTheme()
 
     return (
         <PrettyHeader
             Component="h1"
             onClick={nextPageTheme}
-            style={{ fontSize: "15px", margin: "10px" }}
+            className={onHoverClassName}
+            style={{ fontSize: "15px", padding: "5px", borderRadius: "5px" }}
         >
             Theme Menu {themes[themeId]}
         </PrettyHeader>
@@ -147,21 +147,12 @@ const CloseThemeMenu = () => {
 }
 
 const MenuContainer = ({ children }) => {
-    return (
-        <DivBg1
-            style={{
-                marginBottom: "30px",
-            }}
-            className={styles.themeMenu}
-        >
-            {children}
-        </DivBg1>
-    )
+    return <DivBg1 className={styles.themeMenu}>{children}</DivBg1>
 }
 
 const Menu = ({ style } = {}) => {
     return (
-        <section className={styles.menu} style={{ ...style }}>
+        <section className={styles.menu} style={{ ...style }} tabIndex="0">
             <MenuContainer>
                 <ChooseTheme />
                 <ChooseColor />

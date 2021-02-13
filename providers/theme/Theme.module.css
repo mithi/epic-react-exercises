@@ -62,12 +62,12 @@
  ***************/
 
 .funkyBody {
-    color: #d9b000;
-    background-color: #008f95;
+    color: #ffa7c4;
+    background-color: #373c48;
 }
 
 .funkySection {
-    background-color: #037a7e;
+    background-color: #282c35;
 }
 
 .funkyButton {
@@ -75,7 +75,7 @@
 }
 
 .funkyButtonOnHover:hover {
-    color: #01810c;
+    color: #b9382d;
 }
 
 .invertedFunkyButton {
@@ -91,46 +91,85 @@
     COLORS
  ***************/
 
-.greenBgOnHover:hover {
-    background-color: var(--green-0);
+.pink0Color {
+    color: var(--pink0);
 }
 
-.pinkBgOnHover:hover {
-    background-color: var(--pink-0);
-}
-.greenBgOnHover:hover {
-    background-color: var(--green-0);
-}
-.blueBgOnHover:hover {
-    background-color: var(--blue-0);
-}
-.purpleBgOnHover:hover {
-    background-color: var(--purple-0);
-}
-.orangeBgOnHover:hover {
-    background-color: var(--orange-0);
+.pink0BgOnHover:hover {
+    background-color: var(--pink0);
 }
 
-.pinkColor {
-    color: var(--pink-0);
-}
-.greenColor {
-    color: var(--green-0);
-}
-.blueColor {
-    color: var(--blue-0);
-}
-.purpleColor {
-    color: var(--purple-0);
-}
-.orangeColor {
-    color: var(--orange-0);
+.green0Color {
+    color: var(--green0);
 }
 
-.greenColor {
-    color: var(--green-0);
+.green0BgOnHover:hover {
+    background-color: var(--green0);
 }
 
+.blue0Color {
+    color: var(--blue0);
+}
+
+.blue0BgOnHover:hover {
+    background-color: var(--blue0);
+}
+
+.purple0Color {
+    color: var(--purple0);
+}
+
+.purple0BgOnHover:hover {
+    background-color: var(--purple0);
+}
+
+.orange0Color {
+    color: var(--orange0);
+}
+
+.orange0BgOnHover:hover {
+    background-color: var(--orange0);
+}
+
+.blue1Color {
+    color: var(--blue1);
+}
+
+.blue1BgOnHover:hover {
+    background-color: var(--blue1);
+}
+
+.green1BgOnHover:hover {
+    background-color: var(--green1);
+}
+
+.green1Color {
+    color: var(--green1);
+}
+
+.pink1BgOnHover:hover {
+    background-color: var(--pink1);
+}
+
+.pink1Color {
+    color: var(--pink1);
+}
+
+.orange1BgOnHover:hover {
+    background-color: var(--orange1);
+}
+
+.orange1Color {
+    color: var(--orange1);
+}
+
+.peach0BgOnHover:hover {
+    background-color: var(--peach0);
+}
+
+.peach0Color {
+    color: var(--peach0);
+}
 /***************
     DISABLED
  ***************/

@@ -49,6 +49,10 @@
     border-radius: 10px;
 }
 
+.menu:focus {
+    outline: none;
+}
+
 .nav {
     flex-shrink: 0;
     width: 70px;

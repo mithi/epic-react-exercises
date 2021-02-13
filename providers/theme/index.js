@@ -6,14 +6,25 @@ import THEMES from "./THEMES"
 export const NUMBER_OF_BODY_FONTS = 5
 export const NUMBER_OF_HEADER_FONTS = 5
 
-export const COLORS = ["blue", "pink", "green", "purple", "orange"]
+export const COLORS = [
+    "blue0",
+    "pink0",
+    "green0",
+    "purple0",
+    "orange0",
+    "blue1",
+    "green1",
+    "pink1",
+    "peach0",
+    "orange1",
+]
 export const NUMBER_OF_COLORS = COLORS.length
 
 const colored = id => {
     return {
         onHover: styles[`${COLORS[id]}BgOnHover`],
         classColor: styles[`${COLORS[id]}Color`],
-        var: `var(--${COLORS[id]}-0)`,
+        var: `var(--${COLORS[id]})`,
     }
 }
 
