@@ -90,10 +90,9 @@ function App() {
 
     return (
         <div style={{ margin: "20px" }}>
-            <SmallSpan>
+            <SmallSpan style={{ lineHeight: "0.85" }}>
                 ❗ Only positive integers from 1 to{" "}
-                {NUMBER_OF_RICK_AND_MORTY_CHARACTERS - 1} correspond to a Rick and Morty
-                character.
+                {NUMBER_OF_RICK_AND_MORTY_CHARACTERS - 1} correspond to a character.
             </SmallSpan>
 
             <div

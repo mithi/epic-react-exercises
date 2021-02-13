@@ -1,6 +1,6 @@
 ## The Scrollable Component Exercise
 
--   Write a `scrollable` component that, that takes in a specific `width` and `height` as props (via the `style` prop),.
+-   Write a `scrollable` component that, that takes in a specific `width` and `height` as props (via the `style` prop).
 -   The content (passed through `children`) of that component must be larger than its width and height.
 -   Each time the component mounts, the user should see the most bottom content, NOT the top OR the middle.
 -   The parent of this `scrollable` component, must have two buttons one for scrolling to the top and the bottom and the component.
