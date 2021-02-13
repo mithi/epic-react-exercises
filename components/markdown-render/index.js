@@ -6,6 +6,7 @@ import {
     PrettyLink,
     PrettyAnchor,
     OnClickText,
+    BorderedDiv,
 } from "components/pretty-defaults"
 import CodeBlock from "./dynamic-code-block"
 
@@ -15,12 +16,22 @@ const Code = ({ children, language }) => {
 
     return (
         <div>
-            <OnClickText onClick={() => setShowCode(!showCode)}>
-                <PrettyHeader style={{ paddingLeft: "5px" }}>
-                    {showCode ? "Hide Code" : "Show Code"}
-                </PrettyHeader>
-            </OnClickText>
-            {showCode ? codeBlock : null}
+            <BorderedDiv
+                style={{
+                    margin: "10px",
+                    padding: "10px",
+                    borderStyle: "dotted",
+                    width: "auto",
+                    borderRadius: "5px",
+                }}
+            >
+                <OnClickText onClick={() => setShowCode(!showCode)}>
+                    <PrettyHeader style={{ paddingLeft: "5px", margin: "10px" }}>
+                        {showCode ? "Hide Code" : "Show Code"}
+                    </PrettyHeader>
+                </OnClickText>
+                {codeBlock}
+            </BorderedDiv>
         </div>
     )
 }

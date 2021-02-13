@@ -1,10 +1,11 @@
 import { useTheme } from "hooks"
+import styles from "./Styles.module.css"
 
 const SpinnerDots = () => {
     const { primaryColor } = useTheme()
     const style = { backgroundColor: primaryColor }
     return (
-        <div className="lds-ellipsis">
+        <div className={styles.ldsEllipsis}>
             <div {...{ style }}></div>
             <div {...{ style }}></div>
             <div {...{ style }}></div>
