@@ -14,13 +14,18 @@ content
             |   |- notes.md
             |   |- app.js
             |-2
+            |   |- notes.md
+            |   |- app.js
+            |-3
+            | ....
 
 **************
 return value structure
 **************
 {
-    sectionName: { numberOfPages, title },
-    sectionName2: { numberOfPages, title }
+    sectionName: { numberOfPages, properties: {title, repository, deployedApp} },
+    sectionName2: { numberOfPages, properties: {title, repository, deployedApp} }
+    sectionName3: ...
 
 }
  */
