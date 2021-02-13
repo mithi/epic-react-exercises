@@ -1,11 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400&family=Kanit:wght@700&family=Arvo&family=Montserrat:wght@400&family=Quattrocento&family=Rokkitt:wght@300&family=Bevan&family=Cabin+Sketch:wght@700&family=Permanent+Marker&family=Walter+Turncoat&display=swap");
 
 :root {
-    --pink-0: #e84393;
-    --green-0: #5de294;
-    --blue-0: #16bdca;
-    --purple-0: #ac94fa;
-    --orange-0: #ff8a4c;
+    --pink0: #e84393;
+    --green0: #5de294;
+    --blue0: #16bdca;
+    --purple0: #ac94fa;
+    --orange0: #ff8a4c;
+    --blue1: #76a9fa;
+    --green1: #31c48d;
+    --pink1: #f17eb8;
+    --peach0: #f98080;
+    --orange1: #e3a008;
     --gray-00-light: rgb(223, 223, 223);
     --gray-01-dark: #202124;
     --gray-04-medium: rgba(39, 40, 43, 1);
