@@ -87,29 +87,9 @@ const useTheme = () => {
     return context
 }
 
-const useBodyFont = () => {
-    const { bodyFont } = useTheme()
-    return bodyFont
-}
-
-const useHeaderFont = () => {
-    const { headerFont } = useTheme()
-    return headerFont
-}
-
 const usePrimaryColor = () => {
     const { primaryColor } = useTheme()
     return primaryColor
-}
-
-const useBg1 = () => {
-    const { bodyBg } = useTheme()
-    return bodyBg
-}
-
-const useBg2 = () => {
-    const { sectionBg } = useTheme()
-    return sectionBg
 }
 
 /******************************
@@ -185,10 +165,6 @@ export {
     ThemeContext,
     ButtonThemeProvider,
     useButtonThemeClasses,
-    useBodyFont,
-    useHeaderFont,
-    useBg1,
-    useBg2,
     usePrimaryColor,
     useTheme,
 }
