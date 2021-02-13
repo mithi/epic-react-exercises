@@ -1,10 +1,11 @@
 import "@reach/dialog/styles.css"
 import styles from "./Styles.module.css"
 import { MenuStateProvider } from "providers"
-import { useTheme, useMenuState } from "hooks"
+import { useMenuState } from "hooks"
 import { DialogOverlay, DialogContent } from "@reach/dialog"
 import { LinkOutButton, OnClickButton } from "../button"
 import { GoOctoface, MdSettings, BiCoffeeTogo, FaReact } from "../icons"
+import { DivBg2 } from "../pretty-defaults"
 import ReactMenu from "./react-menu"
 import ThemeMenu from "./theme-menu"
 
@@ -21,11 +22,10 @@ const Dialog = ({ onDismiss, isOpen, label, children }) => (
 
 const NavInner = () => {
     const { changeMenuState, menuState } = useMenuState()
-    const { sectionClassNames } = useTheme()
 
     return (
         <>
-            <nav className={[styles.nav, ...sectionClassNames].join(" ")}>
+            <DivBg2 Component="nav" className={styles.nav}>
                 <div className={styles.navButtonsContainer}>
                     <OnClickButton
                         onClick={() => changeMenuState("react")}
@@ -52,7 +52,7 @@ const NavInner = () => {
                         <BiCoffeeTogo />
                     </LinkOutButton>
                 </div>
-            </nav>
+            </DivBg2>
             <Dialog
                 onDismiss={() => changeMenuState("none")}
                 isOpen={menuState === "theme"}

@@ -3,6 +3,33 @@ import Image from "next/image"
 import { useTheme } from "hooks"
 import { DefaultButton } from "../button"
 
+const DivBg1 = ({ style, className, children, Component }) => {
+    const { bg1ClassName, bodyFont } = useTheme()
+    Component = Component || "div"
+    return (
+        <Component
+            className={[bg1ClassName, className].join(" ")}
+            style={{ fontFamily: bodyFont, ...style }}
+        >
+            {children}
+        </Component>
+    )
+}
+
+const DivBg2 = ({ style, className, children, Component }) => {
+    const { bg2ClassName, bodyFont } = useTheme()
+    Component = Component || "div"
+
+    return (
+        <Component
+            className={[bg2ClassName, className].join(" ")}
+            style={{ fontFamily: bodyFont, ...style }}
+        >
+            {children}
+        </Component>
+    )
+}
+
 const PrettyHeader = ({ style, children, Component, ...otherProps }) => {
     Component = Component ? Component : "div"
     const { headerFont } = useTheme()
@@ -50,10 +77,10 @@ const INPUT_STYLE = {
 }
 
 const PrettyInputField = ({ placeholder, value, onChange, style, ...otherProps }) => {
-    const { bodyClassNames, bodyFont } = useTheme()
+    const { bg1ClassName, bodyFont } = useTheme()
     return (
         <input
-            className={bodyClassNames[0]}
+            className={bg1ClassName}
             style={{ ...INPUT_STYLE, ...style, fontFamily: bodyFont }}
             {...{ placeholder, value, onChange, ...otherProps }}
         />
@@ -176,4 +203,6 @@ export {
     OnClickText,
     SmallSpan,
     RoundedImage,
+    DivBg1,
+    DivBg2,
 }

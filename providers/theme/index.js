@@ -31,8 +31,6 @@ const ThemeProvider = ({ children }) => {
     const [headerFontId, setHeaderFontId] = useStickyState(0, "headerId")
     const [bodyFontId, setBodyFontId] = useStickyState(0, "bodyFontId")
     const theme = THEMES[themeId]
-    const bodyClassNames = [theme.body]
-    const sectionClassNames = [theme.section]
     const onHoverClassName = colored(colorId).onHover
 
     const nextColor = () => {
@@ -71,9 +69,9 @@ const ThemeProvider = ({ children }) => {
                 nextPageTheme,
                 nextColor,
                 nextHeaderFont,
-                bodyClassNames,
-                sectionClassNames,
                 onHoverClassName,
+                bg1ClassName: theme.body,
+                bg2ClassName: theme.section,
             }}
         >
             {children}

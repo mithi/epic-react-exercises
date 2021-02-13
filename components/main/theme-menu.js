@@ -3,7 +3,7 @@ import styles from "./Styles.module.css"
 import { useTheme, useMenuState } from "hooks"
 import { useCodeTheme } from "providers/code-theme"
 import { OnClickButton } from "../button"
-import { OnClickText, PrettyHeader } from "../pretty-defaults"
+import { OnClickText, PrettyHeader, DivBg1, DivBg2 } from "../pretty-defaults"
 import { FaCloudSun, FaCode, FaPaintBrush, CgFormatColor, BiText } from "../icons"
 
 const ICON_BUTTON_STYLE = { margin: "10px 5px" }
@@ -37,17 +37,11 @@ const SquareIcon = ({ onClick, children, ...otherProps }) => (
 )
 
 const ChooseThemeIcons = () => {
-    const {
-        nextColor,
-        nextHeaderFont,
-        nextBodyFont,
-        nextPageTheme,
-        sectionClassNames,
-    } = useTheme()
+    const { nextColor, nextHeaderFont, nextBodyFont, nextPageTheme } = useTheme()
     const { nextCodeTheme } = useCodeTheme()
 
     return (
-        <div className={sectionClassNames[0]} style={ICONS_CONTAINER_STYLE}>
+        <DivBg2 style={ICONS_CONTAINER_STYLE}>
             <SquareIcon onClick={nextPageTheme} aria-label="change page theme">
                 <FaCloudSun />
             </SquareIcon>
@@ -64,7 +58,7 @@ const ChooseThemeIcons = () => {
             <SquareIcon onClick={nextCodeTheme} aria-label="change code theme">
                 <FaCode />
             </SquareIcon>
-        </div>
+        </DivBg2>
     )
 }
 
@@ -153,18 +147,15 @@ const CloseThemeMenu = () => {
 }
 
 const MenuContainer = ({ children }) => {
-    const { primaryColor, bodyClassNames } = useTheme()
-
     return (
-        <div
+        <DivBg1
             style={{
-                border: `1px dotted ${primaryColor}`,
                 marginBottom: "30px",
             }}
-            className={[bodyClassNames[0], styles.themeMenu].join(" ")}
+            className={styles.themeMenu}
         >
             {children}
-        </div>
+        </DivBg1>
     )
 }
 
