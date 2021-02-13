@@ -1,4 +1,4 @@
-import DynamicMarkdownRender from "components/markdown-render/dynamic"
+import { DynamicMarkdownRender } from "components/markdown-render/dynamic"
 import { sectionProperties, pageContents } from "utils"
 import PageLayout from "components/notebook"
 

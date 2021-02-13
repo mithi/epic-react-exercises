@@ -1,8 +1,10 @@
 import styles from "./Styles.module.css"
 import { useTheme, useMenuState } from "providers/hooks"
+import { useCodeTheme } from "providers/code-theme"
 import { OnClickButton } from "../button"
+import { DynamicMiniCode } from "../markdown-render/dynamic"
 import { OnClickText, PrettyHeader, DivBg1, DivBg2 } from "../pretty-defaults"
-import { FaCloudSun, FaPaintBrush, CgFormatColor, BiText } from "../icons"
+import { FaCloudSun, FaPaintBrush, CgFormatColor, BiText, FaCode } from "../icons"
 
 const ICON_BUTTON_STYLE = { margin: "10px 5px" }
 const ICONS_CONTAINER_STYLE = {
@@ -36,6 +38,7 @@ const SquareIcon = ({ onClick, children, ...otherProps }) => (
 
 const ChooseThemeIcons = () => {
     const { nextColor, nextHeaderFont, nextBodyFont, nextPageTheme } = useTheme()
+    const { nextCodeTheme } = useCodeTheme()
 
     return (
         <DivBg2 style={ICONS_CONTAINER_STYLE}>
@@ -50,6 +53,9 @@ const ChooseThemeIcons = () => {
             </SquareIcon>
             <SquareIcon onClick={nextBodyFont} aria-label="change body font">
                 <BiText />
+            </SquareIcon>
+            <SquareIcon onClick={nextCodeTheme} aria-label="change code theme">
+                <FaCode />
             </SquareIcon>
         </DivBg2>
     )
@@ -105,6 +111,18 @@ const CloseThemeMenu = () => {
     )
 }
 
+const SAMPLE_CODE = `function Hello({ world }) {
+    return <div>{world}!</div>
+}`
+
+const ChooseCode = () => {
+    return (
+        <div style={{ padding: "5px", borderRadius: "5px", marginBottom: "10px" }}>
+            <DynamicMiniCode language="jsx">{SAMPLE_CODE}</DynamicMiniCode>
+        </div>
+    )
+}
+
 const MenuContainer = ({ children }) => {
     const { primaryColor } = useTheme()
 
@@ -130,6 +148,7 @@ const Menu = ({ style } = {}) => {
                 <ChooseColor />
                 <ChooseHeader />
                 <ChooseParagraph />
+                <ChooseCode />
                 <ChooseThemeIcons />
                 <CloseThemeMenu />
             </MenuContainer>

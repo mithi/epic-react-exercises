@@ -2,7 +2,7 @@ import styles from "./Styles.module.css"
 import { useState, useEffect } from "react"
 import { CodeThemeProvider } from "providers/code-theme"
 import Nav from "./navbar"
-import { SpinnerDots } from "../spinner"
+//import { SpinnerDots } from "../spinner"
 import { DivBg1 } from "../pretty-defaults"
 
 function useHasMounted() {
@@ -23,7 +23,7 @@ const Home = ({ children } = {}) => {
     const hasMounted = useHasMounted()
 
     if (!hasMounted) {
-        return <SpinnerDots />
+        return null
     }
 
     return (

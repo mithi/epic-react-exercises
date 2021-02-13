@@ -2,46 +2,54 @@
 import { useState } from "react"
 import { useCodeTheme } from "providers/code-theme"
 import ReactMarkdown from "react-markdown"
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import {
     PrettyHeader,
     PrettyLink,
     PrettyAnchor,
     OnClickText,
 } from "components/pretty-defaults"
+import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter"
+import jsx from "react-syntax-highlighter/dist/cjs/languages/prism/jsx"
+SyntaxHighlighter.registerLanguage("jsx", jsx)
 
-const Code = ({ children, language }) => {
+const MiniCode = ({ children, language }) => {
     const { codeTheme } = useCodeTheme()
-    const [showCode, setShowCode] = useState(false)
-
-    const codeBlock = showCode && (
-        <SyntaxHighlighter
-            language={language}
-            style={codeTheme}
-            wrapLongLines={false}
-            wrapLines={false}
-            {...{ tabIndex: "0" }}
-        >
-            {children}
-        </SyntaxHighlighter>
-    )
-
     return (
         <div
             style={{
                 fontSize: "12px",
                 letterSpacing: "1px",
-                marginTop: "20px",
                 marginBottom: "20px",
             }}
         >
+            <SyntaxHighlighter
+                language={language}
+                style={codeTheme}
+                wrapLongLines={false}
+                wrapLines={false}
+                {...{ tabIndex: "0" }}
+            >
+                {children}
+            </SyntaxHighlighter>
+        </div>
+    )
+}
+
+const Code = ({ children, language }) => {
+    const [showCode, setShowCode] = useState(false)
+    const codeBlock = showCode && <MiniCode {...{ children, language }} />
+
+    return (
+        <>
             <OnClickText onClick={() => setShowCode(!showCode)}>
-                <PrettyHeader style={{ paddingLeft: "5px" }}>
+                <PrettyHeader
+                    style={{ paddingLeft: "5px", fontSize: "12px", marginTop: "10px" }}
+                >
                     {showCode ? "Hide Code" : "Show Code"}
                 </PrettyHeader>
             </OnClickText>
             {codeBlock}
-        </div>
+        </>
     )
 }
 
@@ -106,4 +114,4 @@ const renderers = {
 
 const MarkdownRender = ({ children }) => <ReactMarkdown {...{ renderers, children }} />
 
-export default MarkdownRender
+export { MarkdownRender, MiniCode }

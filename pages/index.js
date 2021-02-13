@@ -1,4 +1,4 @@
-import DynamicMarkdownRender from "components/markdown-render/dynamic"
+import { DynamicMarkdownRender } from "components/markdown-render/dynamic"
 import landingString from "content/landing/index.md"
 import Main from "components/main"
 import TwoSections from "components/main/two-sections"

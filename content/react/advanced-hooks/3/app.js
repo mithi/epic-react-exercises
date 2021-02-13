@@ -1,5 +1,5 @@
 import React from "react"
-import DynamicMarkdownRender from "components/markdown-render/dynamic"
+import { DynamicMarkdownRender } from "components/markdown-render/dynamic"
 import Content from "./components/content"
 import { OnClickText } from "components/pretty-defaults"
 import { TopButton, BottomButton, AppContainer, Section } from "./components/helpers"
