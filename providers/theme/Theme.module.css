@@ -62,24 +62,24 @@
  ***************/
 
 .funkyBody {
-    color: #d9b000;
-    background-color: #008f95;
+    color: #ffa7c4;
+    background-color: #373c48;
 }
 
 .funkySection {
-    background-color: #037a7e;
+    background-color: #282c35;
 }
 
 .funkyButton {
-    background-color: #b9382d;
+    background-color: #06d7d9;
 }
 
 .funkyButtonOnHover:hover {
-    color: #01810c;
+    color: #06d7d9;
 }
 
 .invertedFunkyButton {
-    color: #b9382d;
+    color: #06d7d9;
     opacity: 0.8;
 }
 
