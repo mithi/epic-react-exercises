@@ -33,6 +33,7 @@ const ThemeProvider = ({ children }) => {
     const theme = THEMES[themeId]
     const bodyClassNames = [theme.body]
     const sectionClassNames = [theme.section]
+    const onHoverClassName = colored(colorId).onHover
 
     const nextColor = () => {
         const n = (Number(colorId) + 1) % NUMBER_OF_COLORS
@@ -72,6 +73,7 @@ const ThemeProvider = ({ children }) => {
                 nextHeaderFont,
                 bodyClassNames,
                 sectionClassNames,
+                onHoverClassName,
             }}
         >
             {children}
