@@ -1,40 +1,20 @@
 /* eslint-disable react/display-name */
 import { useState } from "react"
-import { useCodeTheme } from "providers/code-theme"
 import ReactMarkdown from "react-markdown"
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import {
     PrettyHeader,
     PrettyLink,
     PrettyAnchor,
     OnClickText,
 } from "components/pretty-defaults"
+import CodeBlock from "./dynamic-code-block"
 
 const Code = ({ children, language }) => {
-    const { codeTheme } = useCodeTheme()
-    const [showCode, setShowCode] = useState(true)
-
-    const codeBlock = (
-        <SyntaxHighlighter
-            language={language}
-            style={codeTheme}
-            wrapLongLines={false}
-            wrapLines={false}
-            {...{ tabIndex: "0" }}
-        >
-            {children}
-        </SyntaxHighlighter>
-    )
+    const [showCode, setShowCode] = useState(false)
+    const codeBlock = showCode && <CodeBlock {...{ language }}>{children}</CodeBlock>
 
     return (
-        <div
-            style={{
-                fontSize: "12px",
-                letterSpacing: "1px",
-                marginTop: "20px",
-                marginBottom: "20px",
-            }}
-        >
+        <div>
             <OnClickText onClick={() => setShowCode(!showCode)}>
                 <PrettyHeader style={{ paddingLeft: "5px" }}>
                     {showCode ? "Hide Code" : "Show Code"}

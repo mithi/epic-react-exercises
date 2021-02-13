@@ -1,13 +1,11 @@
 import { createContext, useContext } from "react"
 import { useStickyState } from "hooks"
-import codeThemes from "./code-themes"
-export const NUMBER_OF_CODE_THEMES = codeThemes.length
+import { NUMBER_OF_CODE_THEMES } from "./code-themes"
 
 const CodeThemeContext = createContext()
 
 const CodeThemeProvider = ({ children }) => {
     const [codeThemeId, setCodeThemeId] = useStickyState(0, "codeThemeId")
-    const codeTheme = codeThemes[codeThemeId]
 
     const nextCodeTheme = () => {
         const n = (Number(codeThemeId) + 1) % NUMBER_OF_CODE_THEMES
@@ -17,7 +15,7 @@ const CodeThemeProvider = ({ children }) => {
     return (
         <CodeThemeContext.Provider
             value={{
-                codeTheme,
+                codeThemeId,
                 nextCodeTheme,
             }}
         >

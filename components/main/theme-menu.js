@@ -1,10 +1,10 @@
-import DynamicMarkdownRender from "components/markdown-render/dynamic"
 import styles from "./Styles.module.css"
 import { useTheme, useMenuState } from "hooks"
 import { useCodeTheme } from "providers/code-theme"
 import { OnClickButton } from "../button"
 import { OnClickText, PrettyHeader, DivBg1, DivBg2 } from "../pretty-defaults"
 import { FaCloudSun, FaCode, FaPaintBrush, CgFormatColor, BiText } from "../icons"
+import CodeBlock from "../markdown-render/dynamic-code-block"
 
 const ICON_BUTTON_STYLE = { margin: "10px 5px" }
 const ICONS_CONTAINER_STYLE = {
@@ -122,7 +122,9 @@ const ChooseParagraph = () => {
     )
 }
 
-const SAMPLE_CODE = "```python\n def hello():\n    return 'world!'"
+const SAMPLE_CODE = `function Hello({world}) {
+    return <div>{world}</div>
+}`
 
 const ChooseCode = () => {
     const { nextCodeTheme } = useCodeTheme()
@@ -132,7 +134,7 @@ const ChooseCode = () => {
             style={{ padding: "5px", borderRadius: "5px", marginBottom: "10px" }}
             onClick={nextCodeTheme}
         >
-            <DynamicMarkdownRender>{SAMPLE_CODE}</DynamicMarkdownRender>
+            <CodeBlock language="jsx">{SAMPLE_CODE}</CodeBlock>
         </div>
     )
 }
