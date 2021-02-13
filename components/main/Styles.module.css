@@ -13,13 +13,13 @@
     grid-column-gap: 10px;
     grid-row-gap: 10px;
     justify-items: stretch;
-    height: 97vh;
 }
 
 .common {
     border-radius: 10px;
     padding: 15px;
     overflow: scroll;
+    height: calc(100vh - 10px);
 }
 
 .div1 {
