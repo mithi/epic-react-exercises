@@ -1,8 +1,8 @@
 import styles from "./Styles.module.css"
 import { useState, useEffect, useLayoutEffect } from "react"
-import { useTheme } from "hooks"
 import { CodeThemeProvider } from "providers/code-theme"
 import Nav from "./navbar"
+import { DivBg1 } from "../pretty-defaults"
 
 /*
     ❗❗❗❗ IMPORTANT ❗❗❗❗
@@ -10,17 +10,15 @@ import Nav from "./navbar"
     DON'T REMOVE IT!
  */
 const Home = ({ children } = {}) => {
-    const { bodyClassNames, bodyFont } = useTheme()
     const [visible, setVisible] = useState(false)
     const useNextEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect
     useNextEffect(() => setVisible(true), [])
 
     return (
-        <div
-            className={[styles.grid, ...bodyClassNames].join(" ")}
+        <DivBg1
+            className={styles.grid}
             style={{
                 overflow: "auto",
-                fontFamily: bodyFont,
                 visibility: visible ? "visible" : "hidden",
             }}
         >
@@ -28,7 +26,7 @@ const Home = ({ children } = {}) => {
                 <Nav />
                 <main className={styles.main}>{children}</main>
             </CodeThemeProvider>
-        </div>
+        </DivBg1>
     )
 }
 

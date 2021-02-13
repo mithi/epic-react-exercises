@@ -1,15 +1,11 @@
 import React from "react"
 import { FaArrowAltCircleUp, FaArrowAltCircleDown } from "components/icons"
 import { DefaultButton } from "components/button"
-import { useTheme } from "hooks"
-import { BorderedDiv } from "components/pretty-defaults"
+import { BorderedDiv, DivBg1 } from "components/pretty-defaults"
 
 const Section = ({ children }) => {
-    const { bodyClassNames } = useTheme()
-
     return (
-        <div
-            className={bodyClassNames[0]}
+        <DivBg1
             style={{
                 padding: "15px 10px",
                 borderRadius: "15px",
@@ -19,7 +15,7 @@ const Section = ({ children }) => {
             }}
         >
             {children}
-        </div>
+        </DivBg1>
     )
 }
 
