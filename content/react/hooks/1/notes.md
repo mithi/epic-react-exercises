@@ -6,7 +6,7 @@
 -   Be able to keep a history of the game; allow players to go backward and forward in time
 -   [Kent's Implementation](https://github.com/kentcdodds/react-hooks/blob/main/src/final/04.extra-3.js)
 
-## My Implementation
+### My Implementation
 
 My top level component basically renders the following:
 
@@ -144,7 +144,7 @@ const App = () => {
 }
 ```
 
-### How to implement a generic useLocalStorage or useStickyState hook ?
+### Readings
 
 -   [Kent C Dodds: UseLocalStorage Implementation](https://github.com/kentcdodds/react-hooks/blob/main/src/final/02.extra-4.js)
 -   [usehooks.com: useLocalStorage](https://usehooks.com/useLocalStorage/)

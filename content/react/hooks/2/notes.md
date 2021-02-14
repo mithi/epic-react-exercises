@@ -4,7 +4,7 @@
 -   Display the details of the perspective transform as it happens
 -   Remember: We don't want event handlers dangling around on DOM nodes that are no longer in the document. (memory leak)
 
-## Code Snippets
+### My Implementation
 
 ```jsx
 function Tilt({ children, setData }) {
@@ -39,7 +39,7 @@ function App() {
 }
 ```
 
-## Additional Notes
+### Notes
 
 1.  DOM interactions
 

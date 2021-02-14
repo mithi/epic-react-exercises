@@ -1,6 +1,8 @@
 # Hello World! [![buy me coffee](https://img.shields.io/badge/Buy%20me%20-coffee!-orange.svg?logo=buy-me-a-coffee&color=795548)](https://ko-fi.com/minimithi)
 
-This site should be useful for front-end web engineers and developers of all shapes and sizes! It contains practical exercises with detailed solutions for real-world use cases. This site is very loosely based on [Kent C Dodd](https://kentcdodds.com/)'s [Epic React Workshops](https://epicreact.dev/).
+This site should be useful for front-end web engineers and developers of all shapes and sizes! It contains practical exercises with detailed solutions for real-world use cases.
+
+This site is very loosely based on [Kent C Dodd](https://kentcdodds.com/)'s [Epic React Workshops](https://epicreact.dev/).
 
 ## List of Exercises
 

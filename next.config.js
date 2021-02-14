@@ -29,4 +29,5 @@ module.exports = {
     images: {
         domains: ["rickandmortyapi.com", "img.pokemondb.net", "storage.googleapis.com"],
     },
+    reactStrictMode: true,
 }

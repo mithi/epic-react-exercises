@@ -104,24 +104,33 @@ const AppNormal = () => {
 }
 ```
 
--   If we don't use `useImperativeHandle`, the parent component will manage `scrollable` component's state.
--   Every single time we scroll up and down, not using `useImperativeHandle` would also cause rerendering of both the `scrollable` component and its parent component . Normally these things are okay, but it's added unnecessary complexity, which we don't want especially if the parent is also managing alot of things.
--   Also, a component not using `useImperativeHandle` would not be very reusable, we need to add an additional state to any component that needs to use this `scrollable` component as their child.
--   Use `useImperativeHandle` if you want to let the parent component customize an instance value that belongs to the child component.
--   The child component exposes properties it needs to expose via `useImperativeHandle`. The parent component must forward a `ref` (in this case we call it `sRef`) to the child component (`scrollable`) and the child uses that `sRef` to expose the properties that the parents could have access to.
--   In this case, the properties to expose are the functions `scrollToTop` and `scrollToBottom`... Both functions manipulate the dom node the child renders, These functions make use of variables local only to `scrollable`.. variables that normally the parent won't have access to.
--   These properties are exposed via the line `useImperativeHandle(ref, () => ({ scrollToTop, scrollToBottom }))`.
--   The parent will be able to access the functions exposed to it like this ` sRef.current.scrollToBottom()` where `sRef` is the `ref` that the parent forwarded to the `scrollable` child.
+### Thoughts
 
--   On another note, this example, is one of the few cases that `useLayoutEffect` should be used instead of `useEffect`. If `useEffect` is used to scroll to the bottom when the component mounts, you would see a flicker, a jumpy behavior. Briefly, the screen will flash to show the contents prior to scrolling to the bottom on each rerender. This is not what we want. This won't happen with `useLayoutEffect` as the effect will be applied before the browser repaints, NOT after.
+1. If we don't use `useImperativeHandle`
 
-### You should know this
+    - The parent component will manage the `scrollable` component's state
+    - Scrolling up and down will cause rerendering of both the `scrollable` component and its parent component . Normally these things are okay, but it's added unnecessary complexity, which we don't want especially if the parent is also managing alot of things.
+    - The `scrollable` component will not be very reusable, we need to add an additional state to any component that needs to use this `scrollable` component as their child.
+
+2. Using `useImperativeHandle`
+
+    - The parent component can customize an instance value that belongs to the child component.
+    - The child component exposes properties via `useImperativeHandle`. The parent component must forward a `ref` (in our case we named it `sRef`), to the child componentandthe child uses `sRef` to expose the properties that the parents could have access to.
+    - In this case, the properties exposed are the functions `scrollToTop` and `scrollToBottom`. Both functions manipulate the dom node the child renders
+    - These properties are exposed via the line
+        - `useImperativeHandle(ref, () => ({ scrollToTop, scrollToBottom }))`.
+    - The parent will be able to access the functions exposed to it like this ` sRef.current.scrollToBottom()`
+
+3. Using `useLayoutEffect` vs `useEffect`
+    - We need to scroll to the bottom when the component mounts
+    - If `useEffect` is used, you would see a flicker, a jumpy behavior. Briefly, the screen will flash to show the contents at the top prior to scrolling to the bottom on each rerender.
+    - This won't happen with `useLayoutEffect` as the effect will be applied before the browser repaints, NOT after
+    - Note: We can use a different strategy of creating a `useDidComponentMount` hook with `useEffect` if we really don't want to use `useLayoutEffect`
+
+### Notes
 
 -   `forwardRef` is a React feature that lets a component take a `ref` from its parent component
 -   Keep in mind that `useRef` doesn’t notify you when its content changes. Mutating the `.current` property doesn’t cause a re-render
-
-### Other useImperativeHandle examples
-
 -   [Sophie Au: React Hooks: `useImperativeHandle`](https://sophieau.com/article/use-imperative-handle/)
 -   [Mehdi Namvar: React’s `useImperativeHandle` by Examples](https://medium.com/@ilxanlar/useimperativehandle-by-examples-99cbdc8e3c3a)
 -   [Chris: When to use `useImperativeHandle`, `useLayoutEffect`, and `useDebugValue`](https://stackoverflow.com/questions/57005663/when-to-use-useimperativehandle-uselayouteffect-and-usedebugvalue)

@@ -12,15 +12,9 @@
 -   Navigating away from the page and going back, refreshing the page, and unmounting remounting the component should NOT clear the cache
 -   As usual, allows the user to randomly get fetch random character by clicking a specific button
 
-## My Implementation
+### My Implementation
 
--   Create a `useCache` hook, that takes in a key (that will be used for storing data in the local storage using the `useLocalStorageState` hook) and returns the a `cache` object and a `dispatch` function. The `dispatch` function should be able to `CLEAR` the cache, add or `OVERRIDE` data in the cache, and `REMOVE` data from the `cache`
--   Using `useCache`, create a `RickAndMortyCacheContext`, `RickAndMortyCacheProvider`, and a `useRickAndMortyCache` cache, to store all the fetched Rick and Morty Characters.
--   On the old `useAsync` hook implementation add the option `reset` that when triggered will set the `useAsync` hook status to `idle`
--   Create a `useRickAndMorty` hook which takes in an object `{key = "", useCacheOnlyWhenNotReloading = false}` and returns `{ status, error, data, reload }`. If `key` is in the `cache`, return this data with a status of `resolved`. If `key` is not the `cache` and `useCacheOnlyWhenNotReloading` is `true` then return `{status: "notInCache", reload}`, If `key` is not in the `cache` and `useCacheOnlyWhenNotReloading` is `false` then fetch this data using the `useAsync` hook. `reload` is a function that is when called, will refetch the data using `useAsync` and override the current data in the cache.
--   Create a `CachePreview` component to manipulate the cache. It accepts a prop of `id` and `setId` so that it knows what `id` is currently selected, and also to be able set the `id` of the parent via `setID`
-
-### The App Component
+The top level App
 
 ```jsx
 const App = () => {
@@ -106,7 +100,7 @@ const Home = () => (
 )
 ```
 
-### CachePreview
+CachePreview
 
 ```jsx
 const RickAndMortyCachePreview = ({ setId, id }) => {
@@ -153,43 +147,7 @@ const RickAndMortyCachePreview = ({ setId, id }) => {
 }
 ```
 
-### useCache
-
-```jsx
-const cacheReducer = (cache, action) => {
-    const { type, key, data } = action
-
-    if (type === "CLEAR") {
-        return {}
-    }
-
-    if (type === "OVERRIDE") {
-        if (!data || !key) {
-            return cache
-        }
-        return { ...cache, [key]: data }
-    }
-
-    if (type === "REMOVE") {
-        if (!cache[key]) {
-            return cache
-        }
-        const newCache = { ...cache }
-        delete newCache[key]
-        return newCache
-    }
-    throw new Error(`unhandled action type: ${type} in useCache`)
-}
-
-const useCache = localStorageKey => {
-    const [localData, setLocalData] = useLocalStorageState(localStorageKey)
-    const [cache, dispatch] = useReducer(cacheReducer, localData)
-    useEffect(() => setLocalData(cache), [cache, setLocalData])
-    return { cache, dispatch }
-}
-```
-
-### useRickAndMortyCache
+useRickAndMortyCache
 
 ```jsx
 const RickAndMortyCacheContext = createContext()
@@ -215,7 +173,7 @@ function useRickAndMortyCache() {
 }
 ```
 
-### useRickAndMorty
+useRickAndMorty
 
 ```jsx
 function useRickAndMorty({ key = "", useCacheOnlyWhenNotReloading = false } = {}) {
@@ -270,63 +228,38 @@ function useRickAndMorty({ key = "", useCacheOnlyWhenNotReloading = false } = {}
 }
 ```
 
-## How to test
+useCache
 
-1.  Start with nothing in the cache
-2.  When the input field has `""`:
+```jsx
+const cacheReducer = (cache, action) => {
+    const { type, key, data } = action
 
-    -   no character should be displayed.
-    -   The `fetch` (with a `magnifying glass icon`) submit button should be disabled.
-    -   The random button should NOT be disabled.
+    if (type === "CLEAR") {
+        return {}
+    }
 
-3.  Input `"1"`
+    if (type === "OVERRIDE") {
+        if (!data || !key) {
+            return cache
+        }
+        return { ...cache, [key]: data }
+    }
 
-    -   under the searchbar you'd see `The id "1" is not in your cache yet. Fetch it?`.
-    -   hitting enter or clicking the "fetch" button or the `fetch it` text should trigger the loading screen.
-    -   The random button and the submit button should be disabled at this point.
+    if (type === "REMOVE") {
+        if (!cache[key]) {
+            return cache
+        }
+        const newCache = { ...cache }
+        delete newCache[key]
+        return newCache
+    }
+    throw new Error(`unhandled action type: ${type} in useCache`)
+}
 
-4.  After successfully loading the data
-
-    -   There should be a small message under the searchbar: `"Successfully fetched Rick Sanchez! (#1)"` along with the profile data.
-    -   The options `Remove "Rick Sanchez" (#1) from cache?` and `clear cache?` should also appear and should be clickable
-    -   The `fetch` submit button should now be a `refetch` button with a `refresh icon`.
-    -   By this point there should be a tiny disabled button at the button representing that data on the cache.
-
-5.  Do the same for "11" and "111".
-
-    -   At this point the character with "111" which is Eli's Girlfriend should be loaded in your screen.
-    -   There should be three characters at your cache right now. Rick, Albert Einstein, and Eli's Girlfriend.
-
-6.  Three button should now be visible...
-
-    -   which should corresponding to each character.
-    -   Clicking each button will display the profile of each character.
-    -   Clicking the buttons should also change the value in the input field, and the button of the active character should also look different from the rest (and `disabled`)
-
-7.  Refreshing this page
-
-    -   That should remove the currently active character but the three buttons and the `Clear cache?` message should still exist.
-
-8.  Type `""` in the input field
-
-    -   `"Remove ___ from cache?"` should disapear and all buttons should be active once again. `Clear cache?` option should still be visible
-
-9.  Then type `"1"` four times until the input field displays `"1111"`.
-    -   It should display the data for "Rick" then "Albert Einstein" then "Eli's girlfriend", and finally the screen should display the message: `"The id "1111" is not in your cache yet. Fetch it?"`.
-10. Submit `"1111"` by pressing enter or clicking the `fetch button` or `fetch it?` text.
-
-    -   After loading, this should produce and error `"404 Not Found"`, and the message `"There was an error while fetching the id "1111 ". Try fetching it again?"` should be displayed.
-    -   Clicking the `"refetch"` button or the `"fetching it? again"` text or pressing enter should try to fetch this character again.
-
-11. Type `"1"` again
-
-    -   The message `Remove "Rick Sanchez" (#1) from cache?` should appear.
-    -   Clicking it would remove him not only in the buttons and as loaded profile. The "Remove from cache` option should also disapear.
-
-12. Click `Clear Cache?`
-
-    -   It would remove all three data points and thus the three buttons in the cache.
-    -   The `Clear Cache?` message should also disappear.
-
-13. Refresh the page
-    -   You should be able to reproduce the steps over and over again without encountering any problem.
+const useCache = localStorageKey => {
+    const [localData, setLocalData] = useLocalStorageState(localStorageKey)
+    const [cache, dispatch] = useReducer(cacheReducer, localData)
+    useEffect(() => setLocalData(cache), [cache, setLocalData])
+    return { cache, dispatch }
+}
+```

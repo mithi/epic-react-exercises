@@ -1,4 +1,4 @@
-## Additional Notes
+## Readings
 
 1.  [Why React hooks? (35 minute talk)](https://www.youtube.com/watch?v=zWsZcBiwgVE&list=PLV5CVI1eNcJgNqzNwcs4UKrlJdhfDjshf)
 
@@ -25,13 +25,17 @@
 
     -   It's usually better to calculate states (deriving) based on other states when you can as opposed to storing them
 
-## You should know these things
+### Notes
 
 -   What is an [error boundary](https://reactjs.org/docs/error-boundaries.html) and what is it for?
--   Can you do something like `useEffect(async () => await doSomething())` ? Why or why not? If not, what should we do instead?
--   [Does React batch state update functions when using hooks?](https://stackoverflow.com/questions/53048495/does-react-batch-state-update-functions-when-using-hooks). Is the behavior the same for Promise calls? [Could this change in the future](https://stackoverflow.com/questions/53048495/does-react-batch-state-update-functions-when-using-hooks)?
+-   Can you do something like
+    -   `useEffect(async () => await doSomething())`?
+    -   Why or why not? If not, what should we do instead?
+-   [Does React batch state update functions when using hooks?](https://stackoverflow.com/questions/53048495/does-react-batch-state-update-functions-when-using-hooks) Is the behavior the same for Promise calls? [Could this change in the future](https://stackoverflow.com/questions/53048495/does-react-batch-state-update-functions-when-using-hooks)?
 -   Why did Kent say [Stop Using `isLoading` booleans](https://kentcdodds.com/blog/stop-using-isloading-booleans)?
--   What is the difference between `fetch().then(result => result, error => error)` and `fetch().then(result => result).catch(error => error)` ?
+-   What is the difference between the following:
+    -   `fetch().then(result => result, error => error)`
+    -   `fetch().then(result => result).catch(error => error)`
 -   [Public Class Fields with React Components](https://egghead.io/lessons/javascript-public-class-fields-with-react-components)
 -   The npm package [bvaughn/react-error-boundary](https://github.com/bvaughn/react-error-boundary)
 -   [React Hooks Best Practices](https://www.smashingmagazine.com/2020/04/react-hooks-best-practices/)
