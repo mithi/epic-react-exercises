@@ -10,7 +10,7 @@
 -   After an error, the user should be able to use the search bar to search for a new pokemon without having to click the `try again` button.
 -   [Kent's Implementation](https://github.com/kentcdodds/react-hooks/blob/main/src/final/04.extra-3.js)
 
-## A Few Code Snippets
+### My Implementation
 
 My Top Level Component
 
@@ -102,22 +102,3 @@ class CustomErrorBoundary extends Component {
     }
 }
 ```
-
-## My implementation
-
-1.  It's better to put all the states in one state object (ie `{status, pokemonData, error}`), instead of having several `useState()` declarations.
-    -   Aside from simplicity, it's because each state change could trigger an immediate rerender, which we don't intend to do.
-2.  `PokemonInfoCard` takes a `pokemonName` and fetches the data.
-    -   It contains the logic of what to render depending on its status (`idle`, `pending`, `rejected`, `resolved`). It manages three things: The current `status`, and the `error` or `pokemonData` if any.
-3.  `CustomErrorBoundary` wraps the `PokemonInfoCard` which takes a `key`, `FallbackComponent`, and `resetFunction`.
-    -   If an error occurs, the boundary will render the supplied `FallbackComponent`, instead of its children. - The `resetFunction` is a function (we define and provide) that's intended to be used by the `FallbackComponent` to trigger unmounting and mounting of a new `ErrorBoundary`.
-    -   Modifying a component's `key` will trigger a rerender, and that's what the `resetFunction` (that we supplied) must do.
-4.  Put it all together, the overall component, only has two main components, the `pokemonSearchbar` and `pokemonInfoCard` wrapped by `CustomErrorBoundary`
-    -   It now only has two states which is `submittedName` and `incompleteName`. `submittedName` is NOT necessarily a real pokemon name, it is whatever the string is in the search bar when the submit button is clicked..
-    -   `incompleteName` used to be handled by the search bar component, but this state was lifted up because, it is required to reset the boundary function.
-    -   The `resetFunction` resets by setting the current `submittedName` to `""`. `""` would never be equal to a previous `submittedName` because our user interface would not allow that to be submitted. This guarantees that the error boundary would be remounted.
-
-## ToDos
-
--   Refactor the [data views module](https://github.com/mithi/epic-notes/blob/main/content/react/hooks/3/components/pokemon-data-view.js)
--   How to refactor to use local storage so that the previously fetched pokemon data will still be displayed on refresh?

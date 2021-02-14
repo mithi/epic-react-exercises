@@ -6,10 +6,10 @@
 -   If the number that was submitted does not correspond to a character, show the error.
 -   While fetching a new character, the input field, random button, and submit button should be disabled.
 -   When the number currently in the input field has been submitted has been either `resolved` or `rejected`, disable the submit button unless the input the user changes it to a new value. The user shoudn't be able to click the submit button if the character corresponding to the number in the input field is currently loaded.
--   The app must also enable the user to mount and unmount this component (via a checkbox).
--   [Kent's Implementation](https://github.com/kentcdodds/advanced-react-hooks/blob/main/src/final/02.extra-3.js). NOTE: his `utils` directory houses a slightly different [implementation](https://github.com/kentcdodds/advanced-react-hooks/blob/main/src/utils.js), giving the user two additional functions `setError` and `setData`, which allows the user to (you guessed it) set the `data` and `error` stored in the `useAsync` hook.
+-   Enable the user to mount and unmount this component (via a checkbox).
+-   [Kent's Implementation](https://github.com/kentcdodds/advanced-react-hooks/blob/main/src/final/02.extra-3.js).
 
-## Important!
+### Important!
 
 (The paragraph below is paraphrased from [this page](https://advanced-react-hooks.netlify.app/2))
 
@@ -23,7 +23,7 @@ To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup f
 
 This warning should NOT pop up in our app.
 
-## My Implementation
+### My Implementation
 
 -   See `RickAndMortyInfoCard` in the codeblock below.
 -   It uses a `useSafeAsync` hook that's responsible for managing the state, and fetching the data.
