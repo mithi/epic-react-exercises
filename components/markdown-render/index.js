@@ -53,7 +53,11 @@ const CustomHeading = ({ children, level }) => {
                 </PrettyHeader>
             )
         case 3:
-            return <PrettyHeader Component="h3">{children}</PrettyHeader>
+            return (
+                <PrettyHeader Component="h3" {...{ style }}>
+                    {children}
+                </PrettyHeader>
+            )
         case 4:
             return <PrettyHeader Component="h4">{children}</PrettyHeader>
         case 5:
@@ -89,9 +93,8 @@ const renderers = {
     link: props => {
         return <DefaultLink {...props} />
     },
-
     paragraph: props => {
-        return <p style={{ marginBottom: "10px" }}>{props.children}</p>
+        return <p style={{ marginBottom: "6px", marginTop: "6px" }}>{props.children}</p>
     },
 }
 
