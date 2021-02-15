@@ -158,21 +158,40 @@ const ArticleFooter = ({ editPath }) => {
 }
 
 const CallToActionBox = ({ editPath }) => {
+    const LIST_STYLE = {
+        listStyleType: "none",
+        margin: "0",
+        padding: "2px 0",
+        lineHeight: "1.1",
+    }
+
     return (
         <BigHeadNotice>
-            <PrettyAnchor href={solutionUrl(editPath)}>
-                {"👀"} View the deployed code
-            </PrettyAnchor>{" "}
-            on Github. <br />
-            Not happy with the solution? {"🐞🐛 "}
-            <PrettyAnchor href={issueUrl("Better solution! Suggestion for:", editPath)}>
-                Suggest a change.
-                <br />
-            </PrettyAnchor>{" "}
-            Grammar errors? {"✏️ "}
-            <PrettyAnchor href={editUrl(editPath)}>Edit</PrettyAnchor> this page. <br />{" "}
-            Other options: <PrettyLink href="/">go back to main</PrettyLink> {"🏠"} or
-            <PrettyAnchor href={KOFI_URL}> {"☕"} buy me a coffee</PrettyAnchor>!
+            <ul style={{ padding: "0", margin: "5px" }}>
+                <li style={LIST_STYLE}>
+                    <PrettyAnchor href={solutionUrl(editPath)}>
+                        {"👀"} View the deployed code{" "}
+                    </PrettyAnchor>
+                    on Github.
+                </li>
+                <li style={LIST_STYLE}>
+                    Not happy with the solution? {"🐞🐛 "}
+                    <PrettyAnchor
+                        href={issueUrl("Better solution! Suggestion for:", editPath)}
+                    >
+                        Suggest a change.
+                    </PrettyAnchor>
+                </li>
+                <li style={LIST_STYLE}>
+                    Grammar errors? {"✏️ "}
+                    <PrettyAnchor href={editUrl(editPath)}>Edit</PrettyAnchor> this page.
+                </li>
+                <li style={LIST_STYLE}>
+                    Other options:{" "}
+                    <PrettyLink href="/">go back to main {"🏠"}</PrettyLink>
+                    <PrettyAnchor href={KOFI_URL}> {"☕"} buy me a coffee</PrettyAnchor>!
+                </li>
+            </ul>
         </BigHeadNotice>
     )
 }
@@ -198,8 +217,8 @@ const PageLayout = ({
                 : () => null,
         [hasApp, topic, section, pageId]
     )
-
     const editPath = `${topic}/${section}/${pageId}`
+
     const article = (
         <article>
             {hasApp && <CallToActionBox {...{ editPath }} />}
