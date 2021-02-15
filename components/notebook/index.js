@@ -107,7 +107,6 @@ function HeaderSection({ children }) {
 
         if (children[child].type === Pagination) {
             pagination = children[child]
-            console.log(pagination)
         }
     }
 
@@ -157,7 +156,7 @@ const ArticleFooter = ({ editPath }) => {
     )
 }
 
-const CallToActionBox = ({ editPath }) => {
+const CallToActionUl = ({ children }) => {
     const LIST_STYLE = {
         listStyleType: "none",
         margin: "0",
@@ -165,35 +164,12 @@ const CallToActionBox = ({ editPath }) => {
         lineHeight: "1.1",
     }
 
-    return (
-        <BigHeadNotice>
-            <ul style={{ padding: "0", margin: "5px" }}>
-                <li style={LIST_STYLE}>
-                    <PrettyAnchor href={solutionUrl(editPath)}>
-                        {"👀"} View the deployed code{" "}
-                    </PrettyAnchor>
-                    on Github.
-                </li>
-                <li style={LIST_STYLE}>
-                    Not happy with the solution? {"🐞🐛 "}
-                    <PrettyAnchor
-                        href={issueUrl("Better solution! Suggestion for:", editPath)}
-                    >
-                        Suggest a change.
-                    </PrettyAnchor>
-                </li>
-                <li style={LIST_STYLE}>
-                    Grammar errors? {"✏️ "}
-                    <PrettyAnchor href={editUrl(editPath)}>Edit</PrettyAnchor> this page.
-                </li>
-                <li style={LIST_STYLE}>
-                    Other options:{" "}
-                    <PrettyLink href="/">go back to main {"🏠"}</PrettyLink>
-                    <PrettyAnchor href={KOFI_URL}> {"☕"} buy me a coffee</PrettyAnchor>!
-                </li>
-            </ul>
-        </BigHeadNotice>
-    )
+    // assumes only "li" are passed as children
+    const styledChildren = Children.map(children, child => {
+        return cloneElement(child, { style: LIST_STYLE })
+    })
+
+    return <ul style={{ padding: "0", margin: "5px" }}>{styledChildren}</ul>
 }
 
 const PageLayout = ({
@@ -219,9 +195,39 @@ const PageLayout = ({
     )
     const editPath = `${topic}/${section}/${pageId}`
 
+    const callToActionBox = (
+        <BigHeadNotice>
+            <CallToActionUl>
+                <li>
+                    <PrettyAnchor href={solutionUrl(editPath)}>
+                        {"👀"} View the deployed code{" "}
+                    </PrettyAnchor>
+                    on Github.
+                </li>
+                <li>
+                    Not happy with the solution? {"🐞🐛 "}
+                    <PrettyAnchor
+                        href={issueUrl("Better solution! Suggestion for:", editPath)}
+                    >
+                        Suggest a change.
+                    </PrettyAnchor>
+                </li>
+                <li>
+                    Grammar errors? {"✏️ "}
+                    <PrettyAnchor href={editUrl(editPath)}>Edit</PrettyAnchor> this page.
+                </li>
+                <li>
+                    Other options:{" "}
+                    <PrettyLink href="/">go back to main {"🏠"}</PrettyLink> or
+                    <PrettyAnchor href={KOFI_URL}> {"☕"} buy me a coffee</PrettyAnchor>!
+                </li>
+            </CallToActionUl>
+        </BigHeadNotice>
+    )
+
     const article = (
         <article>
-            {hasApp && <CallToActionBox {...{ editPath }} />}
+            {hasApp && callToActionBox}
             {notes}
             <ArticleFooter {...{ editPath }} />
         </article>
