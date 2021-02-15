@@ -14,8 +14,8 @@ const BigHeadNotice = ({ children }) => {
                 <RoundedImage
                     src="/hi-res-big-head-girl-transparent.png"
                     alt="Big Head Girl Epic Notes Logo"
-                    width={60}
-                    height={75}
+                    width={50}
+                    height={60}
                     quality={100}
                 />
             </div>
@@ -24,7 +24,7 @@ const BigHeadNotice = ({ children }) => {
                 style={{
                     lineHeight: "0.85",
                     alignSelf: "center",
-                    margin: "10px 20px 10px 0px",
+                    margin: "5px 20px 5px 0px",
                 }}
             >
                 <SmallSpan>{children}</SmallSpan>
