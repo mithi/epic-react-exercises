@@ -131,29 +131,11 @@ const FOOTER_CONTAINER_STYLE = {
 
 const HOME_STYLE = { height: "50px", width: "50px", margin: "10px" }
 
-const ArticleFooter = ({ editPath }) => {
-    return (
-        <div style={FOOTER_CONTAINER_STYLE}>
-            <LinkOutButton
-                href={issueUrl("Something is wrong in:", editPath)}
-                aria-label="report a bug"
-            >
-                <FaBug />
-            </LinkOutButton>
-            <LinkOutButton href={editUrl(editPath)} aria-label="edit this page">
-                <BsPencilSquare />
-            </LinkOutButton>
-            <LinkOutButton href={EPIC_NOTES_REPO_URL} aria-label="star me on github">
-                <GoOctoface />
-            </LinkOutButton>
-            <LinkOutButton href={KOFI_URL} aria-label="buy me a coffee">
-                <BiCoffeeTogo />
-            </LinkOutButton>
-            <LinkButton aria-label="home" href="/" style={HOME_STYLE}>
-                <FaHome />
-            </LinkButton>
-        </div>
-    )
+const ArticleFooterButtons = ({ children }) => {
+    const styledChildren = Children.map(children, child => {
+        return cloneElement(child, { style: HOME_STYLE })
+    })
+    return <div style={FOOTER_CONTAINER_STYLE}>{styledChildren}</div>
 }
 
 const CallToActionUl = ({ children }) => {
@@ -225,11 +207,33 @@ const PageLayout = ({
         </BigHeadNotice>
     )
 
+    const articleFooterButtons = (
+        <ArticleFooterButtons>
+            <LinkOutButton
+                href={issueUrl("Something is wrong in:", editPath)}
+                aria-label="report a bug"
+            >
+                <FaBug />
+            </LinkOutButton>
+            <LinkOutButton href={editUrl(editPath)} aria-label="edit this page">
+                <BsPencilSquare />
+            </LinkOutButton>
+            <LinkOutButton href={EPIC_NOTES_REPO_URL} aria-label="star me on github">
+                <GoOctoface />
+            </LinkOutButton>
+            <LinkOutButton href={KOFI_URL} aria-label="buy me a coffee">
+                <BiCoffeeTogo />
+            </LinkOutButton>
+            <LinkButton aria-label="home" href="/" style={HOME_STYLE}>
+                <FaHome />
+            </LinkButton>
+        </ArticleFooterButtons>
+    )
     const article = (
         <article>
             {hasApp && callToActionBox}
             {notes}
-            <ArticleFooter {...{ editPath }} />
+            {articleFooterButtons}
         </article>
     )
 
