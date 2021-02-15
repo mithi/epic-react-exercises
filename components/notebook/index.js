@@ -127,13 +127,6 @@ const PageLayout = ({
             </LinkButton>
         </ArticleFooterButtons>
     )
-    const article = (
-        <article>
-            {hasApp && callToActionBox}
-            {notes}
-            {articleFooterButtons}
-        </article>
-    )
 
     const { deployedSite, repository, title } = properties
     const deployedSiteButton = deployedSite && (
@@ -146,6 +139,32 @@ const PageLayout = ({
         <LinkButton href={editUrl(editPath)} {...PROPERTY_BUTTONS_PROPS.edit} />
     )
 
+    const propertyButtons = (
+        <PropertyButtons>
+            {deployedSiteButton}
+            {repositoryButton}
+            {editUrlButton}
+            <LinkOutButton
+                href={issueUrl("Something is wrong in:", editPath)}
+                aria-label="report a bug"
+            >
+                <FaBug />
+            </LinkOutButton>
+
+            <LinkButton aria-label="home" href="/">
+                <FaHome />
+            </LinkButton>
+        </PropertyButtons>
+    )
+    const article = (
+        <article>
+            {propertyButtons}
+            {hasApp && callToActionBox}
+            {notes}
+            {articleFooterButtons}
+        </article>
+    )
+
     const header = (
         <HeaderSection>
             <Heading>{title}</Heading>
@@ -153,6 +172,16 @@ const PageLayout = ({
                 {deployedSiteButton}
                 {repositoryButton}
                 {editUrlButton}
+                <LinkOutButton
+                    href={issueUrl("Something is wrong in:", editPath)}
+                    aria-label="report a bug"
+                >
+                    <FaBug />
+                </LinkOutButton>
+
+                <LinkButton aria-label="home" href="/">
+                    <FaHome />
+                </LinkButton>
             </PropertyButtons>
             <Pagination
                 {...{

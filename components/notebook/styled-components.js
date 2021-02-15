@@ -40,9 +40,11 @@ const BUTTON_CONTAINER_STYLE = {
 
 function PropertyButtons({ children }) {
     // assumes only LinkButtons are passed as children
-    return Children.map(children, child => {
+    const styledChildren = Children.map(children, child => {
         return cloneElement(child, { style: BUTTON_STYLE })
     })
+
+    return <div style={BUTTON_CONTAINER_STYLE}>{styledChildren}</div>
 }
 
 function Heading({ children }) {
@@ -51,16 +53,11 @@ function Heading({ children }) {
 
 function HeaderSection({ children }) {
     let title = null
-    let propertyButtons = null
     let pagination = null
 
     for (let child in children) {
         if (children[child].type === Heading) {
             title = children[child]
-        }
-
-        if (children[child].type === PropertyButtons) {
-            propertyButtons = children[child]
         }
 
         if (children[child].type === Pagination) {
@@ -74,7 +71,6 @@ function HeaderSection({ children }) {
                 <PrettyHeader Component="h1" style={{ marginRight: "10px" }}>
                     {title}
                 </PrettyHeader>
-                <div style={BUTTON_CONTAINER_STYLE}>{propertyButtons}</div>
             </div>
             <div className={styles.pagination}>{pagination}</div>
         </div>
