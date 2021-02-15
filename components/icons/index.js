@@ -5,6 +5,7 @@ import { BsPencilSquare } from "react-icons/bs"
 import { GiPerspectiveDiceSixFacesRandom } from "react-icons/gi"
 import { BiRefresh, BiText, BiRocket, BiCoffeeTogo } from "react-icons/bi"
 import { MdDesktopMac, MdLaptopMac, MdTabletMac, MdSettings } from "react-icons/md"
+import { AiOutlineRead } from "react-icons/ai"
 import {
     FaBug,
     FaHome,
@@ -44,4 +45,5 @@ export {
     FaCloudSun,
     FaCode,
     FaPaintBrush,
+    AiOutlineRead,
 }

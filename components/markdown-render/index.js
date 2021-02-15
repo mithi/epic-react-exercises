@@ -98,6 +98,10 @@ const renderers = {
     },
 }
 
-const MarkdownRender = ({ children }) => <ReactMarkdown {...{ renderers, children }} />
+const MarkdownRender = ({ children }) => (
+    <div style={{ marginBottom: "20px" }}>
+        <ReactMarkdown {...{ renderers, children }} />
+    </div>
+)
 
 export default MarkdownRender
