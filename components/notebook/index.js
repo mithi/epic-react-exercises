@@ -1,6 +1,6 @@
 import styles from "./Styles.module.css"
 import dynamic from "next/dynamic"
-import { useMemo } from "react"
+import { useMemo, Children, cloneElement } from "react"
 import {
     FiGithub,
     BiRocket,
@@ -29,32 +29,42 @@ const editUrl = editPath =>
 
 const solutionUrl = editPath => `${EPIC_NOTES_REPO_URL}/edit/main/content/${editPath}`
 
-const PageButton = ({ pageId, pathname, currentPageId }) => {
-    const buttonPathname = `${pathname}/${pageId}`
-    const disabled = pageId === currentPageId
-    const label = `go to page ${pageId} of section: ${pathname}`
+const PROPERTY_BUTTONS_PROPS = {
+    deployedSite: {
+        "aria-label": "go to source deployed site",
+        "children": <BiRocket />,
+    },
 
-    return (
-        <LinkButton
-            key={buttonPathname}
-            disabled={disabled}
-            href={buttonPathname}
-            aria-label={label}
-            style={{ height: "30px", width: "30px", margin: "2px" }}
-        >
-            {pageId}
-        </LinkButton>
-    )
+    repository: {
+        "aria-label": "go to source repository",
+        "children": <FiGithub />,
+    },
+    edit: {
+        "aria-label": "edit this page",
+        "children": <BsPencilSquare />,
+    },
 }
 
 const Pagination = ({ numberOfPages, currentPageId, pathname }) => {
-    const pageButtons = Array.from(Array(numberOfPages).keys()).map(key => (
-        <PageButton
-            key={pathname + key}
-            {...{ pageId: key + 1, pathname, currentPageId }}
-        />
-    ))
-    return <div className={styles.pagination}>{pageButtons}</div>
+    const pageButtons = Array.from(Array(numberOfPages).keys()).map(key => {
+        const pageId = key + 1
+        const buttonPathname = `${pathname}/${pageId}`
+        const disabled = pageId === currentPageId
+        const label = `go to page ${pageId} of section: ${pathname}`
+
+        return (
+            <LinkButton
+                key={buttonPathname}
+                disabled={disabled}
+                href={buttonPathname}
+                aria-label={label}
+                style={{ height: "30px", width: "30px", margin: "2px" }}
+            >
+                {pageId}
+            </LinkButton>
+        )
+    })
+    return <>{pageButtons}</>
 }
 
 const BUTTON_STYLE = {
@@ -70,38 +80,46 @@ const BUTTON_CONTAINER_STYLE = {
     marginBottom: "10px",
 }
 
-const HeaderSection = ({ properties, editPath }) => {
-    const { deployedSite, repository, title } = properties
+function PropertyButtons({ children }) {
+    // assumes only LinkButtons are passed as children
+    return Children.map(children, child => {
+        return cloneElement(child, { style: BUTTON_STYLE })
+    })
+}
 
-    let repositoryButton = repository && {
-        "href": repository,
-        "aria-label": "go to source repository",
-        "children": <FiGithub />,
+function Heading({ children }) {
+    return children
+}
+
+function HeaderSection({ children }) {
+    let title = null
+    let propertyButtons = null
+    let pagination = null
+
+    for (let child in children) {
+        if (children[child].type === Heading) {
+            title = children[child]
+        }
+
+        if (children[child].type === PropertyButtons) {
+            propertyButtons = children[child]
+        }
+
+        if (children[child].type === Pagination) {
+            pagination = children[child]
+            console.log(pagination)
+        }
     }
-
-    let deployedSiteButton = deployedSite && {
-        "href": deployedSite,
-        "aria-label": "go to source deployed site",
-        "children": <BiRocket />,
-    }
-
-    const editButton = {
-        "href": editUrl(editPath),
-        "aria-label": "edit this page",
-        "children": <BsPencilSquare />,
-    }
-
-    const buttons = [repositoryButton, deployedSiteButton, editButton].map(
-        props =>
-            props && <LinkOutButton style={BUTTON_STYLE} key={props.href} {...props} />
-    )
 
     return (
-        <div className={styles.header}>
-            <PrettyHeader Component="h1" style={{ marginRight: "10px" }}>
-                {title}
-            </PrettyHeader>
-            <div style={BUTTON_CONTAINER_STYLE}>{buttons}</div>
+        <div>
+            <div className={styles.header}>
+                <PrettyHeader Component="h1" style={{ marginRight: "10px" }}>
+                    {title}
+                </PrettyHeader>
+                <div style={BUTTON_CONTAINER_STYLE}>{propertyButtons}</div>
+            </div>
+            <div className={styles.pagination}>{pagination}</div>
         </div>
     )
 }
@@ -190,18 +208,38 @@ const PageLayout = ({
         </article>
     )
 
+    const { deployedSite, repository, title } = properties
+    const deployedSiteButton = deployedSite && (
+        <LinkButton href={deployedSite} {...PROPERTY_BUTTONS_PROPS.deployedSite} />
+    )
+    const repositoryButton = repository && (
+        <LinkButton href={repository} {...PROPERTY_BUTTONS_PROPS.repository} />
+    )
+    const editUrlButton = (
+        <LinkButton href={editUrl(editPath)} {...PROPERTY_BUTTONS_PROPS.edit} />
+    )
+
+    const header = (
+        <HeaderSection>
+            <Heading>{title}</Heading>
+            <PropertyButtons>
+                {deployedSiteButton}
+                {repositoryButton}
+                {editUrlButton}
+            </PropertyButtons>
+            <Pagination
+                {...{
+                    numberOfPages,
+                    currentPageId,
+                    pathname: `/${topic}/${section}`,
+                }}
+            />
+        </HeaderSection>
+    )
+
     const div1 = (
         <>
-            <HeaderSection {...{ properties, editPath }} />
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <Pagination
-                    {...{
-                        numberOfPages,
-                        currentPageId,
-                        pathname: `/${topic}/${section}`,
-                    }}
-                />
-            </div>
+            {header}
             {hasApp ? <App /> : article}
         </>
     )
