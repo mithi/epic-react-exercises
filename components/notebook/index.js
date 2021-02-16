@@ -10,7 +10,7 @@ import {
     AiOutlineRead,
 } from "../icons"
 import { SpinnerDots } from "../spinner"
-import { LinkOutButton, LinkButton } from "../button"
+import { SquareButton } from "../button"
 import Main from "../main"
 import NotebookLayout from "../main/two-sections"
 import { PrettyAnchor } from "../pretty-defaults"
@@ -34,31 +34,39 @@ const BUTTONS_PROPS = {
     deployedSite: {
         "aria-label": "go to source deployed site",
         "children": <BiRocket />,
+        "componentType": "linkOut",
+        "side": "small",
     },
 
     repository: {
         "aria-label": "go to source repository",
         "children": <FiGithub />,
+        "side": "small",
     },
     edit: {
         "aria-label": "edit this page",
         "children": <BsPencilSquare />,
+        "side": "small",
     },
     issue: {
         "aria-label": "report a bug",
         "children": <FaBug />,
+        "side": "small",
     },
     home: {
         "aria-label": "go back to main page",
         "children": <FaHome />,
+        "side": "small",
     },
     kofi: {
         "aria-label": "buy me a coffee",
         "children": <BiCoffeeTogo />,
+        "side": "small",
     },
     solution: {
         "aria-label": "view complete solution",
         "children": <AiOutlineRead />,
+        "side": "small",
     },
 }
 
@@ -115,16 +123,16 @@ const PageLayout = ({
     const notebookPageButtons = (
         <NotebookPageButtons>
             {deployedSite && (
-                <LinkOutButton href={deployedSite} {...BUTTONS_PROPS.deployedSite} />
+                <SquareButton href={deployedSite} {...BUTTONS_PROPS.deployedSite} />
             )}
             {repository && (
-                <LinkOutButton href={repository} {...BUTTONS_PROPS.repository} />
+                <SquareButton href={repository} {...BUTTONS_PROPS.repository} />
             )}
-            {hasApp && <LinkOutButton href={solutionHref} {...BUTTONS_PROPS.solution} />}
-            <LinkOutButton href={editHref} {...BUTTONS_PROPS.edit} />
-            {hasApp && <LinkOutButton href={issueHref} {...BUTTONS_PROPS.issue} />}
-            <LinkButton href="/" {...BUTTONS_PROPS.home} />
-            <LinkButton href={KOFI_URL} {...BUTTONS_PROPS.kofi} />
+            {hasApp && <SquareButton href={solutionHref} {...BUTTONS_PROPS.solution} />}
+            <SquareButton href={editHref} {...BUTTONS_PROPS.edit} />
+            {hasApp && <SquareButton href={issueHref} {...BUTTONS_PROPS.issue} />}
+            <SquareButton href="/" {...BUTTONS_PROPS.home} />
+            <SquareButton href={KOFI_URL} {...BUTTONS_PROPS.kofi} />
         </NotebookPageButtons>
     )
     const articlePlus = (
