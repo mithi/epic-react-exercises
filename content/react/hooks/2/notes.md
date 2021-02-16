@@ -7,20 +7,24 @@
 ### My Implementation
 
 ```jsx
-function Tilt({ children, setData }) {
+const vanillaTiltOptions = {
+    max: 25,
+    perspective: 150,
+}
+
+function Tilt({ children, setData, style }) {
     const divRef = useRef()
 
     useEffect(() => {
         const node = divRef.current
-        console.log(node, divRef)
         VanillaTilt.init(node, vanillaTiltOptions)
         node.addEventListener("tiltChange", event => setData(event.detail))
         return () => node.vanillaTilt.destroy()
     }, [setData])
 
     return (
-        <div>
-            <div ref={divRef}> {children} </div>
+        <div ref={divRef} {...{ style }}>
+            {children}
         </div>
     )
 }
@@ -31,9 +35,11 @@ function App() {
     return (
         <>
             <p>Touching the box will transform its perspective.</p>
-            <Tilt {...{ setData }}>
-                <TiltDataDisplay {...{ data }} />
-            </Tilt>
+            <div style={parentStyle}>
+                <Tilt style={tiltStyle}>
+                    <TiltDataDisplay {...{ data }} />
+                </Tilt>
+            </div>
         </>
     )
 }
