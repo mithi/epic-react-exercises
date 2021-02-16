@@ -20,7 +20,6 @@ const RickAndMortyCachePreview = ({ setId, id }) => {
         <SquareButton
             key={cache[i].name}
             disabled={i === id}
-            side="small"
             onClick={() => setId(i)}
             aria-label={`load ${cache[i].namel}`}
             componentType="onClick"

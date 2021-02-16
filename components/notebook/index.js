@@ -35,38 +35,31 @@ const BUTTONS_PROPS = {
         "aria-label": "go to source deployed site",
         "children": <BiRocket />,
         "componentType": "linkOut",
-        "side": "small",
     },
 
     repository: {
         "aria-label": "go to source repository",
         "children": <FiGithub />,
-        "side": "small",
     },
     edit: {
         "aria-label": "edit this page",
         "children": <BsPencilSquare />,
-        "side": "small",
     },
     issue: {
         "aria-label": "report a bug",
         "children": <FaBug />,
-        "side": "small",
     },
     home: {
         "aria-label": "go back to main page",
         "children": <FaHome />,
-        "side": "small",
     },
     kofi: {
         "aria-label": "buy me a coffee",
         "children": <BiCoffeeTogo />,
-        "side": "small",
     },
     solution: {
         "aria-label": "view complete solution",
         "children": <AiOutlineRead />,
-        "side": "small",
     },
 }
 

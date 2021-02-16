@@ -20,7 +20,6 @@ const Pagination = ({ numberOfPages, currentPageId, pathname }) => {
                 disabled={disabled}
                 href={buttonPathname}
                 aria-label={label}
-                side="small"
             >
                 {pageId}
             </SquareButton>
