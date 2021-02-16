@@ -2,15 +2,11 @@ import Link from "next/link"
 import { useTheme } from "hooks"
 import { useButtonThemeClasses, ButtonThemeProvider } from "providers/theme"
 
-const TOTALLY_CENTERED = {
+const DEFAULT_STYLE = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
-}
-
-const AUTO_SIZE_STYLE = {
-    ...TOTALLY_CENTERED,
     flexShrink: 0,
     textDecoration: "none",
     borderStyle: "none",
@@ -32,7 +28,7 @@ const useDefaultButtonStyle = (style, disabled, useBgPrimaryColor, noDisabledBor
     const border = disabled && !noDisabledBorder ? disabledBorder : null
 
     return {
-        ...AUTO_SIZE_STYLE,
+        ...DEFAULT_STYLE,
         ...border,
         fontFamily: headerFont,
         backgroundColor: useBgPrimaryColor ? primaryColor : null,
@@ -40,126 +36,87 @@ const useDefaultButtonStyle = (style, disabled, useBgPrimaryColor, noDisabledBor
     }
 }
 
-const LinkButtonInner = ({
-    children,
-    href,
-    disabled,
-    className,
-    style,
-    ...otherProps
-}) => {
-    className = useButtonThemeClasses(className, disabled)
-    style = useDefaultButtonStyle(style, disabled)
-    return (
-        <Link {...{ href }}>
-            <a style={{ textDecoration: "none" }}>
-                <button {...{ disabled, className, style, ...otherProps }} tabIndex="-1">
-                    {children}
-                </button>
-            </a>
-        </Link>
+const getComponent = (onClick, href, type) => {
+    if (onClick) {
+        return OnClickButton
+    } else if (href && href[0] === "/") {
+        return LinkButton
+    } else if (href && href.slice(0, 4) === "http") {
+        return LinkOutButton
+    } else if (type === "submit") {
+        return OnClickButton
+    }
+    throw new Error(
+        "Button must have a type, href or onClick prop, href must either start with a slash or http, type must be submit"
     )
 }
 
-const LinkOutButtonInner = ({ children, href, className, style, ...otherProps }) => {
-    className = useButtonThemeClasses(className)
-    style = useDefaultButtonStyle(style, false)
-    return (
-        <a {...{ href }} target="_blank" rel="noopener noreferrer">
-            <button {...{ className, style, ...otherProps }} tabIndex="-1">
-                {children}
-            </button>
+const LinkButton = ({ href, ...otherProps }) => (
+    <Link {...{ href }}>
+        <a style={{ textDecoration: "none" }}>
+            <button {...otherProps} tabIndex="-1" />
         </a>
-    )
-}
+    </Link>
+)
 
-const OnClickButtonInner = ({
-    children,
-    onClick,
+const LinkOutButton = ({ href, ...otherProps }) => (
+    <a {...{ href }} target="_blank" rel="noopener noreferrer">
+        <button {...otherProps} tabIndex="-1" />
+    </a>
+)
+
+const OnClickButton = props => <button {...props} />
+
+const ButtonInner = ({
     disabled,
     className,
     style,
+    onClick,
+    type,
+    href,
     useBgPrimaryColor,
     isInvertedColor,
     noDisabledBorder,
     ...otherProps
 }) => {
+    const Component = getComponent(onClick, href, type)
     className = useButtonThemeClasses(className, disabled, isInvertedColor)
     style = useDefaultButtonStyle(style, disabled, useBgPrimaryColor, noDisabledBorder)
-    return (
-        <button {...{ onClick, disabled, className, style, ...otherProps }}>
-            {children}
-        </button>
-    )
+    return <Component {...{ className, style, onClick, href, ...otherProps }} />
 }
 
-const DefaultButton = ({ onClick, children, style, disabled, ...otherProps }) => (
+const ColoredButton = props => (
     <ButtonThemeProvider>
-        <OnClickButton
+        <ButtonInner
             useBgPrimaryColor={true}
             isInvertedColor={true}
             noDisabledBorder={true}
-            {...{ onClick, style, disabled, ...otherProps }}
-        >
-            {children}
-        </OnClickButton>
+            {...props}
+        />
     </ButtonThemeProvider>
 )
 
-const LinkButton = props => (
+const PlainButton = props => (
     <ButtonThemeProvider>
-        <LinkButtonInner {...props} />
-    </ButtonThemeProvider>
-)
-
-const LinkOutButton = props => (
-    <ButtonThemeProvider>
-        <LinkOutButtonInner {...props} />
-    </ButtonThemeProvider>
-)
-
-const OnClickButton = props => (
-    <ButtonThemeProvider>
-        <OnClickButtonInner {...props} />
+        <ButtonInner
+            useBgPrimaryColor={false}
+            isInvertedColor={false}
+            noDisabledBorder={false}
+            {...props}
+        />
     </ButtonThemeProvider>
 )
 
 // size: "small", "big", "40px"
-// componentType: linkOut, onClick, link
 const SMALL_SIDE = "32px"
 const LARGE_SIDE = "50px"
 const SQUARE_BUTTON_STYLE = {
-    ...TOTALLY_CENTERED,
     borderRadius: "25%",
     padding: "2px",
 }
 
 const SquareButton = ({ side, style, ...otherProps }) => {
-    const { onClick, href } = otherProps
-
-    let Component = null
-    if (onClick) {
-        Component = OnClickButton
-    } else if (href && href[0] === "/") {
-        Component = LinkButton
-    } else if (href && href.slice(0, 4) === "http") {
-        Component = LinkOutButton
-    } else {
-        throw new Error(
-            "SquareButton must have an href or onClick prop, href must either start with a slash or http"
-        )
-    }
-
-    if (side === "large") {
-        style = {
-            ...SQUARE_BUTTON_STYLE,
-            height: LARGE_SIDE,
-            width: LARGE_SIDE,
-            margin: "10px",
-            fontSize: "20px",
-            ...style,
-        }
-    } else if (side === "small") {
+    if (!side || side === "small") {
         style = {
             ...SQUARE_BUTTON_STYLE,
             height: SMALL_SIDE,
@@ -168,7 +125,16 @@ const SquareButton = ({ side, style, ...otherProps }) => {
             fontSize: "18px",
             ...style,
         }
-    } else {
+    } else if (side === "large") {
+        style = {
+            ...SQUARE_BUTTON_STYLE,
+            height: LARGE_SIDE,
+            width: LARGE_SIDE,
+            margin: "10px",
+            fontSize: "20px",
+            ...style,
+        }
+    } else if (side.slice(-2) === "px") {
         style = {
             ...SQUARE_BUTTON_STYLE,
             height: side,
@@ -176,9 +142,14 @@ const SquareButton = ({ side, style, ...otherProps }) => {
             margin: "3px",
             ...style,
         }
+    } else {
+        throw new Error(
+            `Square button must have a side equal to a falsy, "small", "large", or a number followed by "px" indicating length in pixels`
+        )
+        // small
     }
 
-    return <Component {...{ style, ...otherProps }} />
+    return <PlainButton {...{ style, ...otherProps }} />
 }
 
-export { LinkOutButton, OnClickButton, LinkButton, DefaultButton, SquareButton }
+export { SquareButton, ColoredButton, PlainButton }
