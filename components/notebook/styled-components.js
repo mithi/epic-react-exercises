@@ -1,5 +1,5 @@
 import { Children, cloneElement } from "react"
-import { LinkButton } from "../button"
+import { SquareButton } from "../button"
 
 const PAGINATION_STYLE = {
     display: "flex",
@@ -15,25 +15,18 @@ const Pagination = ({ numberOfPages, currentPageId, pathname }) => {
         const label = `go to page ${pageId} of section: ${pathname}`
 
         return (
-            <LinkButton
+            <SquareButton
                 key={buttonPathname}
                 disabled={disabled}
                 href={buttonPathname}
                 aria-label={label}
-                style={{ height: "30px", width: "30px", margin: "3px" }}
+                side="small"
             >
                 {pageId}
-            </LinkButton>
+            </SquareButton>
         )
     })
     return <div style={PAGINATION_STYLE}>{pageButtons}</div>
-}
-
-const BUTTON_STYLE = {
-    margin: "3px",
-    width: "30px",
-    height: "30px",
-    fontSize: "15px",
 }
 
 const BUTTON_CONTAINER_STYLE = {
@@ -44,25 +37,25 @@ const BUTTON_CONTAINER_STYLE = {
 }
 
 function NotebookPageButtons({ children }) {
-    // assumes only LinkButton or LinkOutButtons or falsy are passed as children
+    // assumes only buttons or falsy are passed as children
     const styledChildren = Children.map(children, child => {
         if (!child) {
             return null
         }
-        return cloneElement(child, { style: BUTTON_STYLE })
+        return child
     })
 
-    return <div style={{ ...BUTTON_CONTAINER_STYLE }}>{styledChildren}</div>
+    return <div style={BUTTON_CONTAINER_STYLE}>{styledChildren}</div>
+}
+
+const LIST_STYLE = {
+    listStyleType: "none",
+    margin: "0",
+    padding: "2px 0",
+    lineHeight: "1.1",
 }
 
 const CallToActionUl = ({ children }) => {
-    const LIST_STYLE = {
-        listStyleType: "none",
-        margin: "0",
-        padding: "2px 0",
-        lineHeight: "1.1",
-    }
-
     // assumes only "li" are passed as children
     const styledChildren = Children.map(children, child => {
         return cloneElement(child, { style: LIST_STYLE })
