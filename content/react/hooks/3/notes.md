@@ -16,26 +16,36 @@ My Top Level Component
 
 ```jsx
 function App() {
-    const [submittedName, setSubmittedName] = useState("")
-    const [incompleteName, setIncompleteName] = useState("")
+    const [submittedValue, onSubmit] = useState("")
+    const [incompleteValue, setIncompleteValue] = useState("")
 
     const resetFunction = () => {
-        setIncompleteName("")
-        setSubmittedName("")
+        setIncompleteValue("")
+        onSubmit("")
+    }
+
+    function buttonSubmit(value) {
+        setIncompleteValue(value)
+        onSubmit(value)
     }
 
     return (
         <>
-            <PokemonSearchbar
-                pokemonName={submittedName}
-                onSubmit={name => setSubmittedName(name)}
-                {...{ incompleteName, setIncompleteName }}
-            />
+            <SmallSpan>
+                Out of ideas? Try{" "}
+                <PokemonSuggestion {...{ name: "Pikachu", buttonSubmit }} />,{" "}
+                <PokemonSuggestion {...{ name: "Charizard", buttonSubmit }} />, or{" "}
+                <PokemonSuggestion {...{ name: "Ninetales", buttonSubmit }} />
+            </SmallSpan>
+            <SingleFieldForm {...{ setIncompleteValue, incompleteValue, onSubmit }}>
+                <PrettyInputField placeholder="Which pokemon?" />
+                <SubmitButton>Fetch!</SubmitButton>
+            </SingleFieldForm>
             <CustomErrorBoundary
                 FallbackComponent={PokemonErrorView}
-                {...{ resetFunction, key: submittedName }}
+                {...{ resetFunction, key: submittedValue }}
             >
-                <PokemonInfoCard pokemonName={submittedName} />
+                <PokemonInfoCard pokemonName={submittedValue} />
             </CustomErrorBoundary>
         </>
     )

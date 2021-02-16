@@ -10,12 +10,12 @@ import {
     AiOutlineRead,
 } from "../icons"
 import { SpinnerDots } from "../spinner"
-import { LinkOutButton, LinkButton } from "../button"
+import { SquareButton } from "../button"
 import Main from "../main"
 import NotebookLayout from "../main/two-sections"
 import { PrettyAnchor } from "../pretty-defaults"
 import { BigHeadNotice } from "../big-head-girl"
-import { Pagination, NotebookPageButtons, CallToActionUl } from "./styled-components"
+import { Pagination, CallToActionUl } from "./styled-components"
 import { PrettyHeader } from "../pretty-defaults"
 
 const EPIC_NOTES_REPO_URL = "https://github.com/mithi/epic-notes"
@@ -35,7 +35,6 @@ const BUTTONS_PROPS = {
         "aria-label": "go to source deployed site",
         "children": <BiRocket />,
     },
-
     repository: {
         "aria-label": "go to source repository",
         "children": <FiGithub />,
@@ -113,26 +112,26 @@ const PageLayout = ({
     const { deployedSite, repository, title } = properties
 
     const notebookPageButtons = (
-        <NotebookPageButtons>
+        <div style={{ display: "flex", margin: "10px 0 -15px 0" }}>
             {deployedSite && (
-                <LinkOutButton href={deployedSite} {...BUTTONS_PROPS.deployedSite} />
+                <SquareButton href={deployedSite} {...BUTTONS_PROPS.deployedSite} />
             )}
             {repository && (
-                <LinkOutButton href={repository} {...BUTTONS_PROPS.repository} />
+                <SquareButton href={repository} {...BUTTONS_PROPS.repository} />
             )}
-            {hasApp && <LinkOutButton href={solutionHref} {...BUTTONS_PROPS.solution} />}
-            <LinkOutButton href={editHref} {...BUTTONS_PROPS.edit} />
-            {hasApp && <LinkOutButton href={issueHref} {...BUTTONS_PROPS.issue} />}
-            <LinkButton href="/" {...BUTTONS_PROPS.home} />
-            <LinkButton href={KOFI_URL} {...BUTTONS_PROPS.kofi} />
-        </NotebookPageButtons>
+            {hasApp && <SquareButton href={solutionHref} {...BUTTONS_PROPS.solution} />}
+            <SquareButton href={editHref} {...BUTTONS_PROPS.edit} />
+            {hasApp && <SquareButton href={issueHref} {...BUTTONS_PROPS.issue} />}
+            <SquareButton href="/" {...BUTTONS_PROPS.home} />
+            <SquareButton href={KOFI_URL} {...BUTTONS_PROPS.kofi} />
+        </div>
     )
     const articlePlus = (
         <>
             {hasApp && callToActionBox}
             {hasApp && notebookPageButtons}
             <article>{notes}</article>
-            <div style={{ display: "flex", justifyContent: "center" }}>
+            <div style={{ display: "flex", justifyContent: "center", margin: "20px" }}>
                 {notebookPageButtons}
             </div>
         </>
@@ -146,7 +145,7 @@ const PageLayout = ({
             <Pagination
                 {...{
                     numberOfPages,
-                    currentPageId: pageId,
+                    currentPageId: Number(pageId),
                     pathname: `/${topic}/${section}`,
                 }}
             />

@@ -108,7 +108,6 @@ const App = () => {
     return (
         <div
             style={{
-                marginTop: "0px",
                 display: "flex",
                 flexDirection: "column",
             }}

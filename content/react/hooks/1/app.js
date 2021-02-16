@@ -1,5 +1,5 @@
 import { useStickyState } from "hooks"
-import { DefaultButton, OnClickButton } from "components/button"
+import { ColoredButton, SquareButton } from "components/button"
 import { PrettyHeader } from "components/pretty-defaults"
 const X_PLAYER = "X"
 const O_PLAYER = "O"
@@ -7,20 +7,21 @@ const O_PLAYER = "O"
 const Board = ({ currentBoard, onPlayerMove, disableButtons }) => {
     const square = i => {
         const player = currentBoard[i]
-        const disabled = disableButtons || player ? true : false
-        const onClick = disabled ? null : () => onPlayerMove(i)
-        const children = player ? player : "."
-        const style = { fontSize: "50px", height: "75px", width: "75px", margin: "5px" }
-        const label = `TictacToe button # ${i}`
         return (
-            <OnClickButton {...{ onClick, disabled, style }} aria-label={label}>
-                {children}
-            </OnClickButton>
+            <SquareButton
+                onClick={() => onPlayerMove(i)}
+                disabled={disableButtons || player ? true : false}
+                aria-label={`TictacToe button # ${i}`}
+                side="75px"
+                style={{ margin: "4px", fontSize: "50px" }}
+            >
+                {player ? player : "."}
+            </SquareButton>
         )
     }
 
     return (
-        <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
+        <div style={{ display: "flex", justifyContent: "center" }}>
             <table>
                 <tbody>
                     <tr>
@@ -45,49 +46,34 @@ const Board = ({ currentBoard, onPlayerMove, disableButtons }) => {
 }
 
 const BoardStatus = ({ winnerIfAny, gameFinished, playerToMove }) => {
-    let children = null
+    let children = `Player ${playerToMove}, it's your turn!`
     if (gameFinished) {
         children = winnerIfAny ? `Winner: Player ${winnerIfAny} 🎉🥳` : `Nobody won.`
-    } else {
-        children = `Player ${playerToMove}, it's your turn!`
     }
-    return (
-        <div style={{ display: "flex", justifyContent: "center" }}>
-            <PrettyHeader style={{ fontSize: "30px", margin: "20px" }} Component={"div"}>
-                {children}
-            </PrettyHeader>
-        </div>
-    )
-}
 
-const RestartButton = ({ onRestart }) => {
     return (
-        <div style={{ display: "flex", width: "100%", justifyContent: "center" }}>
-            <DefaultButton
-                disabled={!onRestart}
-                useBgPrimaryColor={true}
-                onClick={onRestart}
-                aria-label="restart tictactoe game"
-            >
-                Restart!
-            </DefaultButton>
-        </div>
+        <PrettyHeader
+            style={{ fontSize: "30px", margin: "10px", textAlign: "center" }}
+            Component={"div"}
+        >
+            {children}
+        </PrettyHeader>
     )
 }
 
 const MoveHistory = ({ numberOfSnapshots, onLoadBoardSnapshot, currentSnapshotId }) => {
-    const buttonIterator = Array(numberOfSnapshots).fill(null)
-    const buttons = buttonIterator.map((_, i) => {
-        const disabled = i === currentSnapshotId
-        const onClick = disabled ? null : () => onLoadBoardSnapshot(i)
-        const style = { width: "30px", height: "30px", margin: "3px" }
-        const label = `go to board state move # ${i}`
-        return (
-            <OnClickButton key={i} {...{ onClick, disabled, style }} aria-label={label}>
+    const buttons = Array(numberOfSnapshots)
+        .fill(null)
+        .map((_, i) => (
+            <SquareButton
+                key={i}
+                aria-label={`go to board state move # ${i}`}
+                disabled={i === currentSnapshotId}
+                onClick={() => onLoadBoardSnapshot(i)}
+            >
                 {i}
-            </OnClickButton>
-        )
-    })
+            </SquareButton>
+        ))
 
     return (
         <>
@@ -95,7 +81,6 @@ const MoveHistory = ({ numberOfSnapshots, onLoadBoardSnapshot, currentSnapshotId
                 style={{
                     display: "flex",
                     flexWrap: "wrap",
-                    alignItems: "center",
                     margin: "10px",
                     justifyContent: "center",
                 }}
@@ -190,7 +175,6 @@ const App = () => {
 
     const onRestart = () => setState(INITIAL_STATE)
 
-    const restart = numberOfSnapshots === 1 ? null : onRestart
     return (
         <>
             <BoardStatus {...{ winnerIfAny, gameFinished, playerToMove }} />
@@ -198,7 +182,15 @@ const App = () => {
             <MoveHistory
                 {...{ numberOfSnapshots, onLoadBoardSnapshot, currentSnapshotId }}
             />
-            <RestartButton {...{ onRestart: restart }} />
+            <ColoredButton
+                disabled={numberOfSnapshots === 1}
+                useBgPrimaryColor={true}
+                onClick={onRestart}
+                aria-label="restart tictactoe game"
+                style={{ margin: "auto" }}
+            >
+                Restart!
+            </ColoredButton>
         </>
     )
 }

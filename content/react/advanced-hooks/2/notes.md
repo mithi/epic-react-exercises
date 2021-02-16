@@ -27,17 +27,20 @@ const App = () => {
         useCacheOnlyWhenNotReloading: submitted ? false : true,
     })
 
+    // Leave this debug statement for now
+    useEffect(() => console.log("current InputField Value", inputFieldValue), [
+        inputFieldValue,
+    ])
+
     const setInputField = value =>
         setState({ submitted: false, inputFieldValue: value, submittedValue })
 
-    const onClickReload = e => {
-        e.preventDefault()
+    const onClickReload = () => {
         setState({ submitted: true, submittedValue: inputFieldValue, inputFieldValue })
         reload()
     }
 
-    const onClickFetch = e => {
-        e.preventDefault()
+    const onClickFetch = () => {
         setState({ submitted: true, submittedValue: inputFieldValue, inputFieldValue })
     }
     const setRandomValue = () => {
@@ -56,7 +59,7 @@ const App = () => {
     } else if (status === "idle") {
         bottomMessage = <GenericMessage>Which Rick and Morty Character?</GenericMessage>
     } else if (status === "pending") {
-        bottomMessage = <GenericMessage> This will not take long...</GenericMessage>
+        bottomMessage = <GenericMessage> This won{"'"}t take long...</GenericMessage>
     }
 
     let isReloadSubmitType = ["rejected", "resolved"].includes(status) ? true : false
@@ -68,23 +71,27 @@ const App = () => {
 
     return (
         <div>
-            <RickAndMortySearchbar
-                {...{
-                    onSubmitHandler,
-                    setInputField,
-                    inputFieldValue,
-                    disabledInputField: isPending,
-                    bottomMessage,
-                }}
+            <SingleFieldForm
+                onSubmit={onSubmitHandler}
+                setIncompleteValue={setInputField}
+                incompleteValue={inputFieldValue}
             >
-                <SubmitButton
-                    onClick={onSubmitHandler}
-                    disabled={isPending || !inputFieldValue}
-                >
+                <PositiveIntegerInputField
+                    disabled={isPending}
+                    placeholder="pick a number"
+                />
+                <SubmitButton disabled={isPending || !inputFieldValue}>
                     {submitButtonText}
                 </SubmitButton>
-                <RandomButton onClick={setRandomValue} disabled={isPending} />
-            </RickAndMortySearchbar>
+                <SquareButton
+                    aria-label="fetch a random rick and morty character"
+                    onClick={setRandomValue}
+                    disabled={isPending}
+                >
+                    <GiPerspectiveDiceSixFacesRandom />
+                </SquareButton>
+            </SingleFieldForm>
+            {bottomMessage}
             <RickAndMortyInfoCard {...{ status, error, data }} />
             <RickAndMortyCachePreview
                 {...{ setId: setInputField, id: inputFieldValue }}
@@ -92,12 +99,6 @@ const App = () => {
         </div>
     )
 }
-
-const Home = () => (
-    <RickAndMortyCacheProvider>
-        <App />
-    </RickAndMortyCacheProvider>
-)
 ```
 
 CachePreview
@@ -118,7 +119,7 @@ const RickAndMortyCachePreview = ({ setId, id }) => {
 
     const cacheKeys = Object.keys(cache)
     const buttons = cacheKeys.map(i => (
-        <CacheButton
+        <button
             key={cache[i].name}
             imageUrl={cache[i].imageUrl}
             onClick={() => setId(i)}
@@ -129,19 +130,19 @@ const RickAndMortyCachePreview = ({ setId, id }) => {
     let removeAction = null
     if (id && cache[id]) {
         const removeText = `Remove "${cache[id].name}" (#${id}) from cache?`
-        removeAction = <CacheAction onClick={removeId}>{removeText}</CacheAction>
+        removeAction = <button onClick={removeId}>{removeText}</button>
     }
 
     let clearAction = null
     if (cacheKeys.length !== 0) {
-        clearAction = <CacheAction onClick={clearCache}>Clear cache?</CacheAction>
+        clearAction = <button onClick={clearCache}>Clear cache?</button>
     }
 
     return (
         <>
             {removeAction}
             {clearAction}
-            <div>{buttons}</div>
+            {buttons}
         </>
     )
 }

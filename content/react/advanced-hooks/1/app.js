@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react"
 import { delayedFetchRickAndMorty } from "fetch-utils"
-import { OnClickButton } from "components/button"
+import { SquareButton } from "components/button"
 import { GiPerspectiveDiceSixFacesRandom } from "components/icons"
-import {
-    BorderedDiv,
-    PositiveIntegerSearchbar,
-    SmallSpan,
-} from "components/pretty-defaults"
+import { BorderedDiv, SmallSpan } from "components/pretty-defaults"
 import { ErrorView, PendingView, IdleView } from "./components/views"
 import InfoView from "./components/info-view"
 import useSafeAsync from "./components/use-async"
+import {
+    PositiveIntegerInputField,
+    SubmitButton,
+    SingleFieldForm,
+} from "components/single-field-form"
 
 /*
 This`RickAndMortyInfoCard` uses a `useSafeAsync` hook that's responsible for managing the state,
@@ -89,46 +90,31 @@ function App() {
             ["resolved", "rejected"].includes(fetchStatus))
 
     return (
-        <div style={{ margin: "20px" }}>
-            <SmallSpan style={{ lineHeight: "0.85" }}>
-                ❗ Only positive integers from 1 to{" "}
-                {NUMBER_OF_RICK_AND_MORTY_CHARACTERS - 1} correspond to a character.
-            </SmallSpan>
-
-            <div
-                style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "flex-start",
-                    width: "100%",
-                }}
+        <>
+            <SingleFieldForm
+                onSubmit={value => setSubmittedValue(value)}
+                {...{ incompleteValue, setIncompleteValue }}
             >
-                <PositiveIntegerSearchbar
-                    value={submittedValue}
-                    onSubmit={value => setSubmittedValue(value)}
-                    {...{ incompleteValue, setIncompleteValue }}
-                    placeholder={"Pick a number!"}
-                    disableButton={submitButtonDisabled}
-                    disableInputField={disabledByPending}
-                    submitButtonStyle={{ height: "35px", width: "70px", margin: "3px" }}
-                    inputFieldStyle={{ height: "35px", width: "130px", margin: "3px" }}
-                    submitButtonContent="Fetch"
-                />
-                <OnClickButton
-                    onClick={setRandomValue}
-                    style={{ height: "35px", width: "35px", margin: "3px" }}
+                <PositiveIntegerInputField
                     disabled={disabledByPending}
+                    placeholder={"Pick a number!"}
+                ></PositiveIntegerInputField>
+                <SubmitButton disabled={submitButtonDisabled}>Fetch</SubmitButton>
+
+                <SquareButton
                     aria-label="fetch a random rick and morty character"
+                    onClick={setRandomValue}
+                    disabled={disabledByPending}
                 >
                     <GiPerspectiveDiceSixFacesRandom />
-                </OnClickButton>
-            </div>
-
+                </SquareButton>
+            </SingleFieldForm>
+            <SmallSpan>Which Rick and Morty Character?</SmallSpan>
             <RickAndMortyInfoCard
                 characterId={submittedValue}
                 getStatus={setFetchStatus}
             />
-        </div>
+        </>
     )
 }
 
@@ -136,11 +122,11 @@ function AppWithUnmountCheckbox() {
     const [mountApp, setMountApp] = useState(true)
 
     return (
-        <div>
+        <>
             <BorderedDiv
                 style={{
-                    margin: "10px",
-                    padding: "10px",
+                    padding: "5px",
+                    margin: "15px",
                     borderStyle: "dashed",
                 }}
             >
@@ -150,11 +136,11 @@ function AppWithUnmountCheckbox() {
                         checked={mountApp}
                         onChange={e => setMountApp(e.target.checked)}
                     />
-                    <span style={{ fontSize: "15px" }}> Mount the search bar</span>
+                    <SmallSpan> Mount the search bar</SmallSpan>
                 </label>
             </BorderedDiv>
             {mountApp ? <App /> : null}
-        </div>
+        </>
     )
 }
 

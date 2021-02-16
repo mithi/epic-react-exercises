@@ -20,13 +20,12 @@ const Code = ({ children, language }) => {
                 style={{
                     margin: "10px",
                     padding: "10px",
-                    borderStyle: "dotted",
-                    width: "auto",
-                    borderRadius: "5px",
+                    borderStyle: "dashed",
+                    borderRadius: "10px",
                 }}
             >
                 <OnClickText onClick={() => setShowCode(!showCode)}>
-                    <PrettyHeader style={{ paddingLeft: "5px", margin: "10px" }}>
+                    <PrettyHeader style={{ margin: "10px" }}>
                         {showCode ? "Hide Code" : "Show Code"}
                     </PrettyHeader>
                 </OnClickText>

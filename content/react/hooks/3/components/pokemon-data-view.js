@@ -1,4 +1,4 @@
-import { DefaultButton } from "components/button"
+import { ColoredButton } from "components/button"
 import { PrettyHeader, RoundedImage } from "components/pretty-defaults"
 import { useTheme } from "hooks"
 import { SpinnerDots } from "components/spinner"
@@ -91,9 +91,9 @@ function PokemonErrorView({ error, resetFunction }) {
         <div role="alert" style={{ fontSize: "15px", padding: "10px" }}>
             <span>{error.message}</span>
             <div style={TOTALLY_CENTERED}>
-                <DefaultButton onClick={resetFunction} style={{ backgroundColor: "red" }}>
-                    <PrettyHeader> Try again </PrettyHeader>
-                </DefaultButton>
+                <ColoredButton onClick={resetFunction} style={{ backgroundColor: "red" }}>
+                    Try again
+                </ColoredButton>
                 <div> This error was caught by the error boundary!</div>
             </div>
         </div>

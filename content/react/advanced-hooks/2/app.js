@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react"
-import { PrettyInputField } from "components/pretty-defaults"
+import { GiPerspectiveDiceSixFacesRandom } from "components/icons"
+import { SquareButton } from "components/button"
 import {
     RickAndMortyInfoCard,
     FETCH_BUTTON_CONTENT,
     RELOAD_BUTTON_CONTENT,
-    RandomButton,
-    SubmitButton,
     SuccessMessage,
     GenericMessage,
     ErrorMessage,
@@ -16,43 +15,16 @@ import {
     useRickAndMorty,
     RickAndMortyCacheProvider,
 } from "./components/use-rick-and-morty"
+import {
+    PositiveIntegerInputField,
+    SingleFieldForm,
+    SubmitButton,
+} from "components/single-field-form"
 
 const NUMBER_OF_RICK_AND_MORTY_CHARACTERS = 672
 const randomIntegerBetween = (x, y) => Math.floor(Math.random() * y) + x
 const getRandomRickAndMortyCharacterId = () =>
     randomIntegerBetween(1, NUMBER_OF_RICK_AND_MORTY_CHARACTERS)
-
-const RickAndMortySearchbar = ({
-    onSubmitHandler,
-    setInputField,
-    inputFieldValue,
-    disabledInputField,
-    children,
-    bottomMessage,
-    ...otherProps
-}) => {
-    return (
-        <>
-            <div style={{ display: "flex", alignItems: "center" }} {...otherProps}>
-                <form onSubmit={onSubmitHandler} style={{ marginRight: "5px" }}>
-                    <PrettyInputField
-                        type="number"
-                        pattern="^[0-9]"
-                        min="1"
-                        step="1"
-                        placeholder={"pick a number"}
-                        value={inputFieldValue}
-                        onChange={e => setInputField(e.target.value)}
-                        style={{ width: "100%", height: "35px" }}
-                        disabled={disabledInputField}
-                    />
-                </form>
-                {children}
-            </div>
-            {bottomMessage}
-        </>
-    )
-}
 
 const App = () => {
     const [{ inputFieldValue, submitted, submittedValue }, setState] = useState({
@@ -72,14 +44,12 @@ const App = () => {
     const setInputField = value =>
         setState({ submitted: false, inputFieldValue: value, submittedValue })
 
-    const onClickReload = e => {
-        e.preventDefault()
+    const onClickReload = () => {
         setState({ submitted: true, submittedValue: inputFieldValue, inputFieldValue })
         reload()
     }
 
-    const onClickFetch = e => {
-        e.preventDefault()
+    const onClickFetch = () => {
         setState({ submitted: true, submittedValue: inputFieldValue, inputFieldValue })
     }
     const setRandomValue = () => {
@@ -110,23 +80,27 @@ const App = () => {
 
     return (
         <div>
-            <RickAndMortySearchbar
-                {...{
-                    onSubmitHandler,
-                    setInputField,
-                    inputFieldValue,
-                    disabledInputField: isPending,
-                    bottomMessage,
-                }}
+            <SingleFieldForm
+                onSubmit={onSubmitHandler}
+                setIncompleteValue={setInputField}
+                incompleteValue={inputFieldValue}
             >
-                <SubmitButton
-                    onClick={onSubmitHandler}
-                    disabled={isPending || !inputFieldValue}
-                >
+                <PositiveIntegerInputField
+                    disabled={isPending}
+                    placeholder="pick a number"
+                />
+                <SubmitButton disabled={isPending || !inputFieldValue}>
                     {submitButtonText}
                 </SubmitButton>
-                <RandomButton onClick={setRandomValue} disabled={isPending} />
-            </RickAndMortySearchbar>
+                <SquareButton
+                    aria-label="fetch a random rick and morty character"
+                    onClick={setRandomValue}
+                    disabled={isPending}
+                >
+                    <GiPerspectiveDiceSixFacesRandom />
+                </SquareButton>
+            </SingleFieldForm>
+            {bottomMessage}
             <RickAndMortyInfoCard {...{ status, error, data }} />
             <RickAndMortyCachePreview
                 {...{ setId: setInputField, id: inputFieldValue }}
@@ -140,4 +114,5 @@ const Home = () => (
         <App />
     </RickAndMortyCacheProvider>
 )
+
 export default Home

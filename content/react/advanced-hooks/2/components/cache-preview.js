@@ -1,31 +1,6 @@
 import { OnClickText, SmallSpan, RoundedImage } from "components/pretty-defaults"
-import { OnClickButton } from "components/button"
+import { SquareButton } from "components/button"
 import { useRickAndMortyCache } from "./use-rick-and-morty"
-
-const CacheButton = ({ label, imageUrl, onClick, active }) => (
-    <OnClickButton
-        disabled={active}
-        style={{
-            width: "35px",
-            height: "35px",
-            margin: "2px",
-            borderRadius: "5px",
-        }}
-        onClick={onClick}
-        aria-label={`load ${label}`}
-    >
-        <RoundedImage src={imageUrl} height={30} width={30} />
-    </OnClickButton>
-)
-
-const CacheAction = ({ onClick, children }) => (
-    <>
-        <OnClickText onClick={onClick}>
-            <SmallSpan>{children}</SmallSpan>
-        </OnClickText>
-        <br />
-    </>
-)
 
 const RickAndMortyCachePreview = ({ setId, id }) => {
     const { cache, dispatch } = useRickAndMortyCache()
@@ -42,30 +17,40 @@ const RickAndMortyCachePreview = ({ setId, id }) => {
 
     const cacheKeys = Object.keys(cache)
     const buttons = cacheKeys.map(i => (
-        <CacheButton
+        <SquareButton
             key={cache[i].name}
-            label={cache[i].name}
-            imageUrl={cache[i].imageUrl}
+            disabled={i === id}
             onClick={() => setId(i)}
-            active={i === id}
-        />
+            aria-label={`load ${cache[i].namel}`}
+        >
+            <RoundedImage src={cache[i].imageUrl} height={30} width={30} />
+        </SquareButton>
     ))
 
     let removeAction = null
     if (id && cache[id]) {
-        const removeText = `Remove "${cache[id].name}" (#${id}) from cache?`
-        removeAction = <CacheAction onClick={removeId}>{removeText}</CacheAction>
+        removeAction = (
+            <OnClickText onClick={removeId}>
+                <SmallSpan>{`Remove "${cache[id].name}" (#${id}) from cache?`}</SmallSpan>
+            </OnClickText>
+        )
     }
 
     let clearAction = null
     if (cacheKeys.length !== 0) {
-        clearAction = <CacheAction onClick={clearCache}>Clear cache?</CacheAction>
+        clearAction = (
+            <OnClickText onClick={clearCache}>
+                <SmallSpan>Clear cache?</SmallSpan>
+            </OnClickText>
+        )
     }
 
     return (
         <>
             {removeAction}
+            <br />
             {clearAction}
+            <br />
             <div style={{ display: "flex", flexWrap: "wrap" }}>{buttons}</div>
         </>
     )

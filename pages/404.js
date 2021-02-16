@@ -1,6 +1,6 @@
 import Main from "components/main"
 import { PrettyHeader } from "components/pretty-defaults"
-import { LinkOutButton, LinkButton } from "components/button"
+import { SquareButton } from "components/button"
 import { FaBug, FaHome } from "components/icons"
 
 export default function FourOhfour() {
@@ -21,23 +21,19 @@ export default function FourOhfour() {
                         alignItems: "flex-start",
                     }}
                 >
-                    <PrettyHeader Component={"h1"} style={{ fontSize: "100px" }}>
+                    <PrettyHeader Component="h1" style={{ fontSize: "100px" }}>
                         404
                     </PrettyHeader>
-                    <LinkOutButton
-                        aria-label={"report a bug"}
+                    <SquareButton
+                        aria-label="report a bug"
                         href="https://github.com/mithi/epic-react-notes/issues/new?title=Unexpected%20404:%20file%20not%20found"
-                        style={{ margin: "3px" }}
+                        side="large"
                     >
                         <FaBug />
-                    </LinkOutButton>
-                    <LinkButton
-                        aria-label={"home"}
-                        href="/"
-                        style={{ margin: "3px", width: "50px", height: "50px" }}
-                    >
+                    </SquareButton>
+                    <SquareButton aria-label="home" href="/" side="large">
                         <FaHome />
-                    </LinkButton>
+                    </SquareButton>
                 </div>
             </div>
         </Main>

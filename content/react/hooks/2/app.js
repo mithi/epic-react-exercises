@@ -1,6 +1,8 @@
 import VanillaTilt from "vanilla-tilt"
 import { useEffect, useRef, useState } from "react"
 import { useTheme } from "hooks"
+import { SmallSpan, PrettyHeader } from "components/pretty-defaults"
+
 const centeredStyle = {
     display: "flex",
     justifyContent: "center",
@@ -9,30 +11,26 @@ const centeredStyle = {
     flexDirection: "column",
 }
 
-const tiltRootStyle = {
-    height: "35vh",
-    width: "50%",
-    borderRadius: "15px",
-    borderWidth: "3px",
-    borderStyle: "dashed",
-    ...centeredStyle,
+const useTiltStyle = () => {
+    const { primaryColor } = useTheme()
+    return {
+        height: "35vh",
+        width: "50%",
+        borderRadius: "15px",
+        borderWidth: "3px",
+        borderStyle: "dashed",
+        ...centeredStyle,
+        borderColor: primaryColor,
+    }
 }
-
-const parentStyle = { ...centeredStyle, height: "55vh" }
 
 const vanillaTiltOptions = {
     max: 25,
     perspective: 150,
 }
 
-const useTiltStyle = () => {
-    const { primaryColor } = useTheme()
-    return { ...tiltRootStyle, borderColor: primaryColor }
-}
-
-function Tilt({ children, setData }) {
+function Tilt({ children, setData, style }) {
     const divRef = useRef()
-    const style = useTiltStyle()
 
     useEffect(() => {
         const node = divRef.current
@@ -42,10 +40,8 @@ function Tilt({ children, setData }) {
     }, [setData])
 
     return (
-        <div style={parentStyle}>
-            <div ref={divRef} {...{ style }}>
-                {children}
-            </div>
+        <div ref={divRef} {...{ style }}>
+            {children}
         </div>
     )
 }
@@ -53,16 +49,16 @@ function Tilt({ children, setData }) {
 const TiltDataDisplay = ({ data }) => {
     if (!data) {
         return (
-            <p>
-                Point here: <br />
-                <span style={{ fontSize: "50px" }}>👇</span>
-            </p>
+            <PrettyHeader>
+                point here: <br />
+                👇
+            </PrettyHeader>
         )
     }
 
     const { angle, percentageX, percentageY, tiltX, tiltY } = data
     return (
-        <div style={{ position: "relative", fontSize: "12px" }}>
+        <SmallSpan style={{ position: "relative" }}>
             angle: {angle.toFixed(2)}
             <br />
             percentX: {percentageX.toFixed(2)}
@@ -73,19 +69,22 @@ const TiltDataDisplay = ({ data }) => {
             <br />
             tiltY: {tiltY}
             <br />
-        </div>
+        </SmallSpan>
     )
 }
 
 function App() {
     const [data, setData] = useState(null)
+    const style = useTiltStyle()
 
     return (
         <>
             <p>Touching the box will transform its perspective.</p>
-            <Tilt {...{ setData }}>
-                <TiltDataDisplay {...{ data }} />
-            </Tilt>
+            <div style={{ ...centeredStyle, height: "55vh" }}>
+                <Tilt {...{ setData, style }}>
+                    <TiltDataDisplay {...{ data }} />
+                </Tilt>
+            </div>
         </>
     )
 }
