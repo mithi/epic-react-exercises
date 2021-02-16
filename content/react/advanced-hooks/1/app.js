@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { delayedFetchRickAndMorty } from "fetch-utils"
-import { OnClickButton } from "components/button"
+import { SquareButton } from "components/button"
 import { GiPerspectiveDiceSixFacesRandom } from "components/icons"
 import { BorderedDiv, SmallSpan } from "components/pretty-defaults"
 import { ErrorView, PendingView, IdleView } from "./components/views"
@@ -10,7 +10,7 @@ import {
     PositiveIntegerInputField,
     SubmitButton,
     SingleFieldForm,
-} from "./components/positive-integer-search-bar"
+} from "components/single-field-form"
 
 /*
 This`RickAndMortyInfoCard` uses a `useSafeAsync` hook that's responsible for managing the state,
@@ -90,39 +90,31 @@ function App() {
             ["resolved", "rejected"].includes(fetchStatus))
 
     return (
-        <div style={{ margin: "20px" }}>
-            <SmallSpan>
-                ❗ Only positive integers from 1 to{" "}
-                {NUMBER_OF_RICK_AND_MORTY_CHARACTERS - 1} correspond to a character.
-            </SmallSpan>
-
+        <>
             <SingleFieldForm
                 onSubmit={value => setSubmittedValue(value)}
-                style={{ margin: "5px" }}
                 {...{ incompleteValue, setIncompleteValue }}
             >
-                <SubmitButton disabled={submitButtonDisabled}>Fetch</SubmitButton>
                 <PositiveIntegerInputField
+                    disabled={disabledByPending}
                     placeholder={"Pick a number!"}
-                    value={submittedValue}
-                    disabled={disabledByPending}
-                    style={{ flex: 1, height: "35px" }}
-                />
-                <OnClickButton
-                    onClick={setRandomValue}
-                    style={{ height: "35px", width: "35px" }}
-                    disabled={disabledByPending}
+                ></PositiveIntegerInputField>
+                <SubmitButton disabled={submitButtonDisabled}>Fetch</SubmitButton>
+
+                <SquareButton
                     aria-label="fetch a random rick and morty character"
+                    onClick={setRandomValue}
+                    disabled={disabledByPending}
                 >
                     <GiPerspectiveDiceSixFacesRandom />
-                </OnClickButton>
+                </SquareButton>
             </SingleFieldForm>
-
+            <SmallSpan>Which Rick and Morty Character?</SmallSpan>
             <RickAndMortyInfoCard
                 characterId={submittedValue}
                 getStatus={setFetchStatus}
             />
-        </div>
+        </>
     )
 }
 
@@ -130,11 +122,11 @@ function AppWithUnmountCheckbox() {
     const [mountApp, setMountApp] = useState(true)
 
     return (
-        <div>
+        <>
             <BorderedDiv
                 style={{
-                    margin: "10px",
-                    padding: "10px",
+                    padding: "5px",
+                    margin: "15px",
                     borderStyle: "dashed",
                 }}
             >
@@ -144,11 +136,11 @@ function AppWithUnmountCheckbox() {
                         checked={mountApp}
                         onChange={e => setMountApp(e.target.checked)}
                     />
-                    <span style={{ fontSize: "15px" }}> Mount the search bar</span>
+                    <SmallSpan> Mount the search bar</SmallSpan>
                 </label>
             </BorderedDiv>
             {mountApp ? <App /> : null}
-        </div>
+        </>
     )
 }
 
