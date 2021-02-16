@@ -12,7 +12,7 @@ const TOTALLY_CENTERED = {
 const BIG_ICON_STYLE = {
     width: "50px",
     height: "50px",
-    margin: "10px",
+    margin: "5px auto",
     fontSize: "20px",
     borderRadius: "25%",
 }
@@ -20,6 +20,7 @@ const BIG_ICON_STYLE = {
 const DEFAULT_BUTTON_STYLE = {
     ...TOTALLY_CENTERED,
     ...BIG_ICON_STYLE,
+    flexShrink: 0,
     textDecoration: "none",
     borderStyle: "none",
 }
@@ -27,7 +28,7 @@ const DEFAULT_BUTTON_STYLE = {
 const AUTO_SIZE_STYLE = {
     height: "auto",
     width: "auto",
-    margin: "10px",
+    margin: "auto",
     padding: "10px",
     fontSize: "12px",
     borderRadius: "8px",

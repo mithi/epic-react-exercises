@@ -9,7 +9,7 @@ const Section = ({ children }) => {
             style={{
                 padding: "15px 10px",
                 borderRadius: "15px",
-                margin: "0px 10px",
+                margin: "10px",
                 width: "90%",
                 maxWidth: "300px",
             }}
@@ -29,6 +29,7 @@ const AppContainer = ({ children }) => {
                 alignItems: "center",
                 borderStyle: "dotted",
                 borderRadius: "20px",
+                padding: "10px",
             }}
         >
             {children}

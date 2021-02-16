@@ -6,29 +6,27 @@ import { OnClickText, PrettyHeader, DivBg1, DivBg2 } from "../pretty-defaults"
 import { FaCloudSun, FaCode, FaPaintBrush, CgFormatColor, BiText } from "../icons"
 import CodeBlock from "../markdown-render/dynamic-code-block"
 
-const ICON_BUTTON_STYLE = { margin: "10px 5px" }
+const ICON_BUTTON_STYLE = { margin: "5px" }
 const ICONS_CONTAINER_STYLE = {
     margin: "5px",
     padding: "5px",
     borderRadius: "15px",
     display: "flex",
     justifyContent: "center",
+    width: "auto",
 }
 const PARAGRAPH_STYLE = {
     padding: "10px",
     borderRadius: "5px",
     lineHeight: "1.3",
-    margin: "10px",
-    marginTop: "0",
+    margin: "5px",
 }
 const HEADER_STYLE = {
     padding: "10px",
     borderRadius: "5px",
-    margin: "10px",
-    marginBottom: "0",
 }
 
-const COLOR_LINE_STYLE = { width: "100%", height: "5px" }
+const COLOR_LINE_STYLE = { width: "100%", height: "5px", marginTop: "2px" }
 
 const SquareIcon = ({ onClick, children, ...otherProps }) => (
     <OnClickButton style={ICON_BUTTON_STYLE} {...{ onClick, ...otherProps }}>
@@ -80,11 +78,7 @@ const ChooseTheme = () => {
 const ChooseColor = () => {
     const { nextColor, primaryColor, onHoverClassName } = useTheme()
     return (
-        <div
-            onClick={nextColor}
-            className={onHoverClassName}
-            style={{ height: "10px", marginTop: "5px" }}
-        >
+        <div onClick={nextColor} className={onHoverClassName} style={{ height: "10px" }}>
             <div style={{ ...COLOR_LINE_STYLE, backgroundColor: primaryColor }}></div>
         </div>
     )
@@ -122,7 +116,7 @@ const ChooseParagraph = () => {
     )
 }
 
-const SAMPLE_CODE = `function Hello({world}) {
+const SAMPLE_CODE = `function Hello({ world }) {
     return <div>{world}</div>
 }`
 
@@ -142,7 +136,7 @@ const ChooseCode = () => {
 const CloseThemeMenu = () => {
     const { changeMenuState } = useMenuState()
     return (
-        <div style={{ margin: "15px", textAlign: "center" }}>
+        <div style={{ marginTop: "15px", textAlign: "center" }}>
             <OnClickText onClick={() => changeMenuState("none")}>[close]</OnClickText>
         </div>
     )

@@ -26,10 +26,8 @@ const Button = ({ children, section }) => {
 }
 
 const REACT_MENU_HEADER = (
-    <PrettyHeader Component="h1" style={{ fontSize: "15px", margin: "10px" }}>
-        <PrettyLink style={{ marginTop: "5px", marginLeft: "10px" }} href="/react">
-            (React Menu)
-        </PrettyLink>
+    <PrettyHeader Component="h1" style={{ fontSize: "15px", marginLeft: "10px" }}>
+        <PrettyLink href="/react">(React Menu)</PrettyLink>
     </PrettyHeader>
 )
 

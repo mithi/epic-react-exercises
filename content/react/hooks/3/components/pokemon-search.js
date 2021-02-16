@@ -24,9 +24,14 @@ const PokemonSearchSection = ({ onSubmit, setIncompleteName, incompleteName }) =
                 <PokemonSuggestion {...{ name: "Charizard", buttonSubmit }} />, or{" "}
                 <PokemonSuggestion {...{ name: "Ninetales", buttonSubmit }} />
             </SmallSpan>
-            <form style={{ display: "flex" }} onSubmit={handleSubmit}>
+            <form
+                style={{
+                    display: "flex",
+                }}
+                onSubmit={handleSubmit}
+            >
                 <PrettyInputField
-                    style={{ width: "68%" }}
+                    style={{ flex: 1 }}
                     onChange={e => setIncompleteName(e.target.value)}
                     placeholder="Which pokemon?"
                     value={incompleteName}

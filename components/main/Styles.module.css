@@ -60,7 +60,7 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    padding: 0px;
+    padding: 5px;
     composes: common;
 }
 
@@ -84,7 +84,6 @@
 
     .nav {
         height: 70px;
-        margin-right: 0px;
         width: calc(100vw - 20px);
         padding: 0px;
         grid-area: 1 / 1 / 2 / 2;
@@ -122,13 +121,14 @@
 
     .navButtonsContainer {
         display: flex;
+        align-items: center;
     }
 
     .menu {
         left: 0px;
         top: 80px;
         width: 100%;
-        margin: 0px;
+        margin-top: 10px;
         padding: 10px;
         z-index: 1;
         composes: div0;
@@ -136,7 +136,6 @@
 
     .themeMenu {
         width: 90%;
-        margin-top: 0;
         align-self: center;
         padding: 10px;
     }
