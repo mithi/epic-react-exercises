@@ -9,38 +9,20 @@ const TOTALLY_CENTERED = {
     textAlign: "center",
 }
 
-const BIG_ICON_STYLE = {
-    width: "50px",
-    height: "50px",
-    margin: "5px auto",
-    fontSize: "20px",
-    borderRadius: "25%",
-}
-
-const DEFAULT_BUTTON_STYLE = {
+const AUTO_SIZE_STYLE = {
     ...TOTALLY_CENTERED,
-    ...BIG_ICON_STYLE,
     flexShrink: 0,
     textDecoration: "none",
     borderStyle: "none",
-}
-
-const AUTO_SIZE_STYLE = {
+    borderRadius: "8px",
     height: "auto",
     width: "auto",
-    margin: "auto",
+    margin: "5px",
     padding: "10px",
     fontSize: "12px",
-    borderRadius: "8px",
 }
 
-const useDefaultButtonStyle = (
-    style,
-    disabled,
-    useBgPrimaryColor,
-    isAutoSize,
-    noDisabledBorder
-) => {
+const useDefaultButtonStyle = (style, disabled, useBgPrimaryColor, noDisabledBorder) => {
     const { headerFont, primaryColor } = useTheme()
     const disabledBorder = {
         borderWidth: "2px",
@@ -48,14 +30,12 @@ const useDefaultButtonStyle = (
         borderColor: primaryColor,
     }
     const border = disabled && !noDisabledBorder ? disabledBorder : null
-    const autoStyle = isAutoSize ? AUTO_SIZE_STYLE : null
 
     return {
-        ...DEFAULT_BUTTON_STYLE,
+        ...AUTO_SIZE_STYLE,
         ...border,
         fontFamily: headerFont,
         backgroundColor: useBgPrimaryColor ? primaryColor : null,
-        ...autoStyle,
         ...style,
     }
 }
@@ -101,18 +81,11 @@ const OnClickButtonInner = ({
     style,
     useBgPrimaryColor,
     isInvertedColor,
-    isAutoSize,
     noDisabledBorder,
     ...otherProps
 }) => {
     className = useButtonThemeClasses(className, disabled, isInvertedColor)
-    style = useDefaultButtonStyle(
-        style,
-        disabled,
-        useBgPrimaryColor,
-        isAutoSize,
-        noDisabledBorder
-    )
+    style = useDefaultButtonStyle(style, disabled, useBgPrimaryColor, noDisabledBorder)
     return (
         <button {...{ onClick, disabled, className, style, ...otherProps }}>
             {children}
@@ -123,7 +96,6 @@ const OnClickButtonInner = ({
 const DefaultButton = ({ onClick, children, style, disabled, ...otherProps }) => (
     <ButtonThemeProvider>
         <OnClickButton
-            isAutoSize={true}
             useBgPrimaryColor={true}
             isInvertedColor={true}
             noDisabledBorder={true}
@@ -152,4 +124,61 @@ const OnClickButton = props => (
     </ButtonThemeProvider>
 )
 
-export { LinkOutButton, OnClickButton, LinkButton, DefaultButton }
+// size: "small", "big", "40px"
+// componentType: linkOut, onClick, link
+const SMALL_SIDE = "32px"
+const LARGE_SIDE = "50px"
+const SQUARE_BUTTON_STYLE = {
+    ...TOTALLY_CENTERED,
+    borderRadius: "25%",
+    padding: "2px",
+}
+
+const SquareButton = ({ side, style, ...otherProps }) => {
+    const { onClick, href } = otherProps
+
+    let Component = null
+    if (onClick) {
+        Component = OnClickButton
+    } else if (href && href[0] === "/") {
+        Component = LinkButton
+    } else if (href && href.slice(0, 4) === "http") {
+        Component = LinkOutButton
+    } else {
+        throw new Error(
+            "SquareButton must have an href or onClick prop, href must either start with a slash or http"
+        )
+    }
+
+    if (side === "large") {
+        style = {
+            ...SQUARE_BUTTON_STYLE,
+            height: LARGE_SIDE,
+            width: LARGE_SIDE,
+            margin: "10px",
+            fontSize: "20px",
+            ...style,
+        }
+    } else if (side === "small") {
+        style = {
+            ...SQUARE_BUTTON_STYLE,
+            height: SMALL_SIDE,
+            width: SMALL_SIDE,
+            margin: "3px",
+            fontSize: "18px",
+            ...style,
+        }
+    } else {
+        style = {
+            ...SQUARE_BUTTON_STYLE,
+            height: side,
+            width: side,
+            margin: "3px",
+            ...style,
+        }
+    }
+
+    return <Component {...{ style, ...otherProps }} />
+}
+
+export { LinkOutButton, OnClickButton, LinkButton, DefaultButton, SquareButton }
