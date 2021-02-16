@@ -132,7 +132,7 @@ const PageLayout = ({
             {hasApp && callToActionBox}
             {hasApp && notebookPageButtons}
             <article>{notes}</article>
-            <div style={{ display: "flex", justifyContent: "center" }}>
+            <div style={{ display: "flex", justifyContent: "center", margin: "20px" }}>
                 {notebookPageButtons}
             </div>
         </>
@@ -146,7 +146,7 @@ const PageLayout = ({
             <Pagination
                 {...{
                     numberOfPages,
-                    currentPageId: pageId,
+                    currentPageId: Number(pageId),
                     pathname: `/${topic}/${section}`,
                 }}
             />

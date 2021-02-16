@@ -20,7 +20,7 @@ const Code = ({ children, language }) => {
                 style={{
                     margin: "10px",
                     padding: "10px",
-                    borderStyle: "dotted",
+                    borderStyle: "dashed",
                     width: "auto",
                     borderRadius: "5px",
                 }}
