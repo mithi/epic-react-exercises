@@ -7,12 +7,7 @@ const Code = ({ children, language }) => {
     const codeTheme = getCodeTheme(codeThemeId)
 
     return (
-        <div
-            style={{
-                fontSize: "12px",
-                letterSpacing: "1px",
-            }}
-        >
+        <div style={{ fontSize: "12px" }}>
             <SyntaxHighlighter
                 language={language}
                 style={codeTheme}

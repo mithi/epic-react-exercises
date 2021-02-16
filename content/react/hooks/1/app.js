@@ -21,7 +21,7 @@ const Board = ({ currentBoard, onPlayerMove, disableButtons }) => {
     }
 
     return (
-        <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
+        <div style={{ display: "flex", justifyContent: "center" }}>
             <table>
                 <tbody>
                     <tr>
@@ -46,33 +46,18 @@ const Board = ({ currentBoard, onPlayerMove, disableButtons }) => {
 }
 
 const BoardStatus = ({ winnerIfAny, gameFinished, playerToMove }) => {
-    let children = null
+    let children = `Player ${playerToMove}, it's your turn!`
     if (gameFinished) {
         children = winnerIfAny ? `Winner: Player ${winnerIfAny} 🎉🥳` : `Nobody won.`
-    } else {
-        children = `Player ${playerToMove}, it's your turn!`
     }
-    return (
-        <div style={{ display: "flex", justifyContent: "center" }}>
-            <PrettyHeader style={{ fontSize: "30px", margin: "20px" }} Component={"div"}>
-                {children}
-            </PrettyHeader>
-        </div>
-    )
-}
 
-const RestartButton = ({ onRestart }) => {
     return (
-        <div style={{ display: "flex", width: "100%", justifyContent: "center" }}>
-            <ColoredButton
-                disabled={!onRestart}
-                useBgPrimaryColor={true}
-                onClick={onRestart || (() => {})}
-                aria-label="restart tictactoe game"
-            >
-                Restart!
-            </ColoredButton>
-        </div>
+        <PrettyHeader
+            style={{ fontSize: "30px", margin: "10px", textAlign: "center" }}
+            Component={"div"}
+        >
+            {children}
+        </PrettyHeader>
     )
 }
 
@@ -96,7 +81,6 @@ const MoveHistory = ({ numberOfSnapshots, onLoadBoardSnapshot, currentSnapshotId
                 style={{
                     display: "flex",
                     flexWrap: "wrap",
-                    alignItems: "center",
                     margin: "10px",
                     justifyContent: "center",
                 }}
@@ -191,7 +175,6 @@ const App = () => {
 
     const onRestart = () => setState(INITIAL_STATE)
 
-    const restart = numberOfSnapshots === 1 ? null : onRestart
     return (
         <>
             <BoardStatus {...{ winnerIfAny, gameFinished, playerToMove }} />
@@ -199,7 +182,15 @@ const App = () => {
             <MoveHistory
                 {...{ numberOfSnapshots, onLoadBoardSnapshot, currentSnapshotId }}
             />
-            <RestartButton {...{ onRestart: restart }} />
+            <ColoredButton
+                disabled={numberOfSnapshots === 1}
+                useBgPrimaryColor={true}
+                onClick={onRestart}
+                aria-label="restart tictactoe game"
+                style={{ margin: "auto" }}
+            >
+                Restart!
+            </ColoredButton>
         </>
     )
 }

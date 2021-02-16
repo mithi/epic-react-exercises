@@ -5,12 +5,7 @@ import { ColoredButton } from "components/button"
 const SubmitButton = ({ style, ...otherProps }) => {
     return (
         <ColoredButton
-            style={{
-                margin: "0 5px 0 0",
-                height: "auto",
-                width: "auto",
-                ...style,
-            }}
+            style={{ margin: "0 5px 0 0", ...style }}
             type="submit"
             {...otherProps}
         />

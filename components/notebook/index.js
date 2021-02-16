@@ -15,7 +15,7 @@ import Main from "../main"
 import NotebookLayout from "../main/two-sections"
 import { PrettyAnchor } from "../pretty-defaults"
 import { BigHeadNotice } from "../big-head-girl"
-import { Pagination, NotebookPageButtons, CallToActionUl } from "./styled-components"
+import { Pagination, CallToActionUl } from "./styled-components"
 import { PrettyHeader } from "../pretty-defaults"
 
 const EPIC_NOTES_REPO_URL = "https://github.com/mithi/epic-notes"
@@ -112,7 +112,7 @@ const PageLayout = ({
     const { deployedSite, repository, title } = properties
 
     const notebookPageButtons = (
-        <NotebookPageButtons>
+        <div style={{ display: "flex", margin: "10px 0 -15px 0" }}>
             {deployedSite && (
                 <SquareButton href={deployedSite} {...BUTTONS_PROPS.deployedSite} />
             )}
@@ -124,7 +124,7 @@ const PageLayout = ({
             {hasApp && <SquareButton href={issueHref} {...BUTTONS_PROPS.issue} />}
             <SquareButton href="/" {...BUTTONS_PROPS.home} />
             <SquareButton href={KOFI_URL} {...BUTTONS_PROPS.kofi} />
-        </NotebookPageButtons>
+        </div>
     )
     const articlePlus = (
         <>
