@@ -70,9 +70,10 @@ const PrettyLink = ({ children, href, style, ...otherProps }) => {
 
 const INPUT_STYLE = {
     borderWidth: "0px",
-    borderRadius: "10px",
-    padding: "5px 15px",
+    borderRadius: "8px",
+    padding: "5px 10px",
     marginRight: "5px",
+    flex: 1,
 }
 
 const PrettyInputField = ({ placeholder, value, onChange, style, ...otherProps }) => {

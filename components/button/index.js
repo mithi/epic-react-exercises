@@ -121,7 +121,7 @@ const SquareButton = ({ side, style, ...otherProps }) => {
             ...SQUARE_BUTTON_STYLE,
             height: SMALL_SIDE,
             width: SMALL_SIDE,
-            margin: "3px",
+            margin: "2px",
             fontSize: "18px",
             ...style,
         }
