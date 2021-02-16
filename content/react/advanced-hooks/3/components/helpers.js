@@ -1,6 +1,6 @@
 import React from "react"
 import { FaArrowAltCircleUp, FaArrowAltCircleDown } from "components/icons"
-import { DefaultButton } from "components/button"
+import { ColoredButton } from "components/button"
 import { BorderedDiv, DivBg1 } from "components/pretty-defaults"
 
 const Section = ({ children }) => {
@@ -38,19 +38,19 @@ const AppContainer = ({ children }) => {
 }
 
 const TopButton = ({ onClick }) => (
-    <DefaultButton {...{ onClick }}>
+    <ColoredButton {...{ onClick }}>
         <FaArrowAltCircleUp />
         <span style={{ margin: "0px 10px" }}>scroll to top</span>
         <FaArrowAltCircleUp />
-    </DefaultButton>
+    </ColoredButton>
 )
 
 const BottomButton = ({ onClick }) => (
-    <DefaultButton {...{ onClick }}>
+    <ColoredButton {...{ onClick }}>
         <FaArrowAltCircleDown />
         <span style={{ margin: "0px 10px" }}>scroll to bottom</span>
         <FaArrowAltCircleDown />
-    </DefaultButton>
+    </ColoredButton>
 )
 
 export { Section, AppContainer, TopButton, BottomButton }

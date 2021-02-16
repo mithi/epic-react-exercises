@@ -1,4 +1,4 @@
-import { DefaultButton } from "components/button"
+import { ColoredButton } from "components/button"
 import { OnClickText, PrettyInputField, SmallSpan } from "components/pretty-defaults"
 
 const PokemonSuggestion = ({ name, buttonSubmit }) => {
@@ -36,9 +36,13 @@ const PokemonSearchSection = ({ onSubmit, setIncompleteName, incompleteName }) =
                     placeholder="Which pokemon?"
                     value={incompleteName}
                 />
-                <DefaultButton disabled={!incompleteName.length} type="submit">
+                <ColoredButton
+                    disabled={!incompleteName.length}
+                    type="submit"
+                    aria-label="fetch that pokemon"
+                >
                     Fetch!
-                </DefaultButton>
+                </ColoredButton>
             </form>
         </>
     )

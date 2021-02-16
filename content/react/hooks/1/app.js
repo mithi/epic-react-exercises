@@ -1,5 +1,5 @@
 import { useStickyState } from "hooks"
-import { DefaultButton, SquareButton } from "components/button"
+import { ColoredButton, SquareButton } from "components/button"
 import { PrettyHeader } from "components/pretty-defaults"
 const X_PLAYER = "X"
 const O_PLAYER = "O"
@@ -64,14 +64,14 @@ const BoardStatus = ({ winnerIfAny, gameFinished, playerToMove }) => {
 const RestartButton = ({ onRestart }) => {
     return (
         <div style={{ display: "flex", width: "100%", justifyContent: "center" }}>
-            <DefaultButton
+            <ColoredButton
                 disabled={!onRestart}
                 useBgPrimaryColor={true}
-                onClick={onRestart}
+                onClick={onRestart || (() => {})}
                 aria-label="restart tictactoe game"
             >
                 Restart!
-            </DefaultButton>
+            </ColoredButton>
         </div>
     )
 }
@@ -83,7 +83,6 @@ const MoveHistory = ({ numberOfSnapshots, onLoadBoardSnapshot, currentSnapshotId
             <SquareButton
                 key={i}
                 aria-label={`go to board state move # ${i}`}
-                side="small"
                 disabled={i === currentSnapshotId}
                 onClick={() => onLoadBoardSnapshot(i)}
             >

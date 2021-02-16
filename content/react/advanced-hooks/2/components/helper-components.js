@@ -1,6 +1,6 @@
 import { BiRefresh, GiPerspectiveDiceSixFacesRandom, FaSearch } from "components/icons"
 import { OnClickText, SmallSpan } from "components/pretty-defaults"
-import { OnClickButton, DefaultButton } from "components/button"
+import { SquareButton, ColoredButton } from "components/button"
 import { PendingView } from "../../1/components/views"
 import InfoView, { IdleView, ErrorView } from "./info-view"
 
@@ -32,13 +32,12 @@ const FETCH_BUTTON_CONTENT = (
 )
 
 const RandomButton = ({ onClick, disabled }) => (
-    <OnClickButton
-        style={{ height: "35px", width: "35px", margin: "0px" }}
+    <SquareButton
         aria-label="fetch a random rick and morty character"
         {...{ onClick, disabled }}
     >
         <GiPerspectiveDiceSixFacesRandom />
-    </OnClickButton>
+    </SquareButton>
 )
 
 let NotInCacheMessage = ({ value, onClickFetch }) => (
@@ -68,9 +67,7 @@ let SuccessMessage = ({ data }) => (
 )
 
 const SubmitButton = ({ onClick, disabled, children }) => (
-    <DefaultButton {...{ onClick, disabled }} style={{ height: "35px" }}>
-        {children}
-    </DefaultButton>
+    <ColoredButton {...{ onClick, disabled }}>{children}</ColoredButton>
 )
 
 export {
