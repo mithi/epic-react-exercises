@@ -2,14 +2,15 @@ import { useEffect, useState } from "react"
 import { delayedFetchRickAndMorty } from "fetch-utils"
 import { OnClickButton } from "components/button"
 import { GiPerspectiveDiceSixFacesRandom } from "components/icons"
-import {
-    BorderedDiv,
-    PositiveIntegerSearchbar,
-    SmallSpan,
-} from "components/pretty-defaults"
+import { BorderedDiv, SmallSpan } from "components/pretty-defaults"
 import { ErrorView, PendingView, IdleView } from "./components/views"
 import InfoView from "./components/info-view"
 import useSafeAsync from "./components/use-async"
+import {
+    PositiveIntegerInputField,
+    SubmitButton,
+    SingleFieldForm,
+} from "./components/positive-integer-search-bar"
 
 /*
 This`RickAndMortyInfoCard` uses a `useSafeAsync` hook that's responsible for managing the state,
@@ -90,39 +91,32 @@ function App() {
 
     return (
         <div style={{ margin: "20px" }}>
-            <SmallSpan style={{ lineHeight: "0.85" }}>
+            <SmallSpan>
                 ❗ Only positive integers from 1 to{" "}
                 {NUMBER_OF_RICK_AND_MORTY_CHARACTERS - 1} correspond to a character.
             </SmallSpan>
 
-            <div
-                style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "flex-start",
-                    width: "100%",
-                }}
+            <SingleFieldForm
+                onSubmit={value => setSubmittedValue(value)}
+                style={{ margin: "5px" }}
+                {...{ incompleteValue, setIncompleteValue }}
             >
-                <PositiveIntegerSearchbar
-                    value={submittedValue}
-                    onSubmit={value => setSubmittedValue(value)}
-                    {...{ incompleteValue, setIncompleteValue }}
+                <SubmitButton disabled={submitButtonDisabled}>Fetch</SubmitButton>
+                <PositiveIntegerInputField
                     placeholder={"Pick a number!"}
-                    disableButton={submitButtonDisabled}
-                    disableInputField={disabledByPending}
-                    submitButtonStyle={{ height: "35px", width: "70px", margin: "3px" }}
-                    inputFieldStyle={{ height: "35px", width: "130px", margin: "3px" }}
-                    submitButtonContent="Fetch"
+                    value={submittedValue}
+                    disabled={disabledByPending}
+                    style={{ flex: 1, height: "35px" }}
                 />
                 <OnClickButton
                     onClick={setRandomValue}
-                    style={{ height: "35px", width: "35px", margin: "3px" }}
+                    style={{ height: "35px", width: "35px" }}
                     disabled={disabledByPending}
                     aria-label="fetch a random rick and morty character"
                 >
                     <GiPerspectiveDiceSixFacesRandom />
                 </OnClickButton>
-            </div>
+            </SingleFieldForm>
 
             <RickAndMortyInfoCard
                 characterId={submittedValue}

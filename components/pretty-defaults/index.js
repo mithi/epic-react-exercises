@@ -1,7 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
 import { useTheme } from "hooks"
-import { DefaultButton } from "../button"
 
 const DivBg1 = ({ style, className, children, Component }) => {
     const { bg1ClassName, bodyFont } = useTheme()
@@ -72,8 +71,8 @@ const PrettyLink = ({ children, href, style, ...otherProps }) => {
 const INPUT_STYLE = {
     borderWidth: "0px",
     borderRadius: "10px",
-    margin: "5px",
     padding: "5px 15px",
+    marginRight: "5px",
 }
 
 const PrettyInputField = ({ placeholder, value, onChange, style, ...otherProps }) => {
@@ -101,55 +100,6 @@ const BorderedDiv = ({ children, style, ...otherProps }) => {
         >
             {children}
         </div>
-    )
-}
-
-const PositiveIntegerSearchbar = ({
-    onSubmit,
-    setIncompleteValue,
-    incompleteValue,
-    disableButton,
-    disableInputField,
-    submitButtonStyle,
-    submitButtonContent,
-    inputFieldStyle,
-    placeholder,
-    style,
-}) => {
-    function handleSubmit(e) {
-        e.preventDefault()
-        onSubmit(incompleteValue)
-    }
-
-    return (
-        <form
-            onSubmit={handleSubmit}
-            style={{
-                display: "flex",
-                alignItems: "center",
-                flexWrap: "wrap",
-                ...style,
-            }}
-        >
-            <PrettyInputField
-                type="number"
-                pattern="^[0-9]"
-                min="1"
-                step="1"
-                placeholder={placeholder}
-                value={incompleteValue}
-                onChange={e => setIncompleteValue(e.target.value)}
-                style={inputFieldStyle}
-                disabled={disableInputField}
-            />
-            <DefaultButton
-                type="submit"
-                disabled={disableButton}
-                style={submitButtonStyle}
-            >
-                {submitButtonContent ? submitButtonContent : "submit"}
-            </DefaultButton>
-        </form>
     )
 }
 
@@ -199,7 +149,6 @@ export {
     PrettyInputField,
     BorderedDiv,
     PrettyLink,
-    PositiveIntegerSearchbar,
     OnClickText,
     SmallSpan,
     RoundedImage,

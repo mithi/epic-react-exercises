@@ -1,18 +1,39 @@
+import { cloneElement } from "react"
 import { PrettyInputField } from "components/pretty-defaults"
 import { DefaultButton } from "components/button"
 
-const PositiveIntegerSearchbar = ({
-    style,
+const SubmitButton = props => {
+    return <DefaultButton {...props} type="submit" />
+}
+
+const PositiveIntegerInputField = props => {
+    return <PrettyInputField type="number" pattern="^[0-9]" min="1" step="1" {...props} />
+}
+
+const SingleFieldForm = ({
     onSubmit,
     setIncompleteValue,
     incompleteValue,
-    placeholder,
-    disableButton,
-    disableInputField,
-    submitButtonStyle,
-    inputFieldStyle,
-    submitButtonContent,
+    style,
+    children,
 }) => {
+    let submitButton = null
+    let inputField = null
+    let fragmentIfAny = null
+
+    for (let child in children) {
+        if (children[child].type === SubmitButton) {
+            submitButton = children[child]
+        } else if (children[child].type === PositiveIntegerInputField) {
+            inputField = cloneElement(children[child], {
+                onChange: e => setIncompleteValue(e.target.value),
+                value: incompleteValue,
+            })
+        } else {
+            fragmentIfAny = children[child]
+        }
+    }
+
     function handleSubmit(e) {
         e.preventDefault()
         onSubmit(incompleteValue)
@@ -24,30 +45,15 @@ const PositiveIntegerSearchbar = ({
             style={{
                 display: "flex",
                 alignItems: "center",
-                flexWrap: "wrap",
+                justifyContent: "space-between",
                 ...style,
             }}
         >
-            <PrettyInputField
-                type="number"
-                pattern="^[0-9]"
-                min="1"
-                step="1"
-                placeholder={placeholder}
-                value={incompleteValue}
-                onChange={e => setIncompleteValue(e.target.value)}
-                style={inputFieldStyle}
-                disabled={disableInputField}
-            />
-            <DefaultButton
-                type="submit"
-                disabled={disableButton}
-                style={submitButtonStyle}
-            >
-                {submitButtonContent || "submit"}
-            </DefaultButton>
+            {inputField}
+            {submitButton}
+            {fragmentIfAny}
         </form>
     )
 }
 
-export default PositiveIntegerSearchbar
+export { PositiveIntegerInputField, SubmitButton, SingleFieldForm }
