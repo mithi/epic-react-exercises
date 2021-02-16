@@ -1,5 +1,5 @@
 import { useStickyState } from "hooks"
-import { DefaultButton, OnClickButton } from "components/button"
+import { DefaultButton, SquareButton } from "components/button"
 import { PrettyHeader } from "components/pretty-defaults"
 const X_PLAYER = "X"
 const O_PLAYER = "O"
@@ -7,15 +7,16 @@ const O_PLAYER = "O"
 const Board = ({ currentBoard, onPlayerMove, disableButtons }) => {
     const square = i => {
         const player = currentBoard[i]
-        const disabled = disableButtons || player ? true : false
-        const onClick = disabled ? null : () => onPlayerMove(i)
-        const children = player ? player : "."
-        const style = { fontSize: "50px", height: "75px", width: "75px", margin: "5px" }
-        const label = `TictacToe button # ${i}`
         return (
-            <OnClickButton {...{ onClick, disabled, style }} aria-label={label}>
-                {children}
-            </OnClickButton>
+            <SquareButton
+                onClick={() => onPlayerMove(i)}
+                disabled={disableButtons || player ? true : false}
+                aria-label={`TictacToe button # ${i}`}
+                side="75px"
+                style={{ margin: "4px", fontSize: "50px" }}
+            >
+                {player ? player : "."}
+            </SquareButton>
         )
     }
 
@@ -76,18 +77,19 @@ const RestartButton = ({ onRestart }) => {
 }
 
 const MoveHistory = ({ numberOfSnapshots, onLoadBoardSnapshot, currentSnapshotId }) => {
-    const buttonIterator = Array(numberOfSnapshots).fill(null)
-    const buttons = buttonIterator.map((_, i) => {
-        const disabled = i === currentSnapshotId
-        const onClick = disabled ? null : () => onLoadBoardSnapshot(i)
-        const style = { width: "30px", height: "30px", margin: "3px" }
-        const label = `go to board state move # ${i}`
-        return (
-            <OnClickButton key={i} {...{ onClick, disabled, style }} aria-label={label}>
+    const buttons = Array(numberOfSnapshots)
+        .fill(null)
+        .map((_, i) => (
+            <SquareButton
+                key={i}
+                aria-label={`go to board state move # ${i}`}
+                side="small"
+                disabled={i === currentSnapshotId}
+                onClick={() => onLoadBoardSnapshot(i)}
+            >
                 {i}
-            </OnClickButton>
-        )
-    })
+            </SquareButton>
+        ))
 
     return (
         <>
