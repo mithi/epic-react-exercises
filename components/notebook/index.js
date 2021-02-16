@@ -34,9 +34,7 @@ const BUTTONS_PROPS = {
     deployedSite: {
         "aria-label": "go to source deployed site",
         "children": <BiRocket />,
-        "componentType": "linkOut",
     },
-
     repository: {
         "aria-label": "go to source repository",
         "children": <FiGithub />,
