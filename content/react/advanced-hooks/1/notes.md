@@ -159,12 +159,10 @@ function App() {
     })
 
     const [fetchStatus, setFetchStatus] = useState("idle")
-
     const { incompleteValue, submittedValue } = state
 
     const setIncompleteValue = value => setState({ ...state, incompleteValue: value })
     const setSubmittedValue = value => setState({ ...state, submittedValue: value })
-
     const setRandomValue = () => {
         const id = getRandomRickAndMortyCharacterId()
         setState({ submittedValue: id, incompleteValue: id })
@@ -173,7 +171,7 @@ function App() {
     const disabledByPending = fetchStatus === "pending"
     // the submit button is disabled when
     // 1. We are process of fetching data
-    // 2. the input field value has already been resolved or rejected
+    // 2. The input field value has already been resolved or rejected
     // 3. There is no value in the input field
     const submitButtonDisabled =
         disabledByPending ||
@@ -183,20 +181,27 @@ function App() {
 
     return (
         <div>
-            <PositiveIntegerSearchbar
-                value={submittedValue}
+            <SingleFieldForm
                 onSubmit={value => setSubmittedValue(value)}
                 {...{ incompleteValue, setIncompleteValue }}
-                placeholder={"Pick a number!"}
-                disableButton={submitButtonDisabled}
-                disableInputField={disabledByPending}
-            />
-            <OnClickButton onClick={setRandomValue} disabled={disabledByPending}>
-                <GiPerspectiveDiceSixFacesRandom />
-            </OnClickButton>
+            >
+                <PositiveIntegerInputField
+                    disabled={disabledByPending}
+                    placeholder="Pick a number!"
+                />
+                <SubmitButton disabled={submitButtonDisabled}>Fetch</SubmitButton>
+
+                <SquareButton
+                    aria-label="fetch a random rick and morty character"
+                    onClick={setRandomValue}
+                    disabled={disabledByPending}
+                >
+                    <GiPerspectiveDiceSixFacesRandom />
+                </SquareButton>
+            </SingleFieldForm>
             <RickAndMortyInfoCard
                 characterId={submittedValue}
-                {...{ getStatus: setFetchStatus }}
+                getStatus={setFetchStatus}
             />
         </div>
     )
