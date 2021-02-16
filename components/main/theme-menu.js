@@ -1,12 +1,11 @@
 import styles from "./Styles.module.css"
 import { useTheme, useMenuState } from "hooks"
 import { useCodeTheme } from "providers/code-theme"
-import { OnClickButton } from "../button"
+import { SquareButton } from "../button"
 import { OnClickText, PrettyHeader, DivBg1, DivBg2 } from "../pretty-defaults"
 import { FaCloudSun, FaCode, FaPaintBrush, CgFormatColor, BiText } from "../icons"
 import CodeBlock from "../markdown-render/dynamic-code-block"
 
-const ICON_BUTTON_STYLE = { margin: "5px" }
 const ICONS_CONTAINER_STYLE = {
     margin: "5px",
     padding: "5px",
@@ -26,35 +25,52 @@ const HEADER_STYLE = {
     borderRadius: "5px",
 }
 
-const COLOR_LINE_STYLE = { width: "100%", height: "5px", marginTop: "2px" }
-
-const SquareIcon = ({ onClick, children, ...otherProps }) => (
-    <OnClickButton style={ICON_BUTTON_STYLE} {...{ onClick, ...otherProps }}>
-        {children}
-    </OnClickButton>
-)
+const COLOR_LINE_STYLE = { width: "100%", height: "5px", margin: "3px" }
 
 const ChooseThemeIcons = () => {
     const { nextColor, nextHeaderFont, nextBodyFont, nextPageTheme } = useTheme()
     const { nextCodeTheme } = useCodeTheme()
-
+    const iconProps = {
+        side: "large",
+        style: { margin: "5px" },
+    }
     return (
         <DivBg2 style={ICONS_CONTAINER_STYLE}>
-            <SquareIcon onClick={nextPageTheme} aria-label="change page theme">
+            <SquareButton
+                onClick={nextPageTheme}
+                aria-label="change page theme"
+                {...iconProps}
+            >
                 <FaCloudSun />
-            </SquareIcon>
-            <SquareIcon onClick={nextColor} aria-label="change main color">
+            </SquareButton>
+            <SquareButton
+                onClick={nextColor}
+                aria-label="change main color"
+                {...iconProps}
+            >
                 <FaPaintBrush />
-            </SquareIcon>
-            <SquareIcon onClick={nextHeaderFont} aria-label="change header font">
+            </SquareButton>
+            <SquareButton
+                onClick={nextHeaderFont}
+                aria-label="change header font"
+                {...iconProps}
+            >
                 <CgFormatColor />
-            </SquareIcon>
-            <SquareIcon onClick={nextBodyFont} aria-label="change body font">
+            </SquareButton>
+            <SquareButton
+                onClick={nextBodyFont}
+                aria-label="change body font"
+                {...iconProps}
+            >
                 <BiText />
-            </SquareIcon>
-            <SquareIcon onClick={nextCodeTheme} aria-label="change code theme">
+            </SquareButton>
+            <SquareButton
+                onClick={nextCodeTheme}
+                aria-label="change code theme"
+                {...iconProps}
+            >
                 <FaCode />
-            </SquareIcon>
+            </SquareButton>
         </DivBg2>
     )
 }
