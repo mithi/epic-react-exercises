@@ -6,7 +6,6 @@ const MIKONG = {
     eyebrows: "angry",
     eyes: "content",
     faceMask: false,
-    faceMaskColor: "brown",
     facialHair: "stubble",
     hair: "buzz",
     hairColor: "black",
@@ -22,7 +21,6 @@ const MITHI = {
     eyebrows: "serious",
     eyes: "simple",
     faceMask: false,
-    faceMaskColor: "black",
     facialHair: "none",
     hair: "long",
     hairColor: "black",
@@ -56,7 +54,7 @@ const RandomHead = ({ person }) => (
                 borderRadius: "25%",
                 width: "125px",
                 height: "125px",
-                marginBottom: "10px",
+                margin: "10px",
             }}
         >
             <BigHead {...person} />
