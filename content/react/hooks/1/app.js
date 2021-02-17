@@ -52,10 +52,7 @@ const BoardStatus = ({ winnerIfAny, gameFinished, playerToMove }) => {
     }
 
     return (
-        <PrettyHeader
-            style={{ fontSize: "30px", margin: "10px", textAlign: "center" }}
-            Component={"div"}
-        >
+        <PrettyHeader style={{ margin: "10px", textAlign: "center" }} Component="h3">
             {children}
         </PrettyHeader>
     )
@@ -76,18 +73,16 @@ const MoveHistory = ({ numberOfSnapshots, onLoadBoardSnapshot, currentSnapshotId
         ))
 
     return (
-        <>
-            <div
-                style={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    margin: "10px",
-                    justifyContent: "center",
-                }}
-            >
-                {buttons}
-            </div>
-        </>
+        <div
+            style={{
+                display: "flex",
+                flexWrap: "wrap",
+                margin: "10px",
+                justifyContent: "center",
+            }}
+        >
+            {buttons}
+        </div>
     )
 }
 

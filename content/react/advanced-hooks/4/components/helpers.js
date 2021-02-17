@@ -31,14 +31,7 @@ const BigHeadMessage = ({ state }) => {
                     {state.size}!
                 </PrettyHeader>
                 <br />
-                <div
-                    style={{
-                        paddingTop: "10px",
-                        fontSize: "30px",
-                    }}
-                >
-                    {state.icon}
-                </div>
+                <div style={{ paddingTop: "10px", fontSize: "50px" }}>{state.icon}</div>
             </div>
         </div>
     )

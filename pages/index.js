@@ -5,7 +5,7 @@ import TwoSections from "components/main/two-sections"
 
 export default function Home() {
     const div1 = (
-        <article style={{ width: "100%", maxWidth: "600px", padding: "10px" }}>
+        <article>
             <DynamicMarkdownRender>{landingString}</DynamicMarkdownRender>
         </article>
     )

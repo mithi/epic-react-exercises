@@ -133,23 +133,12 @@ const KingdomRushTower = ({ data }) => {
     const { name, imageUrl, towerType, kingdom, buildCost } = data
 
     return (
-        <BorderedDiv
-            style={{
-                display: "flex",
-                borderStyle: "dotted",
-                borderRadius: "15px",
-                padding: "10px",
-                margin: "15px",
-                flexWrap: "wrap",
-            }}
-        >
+        <BorderedDiv style={{ borderStyle: "dashed" }}>
             <RoundedImage src={imageUrl} alt={name} height={75} width={75} />
-            <div style={{ margin: "5px 5px", maxWidth: "100px" }}>
-                <PrettyHeader style={{ fontSize: "18px", margin: "0px" }}>
-                    {name}
-                </PrettyHeader>
+            <div style={{ margin: "5px" }}>
+                <PrettyHeader style={{ fontSize: "16px" }}>{name}</PrettyHeader>
 
-                <div style={{ fontSize: "10px", margin: "2px", lineHeight: "1.5" }}>
+                <div style={{ fontSize: "10px", lineHeight: "1.3" }}>
                     ({towerType})
                     <br />
                     buildCost: {buildCost}

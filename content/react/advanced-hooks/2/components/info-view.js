@@ -26,7 +26,6 @@ const ImageCard = ({ children, style }) => (
             height: "90px",
             borderStyle: "dashed",
             ...TOTALLY_CENTERED,
-            borderRadius: "20%",
             margin: "5px",
             fontSize: "20px",
             marginBottom: "20px",
@@ -51,13 +50,7 @@ const InfoView = ({ data }) => {
     const { name, status, species, gender, origin, location, imageUrl, id } = data
     return (
         <Card>
-            <RoundedImage
-                src={imageUrl}
-                alt={name}
-                width={100}
-                height={100}
-                style={{ padding: "5px" }}
-            />
+            <RoundedImage src={imageUrl} alt={name} width={100} height={100} />
             <InfoCard header={name}>
                 #{id}, {status}, {species}, {gender}. <br />
                 origin: {origin}, <br /> location: {location}
