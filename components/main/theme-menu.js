@@ -6,7 +6,7 @@ import { OnClickText, PrettyHeader, DivBg1, DivBg2 } from "../pretty-defaults"
 import { FaCloudSun, FaCode, FaPaintBrush, CgFormatColor, BiText } from "../icons"
 import CodeBlock from "../markdown-render/dynamic-code-block"
 
-const HOVER_STYLE = { padding: "5px", margin: "5px", borderRadius: "10px" }
+const HOVER_STYLE = { padding: "5px", margin: "5px", borderRadius: "5px" }
 
 const ChooseThemeIcons = () => {
     const { nextColor, nextHeaderFont, nextBodyFont, nextPageTheme } = useTheme()
@@ -106,9 +106,8 @@ const ChooseHeader = () => {
     )
 }
 
-const SAMPLE_PARAGRAPH = `Click on any of the sample elements
-to change its style. Customize its primary color, header font, body font, code
-theme, and page theme!`
+const SAMPLE_PARAGRAPH = `Click on any element
+to change its style. (primary color, body font, header font, page theme, code theme)`
 
 const ChooseParagraph = () => {
     const { nextBodyFont, onHoverClassName } = useTheme()
@@ -148,14 +147,10 @@ const CloseThemeMenu = () => {
     )
 }
 
-const MenuContainer = ({ children }) => {
-    return <DivBg1 className={styles.themeMenu}>{children}</DivBg1>
-}
-
 const Menu = ({ style } = {}) => {
     return (
         <section className={styles.menu} style={{ ...style }} tabIndex="0">
-            <MenuContainer>
+            <DivBg1 className={styles.themeMenu}>
                 <ChooseTheme />
                 <ChooseColor />
                 <ChooseHeader />
@@ -163,7 +158,7 @@ const Menu = ({ style } = {}) => {
                 <ChooseCode />
                 <ChooseThemeIcons />
                 <CloseThemeMenu />
-            </MenuContainer>
+            </DivBg1>
         </section>
     )
 }
