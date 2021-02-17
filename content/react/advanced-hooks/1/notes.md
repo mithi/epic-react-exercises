@@ -175,29 +175,34 @@ function App() {
             ["resolved", "rejected"].includes(fetchStatus))
 
     return (
-        <div>
+        <>
             <SingleFieldForm
                 onSubmit={value => setSubmittedValue(value)}
                 {...{ incompleteValue, setIncompleteValue }}
             >
                 <PositiveIntegerInputField
                     disabled={disabledByPending}
-                    placeholder="Pick a number!"
-                />
-                <SubmitButton disabled={submitButtonDisabled}>Fetch</SubmitButton>
-                <SquareButton
-                    aria-label="fetch a random rick and morty character"
-                    onClick={setRandomValue}
-                    disabled={disabledByPending}
-                >
-                    <GiPerspectiveDiceSixFacesRandom />
-                </SquareButton>
+                    placeholder={"Pick a number!"}
+                ></PositiveIntegerInputField>
+                <FormSubmit disabled={submitButtonDisabled}>Fetch</FormSubmit>
+                <FormSameLine>
+                    <SquareButton
+                        aria-label="fetch a random rick and morty character"
+                        onClick={setRandomValue}
+                        disabled={disabledByPending}
+                    >
+                        <GiPerspectiveDiceSixFacesRandom />
+                    </SquareButton>
+                </FormSameLine>
+                <FormBottom>
+                    <SmallSpan>Which Rick and Morty Character?</SmallSpan>
+                </FormBottom>
             </SingleFieldForm>
             <RickAndMortyInfoCard
                 characterId={submittedValue}
                 getStatus={setFetchStatus}
             />
-        </div>
+        </>
     )
 }
 ```

@@ -70,7 +70,7 @@ const App = () => {
     const isPending = status === "pending"
 
     return (
-        <div>
+        <>
             <SingleFieldForm
                 onSubmit={onSubmitHandler}
                 setIncompleteValue={setInputField}
@@ -80,23 +80,25 @@ const App = () => {
                     disabled={isPending}
                     placeholder="pick a number"
                 />
-                <SubmitButton disabled={isPending || !inputFieldValue}>
+                <FormSubmit disabled={isPending || !inputFieldValue}>
                     {submitButtonText}
-                </SubmitButton>
-                <SquareButton
-                    aria-label="fetch a random rick and morty character"
-                    onClick={setRandomValue}
-                    disabled={isPending}
-                >
-                    <GiPerspectiveDiceSixFacesRandom />
-                </SquareButton>
+                </FormSubmit>
+                <FormSameLine>
+                    <SquareButton
+                        aria-label="fetch a random rick and morty character"
+                        onClick={setRandomValue}
+                        disabled={isPending}
+                    >
+                        <GiPerspectiveDiceSixFacesRandom />
+                    </SquareButton>
+                </FormSameLine>
+                <FormBottom>{bottomMessage}</FormBottom>
             </SingleFieldForm>
-            {bottomMessage}
             <RickAndMortyInfoCard {...{ status, error, data }} />
             <RickAndMortyCachePreview
                 {...{ setId: setInputField, id: inputFieldValue }}
             />
-        </div>
+        </>
     )
 }
 ```
