@@ -3,8 +3,7 @@ import { useState } from "react"
 import ReactMarkdown from "react-markdown"
 import {
     PrettyHeader,
-    PrettyLink,
-    PrettyAnchor,
+    SimpleLink,
     OnClickText,
     BorderedDiv,
 } from "components/pretty-defaults"
@@ -66,22 +65,6 @@ const CustomHeading = ({ children, level }) => {
     }
 }
 
-const DefaultLink = ({ href, children }) => {
-    if (href.slice(0, 4) === "http") {
-        return (
-            <PrettyAnchor {...{ href, target: "_blank", rel: "noopener noreferrer" }}>
-                {children}
-            </PrettyAnchor>
-        )
-    } else if (href.slice(0, 1) === "/") {
-        return <PrettyLink {...{ href }}>{children}</PrettyLink>
-    }
-
-    return new Error(
-        `Link in markdown does not start with "http" or "/", href=${href}, children=${children}`
-    )
-}
-
 const renderers = {
     code: ({ language, value }) => {
         return <Code language={language}>{value}</Code>
@@ -90,7 +73,7 @@ const renderers = {
         return <CustomHeading {...props} />
     },
     link: props => {
-        return <DefaultLink {...props} />
+        return <SimpleLink {...props} />
     },
     paragraph: props => {
         return <p style={{ marginBottom: "6px", marginTop: "6px" }}>{props.children}</p>

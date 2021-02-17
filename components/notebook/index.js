@@ -13,10 +13,9 @@ import { SpinnerDots } from "../spinner"
 import { SquareButton } from "../button"
 import Main from "../main"
 import NotebookLayout from "../main/two-sections"
-import { PrettyAnchor } from "../pretty-defaults"
 import { BigHeadNotice } from "../big-head-girl"
 import { Pagination, CallToActionUl } from "./styled-components"
-import { PrettyHeader } from "../pretty-defaults"
+import { PrettyHeader, SimpleLink } from "../pretty-defaults"
 
 const EPIC_NOTES_REPO_URL = "https://github.com/mithi/epic-notes"
 const KOFI_URL = "https://ko-fi.com/minimithi"
@@ -90,20 +89,18 @@ const PageLayout = ({
         <BigHeadNotice>
             <CallToActionUl>
                 <li>
-                    <PrettyAnchor href={solutionHref}>
+                    <SimpleLink href={solutionHref}>
                         {"👀 View the deployed code "}
-                    </PrettyAnchor>
+                    </SimpleLink>
                     on Github.
                 </li>
                 <li>
                     Not happy with the solution?
-                    <PrettyAnchor href={issueHref}>
-                        {"🐞🐛 Suggest a change."}
-                    </PrettyAnchor>
+                    <SimpleLink href={issueHref}>{"🐞🐛 Suggest a change."}</SimpleLink>
                 </li>
                 <li>
                     Grammar errors?
-                    <PrettyAnchor href={editHref}>{" ✏️ Edit "}</PrettyAnchor> this page.
+                    <SimpleLink href={editHref}>{" ✏️ Edit "}</SimpleLink> this page.
                 </li>
             </CallToActionUl>
         </BigHeadNotice>
