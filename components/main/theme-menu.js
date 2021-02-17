@@ -32,7 +32,7 @@ const ChooseThemeIcons = () => {
     const { nextCodeTheme } = useCodeTheme()
     const iconProps = {
         side: "large",
-        style: { margin: "5px" },
+        style: { margin: "3px" },
     }
     return (
         <DivBg2 style={ICONS_CONTAINER_STYLE}>
