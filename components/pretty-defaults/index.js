@@ -2,13 +2,27 @@ import Link from "next/link"
 import Image from "next/image"
 import { useTheme } from "hooks"
 
+const MainGrid = ({ children, className, style }) => {
+    const { bg1ClassName, bodyFont } = useTheme()
+    return (
+        <div
+            className={[bg1ClassName, className].join(" ")}
+            style={{ fontFamily: bodyFont, ...style }}
+        >
+            {children}
+        </div>
+    )
+}
+
+const SECTION_STYLE = { borderRadius: "15px", padding: "20px" }
+
 const DivBg1 = ({ style, className, children, Component }) => {
     const { bg1ClassName, bodyFont } = useTheme()
     Component = Component || "div"
     return (
         <Component
             className={[bg1ClassName, className].join(" ")}
-            style={{ fontFamily: bodyFont, ...style }}
+            style={{ fontFamily: bodyFont, ...SECTION_STYLE, ...style }}
         >
             {children}
         </Component>
@@ -22,7 +36,7 @@ const DivBg2 = ({ style, className, children, Component }) => {
     return (
         <Component
             className={[bg2ClassName, className].join(" ")}
-            style={{ fontFamily: bodyFont, ...style }}
+            style={{ fontFamily: bodyFont, ...SECTION_STYLE, ...style }}
         >
             {children}
         </Component>
@@ -78,7 +92,7 @@ const OnClickText = ({ children, onClick, style, ...otherProps }) => {
 const INPUT_STYLE = {
     borderWidth: "0px",
     borderRadius: "8px",
-    padding: "5px 10px",
+    padding: "5px 15px",
     marginRight: "5px",
     flex: 1,
 }
@@ -102,6 +116,10 @@ const BorderedDiv = ({ children, style, ...otherProps }) => {
                 borderWidth: "1px",
                 borderStyle: "solid",
                 borderColor: primaryColor,
+                borderRadius: "15px",
+                padding: "10px",
+                margin: "5px",
+                display: "flex",
                 ...style,
             }}
             {...otherProps}
@@ -125,6 +143,8 @@ const RoundedImage = ({ src, width, height, style, alt, borderType }) => {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
+                padding: "3px",
+                flexShrink: 0,
                 ...style,
             }}
         >
@@ -161,4 +181,5 @@ export {
     RoundedImage,
     DivBg1,
     DivBg2,
+    MainGrid,
 }
