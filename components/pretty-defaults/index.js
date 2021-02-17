@@ -36,12 +36,30 @@ const PrettyHeader = ({ style, children, Component, ...otherProps }) => {
     return <Component {...{ style, ...otherProps }}>{children}</Component>
 }
 
-const PrettyAnchor = ({ children, href, style, ...otherProps }) => {
+const SimpleLink = ({ href, children, style, ...otherProps }) => {
     const { primaryColor } = useTheme()
-    return (
-        <a style={{ color: primaryColor, ...style }} {...{ href, ...otherProps }}>
-            {children}
-        </a>
+    style = { color: primaryColor, ...style }
+
+    if (href.slice(0, 4) === "http") {
+        return (
+            <a
+                target="_blank"
+                rel="noopener noreferrer"
+                {...{ href, style, ...otherProps }}
+            >
+                {children}
+            </a>
+        )
+    } else if (href.slice(0, 1) === "/") {
+        return (
+            <Link {...{ href }}>
+                <a {...{ style, ...otherProps }}>{children}</a>
+            </Link>
+        )
+    }
+
+    return new Error(
+        `Link in markdown does not start with "http" or "/", href=${href}, children=${children}`
     )
 }
 
@@ -54,17 +72,6 @@ const OnClickText = ({ children, onClick, style, ...otherProps }) => {
         >
             {children}
         </button>
-    )
-}
-
-const PrettyLink = ({ children, href, style, ...otherProps }) => {
-    const { primaryColor } = useTheme()
-    return (
-        <Link {...{ href }}>
-            <a style={{ color: primaryColor, ...style }} {...{ ...otherProps }}>
-                {children}
-            </a>
-        </Link>
     )
 }
 
@@ -146,10 +153,9 @@ const RoundedImage = ({ src, width, height, style, alt, borderType }) => {
 
 export {
     PrettyHeader,
-    PrettyAnchor,
     PrettyInputField,
     BorderedDiv,
-    PrettyLink,
+    SimpleLink,
     OnClickText,
     SmallSpan,
     RoundedImage,
