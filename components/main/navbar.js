@@ -25,7 +25,7 @@ const NavInner = () => {
 
     return (
         <>
-            <DivBg2 Component="nav" className={styles.nav}>
+            <DivBg2 Component="nav" style={{ padding: "0" }} className={styles.nav}>
                 <div className={styles.navButtonsContainer}>
                     <SquareButton
                         side="large"

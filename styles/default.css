@@ -113,7 +113,7 @@ h1 {
 }
 
 h2 {
-    font-size: 41px;
+    font-size: 42px;
 }
 
 h3 {
@@ -148,6 +148,19 @@ blockquote p {
 
 @media (max-width: 850px) {
     h1 {
-        font-size: 40px;
+        font-size: 42px;
+        line-height: 1;
+    }
+
+    h2 {
+        font-size: 35px;
+    }
+
+    h3 {
+        font-size: 30px;
+    }
+
+    h4 {
+        font-size: 25px;
     }
 }

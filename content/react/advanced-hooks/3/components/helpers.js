@@ -4,32 +4,17 @@ import { ColoredButton } from "components/button"
 import { BorderedDiv, DivBg1 } from "components/pretty-defaults"
 
 const Section = ({ children }) => {
-    return (
-        <DivBg1
-            style={{
-                padding: "15px 10px",
-                borderRadius: "15px",
-                margin: "10px",
-                width: "90%",
-                maxWidth: "300px",
-            }}
-        >
-            {children}
-        </DivBg1>
-    )
+    return <DivBg1 style={{ maxWidth: "300px" }}>{children}</DivBg1>
 }
 
 const AppContainer = ({ children }) => {
     return (
         <BorderedDiv
             style={{
-                display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
-                borderStyle: "dotted",
-                borderRadius: "20px",
-                padding: "10px",
+                borderStyle: "dashed",
             }}
         >
             {children}

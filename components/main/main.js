@@ -2,7 +2,7 @@ import styles from "./Styles.module.css"
 import { useState, useEffect, useLayoutEffect } from "react"
 import { CodeThemeProvider } from "providers/code-theme"
 import Nav from "./navbar"
-import { DivBg1 } from "../pretty-defaults"
+import { MainGrid } from "../pretty-defaults"
 
 /*
     ❗❗❗❗ IMPORTANT ❗❗❗❗
@@ -15,7 +15,7 @@ const Home = ({ children } = {}) => {
     useNextEffect(() => setVisible(true), [])
 
     return (
-        <DivBg1
+        <MainGrid
             className={styles.grid}
             style={{
                 overflow: "auto",
@@ -26,7 +26,7 @@ const Home = ({ children } = {}) => {
                 <Nav />
                 <main className={styles.main}>{children}</main>
             </CodeThemeProvider>
-        </DivBg1>
+        </MainGrid>
     )
 }
 

@@ -14,23 +14,14 @@ const Code = ({ children, language }) => {
     const codeBlock = showCode && <CodeBlock {...{ language }}>{children}</CodeBlock>
 
     return (
-        <div>
-            <BorderedDiv
-                style={{
-                    margin: "10px",
-                    padding: "10px",
-                    borderStyle: "dashed",
-                    borderRadius: "10px",
-                }}
-            >
-                <OnClickText onClick={() => setShowCode(!showCode)}>
-                    <PrettyHeader style={{ margin: "10px" }}>
-                        {showCode ? "Hide Code" : "Show Code"}
-                    </PrettyHeader>
-                </OnClickText>
-                {codeBlock}
-            </BorderedDiv>
-        </div>
+        <BorderedDiv style={{ margin: "10px", borderStyle: "dashed", display: "block" }}>
+            <OnClickText onClick={() => setShowCode(!showCode)}>
+                <PrettyHeader style={{ margin: "10px" }}>
+                    {showCode ? "Hide Code" : "Show Code"}
+                </PrettyHeader>
+            </OnClickText>
+            {codeBlock}
+        </BorderedDiv>
     )
 }
 
@@ -76,14 +67,10 @@ const renderers = {
         return <SimpleLink {...props} />
     },
     paragraph: props => {
-        return <p style={{ marginBottom: "6px", marginTop: "6px" }}>{props.children}</p>
+        return <p style={{ margin: "6px" }}>{props.children}</p>
     },
 }
 
-const MarkdownRender = ({ children }) => (
-    <div style={{ marginBottom: "20px" }}>
-        <ReactMarkdown {...{ renderers, children }} />
-    </div>
-)
+const MarkdownRender = ({ children }) => <ReactMarkdown {...{ renderers, children }} />
 
 export default MarkdownRender

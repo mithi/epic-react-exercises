@@ -128,13 +128,7 @@ function AppWithUnmountCheckbox() {
 
     return (
         <>
-            <BorderedDiv
-                style={{
-                    padding: "5px",
-                    margin: "15px",
-                    borderStyle: "dashed",
-                }}
-            >
+            <BorderedDiv style={{ borderStyle: "dashed", textAlign: "center" }}>
                 <label>
                     <input
                         type="checkbox"

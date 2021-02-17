@@ -16,8 +16,6 @@
 }
 
 .common {
-    border-radius: 10px;
-    padding: 15px;
     overflow: scroll;
     height: 97vh;
 }
@@ -38,15 +36,11 @@
     z-index: 1;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
     line-height: 0.75;
 }
 
 .themeMenu {
-    padding: 30px;
-    width: 450px;
-    border-radius: 10px;
+    width: 350px;
 }
 
 .menu:focus {
@@ -59,13 +53,8 @@
     margin-right: 10px;
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
     padding: 5px;
     composes: common;
-}
-
-.main {
-    flex-grow: 1;
 }
 
 .navButtonsContainer {
@@ -106,7 +95,6 @@
     }
 
     .div0 {
-        margin: 0;
         margin-bottom: 10px;
         width: 100vw;
         height: auto;
@@ -128,16 +116,13 @@
     .menu {
         left: 0px;
         top: 80px;
-        width: 100%;
-        margin-top: 10px;
         padding: 10px;
         z-index: 1;
         composes: div0;
     }
 
     .themeMenu {
-        width: 90%;
+        width: 95%;
         align-self: center;
-        padding: 10px;
     }
 }

@@ -48,18 +48,9 @@ const DIANA = {
 }
 
 const RandomHead = ({ person }) => (
-    <div>
-        <BorderedDiv
-            style={{
-                borderRadius: "25%",
-                width: "125px",
-                height: "125px",
-                margin: "10px",
-            }}
-        >
-            <BigHead {...person} />
-        </BorderedDiv>
-    </div>
+    <BorderedDiv style={{ width: "125px", display: "auto" }}>
+        <BigHead {...person} />
+    </BorderedDiv>
 )
 
 export { RandomHead, MIKONG, MITHI, DIANA }

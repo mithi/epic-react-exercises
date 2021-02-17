@@ -6,36 +6,23 @@ import { OnClickText, PrettyHeader, DivBg1, DivBg2 } from "../pretty-defaults"
 import { FaCloudSun, FaCode, FaPaintBrush, CgFormatColor, BiText } from "../icons"
 import CodeBlock from "../markdown-render/dynamic-code-block"
 
-const ICONS_CONTAINER_STYLE = {
-    margin: "5px",
-    padding: "5px",
-    borderRadius: "15px",
-    display: "flex",
-    justifyContent: "center",
-    width: "auto",
-}
-const PARAGRAPH_STYLE = {
-    padding: "10px",
-    borderRadius: "5px",
-    lineHeight: "1.3",
-    margin: "5px",
-}
-const HEADER_STYLE = {
-    padding: "10px",
-    borderRadius: "5px",
-}
-
-const COLOR_LINE_STYLE = { width: "100%", height: "5px", margin: "3px" }
+const HOVER_STYLE = { padding: "5px", margin: "5px", borderRadius: "5px" }
 
 const ChooseThemeIcons = () => {
     const { nextColor, nextHeaderFont, nextBodyFont, nextPageTheme } = useTheme()
     const { nextCodeTheme } = useCodeTheme()
     const iconProps = {
         side: "large",
-        style: { margin: "5px" },
+        style: { margin: "3px" },
     }
     return (
-        <DivBg2 style={ICONS_CONTAINER_STYLE}>
+        <DivBg2
+            style={{
+                ...HOVER_STYLE,
+                display: "flex",
+                justifyContent: "center",
+            }}
+        >
             <SquareButton
                 onClick={nextPageTheme}
                 aria-label="change page theme"
@@ -84,7 +71,10 @@ const ChooseTheme = () => {
             Component="h1"
             onClick={nextPageTheme}
             className={onHoverClassName}
-            style={{ fontSize: "15px", padding: "5px", borderRadius: "5px" }}
+            style={{
+                fontSize: "15px",
+                ...HOVER_STYLE,
+            }}
         >
             Theme Menu {themes[themeId]}
         </PrettyHeader>
@@ -95,7 +85,9 @@ const ChooseColor = () => {
     const { nextColor, primaryColor, onHoverClassName } = useTheme()
     return (
         <div onClick={nextColor} className={onHoverClassName} style={{ height: "10px" }}>
-            <div style={{ ...COLOR_LINE_STYLE, backgroundColor: primaryColor }}></div>
+            <div
+                style={{ width: "100%", height: "5px", backgroundColor: primaryColor }}
+            ></div>
         </div>
     )
 }
@@ -106,7 +98,7 @@ const ChooseHeader = () => {
         <PrettyHeader
             onClick={nextHeaderFont}
             className={onHoverClassName}
-            style={HEADER_STYLE}
+            style={HOVER_STYLE}
             Component="h2"
         >
             Heading
@@ -114,18 +106,17 @@ const ChooseHeader = () => {
     )
 }
 
-const SAMPLE_PARAGRAPH = `Click on any of the sample elements
-to change its style. Customize its primary color, header font, body font, code
-theme, and page theme!`
+const SAMPLE_PARAGRAPH = `Click on any element
+to change its style. (primary color, body font, header font, page theme, code theme)`
 
 const ChooseParagraph = () => {
-    const { nextBodyFont, bodyFont, onHoverClassName } = useTheme()
+    const { nextBodyFont, onHoverClassName } = useTheme()
 
     return (
         <p
             onClick={nextBodyFont}
             className={onHoverClassName}
-            style={{ ...PARAGRAPH_STYLE, fontFamily: bodyFont, margin: "0px" }}
+            style={{ ...HOVER_STYLE, lineHeight: "1.3" }}
         >
             {SAMPLE_PARAGRAPH}
         </p>
@@ -137,13 +128,11 @@ const SAMPLE_CODE = `function Hello({ world }) {
 }`
 
 const ChooseCode = () => {
+    const { onHoverClassName } = useTheme()
     const { nextCodeTheme } = useCodeTheme()
 
     return (
-        <div
-            style={{ padding: "5px", borderRadius: "5px", marginBottom: "10px" }}
-            onClick={nextCodeTheme}
-        >
+        <div style={HOVER_STYLE} onClick={nextCodeTheme} className={onHoverClassName}>
             <CodeBlock language="jsx">{SAMPLE_CODE}</CodeBlock>
         </div>
     )
@@ -152,20 +141,16 @@ const ChooseCode = () => {
 const CloseThemeMenu = () => {
     const { changeMenuState } = useMenuState()
     return (
-        <div style={{ marginTop: "15px", textAlign: "center" }}>
+        <div style={{ textAlign: "center", padding: "10px" }}>
             <OnClickText onClick={() => changeMenuState("none")}>[close]</OnClickText>
         </div>
     )
 }
 
-const MenuContainer = ({ children }) => {
-    return <DivBg1 className={styles.themeMenu}>{children}</DivBg1>
-}
-
 const Menu = ({ style } = {}) => {
     return (
         <section className={styles.menu} style={{ ...style }} tabIndex="0">
-            <MenuContainer>
+            <DivBg1 className={styles.themeMenu}>
                 <ChooseTheme />
                 <ChooseColor />
                 <ChooseHeader />
@@ -173,7 +158,7 @@ const Menu = ({ style } = {}) => {
                 <ChooseCode />
                 <ChooseThemeIcons />
                 <CloseThemeMenu />
-            </MenuContainer>
+            </DivBg1>
         </section>
     )
 }

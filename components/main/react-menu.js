@@ -8,9 +8,8 @@ const Button = ({ children, section }) => {
         <PlainButton
             href={`/react/${section}/1`}
             style={{
-                borderRadius: "10px",
-                fontSize: "20px",
-                padding: "16px",
+                fontSize: "18px",
+                padding: "15px",
                 margin: "6px",
                 textAlign: "left",
             }}
@@ -30,7 +29,7 @@ const Menu = ({ style, showCloseButton = true } = {}) => {
         <section
             onClick={() => changeMenuState("none")}
             className={styles.menu}
-            style={{ paddingRight: "30px", ...style }}
+            {...{ style }}
         >
             <PrettyHeader Component="h1" style={{ fontSize: "15px", margin: "0px 10px" }}>
                 <SimpleLink href="/react">(React Menu)</SimpleLink>

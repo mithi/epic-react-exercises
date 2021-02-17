@@ -1,5 +1,11 @@
+import { cloneElement } from "react"
 import { ColoredButton } from "components/button"
-import { PrettyHeader, RoundedImage } from "components/pretty-defaults"
+import {
+    BorderedDiv,
+    PrettyHeader,
+    RoundedImage,
+    SmallSpan,
+} from "components/pretty-defaults"
 import { useTheme } from "hooks"
 import { SpinnerDots } from "components/spinner"
 
@@ -11,128 +17,161 @@ const TOTALLY_CENTERED = {
     textAlign: "center",
 }
 
-const POKEMON_CARD_STYLE = {
-    padding: "20px",
-    margin: "20px",
-    borderRadius: "15px",
-    minHeight: "400px",
-    ...TOTALLY_CENTERED,
+const Heading = ({ children, id }) => {
+    return (
+        <PrettyHeader Component="h2">
+            {children} <sup style={{ fontSize: "20px" }}>({id || "xxx"})</sup>
+        </PrettyHeader>
+    )
 }
 
-const POKEMON_IMAGE_STYLE = {
-    width: "200px",
-    minHeight: "200px",
-    borderRadius: "15px",
-    padding: "10px",
-    fontSize: "20px",
-    marginBottom: "20px",
-    ...TOTALLY_CENTERED,
+const SquareSpace = ({ children, style }) => {
+    return (
+        <BorderedDiv
+            style={{
+                width: "200px",
+                minHeight: "200px",
+                margin: "20px",
+                ...TOTALLY_CENTERED,
+                ...style,
+            }}
+        >
+            {children}
+        </BorderedDiv>
+    )
 }
 
-const ROW_STYLE = {
-    padding: "10px",
-    minWidth: "75px",
-    fontSize: "14px",
-    textAlign: "center",
-}
+const AbilityTable = ({ children, style }) => {
+    style = { padding: "5px", minWidth: "75px", textAlign: "center", ...style }
+    const Td = ({ children }) => (
+        <td {...{ style }}>
+            <SmallSpan>{children}</SmallSpan>
+        </td>
+    )
 
-const usePokemonDataViewStyles = dataViewType => {
-    const { primaryColor } = useTheme()
+    let tableBody =
+        children &&
+        children.map(abilityData => {
+            const { name, type, damage } = abilityData
+            return (
+                <tr key={name}>
+                    <Td>{name}</Td>
+                    <Td>{type}</Td>
+                    <Td>{damage}</Td>
+                </tr>
+            )
+        })
 
-    let border = (border = `1px dashed ${primaryColor}`)
-
-    if (dataViewType === "error") {
-        border = `1px dashed red`
-    } else if (dataViewType === "info") {
-        border = `1px solid ${primaryColor}`
-    }
-
-    const imgStyle = { ...POKEMON_IMAGE_STYLE, border }
-    const trStyle = { ...ROW_STYLE, borderBottom: border }
-    const cardStyle = { ...POKEMON_CARD_STYLE, border }
-
-    const PrettyTr = ({ content }) => (
-        <tr style={trStyle}>
-            <td style={trStyle}>{content[0]}</td>
-            <td style={trStyle}>{content[1]}</td>
-            <td style={trStyle}>{content[2]}</td>
+    tableBody = tableBody || (
+        <tr>
+            <Td>-</Td>
+            <Td>-</Td>
+            <Td>-</Td>
         </tr>
     )
 
-    return { imgStyle, trStyle, cardStyle, PrettyTr }
+    return (
+        <table>
+            <thead>
+                <tr {...{ style }}>
+                    <PrettyHeader Component="th">Ability</PrettyHeader>
+                    <PrettyHeader Component="th">Type</PrettyHeader>
+                    <PrettyHeader Component="th">Damage</PrettyHeader>
+                </tr>
+            </thead>
+            <tbody>{tableBody}</tbody>
+        </table>
+    )
+}
+
+const PokemonDataView = ({ children, borderColor, borderStyle }) => {
+    const { primaryColor } = useTheme()
+    let squareSpace = null
+    let abilityTable = null
+    let heading = null
+
+    borderColor = borderColor || primaryColor
+    borderStyle = borderStyle || "dashed"
+    let borderWidth = "1px"
+    let border = { borderWidth, borderColor, borderStyle }
+
+    for (let child in children) {
+        if (children[child].type === Heading) {
+            heading = children[child]
+        }
+        if (children[child].type === SquareSpace) {
+            squareSpace = cloneElement(children[child], {
+                style: border,
+            })
+        } else if (children[child].type === AbilityTable) {
+            abilityTable = cloneElement(children[child], {
+                style: {
+                    borderBottomColor: borderColor,
+                    borderBottomStyle: borderStyle,
+                    borderWidth,
+                },
+            })
+        }
+    }
+
+    return (
+        <BorderedDiv
+            style={{ padding: "20px", margin: "10px", ...TOTALLY_CENTERED, ...border }}
+        >
+            {heading} {squareSpace} {abilityTable}
+        </BorderedDiv>
+    )
 }
 
 const PokemonLoadingView = ({ pokemonName }) => {
     return (
-        <PokemonDataView
-            {...{
-                name: `Loading ${pokemonName.slice(0, 15)}...`,
-                imageAlternative: <SpinnerDots />,
-                dataViewType: "loading",
-            }}
-        />
+        <PokemonDataView>
+            <Heading>{`Loading ${pokemonName.slice(0, 7)}...`}</Heading>
+            <SquareSpace>
+                <SpinnerDots />
+            </SquareSpace>
+            <AbilityTable />
+        </PokemonDataView>
     )
 }
 
 const PokemonIdleView = () => {
     return (
-        <PokemonDataView
-            {...{
-                name: `No Pokemon Yet!`,
-                imageAlternative: "Please submit a pokemon!",
-                dataViewType: "idle",
-            }}
-        />
+        <PokemonDataView>
+            <Heading>No Pokemon Yet!</Heading>
+            <SquareSpace>Please submit a pokemon!</SquareSpace>
+            <AbilityTable />
+        </PokemonDataView>
     )
 }
 
 function PokemonErrorView({ error, resetFunction }) {
-    const imageAlternative = (
-        <div role="alert" style={{ fontSize: "15px", padding: "10px" }}>
-            <span>{error.message}</span>
-            <div style={TOTALLY_CENTERED}>
-                <ColoredButton onClick={resetFunction} style={{ backgroundColor: "red" }}>
-                    Try again
-                </ColoredButton>
-                <div> This error was caught by the error boundary!</div>
-            </div>
-        </div>
-    )
-
     return (
-        <PokemonDataView
-            {...{
-                name: "Error! :(",
-                imageAlternative,
-                dataViewType: "error",
-            }}
-        />
+        <PokemonDataView borderColor="red">
+            <Heading>Error! :(</Heading>
+            <SquareSpace>
+                <SmallSpan role="alert">
+                    {error.message}
+                    <ColoredButton
+                        onClick={resetFunction}
+                        style={{ backgroundColor: "red", margin: "5px auto" }}
+                    >
+                        Try again
+                    </ColoredButton>
+                    This error was caught by the error boundary!
+                </SmallSpan>
+            </SquareSpace>
+            <AbilityTable />
+        </PokemonDataView>
     )
 }
 
 const PokemonInfoView = ({ pokemonData }) => {
-    return <PokemonDataView {...{ ...pokemonData, dataViewType: "info" }} />
-}
-
-const PokemonDataView = ({
-    imageUrl,
-    name,
-    number,
-    abilities,
-    imageAlternative,
-    dataViewType,
-}) => {
-    const { imgStyle, trStyle, cardStyle, PrettyTr } = usePokemonDataViewStyles(
-        dataViewType
-    )
-
-    /****************
-     * POKEMON IMAGE COMPONENT
-     ****************/
-    let image = <div style={imgStyle}>{imageAlternative || "No image."}</div>
-    if (imageUrl) {
-        image = (
-            <div style={imgStyle}>
+    const { imageUrl, name, number, abilities } = pokemonData
+    return (
+        <PokemonDataView borderStyle="solid">
+            <Heading id={number}>{name}</Heading>
+            <SquareSpace>
                 <RoundedImage
                     src={imageUrl}
                     alt={name}
@@ -140,42 +179,9 @@ const PokemonDataView = ({
                     width={180}
                     borderType={"border15px"}
                 />
-            </div>
-        )
-    }
-
-    /****************
-     * POKEMON ABILITY TABLE COMPONENT
-     ****************/
-    let tableBody = <PrettyTr {...{ content: ["-", "-", "-"] }} />
-
-    if (abilities) {
-        tableBody = abilities.map(abilityData => {
-            const { name, type, damage } = abilityData
-            return <PrettyTr key={name} {...{ content: [name, type, damage] }} />
-        })
-    }
-
-    /****************
-     * FINAL LAYOUT
-     ****************/
-    return (
-        <div style={cardStyle}>
-            <PrettyHeader Component="h1" style={{ padding: "15px", fontSize: "40px" }}>
-                {name} <sup style={{ fontSize: "20px" }}>({number || "xxx"})</sup>
-            </PrettyHeader>
-            {image}
-            <table>
-                <thead>
-                    <tr style={{ ...trStyle, fontSize: "15px" }}>
-                        <PrettyHeader Component="th">Ability</PrettyHeader>
-                        <PrettyHeader Component="th">Type</PrettyHeader>
-                        <PrettyHeader Component="th">Damage</PrettyHeader>
-                    </tr>
-                </thead>
-                <tbody>{tableBody}</tbody>
-            </table>
-        </div>
+            </SquareSpace>
+            <AbilityTable>{abilities}</AbilityTable>
+        </PokemonDataView>
     )
 }
 
