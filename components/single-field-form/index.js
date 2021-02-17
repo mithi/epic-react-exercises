@@ -16,6 +16,8 @@ const PositiveIntegerInputField = props => {
     return <PrettyInputField type="number" pattern="^[0-9]" min="1" step="1" {...props} />
 }
 
+const SameLineComponent = ({ children }) => <>{children}</>
+
 const SingleFieldForm = ({
     onSubmit,
     setIncompleteValue,
@@ -25,9 +27,10 @@ const SingleFieldForm = ({
 }) => {
     let submitButton = null
     let inputField = null
-    let fragmentIfAny = null
+    let maybeSameLineComponent = null
 
     for (let child in children) {
+        console.log("single field form child", child)
         if (children[child].type === SubmitButton) {
             submitButton = children[child]
         } else if (
@@ -39,8 +42,8 @@ const SingleFieldForm = ({
                 onChange: e => setIncompleteValue(e.target.value),
                 value: incompleteValue,
             })
-        } else {
-            fragmentIfAny = children[child]
+        } else if (children[child].type === SameLineComponent) {
+            maybeSameLineComponent = children[child]
         }
     }
 
@@ -60,19 +63,20 @@ const SingleFieldForm = ({
     }
 
     return (
-        <form
-            onSubmit={handleSubmit}
-            style={{
-                display: "flex",
-                alignItems: "stretch",
-                ...style,
-            }}
-        >
-            {inputField}
-            {submitButton}
-            {fragmentIfAny}
+        <form onSubmit={handleSubmit}>
+            <div
+                style={{
+                    display: "flex",
+                    alignItems: "stretch",
+                    ...style,
+                }}
+            >
+                {inputField}
+                {submitButton}
+                {maybeSameLineComponent}
+            </div>
         </form>
     )
 }
 
-export { PositiveIntegerInputField, SubmitButton, SingleFieldForm }
+export { PositiveIntegerInputField, SubmitButton, SingleFieldForm, SameLineComponent }

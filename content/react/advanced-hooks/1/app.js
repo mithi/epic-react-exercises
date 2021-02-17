@@ -10,6 +10,7 @@ import {
     PositiveIntegerInputField,
     SubmitButton,
     SingleFieldForm,
+    SameLineComponent,
 } from "components/single-field-form"
 
 /*
@@ -101,13 +102,15 @@ function App() {
                 ></PositiveIntegerInputField>
                 <SubmitButton disabled={submitButtonDisabled}>Fetch</SubmitButton>
 
-                <SquareButton
-                    aria-label="fetch a random rick and morty character"
-                    onClick={setRandomValue}
-                    disabled={disabledByPending}
-                >
-                    <GiPerspectiveDiceSixFacesRandom />
-                </SquareButton>
+                <SameLineComponent>
+                    <SquareButton
+                        aria-label="fetch a random rick and morty character"
+                        onClick={setRandomValue}
+                        disabled={disabledByPending}
+                    >
+                        <GiPerspectiveDiceSixFacesRandom />
+                    </SquareButton>
+                </SameLineComponent>
             </SingleFieldForm>
             <SmallSpan>Which Rick and Morty Character?</SmallSpan>
             <RickAndMortyInfoCard

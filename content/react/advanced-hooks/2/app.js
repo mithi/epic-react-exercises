@@ -19,6 +19,7 @@ import {
     PositiveIntegerInputField,
     SingleFieldForm,
     SubmitButton,
+    SameLineComponent,
 } from "components/single-field-form"
 
 const NUMBER_OF_RICK_AND_MORTY_CHARACTERS = 672
@@ -92,13 +93,15 @@ const App = () => {
                 <SubmitButton disabled={isPending || !inputFieldValue}>
                     {submitButtonText}
                 </SubmitButton>
-                <SquareButton
-                    aria-label="fetch a random rick and morty character"
-                    onClick={setRandomValue}
-                    disabled={isPending}
-                >
-                    <GiPerspectiveDiceSixFacesRandom />
-                </SquareButton>
+                <SameLineComponent>
+                    <SquareButton
+                        aria-label="fetch a random rick and morty character"
+                        onClick={setRandomValue}
+                        disabled={isPending}
+                    >
+                        <GiPerspectiveDiceSixFacesRandom />
+                    </SquareButton>
+                </SameLineComponent>
             </SingleFieldForm>
             {bottomMessage}
             <RickAndMortyInfoCard {...{ status, error, data }} />
