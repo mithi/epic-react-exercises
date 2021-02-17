@@ -35,17 +35,19 @@ function App() {
 
     return (
         <>
-            <SingleFieldForm {...{ setIncompleteValue, incompleteValue, onSubmit }}>
-                <FormTop>
-                    <SmallSpan>
-                        Out of ideas? Try{" "}
-                        <PokemonSuggestion {...{ name: "Pikachu", buttonSubmit }} />,{" "}
-                        <PokemonSuggestion {...{ name: "Charizard", buttonSubmit }} />, or{" "}
-                        <PokemonSuggestion {...{ name: "Ninetales", buttonSubmit }} />
-                    </SmallSpan>
-                </FormTop>
+            <SingleFieldForm
+                {...{ setIncompleteValue, incompleteValue, onSubmit: buttonSubmit }}
+            >
                 <PrettyInputField placeholder="Which pokemon?" />
                 <FormSubmit>Fetch!</FormSubmit>
+                <FormBottom>
+                    <SmallSpan>
+                        Out of ideas? Try{" "}
+                        <PokemonSuggestion {...{ name: "Ninetales", buttonSubmit }} />,{" "}
+                        <PokemonSuggestion {...{ name: "Pikachu", buttonSubmit }} />, or{" "}
+                        <PokemonSuggestion {...{ name: "Charizard", buttonSubmit }} />.
+                    </SmallSpan>
+                </FormBottom>
             </SingleFieldForm>
             <CustomErrorBoundary
                 FallbackComponent={PokemonErrorView}
