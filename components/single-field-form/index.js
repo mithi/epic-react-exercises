@@ -2,7 +2,7 @@ import { cloneElement } from "react"
 import { PrettyInputField } from "components/pretty-defaults"
 import { ColoredButton } from "components/button"
 
-const SubmitButton = ({ style, ...otherProps }) => {
+const FormSubmit = ({ style, ...otherProps }) => {
     return (
         <ColoredButton
             style={{ margin: "0 5px 0 0", ...style }}
@@ -16,10 +16,9 @@ const PositiveIntegerInputField = props => {
     return <PrettyInputField type="number" pattern="^[0-9]" min="1" step="1" {...props} />
 }
 
-const SameLineComponent = ({ children }) => <>{children}</>
-
-const BottomMessage = ({ children }) => <>{children}</>
-const TopMessage = ({ children }) => <>{children}</>
+const FormSameLine = ({ children }) => <>{children}</>
+const FormBottom = ({ children }) => <>{children}</>
+const FormTop = ({ children }) => <>{children}</>
 
 const SingleFieldForm = ({
     onSubmit,
@@ -30,13 +29,12 @@ const SingleFieldForm = ({
 }) => {
     let submitButton = null
     let inputField = null
-    let maybeSameLineComponent = null
-    let bottomMessage = null
-    let topMessage = null
+    let formSameLine = null
+    let formBottom = null
+    let formTop = null
 
     for (let child in children) {
-        console.log("single field form child", children[child].type.name)
-        if (children[child].type === SubmitButton) {
+        if (children[child].type === FormSubmit) {
             submitButton = children[child]
         } else if (
             children[child].type === PositiveIntegerInputField ||
@@ -47,12 +45,12 @@ const SingleFieldForm = ({
                 onChange: e => setIncompleteValue(e.target.value),
                 value: incompleteValue,
             })
-        } else if (children[child].type === SameLineComponent) {
-            maybeSameLineComponent = children[child]
-        } else if (children[child].type === BottomMessage) {
-            bottomMessage = children[child]
-        } else if (children[child].type === TopMessage) {
-            topMessage = children[child]
+        } else if (children[child].type === FormSameLine) {
+            formSameLine = children[child]
+        } else if (children[child].type === FormBottom) {
+            formBottom = children[child]
+        } else if (children[child].type === FormTop) {
+            formTop = children[child]
         }
     }
 
@@ -73,7 +71,7 @@ const SingleFieldForm = ({
 
     return (
         <form onSubmit={handleSubmit}>
-            {topMessage}
+            {formTop}
             <div
                 style={{
                     display: "flex",
@@ -83,18 +81,18 @@ const SingleFieldForm = ({
             >
                 {inputField}
                 {submitButton}
-                {maybeSameLineComponent}
+                {formSameLine}
             </div>
-            {bottomMessage}
+            {formBottom}
         </form>
     )
 }
 
 export {
     PositiveIntegerInputField,
-    SubmitButton,
+    FormSubmit,
     SingleFieldForm,
-    SameLineComponent,
-    BottomMessage,
-    TopMessage,
+    FormSameLine,
+    FormBottom,
+    FormTop,
 }
