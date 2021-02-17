@@ -2,7 +2,7 @@ import { cloneElement } from "react"
 import { PrettyInputField } from "components/pretty-defaults"
 import { ColoredButton } from "components/button"
 
-const SubmitButton = ({ style, ...otherProps }) => {
+const FormSubmit = ({ style, ...otherProps }) => {
     return (
         <ColoredButton
             style={{ margin: "0 5px 0 0", ...style }}
@@ -16,6 +16,10 @@ const PositiveIntegerInputField = props => {
     return <PrettyInputField type="number" pattern="^[0-9]" min="1" step="1" {...props} />
 }
 
+const FormSameLine = ({ children }) => <>{children}</>
+const FormBottom = ({ children }) => <>{children}</>
+const FormTop = ({ children }) => <>{children}</>
+
 const SingleFieldForm = ({
     onSubmit,
     setIncompleteValue,
@@ -25,10 +29,12 @@ const SingleFieldForm = ({
 }) => {
     let submitButton = null
     let inputField = null
-    let fragmentIfAny = null
+    let formSameLine = null
+    let formBottom = null
+    let formTop = null
 
     for (let child in children) {
-        if (children[child].type === SubmitButton) {
+        if (children[child].type === FormSubmit) {
             submitButton = children[child]
         } else if (
             children[child].type === PositiveIntegerInputField ||
@@ -39,8 +45,12 @@ const SingleFieldForm = ({
                 onChange: e => setIncompleteValue(e.target.value),
                 value: incompleteValue,
             })
-        } else {
-            fragmentIfAny = children[child]
+        } else if (children[child].type === FormSameLine) {
+            formSameLine = children[child]
+        } else if (children[child].type === FormBottom) {
+            formBottom = children[child]
+        } else if (children[child].type === FormTop) {
+            formTop = children[child]
         }
     }
 
@@ -50,7 +60,7 @@ const SingleFieldForm = ({
 
     if (!inputField) {
         throw new Error(
-            `SingleFieldForm must have a children component that is either "PositiveIntegerInputField", "PrettyInputField", or "input"`
+            `SingleFieldForm must have a child component that is either "PositiveIntegerInputField", "PrettyInputField", or "input"`
         )
     }
 
@@ -60,19 +70,29 @@ const SingleFieldForm = ({
     }
 
     return (
-        <form
-            onSubmit={handleSubmit}
-            style={{
-                display: "flex",
-                alignItems: "stretch",
-                ...style,
-            }}
-        >
-            {inputField}
-            {submitButton}
-            {fragmentIfAny}
+        <form onSubmit={handleSubmit}>
+            {formTop}
+            <div
+                style={{
+                    display: "flex",
+                    alignItems: "stretch",
+                    ...style,
+                }}
+            >
+                {inputField}
+                {submitButton}
+                {formSameLine}
+            </div>
+            {formBottom}
         </form>
     )
 }
 
-export { PositiveIntegerInputField, SubmitButton, SingleFieldForm }
+export {
+    PositiveIntegerInputField,
+    FormSubmit,
+    SingleFieldForm,
+    FormSameLine,
+    FormBottom,
+    FormTop,
+}

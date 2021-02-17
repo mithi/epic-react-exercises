@@ -8,8 +8,10 @@ import InfoView from "./components/info-view"
 import useSafeAsync from "./components/use-async"
 import {
     PositiveIntegerInputField,
-    SubmitButton,
+    FormSubmit,
     SingleFieldForm,
+    FormSameLine,
+    FormBottom,
 } from "components/single-field-form"
 
 /*
@@ -99,17 +101,20 @@ function App() {
                     disabled={disabledByPending}
                     placeholder={"Pick a number!"}
                 ></PositiveIntegerInputField>
-                <SubmitButton disabled={submitButtonDisabled}>Fetch</SubmitButton>
-
-                <SquareButton
-                    aria-label="fetch a random rick and morty character"
-                    onClick={setRandomValue}
-                    disabled={disabledByPending}
-                >
-                    <GiPerspectiveDiceSixFacesRandom />
-                </SquareButton>
+                <FormSubmit disabled={submitButtonDisabled}>Fetch</FormSubmit>
+                <FormSameLine>
+                    <SquareButton
+                        aria-label="fetch a random rick and morty character"
+                        onClick={setRandomValue}
+                        disabled={disabledByPending}
+                    >
+                        <GiPerspectiveDiceSixFacesRandom />
+                    </SquareButton>
+                </FormSameLine>
+                <FormBottom>
+                    <SmallSpan>Which Rick and Morty Character?</SmallSpan>
+                </FormBottom>
             </SingleFieldForm>
-            <SmallSpan>Which Rick and Morty Character?</SmallSpan>
             <RickAndMortyInfoCard
                 characterId={submittedValue}
                 getStatus={setFetchStatus}

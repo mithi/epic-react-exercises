@@ -15,6 +15,10 @@
 My Top Level Component
 
 ```jsx
+const PokemonSuggestion = ({ name, buttonSubmit }) => {
+    return <OnClickText onClick={() => buttonSubmit(name)}>{name}</OnClickText>
+}
+
 function App() {
     const [submittedValue, onSubmit] = useState("")
     const [incompleteValue, setIncompleteValue] = useState("")
@@ -31,15 +35,19 @@ function App() {
 
     return (
         <>
-            <SmallSpan>
-                Out of ideas? Try{" "}
-                <PokemonSuggestion {...{ name: "Pikachu", buttonSubmit }} />,{" "}
-                <PokemonSuggestion {...{ name: "Charizard", buttonSubmit }} />, or{" "}
-                <PokemonSuggestion {...{ name: "Ninetales", buttonSubmit }} />
-            </SmallSpan>
-            <SingleFieldForm {...{ setIncompleteValue, incompleteValue, onSubmit }}>
+            <SingleFieldForm
+                {...{ setIncompleteValue, incompleteValue, onSubmit: buttonSubmit }}
+            >
                 <PrettyInputField placeholder="Which pokemon?" />
-                <SubmitButton>Fetch!</SubmitButton>
+                <FormSubmit>Fetch!</FormSubmit>
+                <FormBottom>
+                    <SmallSpan>
+                        Out of ideas? Try{" "}
+                        <PokemonSuggestion {...{ name: "Ninetales", buttonSubmit }} />,{" "}
+                        <PokemonSuggestion {...{ name: "Pikachu", buttonSubmit }} />, or{" "}
+                        <PokemonSuggestion {...{ name: "Charizard", buttonSubmit }} />.
+                    </SmallSpan>
+                </FormBottom>
             </SingleFieldForm>
             <CustomErrorBoundary
                 FallbackComponent={PokemonErrorView}
