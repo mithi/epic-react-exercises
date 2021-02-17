@@ -1,5 +1,6 @@
 import { Children, cloneElement } from "react"
 import { SquareButton } from "../button"
+import { SmallSpan } from "../pretty-defaults"
 
 const Pagination = ({ numberOfPages, currentPageId, pathname }) => {
     const pageButtons = Array.from(Array(numberOfPages).keys()).map(key => {
@@ -35,7 +36,11 @@ const CallToActionUl = ({ children }) => {
         return cloneElement(child, { style: LIST_STYLE })
     })
 
-    return <ul style={{ padding: "0", margin: "5px" }}>{styledChildren}</ul>
+    return (
+        <ul style={{ padding: "0", margin: "5px" }}>
+            <SmallSpan>{styledChildren}</SmallSpan>
+        </ul>
+    )
 }
 
 export { Pagination, CallToActionUl }

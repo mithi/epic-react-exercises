@@ -14,19 +14,19 @@ const BigHeadMessage = ({ state }) => {
     return (
         <div
             style={{
-                fontSize: "15px",
-                margin: "15px",
+                display: "flex",
+                alignItems: "center",
+                margin: "10px",
+                lineHeight: "1",
+                flexWrap: "wrap",
             }}
         >
-            <div style={{ lineHeight: "1", maxWidth: "250px" }}>
-                You are seeing
-                <PrettyHeader
-                    Component="span"
-                    style={{ fontSize: "20px", margin: "5px" }}
-                >
+            <div style={{ maxWidth: "250px" }}>
+                {"You are seeing "}
+                <PrettyHeader Component="span" style={{ fontSize: "20px" }}>
                     {state.name}
                 </PrettyHeader>
-                because your screen size is{" "}
+                {" because your screen size is "}
                 <PrettyHeader Component="span" style={{ fontSize: "20px" }}>
                     {state.size}!
                 </PrettyHeader>

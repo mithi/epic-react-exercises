@@ -86,7 +86,7 @@ const PageLayout = ({
     const editHref = editUrl(editPath)
 
     const callToActionBox = (
-        <BigHeadNotice>
+        <BigHeadNotice headSize={60}>
             <CallToActionUl>
                 <li>
                     <SimpleLink href={solutionHref}>
