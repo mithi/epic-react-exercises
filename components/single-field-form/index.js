@@ -18,6 +18,9 @@ const PositiveIntegerInputField = props => {
 
 const SameLineComponent = ({ children }) => <>{children}</>
 
+const BottomMessage = ({ children }) => <>{children}</>
+const TopMessage = ({ children }) => <>{children}</>
+
 const SingleFieldForm = ({
     onSubmit,
     setIncompleteValue,
@@ -28,9 +31,11 @@ const SingleFieldForm = ({
     let submitButton = null
     let inputField = null
     let maybeSameLineComponent = null
+    let bottomMessage = null
+    let topMessage = null
 
     for (let child in children) {
-        console.log("single field form child", child)
+        console.log("single field form child", children[child].type.name)
         if (children[child].type === SubmitButton) {
             submitButton = children[child]
         } else if (
@@ -44,6 +49,10 @@ const SingleFieldForm = ({
             })
         } else if (children[child].type === SameLineComponent) {
             maybeSameLineComponent = children[child]
+        } else if (children[child].type === BottomMessage) {
+            bottomMessage = children[child]
+        } else if (children[child].type === TopMessage) {
+            topMessage = children[child]
         }
     }
 
@@ -64,6 +73,7 @@ const SingleFieldForm = ({
 
     return (
         <form onSubmit={handleSubmit}>
+            {topMessage}
             <div
                 style={{
                     display: "flex",
@@ -75,8 +85,16 @@ const SingleFieldForm = ({
                 {submitButton}
                 {maybeSameLineComponent}
             </div>
+            {bottomMessage}
         </form>
     )
 }
 
-export { PositiveIntegerInputField, SubmitButton, SingleFieldForm, SameLineComponent }
+export {
+    PositiveIntegerInputField,
+    SubmitButton,
+    SingleFieldForm,
+    SameLineComponent,
+    BottomMessage,
+    TopMessage,
+}
