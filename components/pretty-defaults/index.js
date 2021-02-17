@@ -90,10 +90,12 @@ const OnClickText = ({ children, onClick, style, ...otherProps }) => {
 }
 
 const INPUT_STYLE = {
+    width: "100%",
     borderWidth: "0px",
     borderRadius: "8px",
     padding: "5px 15px",
     marginRight: "5px",
+    fontSize: "16px",
     flex: 1,
 }
 
