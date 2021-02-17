@@ -5,7 +5,7 @@ import { ColoredButton } from "components/button"
 const FormSubmit = ({ style, ...otherProps }) => {
     return (
         <ColoredButton
-            style={{ margin: "0 5px 0 0", ...style }}
+            style={{ margin: "0 5px 0 2px", ...style }}
             type="submit"
             {...otherProps}
         />
@@ -70,15 +70,9 @@ const SingleFieldForm = ({
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} style={{ margin: "20px", ...style }}>
             {formTop}
-            <div
-                style={{
-                    display: "flex",
-                    alignItems: "stretch",
-                    ...style,
-                }}
-            >
+            <div style={{ display: "flex", alignItems: "stretch" }}>
                 {inputField}
                 {submitButton}
                 {formSameLine}

@@ -142,7 +142,7 @@ const ChooseCode = () => {
 const CloseThemeMenu = () => {
     const { changeMenuState } = useMenuState()
     return (
-        <div style={{ ...HOVER_STYLE, textAlign: "center" }}>
+        <div style={{ textAlign: "center", padding: "10px" }}>
             <OnClickText onClick={() => changeMenuState("none")}>[close]</OnClickText>
         </div>
     )
