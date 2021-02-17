@@ -60,7 +60,7 @@ const SingleFieldForm = ({
 
     if (!inputField) {
         throw new Error(
-            `SingleFieldForm must have a children component that is either "PositiveIntegerInputField", "PrettyInputField", or "input"`
+            `SingleFieldForm must have a child component that is either "PositiveIntegerInputField", "PrettyInputField", or "input"`
         )
     }
 
