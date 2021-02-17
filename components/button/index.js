@@ -68,12 +68,12 @@ const LinkOutButton = ({ href, ...otherProps }) => (
 const OnClickButton = props => <button {...props} />
 
 const ButtonInner = ({
-    disabled,
-    className,
-    style,
     onClick,
-    type,
     href,
+    type,
+    className,
+    disabled,
+    style,
     useBgPrimaryColor,
     isInvertedColor,
     noDisabledBorder,
@@ -82,7 +82,11 @@ const ButtonInner = ({
     const Component = getComponent(onClick, href, type)
     className = useButtonThemeClasses(className, disabled, isInvertedColor)
     style = useDefaultButtonStyle(style, disabled, useBgPrimaryColor, noDisabledBorder)
-    return <Component {...{ className, style, onClick, href, ...otherProps }} />
+    return (
+        <Component
+            {...{ onClick, href, disabled, type, className, style, ...otherProps }}
+        />
+    )
 }
 
 const ColoredButton = props => (
@@ -121,7 +125,7 @@ const SquareButton = ({ side, style, ...otherProps }) => {
             ...SQUARE_BUTTON_STYLE,
             height: SMALL_SIDE,
             width: SMALL_SIDE,
-            margin: "2px",
+            margin: "3px",
             fontSize: "18px",
             ...style,
         }
