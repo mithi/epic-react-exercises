@@ -2,6 +2,7 @@ import { useContext } from "react"
 import { ThemeContext, MenuStateContext } from "providers"
 import useStickyState from "./use-sticky-state"
 import useAsync from "./use-async"
+import useWindowSize from "./use-window-size"
 
 function useCustomContext(_context, name) {
     const context = useContext(_context)
@@ -21,4 +22,4 @@ function useMenuState() {
     return useCustomContext(MenuStateContext, "MenuState")
 }
 
-export { useStickyState, useTheme, useMenuState, useAsync }
+export { useStickyState, useTheme, useMenuState, useAsync, useWindowSize }
