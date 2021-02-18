@@ -12,7 +12,7 @@
 -   Navigating away from the page and going back, refreshing the page, and unmounting remounting the component should NOT clear the cache
 -   As usual, allows the user to randomly get fetch random character by clicking a specific button
 
-### My Implementation
+### My Solution
 
 The top level App
 
