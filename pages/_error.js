@@ -1,11 +1,21 @@
-import Main from "components/main"
+import { useWindowSize } from "hooks"
+import { PrettyHeader } from "components/pretty-defaults"
+import { ImpossiblePage } from "components/impossible-page"
 
 function Error({ statusCode }) {
-    const message = statusCode ? `Server Error: ${statusCode}` : "ClientError"
+    const { width, height } = useWindowSize()
+    const errorType = statusCode ? "server" : "client"
+    const fontSize = width > 850 ? `${0.45 * height}px` : `${0.2 * width}px`
+
     return (
-        <Main>
-            <p style={{ margin: "50px" }}>{message}</p>
-        </Main>
+        <ImpossiblePage
+            issueMessage={`Error! (${errorType}) status code: ${statusCode}`}
+            style={{ justifyContent: width > 850 ? "center" : "start" }}
+        >
+            <PrettyHeader Component="h1" style={{ fontSize }}>
+                Error
+            </PrettyHeader>
+        </ImpossiblePage>
     )
 }
 

@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic"
-import { useMemo } from "react"
+import { useMemo, useState } from "react"
 import {
     FiGithub,
     BiRocket,
@@ -16,14 +16,13 @@ import NotebookLayout from "../main/two-sections"
 import { BigHeadNotice } from "../big-head-girl"
 import { Pagination, CallToActionUl } from "./styled-components"
 import { PrettyHeader, SimpleLink } from "../pretty-defaults"
+import { DefaultErrorBoundary } from "components/error-boundary"
 
-const EPIC_NOTES_REPO_URL = "https://github.com/mithi/epic-notes"
 const KOFI_URL = "https://ko-fi.com/minimithi"
 
-const issueUrl = (prefix, editPath) => {
-    prefix = prefix.split(" ").join("%20")
-    return `${EPIC_NOTES_REPO_URL}/issues/new?title=${prefix}%20${editPath}`
-}
+const EPIC_NOTES_REPO_URL = "https://github.com/mithi/epic-notes"
+const issueUrl = message => `${EPIC_NOTES_REPO_URL}/issues/new?title=${message}`
+
 const editUrl = editPath =>
     `${EPIC_NOTES_REPO_URL}/edit/main/content/${editPath}/notes.md`
 
@@ -69,6 +68,7 @@ const PageLayout = ({
     topic,
     section,
 }) => {
+    const [resetCounter, setResetCounter] = useState(0)
     const App = useMemo(
         () =>
             hasApp
@@ -81,8 +81,9 @@ const PageLayout = ({
     )
 
     const editPath = `${topic}/${section}/${pageId}`
+    const resetKey = `${editPath}/${resetCounter}`
     const solutionHref = solutionUrl(editPath)
-    const issueHref = issueUrl("Better solution! Suggestion for:", editPath)
+    const issueHref = issueUrl(`Better solution! Suggestion for: ${editPath}`)
     const editHref = editUrl(editPath)
 
     const callToActionBox = (
@@ -127,7 +128,13 @@ const PageLayout = ({
         <>
             {hasApp && callToActionBox}
             {hasApp && notebookPageButtons}
-            <article>{notes}</article>
+            <DefaultErrorBoundary
+                key={resetKey}
+                resetFunction={() => setResetCounter(resetCounter + 1)}
+                message={`Something went wrong within the article (${editPath})`}
+            >
+                <article>{notes}</article>
+            </DefaultErrorBoundary>
             <div style={{ display: "flex", justifyContent: "center", margin: "20px" }}>
                 {notebookPageButtons}
             </div>
@@ -146,8 +153,13 @@ const PageLayout = ({
                     pathname: `/${topic}/${section}`,
                 }}
             />
-
-            {hasApp ? <App /> : articlePlus}
+            <DefaultErrorBoundary
+                key={resetKey}
+                resetFunction={() => setResetCounter(resetCounter + 1)}
+                message={`Something went wrong within the example component (${editPath})`}
+            >
+                {hasApp ? <App /> : articlePlus}
+            </DefaultErrorBoundary>
         </>
     )
 

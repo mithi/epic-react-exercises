@@ -1,41 +1,19 @@
-import Main from "components/main"
 import { PrettyHeader } from "components/pretty-defaults"
-import { SquareButton } from "components/button"
-import { FaBug, FaHome } from "components/icons"
+import { useWindowSize } from "hooks"
+import { ImpossiblePage } from "components/impossible-page"
 
 export default function FourOhfour() {
+    const { width, height } = useWindowSize()
+    const fontSize = width > 850 ? `${0.5 * height}px` : `${0.35 * width}px`
+
     return (
-        <Main>
-            <div
-                style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: "auto",
-                    margin: "20px",
-                }}
-            >
-                <div
-                    style={{
-                        display: "flex",
-                        alignItems: "flex-start",
-                    }}
-                >
-                    <PrettyHeader Component="h1" style={{ fontSize: "100px" }}>
-                        404
-                    </PrettyHeader>
-                    <SquareButton
-                        aria-label="report a bug"
-                        href="https://github.com/mithi/epic-react-notes/issues/new?title=Unexpected%20404:%20file%20not%20found"
-                        side="large"
-                    >
-                        <FaBug />
-                    </SquareButton>
-                    <SquareButton aria-label="home" href="/" side="large">
-                        <FaHome />
-                    </SquareButton>
-                </div>
-            </div>
-        </Main>
+        <ImpossiblePage
+            issueMessage="Unexpected 404: File not found"
+            style={{ justifyContent: width > 850 ? "center" : "start" }}
+        >
+            <PrettyHeader Component="h1" style={{ fontSize }}>
+                404
+            </PrettyHeader>
+        </ImpossiblePage>
     )
 }

@@ -19,7 +19,7 @@ const TOTALLY_CENTERED = {
 
 const Heading = ({ children, id }) => {
     return (
-        <PrettyHeader Component="h2">
+        <PrettyHeader style={{ fontSize: "30px" }}>
             {children} <sup style={{ fontSize: "20px" }}>({id || "xxx"})</sup>
         </PrettyHeader>
     )
@@ -31,7 +31,7 @@ const SquareSpace = ({ children, style }) => {
             style={{
                 width: "200px",
                 minHeight: "200px",
-                margin: "20px",
+                margin: "10px",
                 ...TOTALLY_CENTERED,
                 ...style,
             }}

@@ -1,16 +1,16 @@
-import Main from "components/main"
+import { ImpossiblePage } from "components/impossible-page"
 
 export async function getServerSideProps() {
-    return {
-        redirect: {
-            destination: "/react",
-            permanent: false,
-        },
-    }
+    return { redirect: { destination: "/react", permanent: false } }
 }
 
 function Page() {
-    return <Main>This {`shouldn't`} be possible.</Main>
+    const message = `Error! You should have been redirected to /react`
+    return (
+        <ImpossiblePage issueMessage={message}>
+            <p style={{ margin: "30px" }}>{message}</p>
+        </ImpossiblePage>
+    )
 }
 
 export default Page
