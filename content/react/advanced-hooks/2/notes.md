@@ -27,11 +27,6 @@ const App = () => {
         useCacheOnlyWhenNotReloading: submitted ? false : true,
     })
 
-    // Leave this debug statement for now
-    useEffect(() => console.log("current InputField Value", inputFieldValue), [
-        inputFieldValue,
-    ])
-
     const setInputField = value =>
         setState({ submitted: false, inputFieldValue: value, submittedValue })
 
@@ -55,11 +50,11 @@ const App = () => {
     } else if (status === "rejected") {
         bottomMessage = <ErrorMessage {...{ onClickReload, value: submittedValue }} />
     } else if (status === "resolved") {
-        bottomMessage = <SuccessMessage {...{ data }} />
+        bottomMessage = ` The character ${data.name}! (#${data.id}) is in your cache! 🎉🥳`
     } else if (status === "idle") {
-        bottomMessage = <GenericMessage>Which Rick and Morty Character?</GenericMessage>
+        bottomMessage = "Which Rick and Morty Character?"
     } else if (status === "pending") {
-        bottomMessage = <GenericMessage> This won{"'"}t take long...</GenericMessage>
+        bottomMessage = `This won't take long...`
     }
 
     let isReloadSubmitType = ["rejected", "resolved"].includes(status) ? true : false
@@ -92,7 +87,9 @@ const App = () => {
                         <GiPerspectiveDiceSixFacesRandom />
                     </SquareButton>
                 </FormSameLine>
-                <FormBottom>{bottomMessage}</FormBottom>
+                <FormBottom>
+                    <SmallSpan>{bottomMessage}</SmallSpan>
+                </FormBottom>
             </SingleFieldForm>
             <RickAndMortyInfoCard {...{ status, error, data }} />
             <RickAndMortyCachePreview
@@ -101,6 +98,12 @@ const App = () => {
         </>
     )
 }
+
+const Home = () => (
+    <RickAndMortyCacheProvider>
+        <App />
+    </RickAndMortyCacheProvider>
+)
 ```
 
 CachePreview
