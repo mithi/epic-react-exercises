@@ -109,7 +109,7 @@ const PageLayout = ({
     const { deployedSite, repository, title } = properties
 
     const notebookPageButtons = (
-        <div style={{ display: "flex", margin: "10px 0 -15px 0" }}>
+        <div style={{ display: "flex", margin: "10px 0" }}>
             {deployedSite && (
                 <SquareButton href={deployedSite} {...BUTTONS_PROPS.deployedSite} />
             )}
