@@ -150,7 +150,6 @@ const SquareButton = ({ side, style, ...otherProps }) => {
         throw new Error(
             `Square button must have a side equal to a falsy, "small", "large", or a number followed by "px" indicating length in pixels`
         )
-        // small
     }
 
     return <PlainButton {...{ style, ...otherProps }} />
