@@ -1,20 +1,6 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { GiPerspectiveDiceSixFacesRandom } from "components/icons"
 import { SquareButton } from "components/button"
-import {
-    RickAndMortyInfoCard,
-    FETCH_BUTTON_CONTENT,
-    RELOAD_BUTTON_CONTENT,
-    SuccessMessage,
-    GenericMessage,
-    ErrorMessage,
-    NotInCacheMessage,
-} from "./components/helper-components"
-import RickAndMortyCachePreview from "./components/cache-preview"
-import {
-    useRickAndMorty,
-    RickAndMortyCacheProvider,
-} from "./components/use-rick-and-morty"
 import {
     PositiveIntegerInputField,
     SingleFieldForm,
@@ -22,6 +8,56 @@ import {
     FormSameLine,
     FormBottom,
 } from "components/single-field-form"
+import { BiRefresh, FaSearch } from "components/icons"
+import { OnClickText, SmallSpan } from "components/pretty-defaults"
+import { IdleView, PendingView, ErrorView, InfoView } from "../1/components/views"
+import RickAndMortyCachePreview from "./components/cache-preview"
+import {
+    useRickAndMorty,
+    RickAndMortyCacheProvider,
+} from "./components/use-rick-and-morty"
+
+const RickAndMortyInfoCard = ({ status, error, data }) => {
+    if (status === "idle" || status === "notInCache") {
+        return <IdleView />
+    } else if (status === "pending") {
+        return <PendingView />
+    } else if (status === "rejected") {
+        return <ErrorView message={error.message} />
+    } else if (status === "resolved") {
+        return <InfoView data={data} />
+    }
+
+    throw new Error("This should be impossible")
+}
+
+const RELOAD_BUTTON_CONTENT = (
+    <>
+        <BiRefresh />
+        <SmallSpan> Refetch</SmallSpan>
+    </>
+)
+
+const FETCH_BUTTON_CONTENT = (
+    <>
+        <FaSearch />
+        <span style={{ paddingLeft: "5px" }}>Fetch</span>
+    </>
+)
+
+let NotInCacheMessage = ({ value, onClickFetch }) => (
+    <>
+        The id {`"${value}" is not in your cache yet. `}
+        <OnClickText onClick={onClickFetch}>Fetch it?</OnClickText>
+    </>
+)
+
+let ErrorMessage = ({ value, onClickReload }) => (
+    <>
+        {`❗❗ There was an error while fetching the id "${value}". `}
+        <OnClickText onClick={onClickReload}>Try fetching it again?</OnClickText>
+    </>
+)
 
 const NUMBER_OF_RICK_AND_MORTY_CHARACTERS = 672
 const randomIntegerBetween = (x, y) => Math.floor(Math.random() * y) + x
@@ -37,11 +73,6 @@ const App = () => {
         key: submitted ? submittedValue : inputFieldValue,
         useCacheOnlyWhenNotReloading: submitted ? false : true,
     })
-
-    // Leave this debug statement for now
-    useEffect(() => console.log("current InputField Value", inputFieldValue), [
-        inputFieldValue,
-    ])
 
     const setInputField = value =>
         setState({ submitted: false, inputFieldValue: value, submittedValue })
@@ -66,11 +97,11 @@ const App = () => {
     } else if (status === "rejected") {
         bottomMessage = <ErrorMessage {...{ onClickReload, value: submittedValue }} />
     } else if (status === "resolved") {
-        bottomMessage = <SuccessMessage {...{ data }} />
+        bottomMessage = ` The character ${data.name}! (#${data.id}) is in your cache! 🎉🥳`
     } else if (status === "idle") {
-        bottomMessage = <GenericMessage>Which Rick and Morty Character?</GenericMessage>
+        bottomMessage = "Which Rick and Morty Character?"
     } else if (status === "pending") {
-        bottomMessage = <GenericMessage> This won{"'"}t take long...</GenericMessage>
+        bottomMessage = `This won't take long...`
     }
 
     let isReloadSubmitType = ["rejected", "resolved"].includes(status) ? true : false
@@ -103,7 +134,9 @@ const App = () => {
                         <GiPerspectiveDiceSixFacesRandom />
                     </SquareButton>
                 </FormSameLine>
-                <FormBottom>{bottomMessage}</FormBottom>
+                <FormBottom>
+                    <SmallSpan>{bottomMessage}</SmallSpan>
+                </FormBottom>
             </SingleFieldForm>
             <RickAndMortyInfoCard {...{ status, error, data }} />
             <RickAndMortyCachePreview

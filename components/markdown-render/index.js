@@ -25,49 +25,19 @@ const Code = ({ children, language }) => {
     )
 }
 
-const CustomHeading = ({ children, level }) => {
-    const style = { marginTop: "20px" }
-    switch (level) {
-        case 1:
-            return (
-                <PrettyHeader Component="h1" {...{ style }}>
-                    {children}
-                </PrettyHeader>
-            )
-
-        case 2:
-            return (
-                <PrettyHeader Component="h2" {...{ style }}>
-                    {children}
-                </PrettyHeader>
-            )
-        case 3:
-            return (
-                <PrettyHeader Component="h3" {...{ style }}>
-                    {children}
-                </PrettyHeader>
-            )
-        case 4:
-            return <PrettyHeader Component="h4">{children}</PrettyHeader>
-        case 5:
-            return <PrettyHeader Component="h5">{children}</PrettyHeader>
-        default:
-            return <PrettyHeader Component="h6">{children}</PrettyHeader>
-    }
-}
-
 const renderers = {
     code: ({ language, value }) => {
         return <Code language={language}>{value}</Code>
     },
-    heading: props => {
-        return <CustomHeading {...props} />
+    heading: ({ children, level }) => {
+        return (
+            <PrettyHeader Component={`h${level}`} style={{ marginTop: "10px" }}>
+                {children}
+            </PrettyHeader>
+        )
     },
     link: props => {
         return <SimpleLink {...props} />
-    },
-    paragraph: props => {
-        return <p style={{ margin: "6px" }}>{props.children}</p>
     },
 }
 

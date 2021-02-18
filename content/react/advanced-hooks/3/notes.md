@@ -8,7 +8,7 @@
 -   Explain the difference between the two implementations.
 -   Will you use `useLayoutEffect` or `useEffect` for this? Explain why.
 
-### My Implementation
+### My Solution
 
 By using `useImperativeHandle` and `forwardRef` my implementation is like this:
 

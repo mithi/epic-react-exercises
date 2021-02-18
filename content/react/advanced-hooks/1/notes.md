@@ -20,7 +20,7 @@
 
 ⚠️❗❗⚠️ This warning should NOT pop up in our app. ⚠️❗❗⚠️
 
-### My Implementation
+### My Solution
 
 -   The `RickAndMortyInfoCard` in the codeblock below uses a `useSafeAsync` hook that's responsible for managing the state, and fetching the data.
 -   The `useSafeAsync` makes sure that the dispatch function (that returns the the data and state from the fetch function) would not be run if the component is no longer mounted.

@@ -3,8 +3,7 @@ import { delayedFetchRickAndMorty } from "fetch-utils"
 import { SquareButton } from "components/button"
 import { GiPerspectiveDiceSixFacesRandom } from "components/icons"
 import { BorderedDiv, SmallSpan } from "components/pretty-defaults"
-import { ErrorView, PendingView, IdleView } from "./components/views"
-import InfoView from "./components/info-view"
+import { IdleView, PendingView, ErrorView, InfoView } from "./components/views"
 import useSafeAsync from "./components/use-async"
 import {
     PositiveIntegerInputField,

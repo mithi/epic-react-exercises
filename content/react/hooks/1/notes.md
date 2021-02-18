@@ -6,7 +6,7 @@
 -   Be able to keep a history of the game; allow players to go backward and forward in time
 -   [Kent's Implementation](https://github.com/kentcdodds/react-hooks/blob/main/src/final/04.extra-3.js)
 
-### My Implementation
+### My Solution
 
 My top level component basically renders the following:
 

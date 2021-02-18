@@ -4,7 +4,7 @@
 -   Display the details of the perspective transform as it happens
 -   Remember: We don't want event handlers dangling around on DOM nodes that are no longer in the document. (memory leak)
 
-### My Implementation
+### My Solution
 
 ```jsx
 const vanillaTiltOptions = {

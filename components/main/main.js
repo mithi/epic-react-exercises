@@ -17,10 +17,7 @@ const Home = ({ children } = {}) => {
     return (
         <MainGrid
             className={styles.grid}
-            style={{
-                overflow: "auto",
-                visibility: visible ? "visible" : "hidden",
-            }}
+            style={{ overflow: "auto", visibility: visible ? "visible" : "hidden" }}
         >
             <CodeThemeProvider>
                 <Nav />

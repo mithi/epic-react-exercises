@@ -34,7 +34,6 @@ const Menu = ({ style, showCloseButton = true } = {}) => {
             <PrettyHeader Component="h1" style={{ fontSize: "15px", margin: "0px 10px" }}>
                 <SimpleLink href="/react">(React Menu)</SimpleLink>
             </PrettyHeader>
-
             <Button section="fundamentals">1. React Fundamentals</Button>
             <Button section="hooks">2. React Hooks</Button>
             <Button section="advanced-hooks">3. Advanced React Hooks</Button>

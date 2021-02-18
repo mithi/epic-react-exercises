@@ -21,7 +21,8 @@ const RickAndMortyCachePreview = ({ setId, id }) => {
             key={cache[i].name}
             disabled={i === id}
             onClick={() => setId(i)}
-            aria-label={`load ${cache[i].namel}`}
+            aria-label={`load ${cache[i].name}`}
+            style={{ margin: "1px" }}
         >
             <RoundedImage src={cache[i].imageUrl} height={30} width={30} />
         </SquareButton>

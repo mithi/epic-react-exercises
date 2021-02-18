@@ -10,7 +10,7 @@
 -   After an error, the user should be able to use the search bar to search for a new pokemon without having to click the `try again` button.
 -   [Kent's Implementation](https://github.com/kentcdodds/react-hooks/blob/main/src/final/04.extra-3.js)
 
-### My Implementation
+### My Solution
 
 My Top Level Component
 
