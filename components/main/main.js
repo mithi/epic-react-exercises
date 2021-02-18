@@ -9,7 +9,7 @@ import { MainGrid } from "../pretty-defaults"
     the setVisible hack is important to address FOUC ( flash of unstyled content )
     DON'T REMOVE IT!
  */
-const Home = ({ children } = {}) => {
+const Home = ({ children, mainStyle } = {}) => {
     const [visible, setVisible] = useState(false)
     const useNextEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect
     useNextEffect(() => setVisible(true), [])
@@ -21,7 +21,9 @@ const Home = ({ children } = {}) => {
         >
             <CodeThemeProvider>
                 <Nav />
-                <main className={styles.main}>{children}</main>
+                <main style={mainStyle} className={styles.main}>
+                    {children}
+                </main>
             </CodeThemeProvider>
         </MainGrid>
     )
