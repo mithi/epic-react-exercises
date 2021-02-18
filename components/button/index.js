@@ -114,10 +114,7 @@ const PlainButton = props => (
 // size: "small", "big", "40px"
 const SMALL_SIDE = "32px"
 const LARGE_SIDE = "50px"
-const SQUARE_BUTTON_STYLE = {
-    borderRadius: "25%",
-    padding: "2px",
-}
+const SQUARE_BUTTON_STYLE = { borderRadius: "25%", padding: "2px" }
 
 const SquareButton = ({ side, style, ...otherProps }) => {
     if (!side || side === "small") {

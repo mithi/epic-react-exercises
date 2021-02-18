@@ -8,11 +8,14 @@ const TwoSections = ({ div1, div2 }) => {
         </DivBg2>
     )
 
-    const section2 = div2 ? (
-        <DivBg2 Component="section" className={styles.div2}>
-            {div2}
-        </DivBg2>
-    ) : null
+    let section2 = null
+    if (div2) {
+        section2 = (
+            <DivBg2 Component="section" className={styles.div2}>
+                {div2}
+            </DivBg2>
+        )
+    }
 
     return (
         <div className={styles.twoSectionsLayout}>
