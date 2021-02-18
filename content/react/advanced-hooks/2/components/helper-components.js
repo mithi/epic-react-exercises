@@ -1,8 +1,7 @@
 import { BiRefresh, FaSearch } from "components/icons"
 import { OnClickText, SmallSpan } from "components/pretty-defaults"
 import { ColoredButton } from "components/button"
-import { PendingView } from "../../1/components/views"
-import InfoView, { IdleView, ErrorView } from "./info-view"
+import { IdleView, PendingView, ErrorView, InfoView } from "../../1/components/views"
 
 const RickAndMortyInfoCard = ({ status, error, data }) => {
     if (status === "idle" || status === "notInCache") {
