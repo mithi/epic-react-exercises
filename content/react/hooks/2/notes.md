@@ -35,8 +35,8 @@ function App() {
     return (
         <>
             <p>Touching the box will transform its perspective.</p>
-            <div style={parentStyle}>
-                <Tilt style={tiltStyle}>
+            <div>
+                <Tilt {...{ setData, style: tiltStyle }}>
                     <TiltDataDisplay {...{ data }} />
                 </Tilt>
             </div>
