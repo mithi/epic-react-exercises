@@ -52,7 +52,9 @@ function DefaultErrorView({ error, resetFunction, message }) {
     const tryReloading = <OnClickText onClick={resetFunction}>try reloading</OnClickText>
     return (
         <BorderedDiv style={DIV_STYLE}>
-            <PrettyHeader style={{ color: "red", margin: "5px" }}>Error! :(</PrettyHeader>
+            <PrettyHeader style={{ color: "red", margin: "5px" }}>
+                Something went wrong. :(
+            </PrettyHeader>
             <SmallSpan>
                 {message}. You can {submitAnIssue} or {tryReloading}.
             </SmallSpan>

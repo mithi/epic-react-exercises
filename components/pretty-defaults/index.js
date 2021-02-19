@@ -73,7 +73,7 @@ const SimpleLink = ({ href, children, style, ...otherProps }) => {
     }
 
     return new Error(
-        `Link in markdown does not start with "http" or "/", href=${href}, children=${children}`
+        `SimpleLink should start with "http" or "/", href=${href}, children=${children}`
     )
 }
 
