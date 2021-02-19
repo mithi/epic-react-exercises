@@ -4,14 +4,14 @@ import { PrettyHeader } from "components/pretty-defaults"
 const X_PLAYER = "X"
 const O_PLAYER = "O"
 
-const Board = ({ currentBoard, onPlayerMove, disableButtons }) => {
+const TicTacToeBoard = ({ currentBoard, onPlayerMove, disableAll }) => {
     const square = i => {
         const player = currentBoard[i]
         return (
             <SquareButton
                 onClick={() => onPlayerMove(i)}
-                disabled={disableButtons || player ? true : false}
-                aria-label={`TictacToe button # ${i}`}
+                disabled={disableAll || player ? true : false}
+                aria-label={`TictacToe button # ${i}, occupied by: ${player}`}
                 side="75px"
                 style={{ margin: "4px", fontSize: "50px" }}
             >
@@ -21,40 +21,25 @@ const Board = ({ currentBoard, onPlayerMove, disableButtons }) => {
     }
 
     return (
-        <div style={{ display: "flex", justifyContent: "center" }}>
-            <table>
-                <tbody>
-                    <tr>
-                        <td>{square(0)}</td>
-                        <td>{square(1)}</td>
-                        <td>{square(2)}</td>
-                    </tr>
-                    <tr>
-                        <td>{square(3)}</td>
-                        <td>{square(4)}</td>
-                        <td>{square(5)}</td>
-                    </tr>
-                    <tr>
-                        <td>{square(6)}</td>
-                        <td>{square(7)}</td>
-                        <td>{square(8)}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    )
-}
-
-const BoardStatus = ({ winnerIfAny, gameFinished, playerToMove }) => {
-    let children = `Player ${playerToMove}, it's your turn!`
-    if (gameFinished) {
-        children = winnerIfAny ? `Winner: Player ${winnerIfAny} 🎉🥳` : `Nobody won.`
-    }
-
-    return (
-        <PrettyHeader style={{ margin: "10px", textAlign: "center" }} Component="h3">
-            {children}
-        </PrettyHeader>
+        <table>
+            <tbody>
+                <tr>
+                    <td>{square(0)}</td>
+                    <td>{square(1)}</td>
+                    <td>{square(2)}</td>
+                </tr>
+                <tr>
+                    <td>{square(3)}</td>
+                    <td>{square(4)}</td>
+                    <td>{square(5)}</td>
+                </tr>
+                <tr>
+                    <td>{square(6)}</td>
+                    <td>{square(7)}</td>
+                    <td>{square(8)}</td>
+                </tr>
+            </tbody>
+        </table>
     )
 }
 
@@ -77,8 +62,8 @@ const MoveHistory = ({ numberOfSnapshots, onLoadBoardSnapshot, currentSnapshotId
             style={{
                 display: "flex",
                 flexWrap: "wrap",
-                margin: "10px",
                 justifyContent: "center",
+                margin: "10px",
             }}
         >
             {buttons}
@@ -170,23 +155,28 @@ const App = () => {
 
     const onRestart = () => setState(INITIAL_STATE)
 
+    let boardStatus = `Player ${playerToMove}, it's your turn!`
+    if (gameFinished) {
+        boardStatus = winnerIfAny ? `Winner: Player ${winnerIfAny} 🎉🥳` : `Nobody won.`
+    }
+
     return (
-        <>
-            <BoardStatus {...{ winnerIfAny, gameFinished, playerToMove }} />
-            <Board {...{ currentBoard, onPlayerMove, disableButtons: gameFinished }} />
+        <div style={{ display: "flex", alignItems: "center", flexDirection: "column" }}>
+            <PrettyHeader Component="h3">{boardStatus}</PrettyHeader>
+            <TicTacToeBoard
+                {...{ currentBoard, onPlayerMove, disableAll: gameFinished }}
+            />
             <MoveHistory
                 {...{ numberOfSnapshots, onLoadBoardSnapshot, currentSnapshotId }}
             />
             <ColoredButton
                 disabled={numberOfSnapshots === 1}
-                useBgPrimaryColor={true}
                 onClick={onRestart}
                 aria-label="restart tictactoe game"
-                style={{ margin: "auto" }}
             >
                 Restart!
             </ColoredButton>
-        </>
+        </div>
     )
 }
 

@@ -3,11 +3,7 @@ import { SquareButton } from "components/button"
 import { FaBug, FaHome } from "components/icons"
 
 const EPIC_NOTES_REPO_URL = "https://github.com/mithi/epic-notes"
-
-const issueUrl = message => {
-    message = message.split(" ").join("%20")
-    return `${EPIC_NOTES_REPO_URL}/issues/new?title=${message}`
-}
+const issueUrl = message => `${EPIC_NOTES_REPO_URL}/issues/new?title=${message}`
 
 const Button = props => (
     <SquareButton side="70px" style={{ fontSize: "50px" }} {...props} />

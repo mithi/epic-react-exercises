@@ -3,31 +3,31 @@ import { SquareButton } from "../button"
 import { SmallSpan } from "../pretty-defaults"
 
 const Pagination = ({ numberOfPages, currentPageId, pathname }) => {
-    const pageButtons = Array.from(Array(numberOfPages).keys()).map(key => {
-        const pageId = key + 1
-        const buttonPathname = `${pathname}/${pageId}`
-        const disabled = pageId === currentPageId
-        const label = `go to page ${pageId} of section: ${pathname}`
+    const pageButtons = Array(numberOfPages)
+        .fill(null)
+        .map((_, key) => {
+            const pageId = key + 1
+            const buttonPathname = `${pathname}/${pageId}`
 
-        return (
-            <SquareButton
-                key={buttonPathname}
-                disabled={disabled}
-                href={buttonPathname}
-                aria-label={label}
-            >
-                {pageId}
-            </SquareButton>
-        )
-    })
+            return (
+                <SquareButton
+                    key={buttonPathname}
+                    disabled={pageId === currentPageId}
+                    href={buttonPathname}
+                    aria-label={`go to page ${pageId} of section: ${pathname}`}
+                >
+                    {pageId}
+                </SquareButton>
+            )
+        })
     return <div style={{ display: "flex", marginBottom: "10px" }}>{pageButtons}</div>
 }
 
 const LIST_STYLE = {
     listStyleType: "none",
-    margin: "0",
-    padding: "2px 0",
-    lineHeight: "1.1",
+    margin: 0,
+    padding: "1px",
+    lineHeight: 1.1,
 }
 
 const CallToActionUl = ({ children }) => {
@@ -37,7 +37,7 @@ const CallToActionUl = ({ children }) => {
     })
 
     return (
-        <ul style={{ padding: "0", margin: "5px" }}>
+        <ul style={{ padding: 0 }}>
             <SmallSpan>{styledChildren}</SmallSpan>
         </ul>
     )

@@ -11,16 +11,16 @@ import CodeBlock from "./dynamic-code-block"
 
 const Code = ({ children, language }) => {
     const [showCode, setShowCode] = useState(false)
-    const codeBlock = showCode && <CodeBlock {...{ language }}>{children}</CodeBlock>
-
     return (
-        <BorderedDiv style={{ margin: "10px", borderStyle: "dashed", display: "block" }}>
+        <BorderedDiv
+            style={{ margin: "20px 0", borderStyle: "dashed", display: "block" }}
+        >
             <OnClickText onClick={() => setShowCode(!showCode)}>
                 <PrettyHeader style={{ margin: "10px" }}>
                     {showCode ? "Hide Code" : "Show Code"}
                 </PrettyHeader>
             </OnClickText>
-            {codeBlock}
+            {showCode && <CodeBlock {...{ language }}>{children}</CodeBlock>}
         </BorderedDiv>
     )
 }

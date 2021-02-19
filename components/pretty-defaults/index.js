@@ -16,7 +16,7 @@ const MainGrid = ({ children, className, style }) => {
 
 const SECTION_STYLE = { borderRadius: "15px", padding: "20px" }
 
-const DivBg1 = ({ style, className, children, Component }) => {
+const DivBg1 = ({ Component, children, className, style }) => {
     const { bg1ClassName, bodyFont } = useTheme()
     Component = Component || "div"
     return (
@@ -29,7 +29,7 @@ const DivBg1 = ({ style, className, children, Component }) => {
     )
 }
 
-const DivBg2 = ({ style, className, children, Component }) => {
+const DivBg2 = ({ Component, children, className, style }) => {
     const { bg2ClassName, bodyFont } = useTheme()
     Component = Component || "div"
 
@@ -43,10 +43,10 @@ const DivBg2 = ({ style, className, children, Component }) => {
     )
 }
 
-const PrettyHeader = ({ style, children, Component, ...otherProps }) => {
+const PrettyHeader = ({ Component, children, style, ...otherProps }) => {
     Component = Component ? Component : "div"
     const { headerFont } = useTheme()
-    style = { ...style, fontFamily: headerFont }
+    style = { fontFamily: headerFont, ...style }
     return <Component {...{ style, ...otherProps }}>{children}</Component>
 }
 
@@ -77,7 +77,7 @@ const SimpleLink = ({ href, children, style, ...otherProps }) => {
     )
 }
 
-const OnClickText = ({ children, onClick, style, ...otherProps }) => {
+const OnClickText = ({ onClick, children, style, ...otherProps }) => {
     const { primaryColor, bodyFont } = useTheme()
     return (
         <button
@@ -110,20 +110,20 @@ const PrettyInputField = ({ placeholder, value, onChange, style, ...otherProps }
     )
 }
 
+const DIV_STYLE = {
+    borderWidth: "1px",
+    borderStyle: "solid",
+    borderRadius: "15px",
+    padding: "10px",
+    margin: "5px",
+    display: "flex",
+}
+
 const BorderedDiv = ({ children, style, ...otherProps }) => {
     const { primaryColor } = useTheme()
     return (
         <div
-            style={{
-                borderWidth: "1px",
-                borderStyle: "solid",
-                borderColor: primaryColor,
-                borderRadius: "15px",
-                padding: "10px",
-                margin: "5px",
-                display: "flex",
-                ...style,
-            }}
+            style={{ borderColor: primaryColor, ...DIV_STYLE, ...style }}
             {...otherProps}
         >
             {children}
@@ -135,7 +135,7 @@ const SmallSpan = ({ children, style }) => (
     <span style={{ fontSize: "12px", ...style }}>{children}</span>
 )
 
-const RoundedImage = ({ src, width, height, style, alt, borderType }) => {
+const RoundedImage = ({ src, width, height, alt, borderType, style }) => {
     borderType = borderType || "border20percent"
     return (
         <div
@@ -152,7 +152,7 @@ const RoundedImage = ({ src, width, height, style, alt, borderType }) => {
         >
             <Image
                 src={src}
-                alt={alt}
+                alt={alt || "unnamed image"}
                 className={borderType}
                 height={height}
                 width={width}

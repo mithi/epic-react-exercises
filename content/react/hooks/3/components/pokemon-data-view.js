@@ -31,7 +31,6 @@ const SquareSpace = ({ children, style }) => {
             style={{
                 width: "200px",
                 minHeight: "200px",
-                margin: "10px",
                 ...TOTALLY_CENTERED,
                 ...style,
             }}
