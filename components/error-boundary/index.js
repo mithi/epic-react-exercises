@@ -31,41 +31,39 @@ class DefaultErrorBoundary extends Component {
     }
 }
 
+const DIV_STYLE = {
+    borderColor: "red",
+    margin: "20px",
+    padding: "20px",
+    textAlign: "center",
+    lineHeight: "1",
+    flexDirection: "column",
+}
+
+const CENTERED_STYLE = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+}
+
 function DefaultErrorView({ error, resetFunction, message }) {
     const issueHref = issueUrl(`Caught by error boundary: ${message} | ${error.message}`)
     const submitAnIssue = <SimpleLink href={issueHref}>submit an issue</SimpleLink>
-    const tryReloading = <OnClickText onClick={resetFunction}>try reloading.</OnClickText>
+    const tryReloading = <OnClickText onClick={resetFunction}>try reloading</OnClickText>
     return (
-        <BorderedDiv
-            style={{
-                borderColor: "red",
-                margin: "20px",
-                padding: "20px",
-                textAlign: "center",
-                lineHeight: "1",
-                flexDirection: "column",
-            }}
-        >
-            <PrettyHeader style={{ color: "red", margin: "10px" }}>
-                Error! :(
-            </PrettyHeader>
+        <BorderedDiv style={DIV_STYLE}>
+            <PrettyHeader style={{ color: "red", margin: "5px" }}>Error! :(</PrettyHeader>
             <SmallSpan>
                 {message}. You can {submitAnIssue} or {tryReloading}.
             </SmallSpan>
-            <div
-                style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                }}
-            >
+            <div style={CENTERED_STYLE}>
                 <ColoredButton
                     onClick={resetFunction}
-                    style={{ backgroundColor: "red", margin: "5px", height: "35px" }}
+                    style={{ backgroundColor: "red", margin: "5px", height: "32px" }}
                 >
                     Reload
                 </ColoredButton>
-                <SquareButton href={issueHref} side={"35px"}>
+                <SquareButton href={issueHref}>
                     <FaBug />
                 </SquareButton>
             </div>
