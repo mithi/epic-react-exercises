@@ -13,25 +13,26 @@ const FormSubmit = ({ style, ...otherProps }) => {
 }
 
 const PositiveIntegerInputField = props => {
-    return <PrettyInputField type="number" pattern="^[0-9]" min="1" step="1" {...props} />
+    return (
+        <PrettyInputField
+            type="number"
+            pattern="^[0-9]"
+            min="1"
+            step="1"
+            placeholder="Pick a number!"
+            {...props}
+        />
+    )
 }
 
 const FormSameLine = ({ children }) => <>{children}</>
 const FormBottom = ({ children }) => <>{children}</>
-const FormTop = ({ children }) => <>{children}</>
 
-const SingleFieldForm = ({
-    onSubmit,
-    setIncompleteValue,
-    incompleteValue,
-    style,
-    children,
-}) => {
+const SingleFieldForm = ({ onSubmit, setValue, value, style, children }) => {
     let submitButton = null
     let inputField = null
     let formSameLine = null
     let formBottom = null
-    let formTop = null
 
     for (let child in children) {
         if (children[child].type === FormSubmit) {
@@ -42,20 +43,18 @@ const SingleFieldForm = ({
             children[child].type === "input"
         ) {
             inputField = cloneElement(children[child], {
-                onChange: e => setIncompleteValue(e.target.value),
-                value: incompleteValue,
+                onChange: e => setValue(e.target.value),
+                value,
             })
         } else if (children[child].type === FormSameLine) {
             formSameLine = children[child]
         } else if (children[child].type === FormBottom) {
             formBottom = children[child]
-        } else if (children[child].type === FormTop) {
-            formTop = children[child]
         }
     }
 
     if (!submitButton) {
-        throw new Error(`SingleFieldForm must have a child component "SubmitButton"`)
+        throw new Error(`SingleFieldForm must have a child component "FormSubmit"`)
     }
 
     if (!inputField) {
@@ -66,12 +65,11 @@ const SingleFieldForm = ({
 
     function handleSubmit(e) {
         e.preventDefault()
-        onSubmit(incompleteValue)
+        onSubmit(value)
     }
 
     return (
         <form onSubmit={handleSubmit} style={{ margin: "20px", ...style }}>
-            {formTop}
             <div style={{ display: "flex", alignItems: "stretch" }}>
                 {inputField}
                 {submitButton}
@@ -88,5 +86,4 @@ export {
     SingleFieldForm,
     FormSameLine,
     FormBottom,
-    FormTop,
 }

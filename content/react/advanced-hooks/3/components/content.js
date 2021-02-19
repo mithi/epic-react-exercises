@@ -136,7 +136,7 @@ const KingdomRushTower = ({ data }) => {
         <BorderedDiv style={{ borderStyle: "dashed" }}>
             <RoundedImage src={imageUrl} alt={name} height={75} width={75} />
             <div style={{ margin: "5px" }}>
-                <PrettyHeader style={{ fontSize: "16px" }}>{name}</PrettyHeader>
+                <PrettyHeader style={{ fontSize: "15px" }}>{name}</PrettyHeader>
 
                 <div style={{ fontSize: "10px", lineHeight: "1.3" }}>
                     ({towerType})

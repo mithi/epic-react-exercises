@@ -7,29 +7,21 @@ const Button = ({ children, section }) => {
     return (
         <PlainButton
             href={`/react/${section}/1`}
-            style={{
-                fontSize: "18px",
-                padding: "15px",
-                margin: "6px",
-                textAlign: "left",
-            }}
+            style={{ fontSize: "18px", padding: "15px", margin: "6px" }}
         >
             {children}
         </PlainButton>
     )
 }
 
-const Close = ({ onClick }) => (
-    <OnClickText {...{ onClick, style: { margin: "5px 10px" } }}>[close]</OnClickText>
-)
-
 const Menu = ({ style, showCloseButton = true } = {}) => {
     const { changeMenuState } = useMenuState()
+
     return (
         <section
             onClick={() => changeMenuState("none")}
             className={styles.menu}
-            {...{ style }}
+            style={{ textAlign: "left", ...style }}
         >
             <PrettyHeader Component="h1" style={{ fontSize: "15px", margin: "0px 10px" }}>
                 <SimpleLink href="/react">(React Menu)</SimpleLink>
@@ -42,7 +34,14 @@ const Menu = ({ style, showCloseButton = true } = {}) => {
             <Button section="testing">6. Testing React Apps</Button>
             <Button section="suspense">7. React Suspense</Button>
             <Button section="app"> 8. Build an Epic React App</Button>
-            {showCloseButton ? <Close onClick={() => changeMenuState("none")} /> : null}
+            {showCloseButton && (
+                <OnClickText
+                    onClick={() => changeMenuState("none")}
+                    style={{ margin: "6px 10px", textAlign: "left" }}
+                >
+                    [close]
+                </OnClickText>
+            )}
         </section>
     )
 }

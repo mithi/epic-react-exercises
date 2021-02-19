@@ -13,7 +13,7 @@ const Code = ({ children, language }) => {
                 style={codeTheme}
                 wrapLongLines={false}
                 wrapLines={false}
-                {...{ tabIndex: "0" }}
+                tabIndex="0"
             >
                 {children}
             </SyntaxHighlighter>

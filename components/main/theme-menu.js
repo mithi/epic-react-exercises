@@ -71,10 +71,7 @@ const ChooseTheme = () => {
             Component="h1"
             onClick={nextPageTheme}
             className={onHoverClassName}
-            style={{
-                fontSize: "15px",
-                ...HOVER_STYLE,
-            }}
+            style={{ fontSize: "15px", ...HOVER_STYLE }}
         >
             Theme Menu {themes[themeId]}
         </PrettyHeader>
@@ -106,8 +103,8 @@ const ChooseHeader = () => {
     )
 }
 
-const SAMPLE_PARAGRAPH = `Click on any element
-to change its style. (primary color, body font, header font, page theme, code theme)`
+const SAMPLE_PARAGRAPH =
+    "Click on any element to change its style. (primary color, body font, header font, page theme, code theme)"
 
 const ChooseParagraph = () => {
     const { nextBodyFont, onHoverClassName } = useTheme()
@@ -123,9 +120,7 @@ const ChooseParagraph = () => {
     )
 }
 
-const SAMPLE_CODE = `function Hello({ world }) {
-    return <div>{world}</div>
-}`
+const SAMPLE_CODE = `function Hello({ world }) {\n\treturn <div>{world}</div>\n}`
 
 const ChooseCode = () => {
     const { onHoverClassName } = useTheme()

@@ -115,19 +115,16 @@ const App = () => {
         <>
             <SingleFieldForm
                 onSubmit={onSubmitHandler}
-                setIncompleteValue={setInputField}
-                incompleteValue={inputFieldValue}
+                setValue={setInputField}
+                value={inputFieldValue}
             >
-                <PositiveIntegerInputField
-                    disabled={isPending}
-                    placeholder="pick a number"
-                />
+                <PositiveIntegerInputField disabled={isPending} />
                 <FormSubmit disabled={isPending || !inputFieldValue}>
                     {submitButtonText}
                 </FormSubmit>
                 <FormSameLine>
                     <SquareButton
-                        aria-label="fetch a random rick and morty character"
+                        aria-label="Fetch a random rick and morty character"
                         onClick={setRandomValue}
                         disabled={isPending}
                     >
