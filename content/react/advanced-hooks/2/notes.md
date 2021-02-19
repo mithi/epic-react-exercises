@@ -18,10 +18,12 @@ The top level App
 
 ```jsx
 const App = () => {
-    const [{ inputFieldValue, submitted, submittedValue }, setState] = useState({
-        inputFieldValue: "",
+    const [{ submitted, inputFieldValue, submittedValue }, setState] = useState({
         submitted: false,
+        inputFieldValue: "",
+        submittedValue: "",
     })
+
     const { status, error, data, reload } = useRickAndMorty({
         key: submitted ? submittedValue : inputFieldValue,
         useCacheOnlyWhenNotReloading: submitted ? false : true,
@@ -31,16 +33,17 @@ const App = () => {
         setState({ submitted: false, inputFieldValue: value, submittedValue })
 
     const onClickReload = () => {
-        setState({ submitted: true, submittedValue: inputFieldValue, inputFieldValue })
+        setState({ submitted: true, inputFieldValue, submittedValue: inputFieldValue })
         reload()
     }
 
     const onClickFetch = () => {
-        setState({ submitted: true, submittedValue: inputFieldValue, inputFieldValue })
+        setState({ submitted: true, inputFieldValue, submittedValue: inputFieldValue })
     }
+
     const setRandomValue = () => {
         const id = getRandomRickAndMortyCharacterId()
-        setState({ submitted: true, submittedValue: id, inputFieldValue: id })
+        setState({ submitted: true, inputFieldValue: id, submittedValue: id })
     }
 
     let bottomMessage = null
@@ -54,7 +57,7 @@ const App = () => {
     } else if (status === "idle") {
         bottomMessage = "Which Rick and Morty Character?"
     } else if (status === "pending") {
-        bottomMessage = `This won't take long...`
+        bottomMessage = "This won't take long..."
     }
 
     let isReloadSubmitType = ["rejected", "resolved"].includes(status) ? true : false
@@ -89,9 +92,7 @@ const App = () => {
                 </FormBottom>
             </SingleFieldForm>
             <RickAndMortyInfoCard {...{ status, error, data }} />
-            <RickAndMortyCachePreview
-                {...{ setId: setInputField, id: inputFieldValue }}
-            />
+            <RickAndMortyCachePreview setId={setInputField} id={inputFieldValue} />
         </>
     )
 }
