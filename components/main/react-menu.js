@@ -1,27 +1,28 @@
 import styles from "./Styles.module.css"
 import { PlainButton } from "../button"
 import { PrettyHeader, SimpleLink, OnClickText } from "../pretty-defaults"
-import { useMenuState } from "hooks"
+import { useMenuState } from "providers"
 
 const Button = ({ children, section }) => {
     return (
         <PlainButton
             href={`/react/${section}/1`}
-            style={{ fontSize: "18px", padding: "15px", margin: "6px" }}
+            style={{ padding: "15px", margin: "6px", fontSize: "18px" }}
+            className={styles.reactMenuButton}
         >
             {children}
         </PlainButton>
     )
 }
 
-const Menu = ({ style, showCloseButton = true } = {}) => {
+const Menu = ({ showCloseButton = true } = {}) => {
     const { changeMenuState } = useMenuState()
 
     return (
         <section
             onClick={() => changeMenuState("none")}
             className={styles.menu}
-            style={{ textAlign: "left", ...style }}
+            style={{ textAlign: "left", zIndex: showCloseButton ? 1 : 0 }}
         >
             <PrettyHeader Component="h1" style={{ fontSize: "15px", margin: "0px 10px" }}>
                 <SimpleLink href="/react">(React Menu)</SimpleLink>

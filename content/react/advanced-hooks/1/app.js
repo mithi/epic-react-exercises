@@ -97,9 +97,7 @@ function App() {
                 setValue={setIncompleteValue}
                 value={incompleteValue}
             >
-                <PositiveIntegerInputField
-                    disabled={disabledByPending}
-                ></PositiveIntegerInputField>
+                <PositiveIntegerInputField disabled={disabledByPending} />
                 <FormSubmit disabled={submitButtonDisabled}>Fetch</FormSubmit>
                 <FormSameLine>
                     <SquareButton

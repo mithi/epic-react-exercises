@@ -1,5 +1,4 @@
 import { sectionProperties, pageContents } from "utils"
-import DynamicMarkdownRender from "components/markdown-render/dynamic"
 import PageLayout from "components/notebook"
 
 export async function getStaticPaths() {
@@ -33,19 +32,7 @@ export async function getStaticProps({ params }) {
     }
 }
 
-const Home = ({ notesString, section, numberOfPages, pageId, properties, hasApp }) => {
-    return (
-        <PageLayout
-            {...{
-                notes: <DynamicMarkdownRender>{notesString}</DynamicMarkdownRender>,
-                pageId,
-                numberOfPages,
-                properties,
-                topic: "react",
-                section,
-                hasApp,
-            }}
-        />
-    )
+const Home = props => {
+    return <PageLayout {...{ ...props, topic: "react" }} />
 }
 export default Home

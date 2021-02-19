@@ -1,4 +1,4 @@
-import { useTheme } from "hooks"
+import { useTheme } from "providers"
 import styles from "./Styles.module.css"
 
 const SpinnerDots = () => {

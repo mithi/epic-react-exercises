@@ -1,5 +1,5 @@
 import styles from "./Styles.module.css"
-import { useTheme, useMenuState } from "hooks"
+import { useTheme, useMenuState } from "providers"
 import { useCodeTheme } from "providers/code-theme"
 import { SquareButton } from "../button"
 import { OnClickText, PrettyHeader, DivBg1, DivBg2 } from "../pretty-defaults"
@@ -11,51 +11,23 @@ const HOVER_STYLE = { padding: "5px", margin: "5px", borderRadius: "5px" }
 const ChooseThemeIcons = () => {
     const { nextColor, nextHeaderFont, nextBodyFont, nextPageTheme } = useTheme()
     const { nextCodeTheme } = useCodeTheme()
-    const iconProps = {
-        side: "large",
-        style: { margin: "3px" },
-    }
+    const iProps = { side: "large", style: { margin: "3px" } }
+
     return (
-        <DivBg2
-            style={{
-                ...HOVER_STYLE,
-                display: "flex",
-                justifyContent: "center",
-            }}
-        >
-            <SquareButton
-                onClick={nextPageTheme}
-                aria-label="change page theme"
-                {...iconProps}
-            >
+        <DivBg2 style={{ ...HOVER_STYLE, display: "flex", justifyContent: "center" }}>
+            <SquareButton onClick={nextPageTheme} aria-label="next pagetheme" {...iProps}>
                 <FaCloudSun />
             </SquareButton>
-            <SquareButton
-                onClick={nextColor}
-                aria-label="change main color"
-                {...iconProps}
-            >
+            <SquareButton onClick={nextColor} aria-label="change main color" {...iProps}>
                 <FaPaintBrush />
             </SquareButton>
-            <SquareButton
-                onClick={nextHeaderFont}
-                aria-label="change header font"
-                {...iconProps}
-            >
+            <SquareButton onClick={nextHeaderFont} aria-label="next headfont" {...iProps}>
                 <CgFormatColor />
             </SquareButton>
-            <SquareButton
-                onClick={nextBodyFont}
-                aria-label="change body font"
-                {...iconProps}
-            >
+            <SquareButton onClick={nextBodyFont} aria-label="next bodyfont" {...iProps}>
                 <BiText />
             </SquareButton>
-            <SquareButton
-                onClick={nextCodeTheme}
-                aria-label="change code theme"
-                {...iconProps}
-            >
+            <SquareButton onClick={nextCodeTheme} aria-label="next codetheme" {...iProps}>
                 <FaCode />
             </SquareButton>
         </DivBg2>
@@ -84,7 +56,7 @@ const ChooseColor = () => {
         <div onClick={nextColor} className={onHoverClassName} style={{ height: "10px" }}>
             <div
                 style={{ width: "100%", height: "5px", backgroundColor: primaryColor }}
-            ></div>
+            />
         </div>
     )
 }

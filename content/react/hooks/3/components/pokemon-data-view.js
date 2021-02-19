@@ -6,7 +6,7 @@ import {
     RoundedImage,
     SmallSpan,
 } from "components/pretty-defaults"
-import { useTheme } from "hooks"
+import { useTheme } from "providers"
 import { SpinnerDots } from "components/spinner"
 
 const TOTALLY_CENTERED = {

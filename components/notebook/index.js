@@ -14,13 +14,15 @@ import { SquareButton } from "../button"
 import Main from "../main"
 import NotebookLayout from "../main/two-sections"
 import { BigHeadNotice } from "../big-head-girl"
-import { Pagination, CallToActionUl } from "./presentational-components"
 import { PrettyHeader, SimpleLink } from "../pretty-defaults"
-import { DefaultErrorBoundary } from "components/error-boundary"
+import { DefaultErrorBoundary } from "../error-boundary"
+import { Pagination, CallToActionUl } from "./presentational-components"
+
+import DynamicMarkdownRender from "../markdown-render/dynamic"
 
 const KOFI_URL = "https://ko-fi.com/minimithi"
-
 const EPIC_NOTES_REPO_URL = "https://github.com/mithi/epic-notes"
+
 const issueUrl = message => `${EPIC_NOTES_REPO_URL}/issues/new?title=${message}`
 
 const editUrl = editPath =>
@@ -62,7 +64,7 @@ const BUTTONS_PROPS = {
 const PageLayout = ({
     properties,
     pageId,
-    notes,
+    notesString,
     numberOfPages,
     hasApp,
     topic,
@@ -121,13 +123,15 @@ const PageLayout = ({
         <>
             {hasApp && callToActionBox}
             {hasApp && notebookPageButtons}
-            <DefaultErrorBoundary
-                key={resetKey}
-                resetFunction={() => setResetCounter(resetCounter + 1)}
-                message={`It's a failure within the article (${editPath})`}
-            >
-                <article>{notes}</article>
-            </DefaultErrorBoundary>
+            <article>
+                <DefaultErrorBoundary
+                    key={resetKey}
+                    resetFunction={() => setResetCounter(resetCounter + 1)}
+                    message={`It's a failure within the article (${editPath})`}
+                >
+                    <DynamicMarkdownRender>{notesString}</DynamicMarkdownRender>
+                </DefaultErrorBoundary>
+            </article>
             <div style={{ display: "flex", justifyContent: "center", margin: "20px" }}>
                 {notebookPageButtons}
             </div>

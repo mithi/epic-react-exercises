@@ -72,7 +72,7 @@ const analyzeBoard = board => {
 }
 ```
 
-Putting everything together, this is the result:
+The top level component
 
 ```jsx
 const INITIAL_BOARD = [null, null, null, null, null, null, null, null, null]
@@ -133,6 +133,68 @@ const App = () => {
             </ColoredButton>
         </div>
     )
+}
+```
+
+The clickable tictactoe board
+
+```jsx
+const TicTacToeBoard = ({ currentBoard, onPlayerMove, disableAll }) => {
+    const square = i => {
+        const player = currentBoard[i]
+        return (
+            <SquareButton
+                onClick={() => onPlayerMove(i)}
+                disabled={disableAll || player ? true : false}
+                aria-label={`TictacToe button # ${i}, occupied by: ${player}`}
+            >
+                {player ? player : "."}
+            </SquareButton>
+        )
+    }
+
+    return (
+        <table>
+            <tbody>
+                <tr>
+                    <td>{square(0)}</td>
+                    <td>{square(1)}</td>
+                    <td>{square(2)}</td>
+                </tr>
+                <tr>
+                    <td>{square(3)}</td>
+                    <td>{square(4)}</td>
+                    <td>{square(5)}</td>
+                </tr>
+                <tr>
+                    <td>{square(6)}</td>
+                    <td>{square(7)}</td>
+                    <td>{square(8)}</td>
+                </tr>
+            </tbody>
+        </table>
+    )
+}
+```
+
+The buttons to go back to a previous board state
+
+```jsx
+const MoveHistory = ({ numberOfSnapshots, onLoadBoardSnapshot, currentSnapshotId }) => {
+    const buttons = Array(numberOfSnapshots)
+        .fill(null)
+        .map((_, i) => (
+            <SquareButton
+                key={i}
+                aria-label={`go to board state move # ${i}`}
+                disabled={i === currentSnapshotId}
+                onClick={() => onLoadBoardSnapshot(i)}
+            >
+                {i}
+            </SquareButton>
+        ))
+
+    return <div>{buttons}</div>
 }
 ```
 
