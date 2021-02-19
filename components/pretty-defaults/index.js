@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { useTheme } from "hooks"
+import { useTheme } from "providers"
 
 const MainGrid = ({ children, className, style }) => {
     const { bg1ClassName, bodyFont } = useTheme()

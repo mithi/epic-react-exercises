@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { useTheme } from "hooks"
+import { useTheme } from "providers"
 import { useButtonThemeClasses, ButtonThemeProvider } from "providers/theme"
 
 const DEFAULT_STYLE = {

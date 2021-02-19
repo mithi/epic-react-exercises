@@ -1,5 +1,5 @@
 import styles from "./Styles.module.css"
-import { useTheme, useMenuState } from "hooks"
+import { useTheme, useMenuState } from "providers"
 import { useCodeTheme } from "providers/code-theme"
 import { SquareButton } from "../button"
 import { OnClickText, PrettyHeader, DivBg1, DivBg2 } from "../pretty-defaults"
