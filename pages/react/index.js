@@ -6,7 +6,7 @@ export default function Home() {
     return (
         <Main>
             <MenuStateProvider>
-                <ReactMenu showCloseButton={false} style={{ zIndex: 0 }} />
+                <ReactMenu showCloseButton={false} />
             </MenuStateProvider>
         </Main>
     )

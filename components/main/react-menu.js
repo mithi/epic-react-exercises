@@ -14,14 +14,14 @@ const Button = ({ children, section }) => {
     )
 }
 
-const Menu = ({ style, showCloseButton = true } = {}) => {
+const Menu = ({ showCloseButton = true } = {}) => {
     const { changeMenuState } = useMenuState()
 
     return (
         <section
             onClick={() => changeMenuState("none")}
             className={styles.menu}
-            style={{ textAlign: "left", ...style }}
+            style={{ textAlign: "left", zIndex: showCloseButton ? 1 : 0 }}
         >
             <PrettyHeader Component="h1" style={{ fontSize: "15px", margin: "0px 10px" }}>
                 <SimpleLink href="/react">(React Menu)</SimpleLink>
