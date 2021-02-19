@@ -86,23 +86,20 @@ const PageLayout = ({
     const issueHref = issueUrl(`Better solution! Suggestion for: ${editPath}`)
     const editHref = editUrl(editPath)
 
+    const editThisPage = <SimpleLink href={editHref}>{" ✏️ Edit "}</SimpleLink>
+    const viewSolution = (
+        <SimpleLink href={solutionHref}>{"👀 View the deployed code "}</SimpleLink>
+    )
+    const suggestAchange = (
+        <SimpleLink href={issueHref}>{"🐞🐛 Suggest a change."}</SimpleLink>
+    )
+
     const callToActionBox = (
         <BigHeadNotice headSize={60}>
             <CallToActionUl>
-                <li>
-                    <SimpleLink href={solutionHref}>
-                        {"👀 View the deployed code "}
-                    </SimpleLink>
-                    on Github.
-                </li>
-                <li>
-                    Not happy with the solution?
-                    <SimpleLink href={issueHref}>{"🐞🐛 Suggest a change."}</SimpleLink>
-                </li>
-                <li>
-                    Grammar errors?
-                    <SimpleLink href={editHref}>{" ✏️ Edit "}</SimpleLink> this page.
-                </li>
+                <li>{viewSolution} on Github.</li>
+                <li>Not happy with the solution? {suggestAchange}</li>
+                <li>Grammar errors?{editThisPage} this page.</li>
             </CallToActionUl>
         </BigHeadNotice>
     )
