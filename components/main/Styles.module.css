@@ -62,6 +62,12 @@
     z-index: 2;
 }
 
+@media (min-height: 600px) {
+    .reactMenuButton {
+        font-size: 35px !important; /* Temporary hack for now*/
+    }
+}
+
 @media (max-width: 850px) {
     .grid {
         display: grid;

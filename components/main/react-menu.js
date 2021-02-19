@@ -7,7 +7,8 @@ const Button = ({ children, section }) => {
     return (
         <PlainButton
             href={`/react/${section}/1`}
-            style={{ fontSize: "18px", padding: "15px", margin: "6px" }}
+            style={{ padding: "15px", margin: "6px", fontSize: "18px" }}
+            className={styles.reactMenuButton}
         >
             {children}
         </PlainButton>
