@@ -23,19 +23,27 @@ function App() {
         onSubmit(value)
     }
 
+    const suggestPikachu = <PokemonSuggestion {...{ name: "Pikachu", buttonSubmit }} />
+    const suggestNineTales = (
+        <PokemonSuggestion {...{ name: "Ninetales", buttonSubmit }} />
+    )
+    const suggestCharizard = (
+        <PokemonSuggestion {...{ name: "Charizard", buttonSubmit }} />
+    )
+
     return (
         <>
             <SingleFieldForm
-                {...{ setIncompleteValue, incompleteValue, onSubmit: buttonSubmit }}
+                onSubmit={buttonSubmit}
+                setValue={setIncompleteValue}
+                value={incompleteValue}
             >
                 <PrettyInputField placeholder="Which pokemon?" />
                 <FormSubmit>Fetch!</FormSubmit>
                 <FormBottom>
                     <SmallSpan>
-                        Out of ideas? Try{" "}
-                        <PokemonSuggestion {...{ name: "Ninetales", buttonSubmit }} />,{" "}
-                        <PokemonSuggestion {...{ name: "Pikachu", buttonSubmit }} />, or{" "}
-                        <PokemonSuggestion {...{ name: "Charizard", buttonSubmit }} />.
+                        Out of ideas? Try {suggestPikachu}, {suggestCharizard} or{" "}
+                        {suggestNineTales}.
                     </SmallSpan>
                 </FormBottom>
             </SingleFieldForm>

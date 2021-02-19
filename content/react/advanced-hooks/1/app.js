@@ -94,16 +94,16 @@ function App() {
         <>
             <SingleFieldForm
                 onSubmit={value => setSubmittedValue(value)}
-                {...{ incompleteValue, setIncompleteValue }}
+                setValue={setIncompleteValue}
+                value={incompleteValue}
             >
                 <PositiveIntegerInputField
                     disabled={disabledByPending}
-                    placeholder={"Pick a number!"}
                 ></PositiveIntegerInputField>
                 <FormSubmit disabled={submitButtonDisabled}>Fetch</FormSubmit>
                 <FormSameLine>
                     <SquareButton
-                        aria-label="fetch a random rick and morty character"
+                        aria-label="Fetch a random rick and morty character"
                         onClick={setRandomValue}
                         disabled={disabledByPending}
                     >
@@ -126,19 +126,19 @@ function AppWithUnmountCheckbox() {
     const [mountApp, setMountApp] = useState(true)
 
     return (
-        <>
-            <BorderedDiv style={{ borderStyle: "dashed", textAlign: "center" }}>
+        <div>
+            <BorderedDiv style={{ borderRadius: 0 }}>
                 <label>
                     <input
                         type="checkbox"
                         checked={mountApp}
                         onChange={e => setMountApp(e.target.checked)}
                     />
-                    <SmallSpan> Mount the search bar</SmallSpan>
+                    Mount the search bar
                 </label>
             </BorderedDiv>
             {mountApp ? <App /> : null}
-        </>
+        </div>
     )
 }
 
