@@ -8,22 +8,6 @@
 
 ### My Solution
 
-My top level component basically renders the following:
-
-```jsx
-// info about the current state of the board)
-<BoardStatus {...{ winnerIfAny, gameFinished, playerToMove }} />
-
-// `Board` is the clickable board
-<Board {...{ currentBoard, onPlayerMove, disableButtons: gameFinished }} />
-
-// buttons that you can click to move forward and backward in time
-<MoveHistory {...{ numberOfSnapshots, onLoadBoardSnapshot, currentSnapshotId }} />
-
-<RestartButton {...{ onRestart: restart }} />
-
-```
-
 My top level component manages a simple state:
 
 ```jsx
@@ -130,16 +114,24 @@ const App = () => {
 
     const onRestart = () => setState(INITIAL_STATE)
 
-    const restart = numberOfSnapshots === 1 ? null : onRestart
+    let boardStatus = `Player ${playerToMove}, it's your turn!`
+    if (gameFinished) {
+        boardStatus = winnerIfAny ? `Winner: Player ${winnerIfAny} 🎉🥳` : `Nobody won.`
+    }
+
     return (
-        <>
-            <BoardStatus {...{ winnerIfAny, gameFinished, playerToMove }} />
-            <Board {...{ currentBoard, onPlayerMove, disableButtons: gameFinished }} />
+        <div>
+            <PrettyHeader>{boardStatus}</PrettyHeader>
+            <TicTacToeBoard
+                {...{ currentBoard, onPlayerMove, disableAll: gameFinished }}
+            />
             <MoveHistory
                 {...{ numberOfSnapshots, onLoadBoardSnapshot, currentSnapshotId }}
             />
-            <RestartButton {...{ onRestart: restart }} />
-        </>
+            <ColoredButton disabled={numberOfSnapshots === 1} onClick={onRestart}>
+                Restart!
+            </ColoredButton>
+        </div>
     )
 }
 ```
