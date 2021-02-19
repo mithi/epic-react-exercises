@@ -23,13 +23,9 @@ function App() {
         onSubmit(value)
     }
 
-    const suggestPikachu = <PokemonSuggestion {...{ name: "Pikachu", buttonSubmit }} />
-    const suggestNineTales = (
-        <PokemonSuggestion {...{ name: "Ninetales", buttonSubmit }} />
-    )
-    const suggestCharizard = (
-        <PokemonSuggestion {...{ name: "Charizard", buttonSubmit }} />
-    )
+    const tryPikachu = <PokemonSuggestion {...{ name: "Pikachu", buttonSubmit }} />
+    const tryNineTales = <PokemonSuggestion {...{ name: "Ninetales", buttonSubmit }} />
+    const tryCharizard = <PokemonSuggestion {...{ name: "Charizard", buttonSubmit }} />
 
     return (
         <>
@@ -42,14 +38,14 @@ function App() {
                 <FormSubmit>Fetch!</FormSubmit>
                 <FormBottom>
                     <SmallSpan>
-                        Out of ideas? Try {suggestPikachu}, {suggestCharizard} or{" "}
-                        {suggestNineTales}.
+                        Out of ideas? Try {tryPikachu}, {tryCharizard}, or {tryNineTales}.
                     </SmallSpan>
                 </FormBottom>
             </SingleFieldForm>
             <CustomErrorBoundary
                 FallbackComponent={PokemonErrorView}
-                {...{ resetFunction, key: submittedValue }}
+                key={submittedValue}
+                {...{ resetFunction }}
             >
                 <PokemonInfoCard pokemonName={submittedValue} />
             </CustomErrorBoundary>
