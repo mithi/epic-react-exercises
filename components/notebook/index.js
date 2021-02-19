@@ -14,7 +14,7 @@ import { SquareButton } from "../button"
 import Main from "../main"
 import NotebookLayout from "../main/two-sections"
 import { BigHeadNotice } from "../big-head-girl"
-import { Pagination, CallToActionUl } from "./styled-components"
+import { Pagination, CallToActionUl } from "./presentational-components"
 import { PrettyHeader, SimpleLink } from "../pretty-defaults"
 import { DefaultErrorBoundary } from "components/error-boundary"
 
@@ -86,7 +86,7 @@ const PageLayout = ({
     const issueHref = issueUrl(`Better solution! Suggestion for: ${editPath}`)
     const editHref = editUrl(editPath)
 
-    const editThisPage = <SimpleLink href={editHref}>{" ✏️ Edit "}</SimpleLink>
+    const editThisPage = <SimpleLink href={editHref}>{"✏️ Edit"}</SimpleLink>
     const viewSolution = (
         <SimpleLink href={solutionHref}>{"👀 View the deployed code "}</SimpleLink>
     )
@@ -99,26 +99,22 @@ const PageLayout = ({
             <CallToActionUl>
                 <li>{viewSolution} on Github.</li>
                 <li>Not happy with the solution? {suggestAchange}</li>
-                <li>Grammar errors?{editThisPage} this page.</li>
+                <li>Grammar errors? {editThisPage} this page.</li>
             </CallToActionUl>
         </BigHeadNotice>
     )
 
     const { deployedSite, repository, title } = properties
-
+    const bp = BUTTONS_PROPS
     const notebookPageButtons = (
         <div style={{ display: "flex", margin: "10px 0" }}>
-            {deployedSite && (
-                <SquareButton href={deployedSite} {...BUTTONS_PROPS.deployedSite} />
-            )}
-            {repository && (
-                <SquareButton href={repository} {...BUTTONS_PROPS.repository} />
-            )}
-            {hasApp && <SquareButton href={solutionHref} {...BUTTONS_PROPS.solution} />}
-            <SquareButton href={editHref} {...BUTTONS_PROPS.edit} />
-            {hasApp && <SquareButton href={issueHref} {...BUTTONS_PROPS.issue} />}
-            <SquareButton href="/" {...BUTTONS_PROPS.home} />
-            <SquareButton href={KOFI_URL} {...BUTTONS_PROPS.kofi} />
+            {deployedSite && <SquareButton href={deployedSite} {...bp.deployedSite} />}
+            {repository && <SquareButton href={repository} {...bp.repository} />}
+            {hasApp && <SquareButton href={solutionHref} {...bp.solution} />}
+            <SquareButton href={editHref} {...bp.edit} />
+            {hasApp && <SquareButton href={issueHref} {...bp.issue} />}
+            <SquareButton href="/" {...bp.home} />
+            <SquareButton href={KOFI_URL} {...bp.kofi} />
         </div>
     )
     const articlePlus = (
@@ -128,7 +124,7 @@ const PageLayout = ({
             <DefaultErrorBoundary
                 key={resetKey}
                 resetFunction={() => setResetCounter(resetCounter + 1)}
-                message={`Something went wrong within the article (${editPath})`}
+                message={`It's a failure within the article (${editPath})`}
             >
                 <article>{notes}</article>
             </DefaultErrorBoundary>
@@ -144,16 +140,14 @@ const PageLayout = ({
                 {title}
             </PrettyHeader>
             <Pagination
-                {...{
-                    numberOfPages,
-                    currentPageId: Number(pageId),
-                    pathname: `/${topic}/${section}`,
-                }}
+                currentPageId={Number(pageId)}
+                pathname={`/${topic}/${section}`}
+                {...{ numberOfPages }}
             />
             <DefaultErrorBoundary
                 key={resetKey}
                 resetFunction={() => setResetCounter(resetCounter + 1)}
-                message={`Something went wrong within the example component (${editPath})`}
+                message={`It's a failure within the example component (${editPath})`}
             >
                 {hasApp ? <App /> : articlePlus}
             </DefaultErrorBoundary>
