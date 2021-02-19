@@ -178,16 +178,16 @@ function App() {
         <>
             <SingleFieldForm
                 onSubmit={value => setSubmittedValue(value)}
-                {...{ incompleteValue, setIncompleteValue }}
+                setValue={setIncompleteValue}
+                value={incompleteValue}
             >
                 <PositiveIntegerInputField
                     disabled={disabledByPending}
-                    placeholder={"Pick a number!"}
                 ></PositiveIntegerInputField>
                 <FormSubmit disabled={submitButtonDisabled}>Fetch</FormSubmit>
                 <FormSameLine>
                     <SquareButton
-                        aria-label="fetch a random rick and morty character"
+                        aria-label="Fetch a random rick and morty character"
                         onClick={setRandomValue}
                         disabled={disabledByPending}
                     >

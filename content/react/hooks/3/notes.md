@@ -33,31 +33,37 @@ function App() {
         onSubmit(value)
     }
 
+    const tryPikachu = <PokemonSuggestion {...{ name: "Pikachu", buttonSubmit }} />
+    const tryNineTales = <PokemonSuggestion {...{ name: "Ninetales", buttonSubmit }} />
+    const tryCharizard = <PokemonSuggestion {...{ name: "Charizard", buttonSubmit }} />
+
     return (
         <>
             <SingleFieldForm
-                {...{ setIncompleteValue, incompleteValue, onSubmit: buttonSubmit }}
+                onSubmit={buttonSubmit}
+                setValue={setIncompleteValue}
+                value={incompleteValue}
             >
                 <PrettyInputField placeholder="Which pokemon?" />
                 <FormSubmit>Fetch!</FormSubmit>
                 <FormBottom>
                     <SmallSpan>
-                        Out of ideas? Try{" "}
-                        <PokemonSuggestion {...{ name: "Ninetales", buttonSubmit }} />,{" "}
-                        <PokemonSuggestion {...{ name: "Pikachu", buttonSubmit }} />, or{" "}
-                        <PokemonSuggestion {...{ name: "Charizard", buttonSubmit }} />.
+                        Out of ideas? Try {tryPikachu}, {tryCharizard}, or {tryNineTales}.
                     </SmallSpan>
                 </FormBottom>
             </SingleFieldForm>
             <CustomErrorBoundary
                 FallbackComponent={PokemonErrorView}
-                {...{ resetFunction, key: submittedValue }}
+                key={submittedValue}
+                {...{ resetFunction }}
             >
                 <PokemonInfoCard pokemonName={submittedValue} />
             </CustomErrorBoundary>
         </>
     )
 }
+
+export default App
 ```
 
 Pokemon Info Card
@@ -118,5 +124,21 @@ class CustomErrorBoundary extends Component {
 
         return children
     }
+}
+```
+
+An example error view
+
+```jsx
+function PokemonErrorView({ error, resetFunction }) {
+    return (
+        <PokemonDataView borderColor="red">
+            <Heading>Error! :(</Heading>
+            <SmallSpan role="alert">
+                {error.message}
+                <ColoredButton onClick={resetFunction}>Try again</ColoredButton>
+            </SmallSpan>
+        </PokemonDataView>
+    )
 }
 ```
