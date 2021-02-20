@@ -1,6 +1,46 @@
 import { useState } from "react"
 import { dequal } from "dequal"
+import {
+    BorderedDiv,
+    PrettyHeader,
+    PrettyInputField,
+    PrettyTextArea,
+    SmallSpan,
+} from "components/pretty-defaults"
+import { PlainButton, ColoredButton } from "components/button"
 import { UserProvider, useUser, updateUser } from "./components/user-context"
+
+const LabeledInputField = ({ labelName, id, ...otherProps }) => {
+    return (
+        <div style={{ margin: "5px" }}>
+            <label htmlFor={`${id}`}>
+                <SmallSpan>{labelName}</SmallSpan>{" "}
+            </label>
+            <PrettyInputField
+                id={`${id}`}
+                name={`${id}`}
+                placeholder={labelName}
+                {...otherProps}
+            />
+        </div>
+    )
+}
+
+const LabeledTextArea = ({ labelName, id, ...otherProps }) => {
+    return (
+        <div>
+            <label htmlFor={`${id}`}>
+                <SmallSpan>{labelName}</SmallSpan>{" "}
+            </label>
+            <PrettyTextArea
+                id={`${id}`}
+                name={`${id}`}
+                placeholder={labelName}
+                {...otherProps}
+            />
+        </div>
+    )
+}
 
 function UserSettings() {
     const [{ user, status, error }, userDispatch] = useUser()
@@ -24,59 +64,69 @@ function UserSettings() {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label htmlFor="useId">UserId</label>
-                <input
-                    id="userId"
-                    name="userId"
-                    disabled
-                    readOnly
-                    value={formState.userId}
-                />
-            </div>
-            <div>
-                <label htmlFor="Nickname">Nickname</label>
-                <input
-                    id="nickName"
-                    name="nickName"
-                    value={formState.nickName}
-                    onChange={handleChange}
-                />
-            </div>
-            <div>
-                <label htmlFor="bio">Biography</label>
-                <textarea
+        <BorderedDiv style={{ borderStyle: "dashed" }}>
+            <form onSubmit={handleSubmit}>
+                <PrettyHeader style={{ textAlign: "center" }}>
+                    (User Update Form)
+                </PrettyHeader>
+                <div style={{ display: "flex" }}>
+                    <LabeledInputField
+                        id="userId"
+                        value={formState.userId}
+                        labelName="User ID"
+                        disabled
+                        readOnly
+                    />
+                    <LabeledInputField
+                        id="nickName"
+                        value={formState.nickName}
+                        onChange={handleChange}
+                        labelName="Nickname*"
+                        maxLength={15}
+                        required
+                    />
+                </div>
+                <LabeledTextArea
                     id="bio"
-                    name="bio"
+                    labelName="Biography"
                     value={formState.bio}
                     onChange={handleChange}
+                    maxLength={140}
+                    placeholder="Tell us more about yourself in less than 140 characters"
                 />
-            </div>
-            <div>
-                <button
-                    type="button"
-                    onClick={() => {
-                        setFormState(user)
-                        userDispatch({ type: "RESET" })
-                    }}
-                    disabled={!isChanged || isPending}
-                >
-                    Reset
-                </button>
-                <br />
-                <button type="submit" disabled={(!isChanged && !isRejected) || isPending}>
-                    {isPending
-                        ? "..."
-                        : isRejected
-                        ? "✖ Try again"
-                        : isChanged
-                        ? "Submit"
-                        : "✔"}
-                </button>
-                {isRejected ? <pre style={{ color: "red" }}>{error.message}</pre> : null}
-            </div>
-        </form>
+                <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                    <PlainButton
+                        type="button"
+                        onClick={() => {
+                            setFormState(user)
+                            userDispatch({ type: "RESET" })
+                        }}
+                        disabled={!isChanged || isPending}
+                    >
+                        Reset
+                    </PlainButton>
+                    <ColoredButton
+                        type="submit"
+                        disabled={(!isChanged && !isRejected) || isPending}
+                    >
+                        {isPending
+                            ? "Please wait..."
+                            : isRejected
+                            ? "✖ Try again"
+                            : isChanged
+                            ? "Submit"
+                            : "✔ Success!"}
+                    </ColoredButton>
+                </div>
+                {isRejected ? (
+                    <BorderedDiv style={{ borderColor: "red", borderRadius: 0 }}>
+                        <SmallSpan style={{ color: "red" }}>
+                            Error! {error.message}
+                        </SmallSpan>
+                    </BorderedDiv>
+                ) : null}
+            </form>
+        </BorderedDiv>
     )
 }
 
