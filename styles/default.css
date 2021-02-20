@@ -48,8 +48,8 @@ input[type="reset"] {
 }
 
 body {
-    line-height: 1.25;
-    letter-spacing: 1px;
+    line-height: 1.4;
+    letter-spacing: 0.5px;
     word-spacing: 3px;
     font-size: 16px;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
@@ -81,6 +81,11 @@ ul {
     padding-left: 10px;
 }
 
+ul p,
+ol p {
+    margin: 0px;
+}
+
 li {
     padding: 5px 0px;
 }
@@ -103,7 +108,8 @@ h4 {
 }
 
 p {
-    margin: 8px;
+    margin: 15px;
+    text-align: justify;
 }
 
 blockquote p {

@@ -127,7 +127,8 @@ const App = () => {
                 </FormSubmit>
                 <FormSameLine>
                     <SquareButton
-                        aria-label="Fetch a random rick and morty character"
+                        aria-label="fetch a random Rick and Morty character"
+                        title="fetch a random Rick and Morty character"
                         onClick={setRandomValue}
                         disabled={isPending}
                     >

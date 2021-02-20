@@ -11,7 +11,7 @@ const BigHeadGirlImage = ({ headSize }) => (
 const BigHeadNotice = ({ children, headSize, style }) => {
     return (
         <BorderedDiv style={{ borderStyle: "dashed", alignItems: "center", ...style }}>
-            <div style={{ marginTop: "-15px" }}>
+            <div style={{ marginTop: "-10px" }}>
                 <BigHeadGirlImage {...{ headSize }} />
             </div>
             <div>{children}</div>
