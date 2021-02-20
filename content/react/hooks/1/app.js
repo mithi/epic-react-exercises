@@ -49,7 +49,8 @@ const MoveHistory = ({ numberOfSnapshots, onLoadBoardSnapshot, currentSnapshotId
         .map((_, i) => (
             <SquareButton
                 key={i}
-                aria-label={`go to board state move # ${i}`}
+                aria-label={`Go back to move #${i}`}
+                title={`Go back to move #${i}`}
                 disabled={i === currentSnapshotId}
                 onClick={() => onLoadBoardSnapshot(i)}
             >

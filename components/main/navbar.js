@@ -30,6 +30,7 @@ const NavInner = () => {
                         side="large"
                         onClick={() => changeMenuState("react")}
                         aria-label="react menu"
+                        title="react menu"
                     >
                         <FaReact />
                     </SquareButton>
@@ -37,6 +38,7 @@ const NavInner = () => {
                         side="large"
                         onClick={() => changeMenuState("theme")}
                         aria-label="theme menu"
+                        title="theme menu"
                     >
                         <MdSettings />
                     </SquareButton>
@@ -44,6 +46,7 @@ const NavInner = () => {
                         side="large"
                         href="https://github.com/mithi"
                         aria-label="follow me on github"
+                        title="follow me on github"
                     >
                         <GoOctoface />
                     </SquareButton>
@@ -51,6 +54,7 @@ const NavInner = () => {
                         side="large"
                         href="https://ko-fi.com/minimithi"
                         aria-label="buy me a coffee"
+                        title="buy me a coffee"
                     >
                         <BiCoffeeTogo />
                     </SquareButton>

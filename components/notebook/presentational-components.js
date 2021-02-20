@@ -15,6 +15,7 @@ const Pagination = ({ numberOfPages, currentPageId, pathname }) => {
                     disabled={pageId === currentPageId}
                     href={buttonPathname}
                     aria-label={`go to page ${pageId} of section: ${pathname}`}
+                    title={`go to page ${pageId}`}
                 >
                     {pageId}
                 </SquareButton>

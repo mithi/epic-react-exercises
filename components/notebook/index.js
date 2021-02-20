@@ -32,31 +32,38 @@ const solutionUrl = editPath => `${EPIC_NOTES_REPO_URL}/edit/main/content/${edit
 
 const BUTTONS_PROPS = {
     deployedSite: {
-        "aria-label": "go to source deployed site",
+        "aria-label": "go to Epic React deployed site",
+        "title": "go to Epic React deployed site",
         "children": <BiRocket />,
     },
     repository: {
-        "aria-label": "go to source repository",
+        "aria-label": "go to Epic React repository",
+        "title": "go to Epic React repository",
         "children": <FiGithub />,
     },
     edit: {
         "aria-label": "edit this page",
+        "title": "edit this page",
         "children": <BsPencilSquare />,
     },
     issue: {
-        "aria-label": "report a bug",
+        "aria-label": "suggest a better solution via an issue",
+        "title": "suggest a better solution via an issue",
         "children": <FaBug />,
     },
     home: {
         "aria-label": "go back to main page",
+        "title": "go back to main page",
         "children": <FaHome />,
     },
     kofi: {
         "aria-label": "buy me a coffee",
+        "title": "buy me a coffee",
         "children": <BiCoffeeTogo />,
     },
     solution: {
         "aria-label": "view complete solution",
+        "title": "view complete solution",
         "children": <AiOutlineRead />,
     },
 }

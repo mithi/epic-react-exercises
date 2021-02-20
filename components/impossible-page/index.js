@@ -11,10 +11,14 @@ const Button = props => (
 
 const ImpossiblePageIcons = ({ issueMessage }) => (
     <div style={{ display: "flex" }}>
-        <Button aria-label="report a bug" href={issueUrl(issueMessage)}>
+        <Button
+            href={issueUrl(issueMessage)}
+            aria-label="report a bug"
+            title="report a bug"
+        >
             <FaBug />
         </Button>
-        <Button aria-label="home" href="/">
+        <Button href="/" aria-label="go back home" title="go back home">
             <FaHome />
         </Button>
     </div>
