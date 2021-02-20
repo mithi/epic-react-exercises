@@ -6,9 +6,11 @@ import {
     PrettyInputField,
     PrettyTextArea,
     SmallSpan,
+    DivBg1,
 } from "components/pretty-defaults"
 import { PlainButton, ColoredButton } from "components/button"
 import { UserProvider, useUser, updateUser } from "./components/user-context"
+import { AvatarHead } from "./components/big-head"
 
 const LabeledInputField = ({ labelName, id, ...otherProps }) => {
     return (
@@ -42,7 +44,7 @@ const LabeledTextArea = ({ labelName, id, ...otherProps }) => {
     )
 }
 
-function UserSettings() {
+function UserUpdateForm() {
     const [{ user, status, error }, userDispatch] = useUser()
 
     const isPending = status === "pending"
@@ -130,17 +132,36 @@ function UserSettings() {
     )
 }
 
-function UserDataDisplay() {
+function UserProfileCard() {
     const [{ user }] = useUser()
-    return <pre>{JSON.stringify(user, null, 2)}</pre>
+    const avatarSpecs = user.avatar
+        ? { ...user.avatar.baseTraits, ...user.avatar.accessories }
+        : null
+
+    const formattedName = user.nickName.charAt(0).toUpperCase() + user.nickName.slice(1)
+    return (
+        <DivBg1 style={{ display: "flex", margin: "20px" }}>
+            <div>
+                <AvatarHead specs={avatarSpecs} />
+            </div>
+            <div>
+                <PrettyHeader style={{ fontSize: "22px" }}>
+                    {formattedName || "Unnamed"}
+                </PrettyHeader>
+                <SmallSpan>{user.bio || "No biography provided"}</SmallSpan>
+                <br />
+                <SmallSpan>({user.userId})</SmallSpan>
+            </div>
+        </DivBg1>
+    )
 }
 
 function App() {
     return (
         <div>
             <UserProvider>
-                <UserSettings />
-                <UserDataDisplay />
+                <UserUpdateForm />
+                <UserProfileCard />
             </UserProvider>
         </div>
     )
