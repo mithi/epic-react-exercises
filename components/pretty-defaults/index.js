@@ -118,7 +118,7 @@ const PrettyInputField = ({ value, onChange, disabled, style, ...otherProps }) =
 const PrettyTextArea = ({ value, onChange, disabled, style, ...otherProps }) => {
     const { bg1ClassName, bodyFont } = useTheme()
     return (
-        <textArea
+        <textarea
             className={bg1ClassName}
             style={{
                 fontFamily: bodyFont,
