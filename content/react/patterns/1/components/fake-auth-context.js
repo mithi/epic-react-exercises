@@ -8,9 +8,9 @@ const FakeAuthContext = createContext({
 
 FakeAuthContext.displayName = "FakeAuthContext"
 
-const FakeAuthProvider = ({ user, ...props }) => (
-    <FakeAuthContext.Provider value={user} {...props} />
-)
+const FakeAuthProvider = ({ user, ...props }) => {
+    return <FakeAuthContext.Provider value={user} {...props} />
+}
 
 function useFakeAuth() {
     return useContext(FakeAuthContext)
