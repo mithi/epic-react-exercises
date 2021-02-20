@@ -14,16 +14,10 @@ AND RETURN THE BACKENDS RESPONSE
 const sleep = t => new Promise(resolve => setTimeout(resolve, t))
 
 const TRAITS = {
-    accessory: ["none", "roundGlasses", "tinyGlasses", "shades"],
-    clothing: ["naked", "shirt", "dressShirt", "vneck", "tankTop", "dress"],
-    clothingColor: ["white", "blue", "black", "green", "red"],
-    graphic: ["none", "redwood", "gatsby", "vue", "react", "graphQL"],
-    hat: ["none", "none2", "none3", "none4", "none5", "beanie", "turban"],
-    hatColor: ["white", "blue", "black", "green", "red"],
     body: ["chest", "breasts"],
     eyebrows: ["raised", "leftLowered", "serious", "angry", "concerned"],
     facialHair: ["none", "none2", "none3", "stubble", "mediumBeard"],
-    hair: ["none", "long", "bun", "short", "pixie", "balding", "buzz", "afro", "bob"],
+    hair: ["none", "long", "bun", "short", "pixie", "buzz", "afro", "bob"],
     hairColor: ["blonde", "orange", "black", "white", "brown", "blue", "pink"],
     lashes: ["true", "false"],
     lipColor: ["red", "purple", "pink", "turqoise", "green"],
@@ -61,12 +55,12 @@ pendingUserUpdates = {userId, nickName, bio}
 async function updateFakeBackendUser(currentUser, pendingUserUpdates) {
     await sleep(1500) // simulate a real-world wait period
 
-    if (Math.random() > 0.5) {
+    if (Math.random() > 0.7) {
         return Promise.reject({ message: "Randomly rejected by the backend" })
     }
 
-    const combinedNickName = pendingUserUpdates.nickName + currentUser.nickName
-    const combinedBio = pendingUserUpdates.bio + currentUser.bio
+    const combinedNickName = pendingUserUpdates.nickName.toLowerCase()
+    const combinedBio = (pendingUserUpdates.bio + currentUser.bio).toLowerCase()
 
     const baseTraits = Object.entries(TRAITS).reduce(
         (base, [traitName, possibleValues], index) => {
