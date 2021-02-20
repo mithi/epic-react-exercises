@@ -7,10 +7,7 @@
 ### My Solution
 
 ```jsx
-const vanillaTiltOptions = {
-    max: 25,
-    perspective: 150,
-}
+const vanillaTiltOptions = { max: 25, perspective: 150 }
 
 function Tilt({ children, setData, style }) {
     const divRef = useRef()
@@ -36,7 +33,7 @@ function App() {
         <>
             <p>Touching the box will transform its perspective.</p>
             <div>
-                <Tilt {...{ setData, style: tiltStyle }}>
+                <Tilt style={tiltStyle} {...{ setData }}>
                     <TiltDataDisplay {...{ data }} />
                 </Tilt>
             </div>
@@ -63,11 +60,12 @@ function App() {
 
     -   [yoannmoinet/nipplejs](https://github.com/yoannmoinet/nipplejs)
     -   [hammer.js](https://github.com/hammerjs/hammer.js)
+    -   ⭐⭐[mojs](https://github.com/mojs/mojs/)
 
 4.  Further Reading
 
     -   [ Tyler McGinnis: Understanding React's useRef Hook](https://ui.dev/useref/)
     -   [Eloquent Javascript: Events](https://eloquentjavascript.net/15_event.html)
     -   [MDN Docs: Events](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events)
-    -   [MDN Docs: Events (refefence)](https://developer.mozilla.org/en-US/docs/Web/Events)
+    -   [MDN Docs: Events (reference)](https://developer.mozilla.org/en-US/docs/Web/Events)
     -   [rehooks/awesome-react-hooks](https://github.com/rehooks/awesome-react-hooks)
