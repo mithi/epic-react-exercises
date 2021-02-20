@@ -99,13 +99,36 @@ const INPUT_STYLE = {
     flex: 1,
 }
 
-const PrettyInputField = ({ placeholder, value, onChange, style, ...otherProps }) => {
+const PrettyInputField = ({ value, onChange, disabled, style, ...otherProps }) => {
     const { bg1ClassName, bodyFont } = useTheme()
     return (
         <input
             className={bg1ClassName}
-            style={{ ...INPUT_STYLE, ...style, fontFamily: bodyFont }}
-            {...{ placeholder, value, onChange, ...otherProps }}
+            style={{
+                ...INPUT_STYLE,
+                fontFamily: bodyFont,
+                opacity: disabled ? 0.3 : 1.0,
+                ...style,
+            }}
+            {...{ value, onChange, disabled, ...otherProps }}
+        />
+    )
+}
+
+const PrettyTextArea = ({ value, onChange, disabled, style, ...otherProps }) => {
+    const { bg1ClassName, bodyFont } = useTheme()
+    return (
+        <textArea
+            className={bg1ClassName}
+            style={{
+                fontFamily: bodyFont,
+                ...INPUT_STYLE,
+                lineHeight: "1.5",
+                opacity: disabled ? 0.3 : 1.0,
+                resize: "none",
+                ...style,
+            }}
+            {...{ value, onChange, disabled, ...otherProps }}
         />
     )
 }
@@ -176,6 +199,7 @@ const RoundedImage = ({ src, width, height, alt, borderType, style }) => {
 export {
     PrettyHeader,
     PrettyInputField,
+    PrettyTextArea,
     BorderedDiv,
     SimpleLink,
     OnClickText,
