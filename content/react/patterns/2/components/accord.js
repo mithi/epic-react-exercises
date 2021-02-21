@@ -3,17 +3,19 @@ import { createContext, useState, Children, cloneElement, useContext } from "rea
 const AccordionItemContext = createContext()
 AccordionItemContext.displayName = "AccordionItemContext"
 
-const AccordItem = ({ toggleItem, isOpen, children }) => {
+const AccordItem = ({ Component, toggleItem, isOpen, children, ...otherProps }) => {
+    Component = Component || "div"
     return (
         <AccordionItemContext.Provider value={{ toggleItem, isOpen }}>
-            {children}
+            <Component {...otherProps}>{children}</Component>
         </AccordionItemContext.Provider>
     )
 }
 
-const AccordPanel = ({ children }) => {
+const AccordPanel = ({ Component, children, ...otherProps }) => {
+    Component = Component || "div"
     const { isOpen } = useContext(AccordionItemContext)
-    return isOpen ? children : null
+    return isOpen ? <Component {...otherProps}>{children}</Component> : null
 }
 const AccordBtnOpen = props => {
     const { isOpen } = useContext(AccordionItemContext)
