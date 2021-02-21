@@ -30,7 +30,8 @@ const AccordBtn = ({ Component, ...otherProps }) => {
     const { toggleItem } = useContext(AccordionItemContext)
     return <Component onClick={toggleItem} {...otherProps} />
 }
-function Accord({ children }) {
+
+function Accord({ Component, children, ...otherProps }) {
     const [openIndices, setOpenIndices] = useState([])
 
     const updateAccord = currentIndex => {
@@ -41,18 +42,23 @@ function Accord({ children }) {
         )
     }
 
-    return Children.map(children, (child, index) => {
-        if (child.type !== AccordItem) {
-            throw new Error(
-                `Only the AccordItem can be a direct child of the Accord component. This child is ${child.type.name}`
-            )
-        }
-        return cloneElement(child, {
-            index,
-            toggleItem: () => updateAccord(index),
-            isOpen: openIndices.includes(index),
-        })
-    })
+    Component = Component || "div"
+    return (
+        <Component {...otherProps}>
+            {Children.map(children, (child, index) => {
+                if (child.type !== AccordItem) {
+                    throw new Error(
+                        `Only the AccordItem can be a direct child of the Accord component. This child is ${child.type.name}`
+                    )
+                }
+                return cloneElement(child, {
+                    index,
+                    toggleItem: () => updateAccord(index),
+                    isOpen: openIndices.includes(index),
+                })
+            })}
+        </Component>
+    )
 }
 
 export { Accord, AccordItem, AccordPanel, AccordBtn, AccordBtnClose, AccordBtnOpen }
