@@ -1,4 +1,3 @@
-import React from "react"
 import { FaArrowAltCircleUp, FaArrowAltCircleDown } from "components/icons"
 import { ColoredButton } from "components/button"
 import { BorderedDiv, DivBg1 } from "components/pretty-defaults"
