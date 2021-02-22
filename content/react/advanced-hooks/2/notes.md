@@ -1,4 +1,6 @@
-## The Simple Caching Exercise
+## A simple fetch-and-cache pattern
+
+> Summary: Create a system for storing and accessing previously fetched data for avoiding redundant network calls and giving a better user experience. The components must be written in an elegant way such that we'll have both great end-user and developer experience. Scope context values correctly for improved performance and maintainability.
 
 -   In this exercise, the user should be able to fetch Rick and Morty characters and store them locally in some sort of cache. If the character was fetched before, it should be loaded instantly without making a network request.
 -   While the user types in the input field, the app should be getting data from the cache on each change. When the input field contains an id that is on the cache, instantaneously display the cached data on the screen.
@@ -267,3 +269,7 @@ const useCache = localStorageKey => {
     return { cache, dispatch }
 }
 ```
+
+### Notes
+
+> A common mistake of context (and generally any “application” state) is to make it globally available anywhere in your application when it’s actually only needed to be available in a part of the app (like a single page). Keeping a context value scoped to the area that needs it most has improved performance and maintainability characteristics.

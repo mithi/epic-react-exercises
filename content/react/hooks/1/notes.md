@@ -1,10 +1,13 @@
-## [The TicTacToe Exercise](https://react-hooks.netlify.app/4)
+## State Management Complexity
 
+> Summary: Create a user interface for tictactoe that also enables the user to go back and forward to a previous board state of a game. Make sure that you reduce state management complexity by deriving most states instead of storing them.
+
+-   Write a user interface for tictactoe
 -   Be able to pause a game, close the tab, and then resume the game later
 -   Include a restart button (disabled before starting the game)
 -   Display the status of the game (winner, whose turn is it, if the game is finished etc)
 -   Be able to keep a history of the game; allow players to go backward and forward in time
--   [Kent's Implementation](https://github.com/kentcdodds/react-hooks/blob/main/src/final/04.extra-3.js)
+-   The tictactoe exercise taken from [here](https://react-hooks.netlify.app/4): [Kent's Implementation](https://github.com/kentcdodds/react-hooks/blob/main/src/final/04.extra-3.js)
 
 ### My Solution
 

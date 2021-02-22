@@ -1,6 +1,8 @@
-## The Accordion Exercise
+## Flexible Compound Components
 
-Create a flexible compound components for an "accordion functionality".
+> Create an accordion component (with subcomponents) that has a great API / syntax. The component styles should be fully customizable by those who'll use them.
+
+Create flexible compound components for an "accordion functionality".
 You should be able to use the components like this:
 
 ```jsx
@@ -27,7 +29,7 @@ You should be able to use the components like this:
 </Accord>
 ```
 
-For simplicity, Do not allow any other component as a direct child of the `Accord` component
+For simplicity, do not allow any other component as a direct child of the `Accord` component
 other than `AccordItem`. Return an error if that happens.
 `AccordItem` must have `AccordBtn` and `AccordPanel` as its decendant, but they don't have
 to be direct descendants. Either you have `AccordBtn` or both `AccordBtnOpen` and `AccordBtnClose` inside `AccordItem`
@@ -36,7 +38,7 @@ You should be able to use this accordion and customize how it looks as you can s
 
 ### My Solution
 
-Here's all the components
+Here's all the accordion related components
 
 ```jsx
 import { createContext, useState, Children, cloneElement, useContext } from "react"

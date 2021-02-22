@@ -1,5 +1,8 @@
-## The User Update Exercise
+## Context Module Functions
 
+> Summary: Add the ability for a user to submit data (such as updating its user profile) to a backend. As usual, your app should handle the request success or failure appropriately keeping the end user's experience in mind. Use the `Context Module functions` pattern for better performance by avoiding unneccessarily component rerenders and comparisons.
+
+-   This user Update Exercise is taken from here [https://advanced-react-patterns.netlify.app/1]
 -   This exercise, you'll have a form that updates the user profile, you'll have to submit the updates to a backend.
 -   The request to update will be rejected 50% of the time to simulate network errors.
 

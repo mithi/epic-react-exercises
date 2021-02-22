@@ -1,6 +1,8 @@
-## [The useSafeAsync Exercise](https://advanced-react-hooks.netlify.app/2)
+## Safely handling async operations
 
--   This is a variation of [Kent's exercise 2.3](https://github.com/kentcdodds/advanced-react-hooks/blob/main/src/final/02.extra-3.js) of his Advanced React Hooks workshop.
+> Summary: Create a reusable async hook to fetch a unique character from the Rick and Morty API. Make sure that you don't perform a state updates to unmounted components and avoid unneccessary network calls.
+
+-   This is a variation of [Kent's exercise 2.3](https://advanced-react-hooks.netlify.app/2) of his Advanced React Hooks workshop. See solution [here](https://github.com/kentcdodds/advanced-react-hooks/blob/main/src/final/02.extra-3.js).
 -   Write an component that fetches a unique character from the [Rick and Morty API](https://rickandmortyapi.com/) given a user-supplied number (the character ID).
 -   Add a button that, when clicked, will fetch a random Rick and Morty character.
 -   If the submitted number does not correspond to a character, show the error.

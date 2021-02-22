@@ -1,11 +1,13 @@
-## The UseDebugValue Exercise
+## Adding debug labels to hooks
+
+> Create a hook to determine the window user's window screen size and update the view based on it. Use the `useDebugValue` hook so that when a component uses the hook three different times, you'll be able to differentiate them on the [The React DevTools browser extension](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en).
 
 -   Show the current size of the window (`height` and `width`)
 -   Checkout the [RobertBroersma/bigheads](https://github.com/RobertBroersma/bigheads) package, you'll use this in this exercise!
 -   Generate three specific avatars, you can name it whatever you want. I named mine, `Mithi`, `Diana`, and `Mikong`. Each specific avatar must have fixed properties but except for `hat`, `hatColor`, `accessory`, `clothing`, `clothingColor` and `graphic`
 -   Every time the screen size changes, an avatar's `hat`, `hatColor`, `accessory`, `clothing`, `clothingColor` and `graphic` should change (randomly).
 -   Only one avatar should be shown for each screen width type, In my case, I show `Mithi` when the screen size is `big`, and `Diana` and `Mikong` for `medium` and `small` respectively. A big screen has a width above `1000px`, a small screen has a width below `700px` the rest are medium screens.
--   `useDebugValugValue` used to display a label for custom hooks in React DevTools. The custom hook should take in a minimum and maximum width, and return whether the current window size satisfies the condition.
+-   `useDebugValue` used to display a label for custom hooks in React DevTools. The custom hook should take in a minimum and maximum width, and return whether the current window size satisfies the condition.
 
 ### My implementation
 
