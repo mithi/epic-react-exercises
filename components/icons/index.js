@@ -16,6 +16,7 @@ import {
     FaArrowAltCircleDown,
     FaPlusCircle,
     FaUser,
+    FaTimes,
     FaRegStar,
     FaUserTimes,
     FaSearch,
@@ -27,6 +28,7 @@ import {
     FaWindowClose,
     FaRegWindowClose,
     FaHeartBroken,
+    FaPlus,
 } from "react-icons/fa"
 
 export {
@@ -58,6 +60,8 @@ export {
     FaPlusCircle,
     FaCloudSun,
     FaCode,
+    FaTimes,
+    FaPlus,
     FaPaintBrush,
     AiOutlineRead,
     RiCloseCircleFill,
