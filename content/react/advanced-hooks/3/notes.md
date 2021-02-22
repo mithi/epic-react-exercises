@@ -1,4 +1,6 @@
-## The Scrollable Component Exercise
+## Exposing properties to the parent
+
+> Summary: Create a scrollable component such that its parent could control whether the top part or the bottom part is shown. There shouldn't be any flickery jumpy behavior. Implement it twice, one with `useImperativeHandle` and `forwardRef`, the other without. State the difference between the two.
 
 -   Write a `scrollable` component that, that takes in a specific `width` and `height` as props (via the `style` prop).
 -   The content (passed through `children`) of that component must be larger than its width and height.
@@ -131,6 +133,17 @@ const AppNormal = () => {
 
 -   `forwardRef` is a React feature that lets a component take a `ref` from its parent component
 -   Keep in mind that `useRef` doesn’t notify you when its content changes. Mutating the `.current` property doesn’t cause a re-render
+
 -   [Sophie Au: React Hooks: `useImperativeHandle`](https://sophieau.com/article/use-imperative-handle/)
 -   [Mehdi Namvar: React’s `useImperativeHandle` by Examples](https://medium.com/@ilxanlar/useimperativehandle-by-examples-99cbdc8e3c3a)
 -   [Chris: When to use `useImperativeHandle`, `useLayoutEffect`, and `useDebugValue`](https://stackoverflow.com/questions/57005663/when-to-use-useimperativehandle-uselayouteffect-and-usedebugvalue)
+
+### Quotes
+
+> `useImperativeHandle` customizes the instance value that is exposed to parent components when using `ref`. As always, imperative code using refs should be avoided in most cases. `useImperativeHandle` should be used with `forwardRef`.
+
+> It allows us to expose imperative methods to developers who pass a ref prop to our component which can be useful when you have something that needs to happen and is hard to deal with declaratively.
+
+> It gives you control over the value that is returned. Instead of returning the instance element, you explicitly state what the return value will be
+
+> It allows you to replace native functions (such as blur, focus, etc) with functions of your own, thus allowing side-effects to the normal behavior, or a different behavior altogether.

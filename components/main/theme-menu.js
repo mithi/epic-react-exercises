@@ -85,7 +85,7 @@ const ChooseParagraph = () => {
         <p
             onClick={nextBodyFont}
             className={onHoverClassName}
-            style={{ ...HOVER_STYLE, lineHeight: "1.3" }}
+            style={{ ...HOVER_STYLE, lineHeight: 1.2, textAlign: "left" }}
         >
             {SAMPLE_PARAGRAPH}
         </p>

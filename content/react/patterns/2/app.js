@@ -44,7 +44,6 @@ const FirstExample = () => (
                         <RoundedImage src={imageUrl} alt={name} height={75} width={75} />
                         <div style={{ margin: "5px" }}>
                             <SmallSpan>
-                                {" "}
                                 towertype: {towerType}
                                 <br />
                                 buildcost: {buildCost}

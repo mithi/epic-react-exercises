@@ -1,8 +1,10 @@
-## [The Vanilla Tilt Exercise](https://react-hooks.netlify.app/5)
+## Direct DOM Access and Memory Leaks
 
--   Transform the perspective of a container on enter with [micku7zu/vanilla-tilt.js](https://micku7zu.github.io/vanilla-tilt.js/)
+> Summary: Be able to use non-React libraries that directly interact with the DOM such as the [VanillaTilt](https://micku7zu.github.io/vanilla-tilt.js/). Use `useRef` to access dom nodes. Make sure that there are no memory leaks by cleaning up event handlers.
+
+-   Transform the perspective of a container on enter with [this library](https://micku7zu.github.io/vanilla-tilt.js/)
 -   Display the details of the perspective transform as it happens
--   Remember: We don't want event handlers dangling around on DOM nodes that are no longer in the document. (memory leak)
+-   This exercise is a modified version of [this](https://react-hooks.netlify.app/5)
 
 ### My Solution
 

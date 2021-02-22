@@ -1,4 +1,6 @@
-## [The Http Request Exercise](https://react-hooks.netlify.app/6)
+## The Http Requests and Error Boundaries
+
+> Summary: Be able to gracefully do http requests (like fetching pokemon data) for end-users and give them a good experience. Display appropriate views depending on the status of the http request and handle unexpected errors.
 
 -   [Fetch pokemons](https://graphql-pokemon2.vercel.app) from [this project](https://github.com/lucasbento/graphql-pokemon/pull/14)!
 -   A form where users can enter the pokemon name and your app fetches and displays that pokemon's data
@@ -8,7 +10,8 @@
 -   When something goes wrong (like a `network error`, or a `pokemon not existing in the database`), the error should be displayed at the bottom of the search bar. The search bar should ALWAYS be mounted.
 -   There should be a button to `try again` after an error. Upon clicking this , the `no pokemon yet, please submit a pokemon!` will be shown and the current string on the search bar would be removed.
 -   After an error, the user should be able to use the search bar to search for a new pokemon without having to click the `try again` button.
--   [Kent's Implementation](https://github.com/kentcdodds/react-hooks/blob/main/src/final/04.extra-3.js)
+
+-   This Fetch Pokemon exercise is taken from [here](https://react-hooks.netlify.app/6): [Kent's Implementation](https://github.com/kentcdodds/react-hooks/blob/main/src/final/04.extra-3.js)
 
 ### My Solution
 
