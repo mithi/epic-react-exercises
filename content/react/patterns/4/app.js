@@ -1,6 +1,6 @@
 import { SquareButton } from "components/button"
 import { FaPlus, FaTimes } from "components/icons"
-import { DivBg1, PrettyHeader } from "components/pretty-defaults"
+import { PrettyHeader } from "components/pretty-defaults"
 import useAnimatedCounter from "./components/use-animated-counter"
 import { AnimatedCountButton } from "../3/components/use-animated-counter"
 import { useTheme } from "providers"
@@ -48,7 +48,7 @@ function App() {
         backgroundColor: "rgba(0, 0, 0, 0)",
     }
     return (
-        <DivBg1
+        <div
             style={{
                 display: "flex",
                 margin: "5px",
@@ -101,7 +101,7 @@ function App() {
             >
                 <FaPlus />
             </SquareButton>
-        </DivBg1>
+        </div>
     )
 }
 

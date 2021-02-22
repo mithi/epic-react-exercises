@@ -38,7 +38,7 @@ const Example = () => {
                 width: "300px",
             }}
         >
-            <div style={{ textAlign: "center", width: "140px" }}>
+            <div style={{ textAlign: "center", width: "140px", marginTop: "-30px" }}>
                 <AnimatedCountButton {...animatedButtonProps}>
                     <span {...countProps} style={{ fontSize: "130px" }} />
                 </AnimatedCountButton>

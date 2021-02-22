@@ -49,7 +49,7 @@ const Example = () => {
                                     onClick={() => {}}
                                     style={{
                                         borderWidth: 0,
-                                        color: "yellow",
+                                        color: "orange",
                                         backgroundColor: "rgba(0, 0, 0, 0)",
                                         opacity: progressFraction,
                                         fontSize: "30px",
