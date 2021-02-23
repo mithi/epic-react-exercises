@@ -18,6 +18,22 @@ const Example = () => {
     })
 
     const { atStartPosition, atEndPosition } = state
+
+    const maybeResetButton = !atStartPosition && (
+        <SquareButton
+            {...resetButtonProps}
+            style={{
+                borderRadius: "50%",
+                fontSize: "8px",
+                width: "16px",
+                height: "16px",
+                marginTop: "-10px",
+            }}
+        >
+            <ImCross />
+        </SquareButton>
+    )
+
     return (
         <div style={{ margin: "5px", width: "100px" }}>
             <DivBg1
@@ -38,21 +54,7 @@ const Example = () => {
                 >
                     <FaHeart />
                 </AnimatedCountButton>
-
-                {!atStartPosition && (
-                    <SquareButton
-                        {...resetButtonProps}
-                        style={{
-                            borderRadius: "50%",
-                            fontSize: "8px",
-                            width: "16px",
-                            height: "16px",
-                            marginTop: "-10px",
-                        }}
-                    >
-                        <ImCross />
-                    </SquareButton>
-                )}
+                {maybeResetButton}
             </DivBg1>
         </div>
     )

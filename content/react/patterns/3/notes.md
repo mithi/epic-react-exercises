@@ -188,23 +188,18 @@ const useAnimatedCounter = ({
 The simple counter
 
 ```jsx
-<DivBg1>
-    <div>
-        <AnimatedCountButton {...animatedButtonProps}>
-            <span {...countProps} />
-        </AnimatedCountButton>
-        <div>
-            <SquareButton {...resetButtonProps}>
-                <BiRefresh />
-            </SquareButton>
+<div>
+    <AnimatedCountButton {...animatedButtonProps}>
+        <span {...countProps} />
+    </AnimatedCountButton>
+    <button {...resetButtonProps}>
+        <BiRefresh />
+    </button>
+    <button {...countButtonProps}>
+        <FaPlusCircle />
+    </button>
 
-            <SquareButton {...countButtonProps}>
-                <FaPlusCircle />
-            </SquareButton>
-        </div>
-    </div>
-
-    <div>
+    <ul>
         <li>min: {minCount}</li>
         <li>max: {maxCount}</li>
         <li>step: {step}</li>
@@ -227,8 +222,8 @@ The simple counter
                 Try resetting
             </OnClickText>
         </li>
-    </div>
-</DivBg1>
+    </ul>
+</div>
 ```
 
 The heart
@@ -247,10 +242,14 @@ const Example = () => {
         initialCount: 16,
     })
 
+    const maybeResetButton = !atStartPosition && (
+        <button {...resetButtonProps}>reset</button>
+    )
+
     const { atStartPosition, atEndPosition } = state
     return (
-        <DivBg1>
-            <PrettyHeader {...countProps} />
+        <div>
+            <span {...countProps} />
             <AnimatedCountButton
                 {...animatedButtonProps}
                 style={{
@@ -259,13 +258,8 @@ const Example = () => {
             >
                 <FaHeart />
             </AnimatedCountButton>
-
-            {!atStartPosition && (
-                <SquareButton {...resetButtonProps}>
-                    <ImCross />
-                </SquareButton>
-            )}
-        </DivBg1>
+            {maybeResetButton}
+        </div>
     )
 }
 ```
@@ -287,37 +281,43 @@ const Example = () => {
     })
 
     const { atEndPosition, count, progressFraction } = state
-    return (
-        <DivBg1>
-            {atEndPosition ? (
-                <SquareButton {...resetButtonProps}>
-                    <ImCross />
-                </SquareButton>
-            ) : (
-                <SquareButton {...countButtonProps}>
-                    <FaRegStar />
-                </SquareButton>
-            )}
 
-            <AnimatedCountButton {...animatedButtonProps}>
-                <div>
-                    {Array(count)
-                        .fill(null)
-                        .map((_, key) => {
-                            return (
-                                <SquareButton
-                                    disabled={true}
-                                    key={key}
-                                    onClick={() => {}}
-                                    style={opacity: progressFraction}}
-                                >
-                                    <FaStar />
-                                </SquareButton>
-                            )
-                        })}
-                </div>
-            </AnimatedCountButton>
-        </DivBg1>
+    let leftButton = (
+        <button {...countButtonProps}>
+            <FaRegStar />
+        </button>
+    )
+
+    if (atEndPosition) {
+        leftButton = (
+            <button {...resetButtonProps}>
+                <ImCross />
+            </button>
+        )
+    }
+
+    const stars = Array(count)
+        .fill(null)
+        .map((_, key) => {
+            return (
+                <button
+                    disabled={true}
+                    key={key}
+                    onClick={() => {}}
+                    style={{
+                        opacity: progressFraction,
+                    }}
+                >
+                    <FaStar />
+                </button>
+            )
+        })
+
+    return (
+        <div>
+            {leftButton}
+            <AnimatedCountButton {...animatedButtonProps}>{stars}</AnimatedCountButton>
+        </div>
     )
 }
 ```
@@ -349,7 +349,7 @@ const Example = () => {
     const offset = progressFraction * circumference
 
     return (
-        <DivBg1>
+        <div>
             <AnimatedCountButton {...animatedButtonProps}>
                 <svg className="svg" width={size} height={size}>
                     <circle
@@ -381,14 +381,10 @@ const Example = () => {
                 </svg>
             </AnimatedCountButton>
             <div>
-                <SquareButton {...resetButtonProps}>
-                    <BiRefresh />
-                </SquareButton>
-                <SquareButton {...countButtonProps}>
-                    <FaPlusCircle />
-                </SquareButton>
+                <button {...resetButtonProps}>reset</button>
+                <button {...countButtonProps}>increment</button>
             </div>
-        </DivBg1>
+        </div>
     )
 }
 ```
