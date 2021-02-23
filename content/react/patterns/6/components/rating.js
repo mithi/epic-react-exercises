@@ -28,11 +28,8 @@ const ratingReducer = (previous, action) => {
                     : eventTypes.setRating,
         }
     } else if (action.type === actionTypes.hover) {
-        const lastEvent = wasRated(previous.lastEvent)
-            ? previous.event
-            : action.hoverIndex === null
-            ? eventTypes.mouseLeave
-            : eventTypes.hover
+        const lastEvent =
+            action.hoverIndex === null ? eventTypes.mouseLeave : eventTypes.hover
 
         return {
             ...previous,
@@ -53,7 +50,7 @@ const useRating = ({
     maxRating = 5,
 }) => {
     const { current: initialState } = useRef({
-        rating: initialRating,
+        rating: initialRating || 0,
         hoverIndex: null,
         lastEvent: null,
     })
