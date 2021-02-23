@@ -1,47 +1,64 @@
+import { useState } from "react"
+import { SmallSpan } from "components/pretty-defaults"
 import { FaStar, FaRegStar } from "components/icons"
 import { Rating } from "./components/rating"
 
 const redStar = (
-    <div style={{ fontSize: "50px", color: "red" }}>
+    <span style={{ fontSize: "50px", color: "red" }}>
         <FaStar />
-    </div>
+    </span>
 )
 
 const orangeStar = (
-    <div style={{ fontSize: "50px", color: "orange" }}>
+    <span style={{ fontSize: "50px", color: "orange" }}>
         <FaStar />
-    </div>
+    </span>
 )
 
 const orangeStarBigger = (
-    <div style={{ fontSize: "55px", color: "orange" }}>
+    <span style={{ fontSize: "55px", color: "orange" }}>
         <FaStar />
-    </div>
+    </span>
 )
 const greyStar = (
-    <div style={{ fontSize: "50px", color: "grey" }}>
+    <span style={{ fontSize: "50px", color: "grey" }}>
         <FaRegStar />
-    </div>
+    </span>
 )
 
 const App = () => {
+    const [messages, setMessages] = useState({})
+    function handleRatingChange(state, action) {
+        setMessages({
+            state,
+            action,
+        })
+    }
+
     return (
-        <Rating
-            style={{
-                height: "50px",
-                margin: "30px 0",
-                display: "flex",
-                width: "100%",
-                justifyContent: "center",
-                alignItems: "center",
-            }}
-            iconFilled={redStar}
-            iconDefault={greyStar}
-            iconHover={orangeStar}
-            iconActive={orangeStarBigger}
-            maxRating={7}
-            initialRating={4}
-        />
+        <div>
+            <SmallSpan>STATE: {JSON.stringify(messages.state)}</SmallSpan>
+            <br />
+            <SmallSpan>ACTION: {JSON.stringify(messages.action)}</SmallSpan>
+
+            <Rating
+                style={{
+                    height: "50px",
+                    margin: "30px 0",
+                    display: "flex",
+                    width: "100%",
+                    justifyContent: "center",
+                    alignItems: "center",
+                }}
+                iconFilled={redStar}
+                iconDefault={greyStar}
+                iconHover={orangeStar}
+                iconActive={orangeStarBigger}
+                maxRating={7}
+                initialRating={4}
+                onChange={handleRatingChange}
+            />
+        </div>
     )
 }
 
