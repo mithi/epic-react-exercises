@@ -17,6 +17,41 @@ const Example = () => {
     })
 
     const { atEndPosition, count, progressFraction } = state
+
+    let leftButton = (
+        <SquareButton {...countButtonProps}>
+            <FaRegStar />
+        </SquareButton>
+    )
+
+    if (atEndPosition) {
+        leftButton = (
+            <SquareButton {...resetButtonProps}>
+                <ImCross />
+            </SquareButton>
+        )
+    }
+
+    const stars = Array(count)
+        .fill(null)
+        .map((_, key) => {
+            return (
+                <SquareButton
+                    disabled={true}
+                    key={key}
+                    onClick={() => {}}
+                    style={{
+                        borderWidth: 0,
+                        color: "orange",
+                        backgroundColor: "rgba(0, 0, 0, 0)",
+                        opacity: progressFraction,
+                        fontSize: "30px",
+                    }}
+                >
+                    <FaStar />
+                </SquareButton>
+            )
+        })
     return (
         <DivBg1
             style={{
@@ -27,39 +62,10 @@ const Example = () => {
                 margin: "5px",
             }}
         >
-            {atEndPosition ? (
-                <SquareButton {...resetButtonProps}>
-                    <ImCross />
-                </SquareButton>
-            ) : (
-                <SquareButton {...countButtonProps}>
-                    <FaRegStar />
-                </SquareButton>
-            )}
+            {leftButton}
 
             <AnimatedCountButton {...animatedButtonProps} style={{ fontSize: "50px" }}>
-                <div style={{ display: "flex", marginRight: "20px" }}>
-                    {Array(count)
-                        .fill(null)
-                        .map((_, key) => {
-                            return (
-                                <SquareButton
-                                    disabled={true}
-                                    key={key}
-                                    onClick={() => {}}
-                                    style={{
-                                        borderWidth: 0,
-                                        color: "orange",
-                                        backgroundColor: "rgba(0, 0, 0, 0)",
-                                        opacity: progressFraction,
-                                        fontSize: "30px",
-                                    }}
-                                >
-                                    <FaStar />
-                                </SquareButton>
-                            )
-                        })}
-                </div>
+                <div style={{ display: "flex", marginRight: "20px" }}>{stars}</div>
             </AnimatedCountButton>
         </DivBg1>
     )

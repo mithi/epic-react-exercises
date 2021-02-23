@@ -52,7 +52,6 @@ const Example = () => {
                     <SquareButton {...resetButtonProps}>
                         <BiRefresh />
                     </SquareButton>
-
                     <SquareButton {...countButtonProps}>
                         <FaPlusCircle />
                     </SquareButton>
