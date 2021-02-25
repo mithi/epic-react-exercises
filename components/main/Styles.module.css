@@ -6,13 +6,12 @@
 }
 
 .twoSectionsLayout {
-    flex-grow: 0;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 1fr;
     grid-column-gap: 10px;
     grid-row-gap: 10px;
-    justify-items: stretch;
+    width: calc(100vw - 70px - 20px); /*view width minus nav - minus nav margins*/
 }
 
 .common {
@@ -48,7 +47,6 @@
 }
 
 .nav {
-    flex-shrink: 0;
     width: 70px;
     margin-right: 10px;
     display: flex;
