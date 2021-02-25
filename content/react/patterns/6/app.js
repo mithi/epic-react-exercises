@@ -57,10 +57,12 @@ const filledHeart = (
 )
 
 const NUMBER_OF_STARS = 5
-
+const HEART_MULTIPLIER = 2
+const NUMBER_OF_HEARTS = NUMBER_OF_STARS * HEART_MULTIPLIER
+const NAME = { heart: "heart", star: "star" }
 const RATING_STYLE = {
-    height: "60px",
-    margin: "10px",
+    height: "70px",
+    padding: "5px",
     display: "flex",
     width: "100%",
     justifyContent: "center",
@@ -72,17 +74,68 @@ const App = () => {
         state: { rating: 0, hoverIndex: null, lastEvent: actionTypes.mouseLeave },
     })
 
-    function handleSyncRatingChange(state, action) {
-        setSyncRating({ state, action })
+    function handleStarRatingChange(suggestedState, action) {
+        setSyncRating({
+            state: {
+                ...suggestedState,
+                rating: suggestedState.rating * HEART_MULTIPLIER,
+                hoverIndex:
+                    suggestedState.hoverIndex === null
+                        ? null
+                        : suggestedState.hoverIndex * HEART_MULTIPLIER + 1,
+            },
+            action: { ...action, name: NAME.star },
+        })
     }
+
+    function handleHeartRatingChange(suggestedState, action) {
+        if (
+            suggestedState.rating === syncRating.state &&
+            action.type === actionTypes.rate
+        ) {
+            setSyncRating({ state: suggestedState, action: { action, name: NAME.heart } })
+        }
+        const isEven = suggestedState.rating % 2 === 0
+        const evenRating = isEven ? suggestedState.rating : suggestedState.rating + 1
+
+        const evenHoverIndex =
+            suggestedState.hoverIndex === null
+                ? null
+                : suggestedState.hoverIndex % 2 === 0
+                ? suggestedState.hoverIndex + 1
+                : suggestedState.hoverIndex
+
+        setSyncRating({
+            state: {
+                ...suggestedState,
+                rating: evenRating,
+                hoverIndex: evenHoverIndex,
+            },
+            action: { ...action, name: NAME.heart },
+        })
+    }
+
+    const starState = {
+        ...syncRating.state,
+        hoverIndex:
+            syncRating.state.hoverIndex === null
+                ? null
+                : Math.floor(syncRating.state.hoverIndex / HEART_MULTIPLIER),
+        rating: Math.floor(syncRating.state.rating / HEART_MULTIPLIER),
+    }
+
+    const heartState = syncRating.state
 
     return (
         <div>
-            <SmallSpan>SYNC STATE: {JSON.stringify(syncRating.state)}</SmallSpan>
-            <br />
-            <SmallSpan>SYNC ACTION: {JSON.stringify(syncRating.action)}</SmallSpan>
-            <br />
-            <PrettyHeader>controlled</PrettyHeader>
+            <p>
+                <SmallSpan>SYNC STATE: {JSON.stringify(syncRating.state)}</SmallSpan>
+                <br />
+                <SmallSpan>SYNC ACTION: {JSON.stringify(syncRating.action)}</SmallSpan>
+            </p>
+            <PrettyHeader style={{ textAlign: "center", margin: "5px" }}>
+                controlled
+            </PrettyHeader>
             <Rating
                 style={RATING_STYLE}
                 iconFilled={darkOrangeStar}
@@ -90,20 +143,30 @@ const App = () => {
                 iconHover={orangeStar}
                 iconActive={orangeStarBigger}
                 maxRating={NUMBER_OF_STARS}
-                onChange={handleSyncRatingChange}
-                state={syncRating.state}
-                name="star"
+                onChange={handleStarRatingChange}
+                state={starState}
+                name={NAME.star}
             />
             <Rating
-                style={RATING_STYLE}
+                style={{ ...RATING_STYLE, height: "35px" }}
+                iconFilled={filledHeart}
+                iconDefault={defaultHeart}
+                iconHover={hoverHeart}
+                iconActive={activeHeart}
+                maxRating={NUMBER_OF_HEARTS}
+                onChange={handleHeartRatingChange}
+                state={heartState}
+                name={NAME.heart}
+            />
+            <PrettyHeader style={{ textAlign: "center" }}>uncontrolled</PrettyHeader>
+            <Rating
+                style={{ ...RATING_STYLE, height: "35px" }}
                 iconFilled={filledHeart}
                 iconDefault={defaultHeart}
                 iconHover={hoverHeart}
                 iconActive={activeHeart}
                 maxRating={NUMBER_OF_STARS}
-                onChange={handleSyncRatingChange}
-                state={syncRating.state}
-                name="heart"
+                name={NAME.heart}
             />
         </div>
     )
