@@ -1,10 +1,17 @@
 import { useState } from "react"
-import { SmallSpan } from "components/pretty-defaults"
-import { FaStar, FaRegStar } from "components/icons"
-import { Rating } from "./components/rating"
+import { SmallSpan, PrettyHeader } from "components/pretty-defaults"
+import {
+    FaStar,
+    FaRegStar,
+    FaHeart,
+    FaHeartBroken,
+    FaRegHeart,
+    FaHeartbeat,
+} from "components/icons"
+import { Rating, actionTypes } from "./components/rating"
 
-const redStar = (
-    <span style={{ fontSize: "50px", color: "red" }}>
+const darkOrangeStar = (
+    <span style={{ fontSize: "50px", color: "#e17055" }}>
         <FaStar />
     </span>
 )
@@ -26,40 +33,106 @@ const greyStar = (
     </span>
 )
 
+/*
+const defaultHeart = (
+    <span style={{ fontSize: "20px", color: "grey" }}>
+        <FaRegHeart />
+    </span>
+)
+const activeHeart = (
+    <span style={{ fontSize: "20px", color: "#fd79a8" }}>
+        <FaHeartBroken />
+    </span>
+)
+
+const hoverHeart = (
+    <span style={{ fontSize: "20px", color: "#fd79a8" }}>
+        <FaHeartbeat />
+    </span>
+)
+
+const filledHeart = (
+    <span style={{ fontSize: "20px", color: "#e84393" }}>
+        <FaHeart />
+    </span>
+)
+
+const HEART_MULTIPLIER = 2
+
+*/
+
+const NUMBER_OF_STARS = 5
+
 const App = () => {
-    const [messages, setMessages] = useState({})
-    function handleRatingChange(state, action) {
-        setMessages({
-            state,
-            action,
-        })
+    const [starRating, setStarRating] = useState({
+        action: null,
+        state: { rating: 0, hoverIndex: null, lastEvent: actionTypes.mouseLeave },
+    })
+
+    function handleStarRatingChange(state, action) {
+        setStarRating({ state, action })
     }
 
     return (
         <div>
-            <SmallSpan>STATE: {JSON.stringify(messages.state)}</SmallSpan>
+            <SmallSpan>STAR STATE: {JSON.stringify(starRating.state)}</SmallSpan>
             <br />
-            <SmallSpan>ACTION: {JSON.stringify(messages.action)}</SmallSpan>
-
+            <SmallSpan>STAR RATING ACTION: {JSON.stringify(starRating.action)}</SmallSpan>
+            <br />
+            <PrettyHeader>controlled</PrettyHeader>
             <Rating
                 style={{
                     height: "50px",
-                    margin: "30px 0",
+                    margin: "10px",
                     display: "flex",
                     width: "100%",
                     justifyContent: "center",
                     alignItems: "center",
                 }}
-                iconFilled={redStar}
+                iconFilled={darkOrangeStar}
                 iconDefault={greyStar}
                 iconHover={orangeStar}
                 iconActive={orangeStarBigger}
-                maxRating={7}
-                initialRating={4}
-                onChange={handleRatingChange}
+                maxRating={NUMBER_OF_STARS}
+                onChange={handleStarRatingChange}
+                state={starRating.state}
+            />
+            <PrettyHeader>Uncontrolled</PrettyHeader>
+            <Rating
+                style={{
+                    height: "50px",
+                    margin: "10px",
+                    display: "flex",
+                    width: "100%",
+                    justifyContent: "center",
+                    alignItems: "center",
+                }}
+                iconFilled={darkOrangeStar}
+                iconDefault={greyStar}
+                iconHover={orangeStar}
+                iconActive={orangeStarBigger}
+                maxRating={NUMBER_OF_STARS}
             />
         </div>
     )
 }
 
+/*
+
+            <Rating
+                style={{
+                    height: "20px",
+                    display: "flex",
+                    width: "100%",
+                    justifyContent: "center",
+                    alignItems: "center",
+                }}
+                iconFilled={filledHeart}
+                iconDefault={defaultHeart}
+                iconHover={hoverHeart}
+                iconActive={activeHeart}
+                maxRating={NUMBER_OF_STARS * HEART_MULTIPLIER}
+            />
+
+ */
 export default App
