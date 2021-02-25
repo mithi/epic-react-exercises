@@ -42,7 +42,7 @@ const ratingReducer = (previous, action) => {
     throw new Error(`Unsupported type: ${action.type}`)
 }
 
-const useRating = ({ onChange, controlledState, maxRating = 5 } = {}) => {
+const useRating = ({ onChange, controlledState, maxRating } = {}) => {
     const { current: initialState } = useRef({
         rating: 0,
         hoverIndex: null,
@@ -50,7 +50,7 @@ const useRating = ({ onChange, controlledState, maxRating = 5 } = {}) => {
     })
     const [stateFromReducer, dispatch] = useReducer(ratingReducer, initialState)
 
-    const stateIsControlled = stateIsControlled !== undefined
+    const stateIsControlled = controlledState !== undefined
     const state = stateIsControlled ? controlledState : stateFromReducer
 
     const dispatchWithOnChange = action => {
@@ -138,6 +138,7 @@ const Rating = ({
     state: controlledState,
     onChange,
     style,
+    name,
 } = {}) => {
     const { state, getButtonProps } = useRating({
         onChange,
@@ -168,7 +169,7 @@ const Rating = ({
             )
         })
 
-    return <ul {...{ style }}>{ratingElements}</ul>
+    return <ul {...{ style, name }}>{ratingElements}</ul>
 }
 
 export { Rating, actionTypes, wasRated }
