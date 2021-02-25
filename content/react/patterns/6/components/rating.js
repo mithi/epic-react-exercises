@@ -5,6 +5,7 @@ const callAll = (...fns) => (...args) => fns.forEach(fn => fn && fn(...args))
 const actionTypes = {
     rate: "rate",
     hover: "hover",
+    setState: "setState",
 }
 
 const eventTypes = {
@@ -41,46 +42,33 @@ const ratingReducer = (previous, action) => {
     throw new Error(`Unsupported type: ${action.type}`)
 }
 
-const useRating = ({
-    initialRating = 0,
-    reducer = ratingReducer,
-    onChange,
-    rating: controlledRating,
-    hoverIndex,
-    maxRating = 5,
-}) => {
+const useRating = ({ onChange, controlledState, maxRating = 5 } = {}) => {
     const { current: initialState } = useRef({
-        rating: initialRating || 0,
+        rating: 0,
         hoverIndex: null,
-        lastEvent: null,
+        lastEvent: actionTypes.mouseLeave,
     })
-    const [state, dispatch] = useReducer(ratingReducer, initialState)
-    const ratingIsControlled = controlledRating != null
-    const rating = ratingIsControlled ? controlledRating : state.rating
+    const [stateFromReducer, dispatch] = useReducer(ratingReducer, initialState)
+
+    const stateIsControlled = stateIsControlled !== undefined
+    const state = stateIsControlled ? controlledState : stateFromReducer
 
     const dispatchWithOnChange = action => {
-        if (!ratingIsControlled) {
+        if (!stateIsControlled) {
             dispatch(action)
         }
 
-        // call the default reducer to get the next state
-        const nextRating = reducer({ ...state, rating, hoverIndex }, action)
-
-        // execute the custom behavior passed to us
-        onChange && onChange(nextRating, action)
+        if (onChange) {
+            const nextState = ratingReducer(state, action)
+            onChange(nextState, action)
+        }
     }
 
     const rate = newRating => {
-        dispatchWithOnChange({
-            type: actionTypes.rate,
-            rating: newRating,
-        })
+        dispatchWithOnChange({ type: actionTypes.rate, rating: newRating })
     }
     const hover = hoverIndex => {
-        dispatchWithOnChange({
-            type: actionTypes.hover,
-            hoverIndex,
-        })
+        dispatchWithOnChange({ type: actionTypes.hover, hoverIndex })
     }
 
     const getButtonProps = ({
@@ -107,11 +95,7 @@ const useRating = ({
         }
     }
 
-    return {
-        dispatchWithOnChange,
-        getButtonProps,
-        state,
-    }
+    return { getButtonProps, state }
 }
 
 const iconTypes = {
@@ -151,16 +135,14 @@ const Rating = ({
     iconHover,
     iconActive,
     maxRating = 5,
-    rating,
+    state: controlledState,
     onChange,
-    initialRating,
     style,
 } = {}) => {
     const { state, getButtonProps } = useRating({
-        initialRating,
         onChange,
-        rating,
-        hoverIndex: 0,
+        controlledState,
+        maxRating,
     })
 
     const possibleIcons = {
@@ -189,4 +171,4 @@ const Rating = ({
     return <ul {...{ style }}>{ratingElements}</ul>
 }
 
-export { Rating }
+export { Rating, actionTypes, wasRated }
