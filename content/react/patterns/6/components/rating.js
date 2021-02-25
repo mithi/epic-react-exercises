@@ -20,7 +20,7 @@ const wasRated = event => [eventTypes.setRating, eventTypes.removeRating].includ
 const ratingReducer = (previous, action) => {
     if (action.type === actionTypes.rate) {
         const toggled = previous.rating === action.rating
-        return {
+        const next = {
             ...previous,
             rating: toggled ? 0 : action.rating,
             lastEvent:
@@ -28,15 +28,19 @@ const ratingReducer = (previous, action) => {
                     ? eventTypes.removeRating
                     : eventTypes.setRating,
         }
+
+        return next
     } else if (action.type === actionTypes.hover) {
         const lastEvent =
             action.hoverIndex === null ? eventTypes.mouseLeave : eventTypes.hover
 
-        return {
+        const next = {
             ...previous,
             hoverIndex: action.hoverIndex,
             lastEvent,
         }
+
+        return next
     }
 
     throw new Error(`Unsupported type: ${action.type}`)
