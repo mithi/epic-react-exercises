@@ -23,7 +23,7 @@ const orangeStar = (
 )
 
 const orangeStarBigger = (
-    <span style={{ fontSize: "55px", color: "orange" }}>
+    <span style={{ fontSize: "60px", color: "orange" }}>
         <FaStar />
     </span>
 )
@@ -33,7 +33,6 @@ const greyStar = (
     </span>
 )
 
-/*
 const defaultHeart = (
     <span style={{ fontSize: "20px", color: "grey" }}>
         <FaRegHeart />
@@ -57,82 +56,57 @@ const filledHeart = (
     </span>
 )
 
-const HEART_MULTIPLIER = 2
-
-*/
-
 const NUMBER_OF_STARS = 5
 
+const RATING_STYLE = {
+    height: "60px",
+    margin: "10px",
+    display: "flex",
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+}
 const App = () => {
-    const [starRating, setStarRating] = useState({
+    const [syncRating, setSyncRating] = useState({
         action: null,
         state: { rating: 0, hoverIndex: null, lastEvent: actionTypes.mouseLeave },
     })
 
-    function handleStarRatingChange(state, action) {
-        setStarRating({ state, action })
+    function handleSyncRatingChange(state, action) {
+        setSyncRating({ state, action })
     }
 
     return (
         <div>
-            <SmallSpan>STAR STATE: {JSON.stringify(starRating.state)}</SmallSpan>
+            <SmallSpan>SYNC STATE: {JSON.stringify(syncRating.state)}</SmallSpan>
             <br />
-            <SmallSpan>STAR RATING ACTION: {JSON.stringify(starRating.action)}</SmallSpan>
+            <SmallSpan>SYNC ACTION: {JSON.stringify(syncRating.action)}</SmallSpan>
             <br />
             <PrettyHeader>controlled</PrettyHeader>
             <Rating
-                style={{
-                    height: "50px",
-                    margin: "10px",
-                    display: "flex",
-                    width: "100%",
-                    justifyContent: "center",
-                    alignItems: "center",
-                }}
+                style={RATING_STYLE}
                 iconFilled={darkOrangeStar}
                 iconDefault={greyStar}
                 iconHover={orangeStar}
                 iconActive={orangeStarBigger}
                 maxRating={NUMBER_OF_STARS}
-                onChange={handleStarRatingChange}
-                state={starRating.state}
+                onChange={handleSyncRatingChange}
+                state={syncRating.state}
+                name="star"
             />
-            <PrettyHeader>Uncontrolled</PrettyHeader>
             <Rating
-                style={{
-                    height: "50px",
-                    margin: "10px",
-                    display: "flex",
-                    width: "100%",
-                    justifyContent: "center",
-                    alignItems: "center",
-                }}
-                iconFilled={darkOrangeStar}
-                iconDefault={greyStar}
-                iconHover={orangeStar}
-                iconActive={orangeStarBigger}
+                style={RATING_STYLE}
+                iconFilled={filledHeart}
+                iconDefault={defaultHeart}
+                iconHover={hoverHeart}
+                iconActive={activeHeart}
                 maxRating={NUMBER_OF_STARS}
+                onChange={handleSyncRatingChange}
+                state={syncRating.state}
+                name="heart"
             />
         </div>
     )
 }
 
-/*
-
-            <Rating
-                style={{
-                    height: "20px",
-                    display: "flex",
-                    width: "100%",
-                    justifyContent: "center",
-                    alignItems: "center",
-                }}
-                iconFilled={filledHeart}
-                iconDefault={defaultHeart}
-                iconHover={hoverHeart}
-                iconActive={activeHeart}
-                maxRating={NUMBER_OF_STARS * HEART_MULTIPLIER}
-            />
-
- */
 export default App
