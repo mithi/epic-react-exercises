@@ -173,7 +173,11 @@ const Rating = ({
             )
         })
 
-    return <ul {...{ style, name }}>{ratingElements}</ul>
+    return (
+        <ul {...{ style: { margin: 0, padding: 0, ...style }, name }}>
+            {ratingElements}
+        </ul>
+    )
 }
 
 export { Rating, actionTypes, wasRated }

@@ -21,7 +21,7 @@ const TicTacToeBoard = ({ currentBoard, onPlayerMove, disableAll }) => {
     }
 
     return (
-        <table>
+        <table style={{ margin: "10px" }}>
             <tbody>
                 <tr>
                     <td>{square(0)}</td>
