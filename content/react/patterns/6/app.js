@@ -1,175 +1,108 @@
-import { useState } from "react"
+import { useReducer, useState } from "react"
 import { SmallSpan, PrettyHeader } from "components/pretty-defaults"
-import {
-    FaStar,
-    FaRegStar,
-    FaHeart,
-    FaHeartBroken,
-    FaRegHeart,
-    FaHeartbeat,
-} from "components/icons"
-import { Rating, actionTypes } from "./components/rating"
+import { ColoredButton } from "components/button"
 
-const darkOrangeStar = (
-    <span style={{ fontSize: "50px", color: "#e17055" }}>
-        <FaStar />
-    </span>
-)
-
-const orangeStar = (
-    <span style={{ fontSize: "50px", color: "orange" }}>
-        <FaStar />
-    </span>
-)
-
-const orangeStarBigger = (
-    <span style={{ fontSize: "60px", color: "orange" }}>
-        <FaStar />
-    </span>
-)
-const greyStar = (
-    <span style={{ fontSize: "50px", color: "grey" }}>
-        <FaRegStar />
-    </span>
-)
-
-const defaultHeart = (
-    <span style={{ fontSize: "20px", color: "grey" }}>
-        <FaRegHeart />
-    </span>
-)
-const activeHeart = (
-    <span style={{ fontSize: "20px", color: "#fd79a8" }}>
-        <FaHeartBroken />
-    </span>
-)
-
-const hoverHeart = (
-    <span style={{ fontSize: "20px", color: "#fd79a8" }}>
-        <FaHeartbeat />
-    </span>
-)
-
-const filledHeart = (
-    <span style={{ fontSize: "20px", color: "#e84393" }}>
-        <FaHeart />
-    </span>
-)
-
-const NUMBER_OF_STARS = 5
-const HEART_MULTIPLIER = 2
-const NUMBER_OF_HEARTS = NUMBER_OF_STARS * HEART_MULTIPLIER
-const NAME = { heart: "heart", star: "star" }
-const RATING_STYLE = {
-    height: "70px",
-    padding: "5px",
-    display: "flex",
-    width: "100%",
-    justifyContent: "center",
-    alignItems: "center",
+const actionTypes = {
+    onClick: "onClick",
 }
-const App = () => {
-    const [syncRating, setSyncRating] = useState({
-        action: null,
-        state: { rating: 0, hoverIndex: null, lastEvent: actionTypes.mouseLeave },
+
+const myButtonWithStateDisplayReducer = (state, action) => {
+    if (action.type === actionTypes.onClick) {
+        return { count: state.count + 1 }
+    }
+
+    throw Error(`unhandled action type ${action.type}`)
+}
+
+const useMyButtonWithStateDisplay = ({ onChange, controlledState }) => {
+    const [stateFromReducer, dispatch] = useReducer(myButtonWithStateDisplayReducer, {
+        count: 0,
     })
 
-    function handleStarRatingChange(suggestedState, action) {
-        setSyncRating({
-            state: {
-                ...suggestedState,
-                rating: suggestedState.rating * HEART_MULTIPLIER,
-                hoverIndex:
-                    suggestedState.hoverIndex === null
-                        ? null
-                        : suggestedState.hoverIndex * HEART_MULTIPLIER + 1,
-            },
-            action: { ...action, name: NAME.star },
-        })
-    }
+    const stateIsControlled = controlledState !== undefined
+    const state = stateIsControlled ? controlledState : stateFromReducer
 
-    function handleHeartRatingChange(suggestedState, action) {
-        if (
-            suggestedState.rating === syncRating.state &&
-            action.type === actionTypes.rate
-        ) {
-            setSyncRating({ state: suggestedState, action: { action, name: NAME.heart } })
+    const dispatchWithOnChange = action => {
+        if (!stateIsControlled) {
+            return dispatch(action)
         }
-        const isEven = suggestedState.rating % 2 === 0
-        const evenRating = isEven ? suggestedState.rating : suggestedState.rating + 1
 
-        const evenHoverIndex =
-            suggestedState.hoverIndex === null
-                ? null
-                : suggestedState.hoverIndex % 2 === 0
-                ? suggestedState.hoverIndex + 1
-                : suggestedState.hoverIndex
+        if (onChange) {
+            const suggestedState = myButtonWithStateDisplayReducer(state, action)
+            onChange(suggestedState, action)
+            return
+        }
 
-        setSyncRating({
-            state: {
-                ...suggestedState,
-                rating: evenRating,
-                hoverIndex: evenHoverIndex,
-            },
-            action: { ...action, name: NAME.heart },
-        })
+        throw new Error(
+            "If your state is controlled, then you must also supply an onChange handler"
+        )
     }
 
-    const starState = {
-        ...syncRating.state,
-        hoverIndex:
-            syncRating.state.hoverIndex === null
-                ? null
-                : Math.floor(syncRating.state.hoverIndex / HEART_MULTIPLIER),
-        rating: Math.floor(syncRating.state.rating / HEART_MULTIPLIER),
+    return {
+        state,
+        buttonProps: {
+            onClick: () => dispatchWithOnChange({ type: actionTypes.onClick }),
+        },
     }
+}
 
-    const heartState = syncRating.state
+const MyButtonWithStateDisplay = ({ onChange, state: controlledState }) => {
+    const { state, buttonProps } = useMyButtonWithStateDisplay({
+        onChange,
+        controlledState,
+    })
 
     return (
-        <div>
-            <p>
-                <SmallSpan>SYNC STATE: {JSON.stringify(syncRating.state)}</SmallSpan>
-                <br />
-                <SmallSpan>SYNC ACTION: {JSON.stringify(syncRating.action)}</SmallSpan>
-            </p>
-            <PrettyHeader style={{ textAlign: "center", margin: "5px" }}>
-                controlled
-            </PrettyHeader>
-            <Rating
-                style={RATING_STYLE}
-                iconFilled={darkOrangeStar}
-                iconDefault={greyStar}
-                iconHover={orangeStar}
-                iconActive={orangeStarBigger}
-                maxRating={NUMBER_OF_STARS}
-                onChange={handleStarRatingChange}
-                state={starState}
-                name={NAME.star}
-            />
-            <Rating
-                style={{ ...RATING_STYLE, height: "35px" }}
-                iconFilled={filledHeart}
-                iconDefault={defaultHeart}
-                iconHover={hoverHeart}
-                iconActive={activeHeart}
-                maxRating={NUMBER_OF_HEARTS}
-                onChange={handleHeartRatingChange}
-                state={heartState}
-                name={NAME.heart}
-            />
-            <PrettyHeader style={{ textAlign: "center" }}>uncontrolled</PrettyHeader>
-            <Rating
-                style={{ ...RATING_STYLE, height: "35px" }}
-                iconFilled={filledHeart}
-                iconDefault={defaultHeart}
-                iconHover={hoverHeart}
-                iconActive={activeHeart}
-                maxRating={NUMBER_OF_STARS}
-                name={NAME.heart}
-            />
+        <div style={{ width: "100%" }}>
+            <ColoredButton {...buttonProps}> Click Me! </ColoredButton>
+            <pre> {JSON.stringify(state, null, 2)}</pre>
         </div>
     )
 }
 
+const MAX_VALUE = 512
+
+const App = () => {
+    const [currentState, setState] = useState({
+        count: 1,
+    })
+
+    const handleChange = (suggestedState, action) => {
+        if (action.type !== actionTypes.onClick) {
+            throw new Error(
+                `This action type ${action.type} is not supposed to be in the API`
+            )
+        }
+
+        let count = currentState.count * 2 > MAX_VALUE ? 1 : currentState.count * 2
+
+        setState({
+            count,
+            previous: currentState.count,
+            suggested: suggestedState.count,
+        })
+    }
+
+    return (
+        <div style={{ display: "flex" }}>
+            <div style={{ width: "50%", margin: "5px" }}>
+                <PrettyHeader>Uncontrolled</PrettyHeader>
+                <MyButtonWithStateDisplay />
+                <SmallSpan>
+                    (Starts count at 0, increments by one on each click indefinitely.
+                    Displays the state which is only the current count)
+                </SmallSpan>
+            </div>
+            <div style={{ width: "50%", margin: "5px" }}>
+                <PrettyHeader>Controlled</PrettyHeader>
+                <MyButtonWithStateDisplay onChange={handleChange} state={currentState} />
+                <SmallSpan>
+                    (Starts count at 1, doubles value on each click until it reaches 1024
+                    (where it will restart), also displays previous count and suggested
+                    count)
+                </SmallSpan>
+            </div>
+        </div>
+    )
+}
 export default App
