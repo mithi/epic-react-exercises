@@ -71,7 +71,7 @@ const getSyncInfoFromStar = (suggestedState, action) => {
     const hoverIndex =
         suggestedState.hoverIndex === null
             ? null
-            : suggestedState.hoverIndex * HEART_MULTIPLIER + 1
+            : suggestedState.hoverIndex * HEART_MULTIPLIER
 
     return {
         state: {
