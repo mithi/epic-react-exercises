@@ -1,6 +1,6 @@
 ## Flexible Compound Components
 
-> Create an accordion component (with subcomponents) that has a great API / syntax. The component styles should be fully customizable by those who'll use them.
+> Summary: create an accordion component (with subcomponents) that has a great API / syntax. The component styles should be fully customizable by those who'll use them.
 
 Create flexible compound components for an "accordion functionality".
 You should be able to use the components like this:
@@ -38,7 +38,13 @@ You should be able to use this accordion and customize how it looks as you can s
 
 ### My Solution
 
-Here's all the accordion related components
+Here are all the accordion related subcomponents:
+
+-   `AccordItem`
+-   `AccordPanel`
+-   `AccordBtnOpen`
+-   `AccordBtnClose`
+-   `AccordBtn`
 
 ```jsx
 import { createContext, useState, Children, cloneElement, useContext } from "react"
@@ -75,7 +81,11 @@ const AccordBtn = ({ Component, ...otherProps }) => {
     const { toggleItem } = useContext(AccordionItemContext)
     return <Component onClick={toggleItem} {...otherProps} />
 }
+```
 
+Here's the top level `Accord` component
+
+```jsx
 function Accord({ Component, children, ...otherProps }) {
     const [openIndices, setOpenIndices] = useState([])
 
@@ -170,7 +180,7 @@ const FirstExample = () => (
 )
 ```
 
-A cool way you can use the components, somewhat different than usual.
+Here's a cool way you can use the components, somewhat different than usual.
 
 ```jsx
 const SecondExample = () => (
