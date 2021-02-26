@@ -25,16 +25,16 @@ const RATING_STYLE = {
     alignItems: "center",
 }
 
-const getSyncInfoFromHeart = (suggestedState, action, syncRating) => {
-    const isEven = suggestedState.rating % 2 === 0
-    const evenRating = isEven ? suggestedState.rating : suggestedState.rating + 1
+const getSyncInfoFromHeart = (suggestedState, action, previousRating) => {
+    const newRating = suggestedState.rating
+    const isEven = newRating % 2 === 0
+    const evenRating = isEven ? newRating : newRating + 1
     action = { component: NAME.heart, ...action }
 
     if (action.type === actionTypes.rate) {
-        if (!isEven && syncRating.state.rating === evenRating) {
+        if (!isEven && previousRating === evenRating) {
             return {
                 state: {
-                    ...suggestedState,
                     rating: 0,
                     lastEvent: actionTypes.removeRating,
                     hoverIndex: null,
@@ -49,21 +49,22 @@ const getSyncInfoFromHeart = (suggestedState, action, syncRating) => {
         }
     }
 
-    const evenHoverIndex =
-        suggestedState.hoverIndex === null
-            ? null
-            : suggestedState.hoverIndex % 2 === 0
-            ? suggestedState.hoverIndex + 1
-            : suggestedState.hoverIndex
+    if (action.type === actionTypes.hover) {
+        const newHoverIndex = suggestedState.hoverIndex
+        const evenHoverIndex =
+            newHoverIndex === null
+                ? null
+                : newHoverIndex % 2 === 0
+                ? newHoverIndex + 1
+                : newHoverIndex
 
-    return {
-        state: {
-            ...suggestedState,
-            rating: evenRating,
-            hoverIndex: evenHoverIndex,
-        },
-        action,
+        return {
+            state: { ...suggestedState, rating: evenRating, hoverIndex: evenHoverIndex },
+            action,
+        }
     }
+
+    throw new Error(`Unsupported actionType: ${action.type}`)
 }
 
 const getSyncInfoFromStar = (suggestedState, action) => {
@@ -82,18 +83,20 @@ const getSyncInfoFromStar = (suggestedState, action) => {
     }
 }
 
-const getStarStateFromHeart = state => {
+const getStarStateFromHeart = heartState => {
     return {
-        ...state,
-        rating: state.rating / HEART_MULTIPLIER,
+        ...heartState,
+        rating: heartState.rating / HEART_MULTIPLIER,
         hoverIndex:
-            state.hoverIndex === null ? null : state.hoverIndex / HEART_MULTIPLIER,
+            heartState.hoverIndex !== null
+                ? heartState.hoverIndex / HEART_MULTIPLIER
+                : null,
     }
 }
 
 const App = () => {
     const [syncInfo, setSyncInfo] = useState({
-        action: { component: NAME.star, type: null, hoverIndex: null, rating: 0 },
+        action: { component: NAME.heart, type: null, hoverIndex: null, rating: 0 },
         state: { rating: 0, hoverIndex: null, lastEvent: actionTypes.mouseLeave },
     })
 
@@ -103,7 +106,7 @@ const App = () => {
     }
 
     function handleHeartRatingChange(suggestedState, action) {
-        const next = getSyncInfoFromHeart(suggestedState, action, syncInfo)
+        const next = getSyncInfoFromHeart(suggestedState, action, syncInfo.state.rating)
         setSyncInfo(next)
     }
 
@@ -118,7 +121,7 @@ const App = () => {
                 STATE (heart): {JSON.stringify(syncInfo.state, null, 2)}
             </SmallSpan>
             <br />
-            <SmallSpan>ACTION: {JSON.stringify(syncInfo.action, null, 2)}</SmallSpan>
+            <SmallSpan>LAST ACTION: {JSON.stringify(syncInfo.action, null, 2)}</SmallSpan>
             <Rating
                 style={{ ...RATING_STYLE, height: "40px", marginTop: "10px" }}
                 iconFilled={filledHeart}
