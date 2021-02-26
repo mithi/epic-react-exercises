@@ -1,12 +1,6 @@
 import { useReducer, useRef } from "react"
 
-const callAll = (...fns) => (...args) => fns.forEach(fn => fn && fn(...args))
-
-const actionTypes = {
-    rate: "rate",
-    hover: "hover",
-    setState: "setState",
-}
+const actionTypes = { rate: "rate", hover: "hover" }
 
 const eventTypes = {
     hover: "hover",
@@ -30,7 +24,9 @@ const ratingReducer = (previous, action) => {
         }
 
         return next
-    } else if (action.type === actionTypes.hover) {
+    }
+
+    if (action.type === actionTypes.hover) {
         const lastEvent =
             action.hoverIndex === null ? eventTypes.mouseLeave : eventTypes.hover
 
@@ -81,21 +77,15 @@ const useRating = ({ onChange, controlledState, maxRating } = {}) => {
         dispatchWithOnChange({ type: actionTypes.hover, hoverIndex })
     }
 
-    const getButtonProps = ({
-        index,
-        onClick,
-        onMouseEnter,
-        onMouseLeave,
-        ...otherProps
-    }) => {
+    const getButtonProps = ({ index, ...otherProps }) => {
         const setRating = () => rate(index + 1)
         const setHoverIndex = () => hover(index)
         const removeHoverIndex = () => hover(null)
 
         return {
-            "onClick": callAll(setRating, onClick),
-            "onMouseEnter": callAll(setHoverIndex, onMouseEnter),
-            "onMouseLeave": callAll(removeHoverIndex, onMouseLeave),
+            "onClick": setRating,
+            "onMouseEnter": setHoverIndex,
+            "onMouseLeave": removeHoverIndex,
             "aria-valuemax": maxRating,
             "aria-valuemin": 0,
             "aria-valuenow": state.rating,

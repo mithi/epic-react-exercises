@@ -85,11 +85,9 @@ const getSyncInfoFromStar = (suggestedState, action) => {
 const getStarStateFromHeart = state => {
     return {
         ...state,
-        rating: Math.floor(state.rating / HEART_MULTIPLIER),
+        rating: state.rating / HEART_MULTIPLIER,
         hoverIndex:
-            state.hoverIndex === null
-                ? null
-                : Math.floor(state.hoverIndex / HEART_MULTIPLIER),
+            state.hoverIndex === null ? null : state.hoverIndex / HEART_MULTIPLIER,
     }
 }
 
