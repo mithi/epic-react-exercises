@@ -13,30 +13,19 @@ const wasRated = event => [eventTypes.setRating, eventTypes.removeRating].includ
 
 const ratingReducer = (previous, action) => {
     if (action.type === actionTypes.rate) {
-        const toggled = previous.rating === action.rating
-        const next = {
-            ...previous,
-            rating: toggled ? 0 : action.rating,
-            lastEvent:
-                toggled && previous.rating
-                    ? eventTypes.removeRating
-                    : eventTypes.setRating,
-        }
+        const willReset = previous.rating === action.rating
+        const rating = willReset ? 0 : action.rating
+        const lastEvent =
+            willReset && previous.rating ? eventTypes.removeRating : eventTypes.setRating
 
-        return next
+        return { ...previous, rating, lastEvent }
     }
 
     if (action.type === actionTypes.hover) {
         const lastEvent =
             action.hoverIndex === null ? eventTypes.mouseLeave : eventTypes.hover
 
-        const next = {
-            ...previous,
-            hoverIndex: action.hoverIndex,
-            lastEvent,
-        }
-
-        return next
+        return { ...previous, hoverIndex: action.hoverIndex, lastEvent }
     }
 
     throw new Error(`Unsupported type: ${action.type}`)
@@ -78,14 +67,10 @@ const useRating = ({ onChange, controlledState, maxRating } = {}) => {
     }
 
     const getButtonProps = ({ index, ...otherProps }) => {
-        const setRating = () => rate(index + 1)
-        const setHoverIndex = () => hover(index)
-        const removeHoverIndex = () => hover(null)
-
         return {
-            "onClick": setRating,
-            "onMouseEnter": setHoverIndex,
-            "onMouseLeave": removeHoverIndex,
+            "onClick": () => rate(index + 1),
+            "onMouseEnter": () => hover(index),
+            "onMouseLeave": () => hover(null),
             "aria-valuemax": maxRating,
             "aria-valuemin": 0,
             "aria-valuenow": state.rating,
