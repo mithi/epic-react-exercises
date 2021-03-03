@@ -4,11 +4,10 @@ import "styles/reset.css"
 import "styles/vars.css"
 import "styles/default.css"
 
-const URL = "https://epic-notes.vercel.app/"
-const TITLE =
-    "Mithi's Epic Notes: Real-world Exercises and Solutions for Frontend Engineers"
+const URL = "https://epic-react-exercises.vercel.app/"
+const TITLE = "Mithi's Epic React Exercises"
 const DESCRIPTION =
-    "This site should be useful for front-end web engineers and developers of all shapes and sizes! It contains practical exercises with detailed solutions for real-world use cases."
+    "A few practical React exercises with detailed solutions for real-world use cases. This site is very loosely based on Kent C Dodd's Epic React Workshops."
 const PREVIEW_IMAGE_URL =
     "https://user-images.githubusercontent.com/1670421/107224673-b31fcb80-6a52-11eb-8b61-4956014ba931.png"
 
