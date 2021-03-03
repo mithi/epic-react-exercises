@@ -2,9 +2,7 @@ import { useReducer, useState } from "react"
 import { SmallSpan, PrettyHeader } from "components/pretty-defaults"
 import { ColoredButton } from "components/button"
 
-const actionTypes = {
-    onClick: "onClick",
-}
+const actionTypes = { onClick: "onClick" }
 
 const myButtonWithStateDisplayReducer = (state, action) => {
     if (action.type === actionTypes.onClick) {
@@ -97,12 +95,13 @@ const App = () => {
                 <PrettyHeader>Controlled</PrettyHeader>
                 <MyButtonWithStateDisplay onChange={handleChange} state={currentState} />
                 <SmallSpan>
-                    (Starts count at 1, doubles value on each click until it reaches 1024
-                    (where it will restart), also displays previous count and suggested
-                    count)
+                    (Starts count at 1, doubles value on each click until it reaches{" "}
+                    {MAX_VALUE} (it will restart after). Aside from the count, it also
+                    displays previous count and suggested count)
                 </SmallSpan>
             </div>
         </div>
     )
 }
+
 export default App

@@ -144,7 +144,6 @@ const App = () => {
                 state={starState}
                 name={NAME.star}
             />
-
             <PrettyHeader style={{ textAlign: "center", marginTop: "15px" }}>
                 UNCONTROLLED
             </PrettyHeader>
