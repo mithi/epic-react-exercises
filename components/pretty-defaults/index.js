@@ -77,8 +77,25 @@ const SimpleLink = ({ href, children, style, ...otherProps }) => {
     )
 }
 
-const OnClickText = ({ onClick, children, style, ...otherProps }) => {
+const OnClickText = ({ onClick, children, style, disabled, ...otherProps }) => {
     const { primaryColor, bodyFont } = useTheme()
+
+    if (disabled) {
+        return (
+            <button
+                disabled={true}
+                style={{
+                    ...style,
+                    fontFamily: bodyFont,
+                    color: "gray",
+                    textDecoration: "none",
+                }}
+            >
+                {children}
+            </button>
+        )
+    }
+
     return (
         <button
             {...{ onClick, ...otherProps }}
