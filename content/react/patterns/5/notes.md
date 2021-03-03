@@ -35,6 +35,8 @@ Your module could expose the following to the users:
 
 ### My solution
 
+> Important Note / TODO / FIXME: This accordion implementation is not yet accessible, to make it accessible check [w3.org](https://www.w3.org/TR/wai-aria-practices-1.1/examples/accordion/accordion.html)
+
 The `useAccordion` hook is just four lines!
 
 ```js

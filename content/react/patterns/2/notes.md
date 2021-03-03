@@ -38,6 +38,8 @@ You should be able to use this accordion and customize how it looks as you can s
 
 ### My Solution
 
+> Important Note / TODO / FIXME: This accordion implementation is not yet accessible, to make it accessible check [w3.org](https://www.w3.org/TR/wai-aria-practices-1.1/examples/accordion/accordion.html)
+
 Here are all the accordion related subcomponents:
 
 -   `AccordItem`

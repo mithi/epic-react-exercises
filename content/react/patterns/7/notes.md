@@ -1,8 +1,8 @@
 ## Control Props, II
 
-> Create a similar rating component as that of [Material UI](https://material-ui.com/components/rating/) using the Control Props pattern. It's okay if it's a different API and that you don't handle half star ratings.
+> Summary: Create a similar rating component as that of [Material UI](https://material-ui.com/components/rating/) using the Control Props pattern. It's okay if it's a different API and that you don't handle half star ratings.
 
-Once you have made the rating component. Instantiate two of them, that should be in sync with each other, like in the accompanying demonstration.
+Once you have made the rating component, instantiate two of them. They should be in sync with each other, like in the accompanying demonstration.
 The two components have a maximum score of five and ten respectively, say they're called `rating5` and `rating10`. The component with 10 components, can only have even ratings (`2`, `4`, `6`, `8`, `10`). When one of the events occur in the component (`mouseEnter`, `mouseOut`, or `onClick`), the other component makes a similar update in its state.
 In other words, when `rating5` has a rating of `3`, `rating10` has a rating of `6`, always twice that of `rating5`. If the icon corresponding to `5` of `rating 10` is clicked,
 the rating would be `6`. The specific icon corresponding to the rating should be different from the rest.
@@ -61,6 +61,7 @@ const orangeStarBigger = (
         <FaStar />
     </span>
 )
+
 const greyStar = (
     <span style={{ fontSize: "50px", color: "grey" }}>
         <FaRegStar />
