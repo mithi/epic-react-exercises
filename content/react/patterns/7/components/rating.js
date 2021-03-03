@@ -1,3 +1,4 @@
+import styles from "../../3/components/Styles.module.css"
 import { useReducer, useRef } from "react"
 
 const actionTypes = { rate: "rate", hover: "hover" }
@@ -155,7 +156,10 @@ const Rating = ({
         })
 
     return (
-        <ul {...{ style: { margin: 0, padding: 0, ...style }, name }}>
+        <ul
+            className={styles.noSelect}
+            {...{ style: { margin: 0, padding: 0, ...style }, name }}
+        >
             {ratingElements}
         </ul>
     )

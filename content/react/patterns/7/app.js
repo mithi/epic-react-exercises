@@ -71,7 +71,7 @@ const getSyncInfoFromStar = (suggestedState, action) => {
     const hoverIndex =
         suggestedState.hoverIndex === null
             ? null
-            : suggestedState.hoverIndex * HEART_MULTIPLIER
+            : suggestedState.hoverIndex * HEART_MULTIPLIER + 1
 
     return {
         state: {
@@ -86,10 +86,10 @@ const getSyncInfoFromStar = (suggestedState, action) => {
 const getStarStateFromHeart = heartState => {
     return {
         ...heartState,
-        rating: heartState.rating / HEART_MULTIPLIER,
+        rating: Math.floor(heartState.rating / HEART_MULTIPLIER),
         hoverIndex:
             heartState.hoverIndex !== null
-                ? heartState.hoverIndex / HEART_MULTIPLIER
+                ? Math.floor(heartState.hoverIndex / HEART_MULTIPLIER)
                 : null,
     }
 }
