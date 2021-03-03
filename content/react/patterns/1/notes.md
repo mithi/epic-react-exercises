@@ -2,20 +2,14 @@
 
 > Summary: Add the ability for a user to submit data (such as updating its user profile) to a backend. As usual, your app should handle the request success or failure appropriately keeping the end user's experience in mind. Use the `Context Module functions` pattern for better performance by avoiding unneccessarily component rerenders and comparisons.
 
--   This user Update Exercise is taken from here [https://advanced-react-patterns.netlify.app/1]
--   This exercise, you'll have a form that updates the user profile, you'll have to submit the updates to a backend.
+-   This user Update Exercise is taken from (here)[https://advanced-react-patterns.netlify.app/1]
+-   In this exercise, you'll have a form that updates the user profile, you'll have to submit the updates to a backend.
 -   The request to update will be rejected 50% of the time to simulate network errors.
-
--   The backend will choose an (bighead avatar) for the user on the provided information, you can create your own algorithm on how to do this but it has to be deterministic.
-
+-   The backend will choose a (bighead) avatar for the user given the provided information. You can create your own algorithm on how to do this but it has to be deterministic.
 -   This user profile should be available anywhere in your app
 -   When the form is submitted, the user profile will be immediately updated, but when the backend reports that something when wrong, the update will be erased, and the user profile will go back to the latest saved information.
 -   There should be a `reset`, `submit`, `try again` button when appropriate, and they should be disabled when appropriate.
 
--   Here's how my backend computes the profile avatar specification
-
-    -   How you look is determined by the letters of your nickname
-    -   The accessories (hat, hat color, shirt color, graphic, shirt) depends on the letters of your bio and previous bio
 
 ### Background
 
@@ -236,6 +230,8 @@ function UserProfileCard {
     )
 }
 ```
+
+> Note:  Here's how my backend computes the profile avatar specification: (1) How you look is determined by the letters of your nickname, (2)The accessories (hat, hat color, shirt color, graphic, shirt) depends on the letters of your bio and previous bio
 
 ### Notes
 
