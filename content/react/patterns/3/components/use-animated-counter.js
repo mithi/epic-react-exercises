@@ -96,7 +96,7 @@ const pressedVariant = { color: "#81ecec" }
 const hoverVariant = { color: "#fd79a8" }
 
 const AnimatedCountButton = ({ onClick, children, animationType, ...otherProps }) => (
-    <button {...{ onClick, ...otherProps }} className={styles.noSelect}>
+    <div {...{ onClick, ...otherProps }} className={styles.noSelect}>
         <motion.div
             animate={
                 animationType === "entrance"
@@ -110,7 +110,7 @@ const AnimatedCountButton = ({ onClick, children, animationType, ...otherProps }
         >
             {children}
         </motion.div>
-    </button>
+    </div>
 )
 
 export { useAnimatedCounter, AnimatedCountButton }

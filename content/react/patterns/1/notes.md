@@ -28,7 +28,7 @@ the `dispatch` function, the current `user` from the `useUser` and `updates`. `u
 
 ### My Solution
 
-My solution is not really that different to [Kent's solution](https://github.com/kentcdodds/advanced-react-patterns/blob/main/src/final/01.js), so I guess it's better that you go look at that instead.
+My solution is not really that different to [Kent's solution](https://github.com/kentcdodds/advanced-react-patterns/blob/main/src/final/01.js), so it might be better if you go look at that instead.
 
 Here's the user reducer
 

@@ -1,4 +1,4 @@
-## The state reducer pattern
+## The State Reducer Pattern
 
 > Summary: Create a `useAccordion` hook that people can easily add their own functionality using the state reducer pattern. Examples of functionality they might want to add is enforcing not having more than one panel at a time or making sure that at least one panel is open at a time or both.
 
@@ -11,10 +11,10 @@ The key here is that hooks can accept a custom `reducer` function, and users can
 
 ```js
 // get a list of reducer functions ordered by priority
-// runs each reducer one by one. If that reducer returns a result,
-// don't run the next ones.
-// in other words, the combine reducer returns a functin that
-// run each reducer until one of them, returns a result, which it will then return
+// runs each reducer one by one.
+// If that reducer returns a result, don't run the next ones.
+// in other words, the combine reducer returns a function that
+// run each reducer until one of them returns a result, given the passed state and action
 function combineReducers(...reducers) {
     return (state, action) => {
         for (const reducer of reducers) {
@@ -34,6 +34,8 @@ Your module could expose the following to the users:
 5. Other reducers to override the defaullts like ` atleastOnePanelOpenReducer` and `onlyOnePanelOpenReducer`
 
 ### My solution
+
+> Important Note / TODO / FIXME: This accordion implementation is not yet accessible, to make it accessible check [w3.org](https://www.w3.org/TR/wai-aria-practices-1.1/examples/accordion/accordion.html)
 
 The `useAccordion` hook is just four lines!
 
@@ -116,7 +118,7 @@ const TowerAccordion = ({ reducer }) => {
                 return (
                     <div key={panelId} style={{ display: "flex" }}>
                         <button onClick={() => togglePanelId(panelId)}>
-                            {tower.name}{" "}
+                            {tower.name}
                         </button>
                         {openedPanelIds.includes(panelId) && content}
                     </div>
@@ -159,7 +161,7 @@ function App() {
                 </button>
                 <br />
                 {atLeastOnePanelOpen
-                    ? "✔ There's always at least one panel open"
+                    ? "✔ Prevent closing the last opened panel"
                     : "✔ It's okay to have no panels open"}
                 <button onClick={() => setAtleastOnePanelOpen(!atLeastOnePanelOpen)}>
                     {"-> (change)"}

@@ -21,7 +21,7 @@ const Pagination = ({ numberOfPages, currentPageId, pathname }) => {
                 </SquareButton>
             )
         })
-    return <div style={{ display: "flex", marginBottom: "10px" }}>{pageButtons}</div>
+    return <div style={{ display: "flex", marginBottom: "20px" }}>{pageButtons}</div>
 }
 
 const LIST_STYLE = {
