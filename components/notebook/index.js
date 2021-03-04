@@ -21,7 +21,7 @@ import { Pagination, CallToActionUl } from "./presentational-components"
 import DynamicMarkdownRender from "../markdown-render/dynamic"
 
 const KOFI_URL = "https://ko-fi.com/minimithi"
-const EPIC_NOTES_REPO_URL = "https://github.com/mithi/epic-notes"
+const EPIC_NOTES_REPO_URL = "https://github.com/mithi/epic-react-exercises"
 
 const issueUrl = message => `${EPIC_NOTES_REPO_URL}/issues/new?title=${message}`
 

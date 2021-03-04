@@ -2,7 +2,7 @@ import Main from "components/main"
 import { SquareButton } from "components/button"
 import { FaBug, FaHome } from "components/icons"
 
-const EPIC_NOTES_REPO_URL = "https://github.com/mithi/epic-notes"
+const EPIC_NOTES_REPO_URL = "https://github.com/mithi/epic-react-exercises"
 const issueUrl = message => `${EPIC_NOTES_REPO_URL}/issues/new?title=${message}`
 
 const Button = props => (

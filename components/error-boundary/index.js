@@ -9,7 +9,7 @@ import {
     BorderedDiv,
 } from "../pretty-defaults"
 
-const EPIC_NOTES_REPO_URL = "https://github.com/mithi/epic-notes"
+const EPIC_NOTES_REPO_URL = "https://github.com/mithi/epic-react-exercises"
 const issueUrl = message => `${EPIC_NOTES_REPO_URL}/issues/new?title=${message}`
 
 class DefaultErrorBoundary extends Component {
