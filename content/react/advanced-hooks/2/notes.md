@@ -1,20 +1,22 @@
 ## A simple fetch-and-cache pattern
 
-> Summary: Create a system for storing and accessing previously fetched data for avoiding redundant network calls and giving a better user experience. The components must be written in an elegant way such that we'll have both great end-user and developer experience. Scope context values correctly for improved performance and maintainability.
+> Summary: Create a system for storing and accessing previously fetched data that avoids redundant network calls and gives a better user experience. The components must be written in an elegant way such that we'll have both great end-user and developer experience. Scope context values correctly for improved performance and maintainability.
 
--   In this exercise, the user should be able to fetch Rick and Morty characters and store them locally in some sort of cache. If the character was fetched before, it should be loaded instantly without making a network request.
+-   The user should be able to fetch Rick and Morty characters and store them locally in some sort of cache. If the character was fetched before, it should be loaded instantly, do NOT make a network request.
 -   While the user types in the input field, the app should be getting data from the cache on each change. When the input field contains an id that is on the cache, instantaneously display the cached data on the screen.
--   If the data is not on the cache, your app should wait for the user to submit (by hitting `enter` or click the `fetch` button) before sending an http request.
+-   If the data is not on the cache, the app should wait for the user to submit (by hitting `enter` or click the `fetch` button) before sending an http request.
 -   Allow the user to `refetch` data that is already on the cache by hitting a `refetch` button. Hitting it should update the cache with the newly fetched data.
 -   When there is an error upon `fetching`, allow the user to try to refetch again.
 -   For each data on the cache, display buttons that users can click to load that data on the screen
 -   Allow the user to remove data from the cache or clear the cache entirely
 -   Disable the buttons and search bar and when the network request is not yet complete
 -   The submit button should be disabled when there is no data on the input field
--   Navigating away from the page and going back, refreshing the page, and unmounting remounting the component should NOT clear the cache
--   As usual, allows the user to randomly get fetch random character by clicking a specific button
+-   Navigating away from the page, going back, refreshing the page, unmounting or remounting the component should NOT clear the cache
+-   As usual, allows the user to randomly get fetch random character with a dedicated button
 
 ### My Solution
+
+> Note: This solution doesn't use a library, but it's best practice that you do. Use a library like [Tanner Linsley's React Query](https://github.com/tannerlinsley/react-query) to help do this instead of implementing everything on your own from scratch.
 
 The top level App
 
@@ -80,18 +82,10 @@ const App = () => {
                 <FormSubmit disabled={isPending || !inputFieldValue}>
                     {submitButtonText}
                 </FormSubmit>
-                <FormSameLine>
-                    <SquareButton
-                        aria-label="Fetch a random rick and morty character"
-                        onClick={setRandomValue}
-                        disabled={isPending}
-                    >
-                        <GiPerspectiveDiceSixFacesRandom />
-                    </SquareButton>
-                </FormSameLine>
-                <FormBottom>
-                    <SmallSpan>{bottomMessage}</SmallSpan>
-                </FormBottom>
+                <button onClick={setRandomValue} disabled={isPending}>
+                    Get Random Character
+                </button>
+                <span>{bottomMessage}</span>
             </SingleFieldForm>
             <RickAndMortyInfoCard {...{ status, error, data }} />
             <RickAndMortyCachePreview setId={setInputField} id={inputFieldValue} />

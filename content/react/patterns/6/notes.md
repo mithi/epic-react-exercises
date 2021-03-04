@@ -2,16 +2,16 @@
 
 > Summary: The control props pattern lets the user of a component manage that components state from the outside. Write a very simple button component that implements the bare minimum of this pattern.
 
-Create a very simple component that has a button you can click and also displays its internal state with an initial state of` {count: 0}`. By default, the button increments its count by one when it is clicked. This component should be controllable from the outside, so that the user could control how the state is updated each time the component is clicked.
+Create a very simple component that has a buttonand also displays its internal state. The initial state should be` {count: 0}`. By default, the button increments its count by one when it is clicked. This component should be controllable from the outside. The user could control how the state is updated each time the component is clicked.
 
 Say from the outside say you want to use this same button but instead:
 
 1. The counter starts at `{count: 1`}
 2. You'd rather double the value at each click.
-3. You also want to display: the previous count value, the suggested value, and the count value that would have happened if we weren't controlling this component.
+3. You also want to display the previous count value, and the "suggested" value, the value that would have been if we weren't controlling this component.
 4. You might also want the button to reset when it reaches a particular maximum value.
 
-Here's an example api of how might want to use it. Whenever the state of the component changes, it will pass the `suggestedState` and the `action` that happened. And you can do whatever you want with that information to get the new state which you will pass back to the component.
+Here's an example api of how might want to use it. Whenever the state of the component changes, it will pass the `suggestedState` and the `action` that happened to the function we passed to `onChange`. And you can do whatever you want with that information to get the new state which you will pass back to the component.
 
 ```jsx
 const MAX_VALUE = 512
@@ -57,9 +57,8 @@ const App = () => {
 
 ### My Solution
 
-Your component `MyButtonWithStateDisplay` could be using a hook `useMyButtonWithStateDisplay` like this. It uses the prop collections pattern!
-The hook is responsible for returning the actual `state` and the props that you should pass to the button given
-the optional `onChange` handler and controlled `state` passed to the component if any.
+The component `MyButtonWithStateDisplay` could be using a hook `useMyButtonWithStateDisplay`. It could use the prop collections pattern!
+The hook is responsible for returning the actual `state` and the props that you should pass to the button given the optional `onChange` handler and controlled `state` passed to the component if any.
 
 ```jsx
 const MyButtonWithStateDisplay = ({ onChange, state: controlledState }) => {
@@ -77,7 +76,7 @@ const MyButtonWithStateDisplay = ({ onChange, state: controlledState }) => {
 }
 ```
 
-And your `useMyButtonWithStateDisplay` hook may be using a reducer like this:
+The `useMyButtonWithStateDisplay` hook may be using a reducer like this:
 
 ```jsx
 const myButtonWithStateDisplayReducer = (state, action) => {

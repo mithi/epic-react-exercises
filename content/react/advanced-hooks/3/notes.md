@@ -3,9 +3,9 @@
 > Summary: Create a scrollable component such that its parent could control whether the top part or the bottom part is shown. There shouldn't be any flickery jumpy behavior. Implement it twice, one with `useImperativeHandle` and `forwardRef`, the other without. State the difference between the two.
 
 -   Write a `scrollable` component that, that takes in a specific `width` and `height` as props (via the `style` prop).
--   The content (passed through `children`) of that component must be larger than its width and height.
+-   The content (passed through `children`) of that component must be larger than its height.
 -   Each time the component mounts, the user should see the most bottom content, NOT the top OR the middle.
--   The parent of this `scrollable` component, must have two buttons one for scrolling to the top and the bottom and the component.
+-   The parent of this `scrollable` component, must have two buttons: to scroll to the top and the bottom and the component.
 -   Try implementing the same functionality twice. One using `useImperativeHandle` and `forwardRef` and the other, without using the two.
 -   Explain the difference between the two implementations.
 -   Will you use `useLayoutEffect` or `useEffect` for this? Explain why.
@@ -117,15 +117,14 @@ const AppNormal = () => {
 2. Using `useImperativeHandle`
 
     - The parent component can customize an instance value that belongs to the child component.
-    - The child component exposes properties via `useImperativeHandle`. The parent component must forward a `ref` (in our case we named it `sRef`), to the child componentandthe child uses `sRef` to expose the properties that the parents could have access to.
+    - The child component exposes properties via `useImperativeHandle`. The parent component must forward a `ref` (in our case we named it `sRef`), to the child component. The child uses `sRef` to expose the properties that the parent can access.
     - In this case, the properties exposed are the functions `scrollToTop` and `scrollToBottom`. Both functions manipulate the dom node the child renders
-    - These properties are exposed via the line
-        - `useImperativeHandle(ref, () => ({ scrollToTop, scrollToBottom }))`.
+    - These properties are exposed via the line `useImperativeHandle(ref, () => ({ scrollToTop, scrollToBottom }))`.
     - The parent will be able to access the functions exposed to it like this ` sRef.current.scrollToBottom()`
 
 3. Using `useLayoutEffect` vs `useEffect`
     - We need to scroll to the bottom when the component mounts
-    - If `useEffect` is used, you would see a flicker, a jumpy behavior. Briefly, the screen will flash to show the contents at the top prior to scrolling to the bottom on each rerender.
+    - If `useEffect` is used, you would see a flicker, a jumpy behavior. Briefly, the screen will flash to show the contents at the top prior to scrolling to the bottom.
     - This won't happen with `useLayoutEffect` as the effect will be applied before the browser repaints, NOT after
     - Note: We can use a different strategy of creating a `useDidComponentMount` hook with `useEffect` if we really don't want to use `useLayoutEffect`
 

@@ -7,6 +7,7 @@
     -   `ReactDom`
         -   Responsible for rendering React elements to the dom (like `node.append`)
     -   ❗ Understand in more detail how that function works`React.createElement()`,
+    -   [`pomber/didact`: A DIY guide to build your own React](https://github.com/pomber/didact)
     -   [Kent's Blog: Javascript to Know for React](https://kentcdodds.com/blog/javascript-to-know-for-react)
     -   [MDN Webdocs: DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction)
     -   [React Source Code](https://github.com/facebook/react/blob/48907797294340b6d5d8fecfbcf97edf0691888d/packages/react-dom/src/client/ReactDOMComponent.js#L416)

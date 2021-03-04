@@ -2,8 +2,7 @@
 
 > Summary: create an accordion component (with subcomponents) that has a great API / syntax. The component styles should be fully customizable by those who'll use them.
 
-Create flexible compound components for an "accordion functionality".
-You should be able to use the components like this:
+Create flexible compound components for an "accordion functionality". You should be able to use the components like this:
 
 ```jsx
 <Accord>
@@ -29,16 +28,14 @@ You should be able to use the components like this:
 </Accord>
 ```
 
-For simplicity, do not allow any other component as a direct child of the `Accord` component
-other than `AccordItem`. Return an error if that happens.
-`AccordItem` must have `AccordBtn` and `AccordPanel` as its decendant, but they don't have
-to be direct descendants. Either you have `AccordBtn` or both `AccordBtnOpen` and `AccordBtnClose` inside `AccordItem`
+For simplicity, do not allow any other component as a direct child of the `Accord` component other than `AccordItem`. Return an error if that happens.
+`AccordItem` must have `AccordBtn` and `AccordPanel` as its decendant, but they don't have to be direct descendants. Either you have `AccordBtn` or both `AccordBtnOpen` and `AccordBtnClose` inside `AccordItem`
 
 You should be able to use this accordion and customize how it looks as you can see in the demonstration of this app.
 
 ### My Solution
 
-> Important Note / TODO / FIXME: This accordion implementation is not yet accessible, to make it accessible check [w3.org](https://www.w3.org/TR/wai-aria-practices-1.1/examples/accordion/accordion.html)
+> FIXME: This accordion implementation does not follow all best accessibility practices. It should be motified according to the specifications, read more at [w3.org](https://www.w3.org/TR/wai-aria-practices-1.1/examples/accordion/accordion.html)
 
 Here are all the accordion related subcomponents:
 
@@ -166,13 +163,11 @@ const FirstExample = () => (
                     <AccordPanel style={{ display: "flex", justifyContent: "center" }}>
                         <RoundedImage src={imageUrl} alt={name} height={75} width={75} />
                         <div style={{ margin: "5px" }}>
-                            <SmallSpan>
+                            <span>
                                 towertype: {towerType}
-                                <br />
                                 buildcost: {buildCost}
-                                <br />
                                 kingdom: {kingdom}
-                            </SmallSpan>
+                            </span>
                         </div>
                     </AccordPanel>
                 </AccordItem>
@@ -192,10 +187,10 @@ const SecondExample = () => (
 
             const panel = (
                 <AccordPanel style={{ margin: "0px 10px" }}>
-                    <PrettyHeader>{name}</PrettyHeader>
-                    <SmallSpan>
+                    <h1>{name}</h1>
+                    <span>
                         buildcost: {buildCost} kingdom: {kingdom} <br />({towerType})
-                    </SmallSpan>
+                    </span>
                 </AccordPanel>
             )
 

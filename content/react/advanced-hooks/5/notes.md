@@ -23,4 +23,4 @@
 3. Is `setState` from `useState` and `dispatch` from `useReducer` guaranteed to be stable? What does that mean?
 4. What does it mean when the React docs say: "You may rely on `useMemo` as a performance optimization, not as a semantic guarantee."
 5. How does [`Object.is` comparison algorithm](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is#description) work?
-6. React docs says "we recommend starting with `useEffect` first and only trying `useLayoutEffect` if that causes a problem"
+6. Why does the React docs says "we recommend starting with `useEffect` first and only trying `useLayoutEffect` if that causes a problem"?
