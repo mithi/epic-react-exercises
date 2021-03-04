@@ -4,7 +4,7 @@
 
 -   Transform the perspective of a container on enter with [this library](https://micku7zu.github.io/vanilla-tilt.js/)
 -   Display the details of the perspective transform as it happens
--   This exercise is a modified version of [this](https://react-hooks.netlify.app/5)
+-   This exercise is a modified version of [KCD's exercise](https://react-hooks.netlify.app/5)
 
 ### My Solution
 
@@ -51,7 +51,7 @@ function App() {
     -   `<div></div>` is just a syntactic sugar for `React.createElement()`, dom nodes are not created at all until `ReactDom.render()` is called.
     -   The `render` method has no access to the dom node by itself, it only creates and returns react elements
     -   To access the dom, use a special prop called `ref`
-    -   A component that has rendered is said to be `mounted`. That's when `useEffect` callback is called. By that point `ref.current` is set to the dom node which you can directly do interactions, manipulations...
+    -   A component that has rendered is said to be `mounted`. That's when `useEffect` callback is called. By that point, `ref.current` is set to the dom node and you can directly do interactions and manipulations...
 
 2.  ❗ ❗[Ref Forwarding](https://reactjs.org/docs/forwarding-refs.html)
 
@@ -66,7 +66,7 @@ function App() {
 
 4.  Further Reading
 
-    -   [ Tyler McGinnis: Understanding React's useRef Hook](https://ui.dev/useref/)
+    -   [Tyler McGinnis: Understanding React's useRef Hook](https://ui.dev/useref/)
     -   [Eloquent Javascript: Events](https://eloquentjavascript.net/15_event.html)
     -   [MDN Docs: Events](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events)
     -   [MDN Docs: Events (reference)](https://developer.mozilla.org/en-US/docs/Web/Events)

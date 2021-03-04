@@ -35,7 +35,7 @@ Your module could expose the following to the users:
 
 ### My solution
 
-> Important Note / TODO / FIXME: This accordion implementation is not yet accessible, to make it accessible check [w3.org](https://www.w3.org/TR/wai-aria-practices-1.1/examples/accordion/accordion.html)
+> FIXME: This accordion implementation does not follow all best accessibility practices. It should be motified according to the specifications, read more at [w3.org](https://www.w3.org/TR/wai-aria-practices-1.1/examples/accordion/accordion.html)
 
 The `useAccordion` hook is just four lines!
 
@@ -47,13 +47,13 @@ function useAccordion({ reducer = defaultAccordionReducer } = {}) {
 }
 ```
 
-You can have several action types, you can add a `reset` `actionType` if you like.
+You can include more action types, such as a `reset` `actionType` if you'd want to.
 
 ```js
 const actionTypes = { togglePanel: "togglePanel" }
 ```
 
-Here's the default accordion reducer which is just 8 lines of code.
+Here's the default accordion reducer which is just eight lines of code
 
 ```js
 function defaultAccordionReducer(openedPanelIds, action) {

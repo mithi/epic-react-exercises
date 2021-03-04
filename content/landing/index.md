@@ -1,8 +1,6 @@
 # Hello World! [![buy me coffee](https://img.shields.io/badge/Buy%20me%20-coffee!-orange.svg?logo=buy-me-a-coffee&color=795548)](https://ko-fi.com/minimithi)
 
-A few practical React exercises with detailed solutions for real-world use cases.
-
-This site is very loosely based on [Kent C Dodd](https://kentcdodds.com/)'s [Epic React Workshops](https://epicreact.dev/).
+A few practical React exercises with detailed solutions for real-world use cases. This site is very loosely based on [Kent C Dodd](https://kentcdodds.com/)'s [Epic React Workshops](https://epicreact.dev/).
 
 ## List of Exercises
 
@@ -33,7 +31,7 @@ This site is very loosely based on [Kent C Dodd](https://kentcdodds.com/)'s [Epi
 
     - [Kent C Dodds: Epic React.dev](https://epicreact.dev/) and [Testing Javascript](https://testingjavascript.com/)
     - [Josh W Comeau: CSS for JS Devs](https://css-for-js.dev/)
-    - [Algo Expert](https://www.algoexpert.io/)
+    - [AlgoExpert](https://www.algoexpert.io/)
 
 3. Paid Subscriptions (Try one month)
 

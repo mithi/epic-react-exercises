@@ -1,6 +1,6 @@
 ## Adding debug labels to hooks
 
-> Create a hook to determine the window user's window screen size and update the view based on it. Use the `useDebugValue` hook so that when a component uses the hook three different times, you'll be able to differentiate them on the [The React DevTools browser extension](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en).
+> Summary: Create a hook to determine the window user's window screen size and update the view based on it. Use the `useDebugValue` hook so that when a component uses the hook three different times, you'll be able to differentiate them on the [The React DevTools browser extension](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en).
 
 -   Show the current size of the window (`height` and `width`)
 -   Checkout the [RobertBroersma/bigheads](https://github.com/RobertBroersma/bigheads) package, you'll use this in this exercise!

@@ -1,16 +1,16 @@
 ## Safely handling async operations
 
-> Summary: Create a reusable async hook to fetch a unique character from the Rick and Morty API. Make sure that you don't perform a state updates to unmounted components and avoid unneccessary network calls.
+> Summary: Create a reusable async hook to fetch a unique character from the Rick and Morty API. Don't perform state updates to unmounted components. Avoid unneccessary network calls.
 
--   This is a variation of [Kent's exercise 2.3](https://advanced-react-hooks.netlify.app/2) of his Advanced React Hooks workshop. See solution [here](https://github.com/kentcdodds/advanced-react-hooks/blob/main/src/final/02.extra-3.js).
--   Write an component that fetches a unique character from the [Rick and Morty API](https://rickandmortyapi.com/) given a user-supplied number (the character ID).
--   Add a button that, when clicked, will fetch a random Rick and Morty character.
+-   This is a variation of [KCD's exercise 2.3](https://advanced-react-hooks.netlify.app/2) of his Advanced React Hooks workshop. See his solution [here](https://github.com/kentcdodds/advanced-react-hooks/blob/main/src/final/02.extra-3.js).
+-   Write a component that fetches a unique character from the [Rick and Morty API](https://rickandmortyapi.com/) given a user-supplied number (the character ID).
+-   Add another button to fetch a random Rick and Morty character.
 -   If the submitted number does not correspond to a character, show the error.
 -   While fetching data, the input field, random button, and submit button should be disabled.
 -   When the number currently in the input field has been submitted has been either `resolved` or `rejected`, disable the submit button unless the input the user changes it to a new value.
 -   The user shoudn't be able to click the submit button if the character corresponding to the number in the input field is currently loaded (ie profile info shown on the screen).
 -   Enable the user to mount and unmount this component (via a checkbox).
--   [Kent's Implementation](https://github.com/kentcdodds/advanced-react-hooks/blob/main/src/final/02.extra-3.js).
+-   [KCD's Implementation](https://github.com/kentcdodds/advanced-react-hooks/blob/main/src/final/02.extra-3.js).
 
 ### Important!
 
@@ -24,12 +24,13 @@
 
 ### My Solution
 
--   The `RickAndMortyInfoCard` in the codeblock below uses a `useSafeAsync` hook that's responsible for managing the state, and fetching the data.
--   The `useSafeAsync` makes sure that the dispatch function (that returns the the data and state from the fetch function) would not be run if the component is no longer mounted.
+> Note: This solution doesn't use a library, but in most cases that you do. Use a library like [Tanner Linsley's React Query](https://github.com/tannerlinsley/react-query) to help do this instead of implementing everything on your own from scratch.
+
+-   The `RickAndMortyInfoCard` in the code block below uses a `useSafeAsync` hook. It's responsible for managing the state, and fetching the data.
+-   The `useSafeAsync` makes sure that the dispatch function would not run if the component is no longer mounted. The dispatch function returns the the data and state from the fetch function.
 -   In other words, if the `RickAndMortyInfoCard` is no longer mounted, its state will no longer be updated (since it doesn't exist anymore)
--   The `runFunction` provided by `useSafeAsync` is the function that we should run whenever we want to fetch the data. The `runFunction` takes in a promise and updates the state `{data, status error}`.
--   In our case,, the promise that we feed to the `runFunction` is the return value of the fetch function
-    we call whenever we need to fetch something.
+-   The `runFunction` provided by `useSafeAsync` is the function that should run whenever data should be fetched. The `runFunction` takes in a promise and updates the state `{data, status error}`.
+-   In our case,, the promise that we feed to the `runFunction` is the return value of the fetch function we call whenever we need to fetch something.
 
 ```jsx
 function RickAndMortyInfoCard({ characterId, getStatus }) {
@@ -64,7 +65,7 @@ function RickAndMortyInfoCard({ characterId, getStatus }) {
 
 -   The `useSafeAsync` is a hook that optionally takes an initial state and `returns { status, data, error, runFunction}`. The state is just `{ status, data, error}`.
 -   The `runFunction` is a function that accepts a promise and runs a dispatch function to update the state `{ status, data, error }`
--   This promise is assumed to be returned by the function you want to run such as a fetch function: So you call it like this: `runFunction(fetchSomething(...))` where `fetchSomething(...)` returns a promise
+-   This promise is assumed to be returned by the function you want to run. Example, you call it like this: `runFunction(fetchSomething(...))` where `fetchSomething(...)` returns a promise
 -   This dispatch function is safe, meaning that the function will not run if the component that called it is unmounted
 -   Notice that `useSafeAsync` uses `asyncReducer` and `useSafeDispatch` which i will discuss next.
 
@@ -102,13 +103,13 @@ const useSafeAsync = initialState => {
 
 `asyncReducer` is a private function that is only available to `useAsync`.
 
-```
+```js
 idle or pending: { data: null, error: null }
 rejected: { data: null, error }
 resolved: { data, error: null}
 ```
 
-⚠️❗❗⚠️ WARNING ⚠️❗❗⚠️: Be careful with this, you might want to write an asyncReducer that is more explicit like [how Kent implemented it](https://github.com/kentcdodds/advanced-react-hooks/blob/a449a2119e0b8ea9d90065cc80a00e68a6d4db8b/src/final/02.extra-3.js#L33).
+⚠️❗❗⚠️ WARNING ⚠️❗❗⚠️: Be careful with this, you might want to write an asyncReducer that is more explicit like [how KCD implemented it](https://github.com/kentcdodds/advanced-react-hooks/blob/a449a2119e0b8ea9d90065cc80a00e68a6d4db8b/src/final/02.extra-3.js#L33).
 
 ```jsx
 const asyncReducer = (_, nextState) => nextState
@@ -185,18 +186,13 @@ function App() {
             >
                 <PositiveIntegerInputField disabled={disabledByPending} />
                 <FormSubmit disabled={submitButtonDisabled}>Fetch</FormSubmit>
-                <FormSameLine>
-                    <SquareButton
-                        aria-label="Fetch a random rick and morty character"
-                        onClick={setRandomValue}
-                        disabled={disabledByPending}
-                    >
-                        <GiPerspectiveDiceSixFacesRandom />
-                    </SquareButton>
-                </FormSameLine>
-                <FormBottom>
-                    <SmallSpan>Which Rick and Morty Character?</SmallSpan>
-                </FormBottom>
+                <button
+                    aria-label="Fetch a random rick and morty character"
+                    onClick={setRandomValue}
+                    disabled={disabledByPending}
+                >
+                    Get Random Character
+                </button>
             </SingleFieldForm>
             <RickAndMortyInfoCard
                 characterId={submittedValue}

@@ -2,12 +2,12 @@
 
 > Summary: Create a user interface for tictactoe that also enables the user to go back and forward to a previous board state of a game. Make sure that you reduce state management complexity by deriving most states instead of storing them.
 
--   Write a user interface for tictactoe
+-   Write a user interface for Tic Tac Toe
 -   Be able to pause a game, close the tab, and then resume the game later
 -   Include a restart button (disabled before starting the game)
 -   Display the status of the game (winner, whose turn is it, if the game is finished etc)
 -   Be able to keep a history of the game; allow players to go backward and forward in time
--   The tictactoe exercise taken from [here](https://react-hooks.netlify.app/4): [Kent's Implementation](https://github.com/kentcdodds/react-hooks/blob/main/src/final/04.extra-3.js)
+-   Here's [KCD's Implementation](https://github.com/kentcdodds/react-hooks/blob/main/src/final/04.extra-3.js)
 
 ### My Solution
 
@@ -124,16 +124,16 @@ const App = () => {
 
     return (
         <div>
-            <PrettyHeader>{boardStatus}</PrettyHeader>
+            <h1>{boardStatus}</h1>
             <TicTacToeBoard
                 {...{ currentBoard, onPlayerMove, disableAll: gameFinished }}
             />
             <MoveHistory
                 {...{ numberOfSnapshots, onLoadBoardSnapshot, currentSnapshotId }}
             />
-            <ColoredButton disabled={numberOfSnapshots === 1} onClick={onRestart}>
+            <button disabled={numberOfSnapshots === 1} onClick={onRestart}>
                 Restart!
-            </ColoredButton>
+            </button>
         </div>
     )
 }
@@ -146,13 +146,13 @@ const TicTacToeBoard = ({ currentBoard, onPlayerMove, disableAll }) => {
     const square = i => {
         const player = currentBoard[i]
         return (
-            <SquareButton
+            <button
                 onClick={() => onPlayerMove(i)}
                 disabled={disableAll || player ? true : false}
                 aria-label={`TictacToe button # ${i}, occupied by: ${player}`}
             >
                 {player ? player : "."}
-            </SquareButton>
+            </button>
         )
     }
 
@@ -187,14 +187,14 @@ const MoveHistory = ({ numberOfSnapshots, onLoadBoardSnapshot, currentSnapshotId
     const buttons = Array(numberOfSnapshots)
         .fill(null)
         .map((_, i) => (
-            <SquareButton
+            <button
                 key={i}
                 aria-label={`go to board state move # ${i}`}
                 disabled={i === currentSnapshotId}
                 onClick={() => onLoadBoardSnapshot(i)}
             >
                 {i}
-            </SquareButton>
+            </button>
         ))
 
     return <div>{buttons}</div>

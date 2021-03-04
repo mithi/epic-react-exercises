@@ -1,6 +1,6 @@
 ## Prop Collections
 
-> Summary: Use the prop collection pattern to create reusable animated counters that can be applied to and customized for many different use cases. It also helps users not misuse your components
+> Summary: Use the prop collection pattern to create reusable animated counters that can be applied to and customized for many different use cases. The hook should also help users not misuse your components.
 
 The idea is of prop collections is that to achieve the intended functionality, the hook returns props that are intended to be passed to components.
 
@@ -38,21 +38,21 @@ const AnimatedCountButton = ({
 )
 ```
 
-The `useAnimatedCounter` could take in 4 arguments
+The `useAnimatedCounter` could take in four arguments
 
 1. A minimum value
 2. A maximum value
 3. An initial value
 4. The increment / step size
 
-The `useAnimatedCounter` could return four collections of props. A collection of props for:
+The `useAnimatedCounter` could return four collections of props, one for each of the following:
 
 1. The reset button
 2. The increment button
 3. The clickable animating component
 4. The display of the count (with built in accessibility features)
 
-It could also return managed and derived states such as
+It could also return managed and derived states such as:
 
 1. Which animation type to display (the animation on `reset`, on `increment` or on `no operation` because the value is above the intended maximum value)
 2. Number of times the buttons have been clicked
