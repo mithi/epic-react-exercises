@@ -128,7 +128,7 @@ const PageLayout = ({
     )
 
     const articlePlus = (
-        <div id='currentArticlePlus'>
+        <div id="currentArticlePlus">
             {hasApp && callToActionBox}
             {hasApp && notebookPageButtons}
             <article>
@@ -168,15 +168,20 @@ const PageLayout = ({
 
     const div2 = hasApp && articlePlus
 
-    useEffect(() => {
-      document.getElementById('currentArticlePlus').scrollIntoView()
-    }, [div2])
-
-    return (
+    const main = (
         <Main>
-            <NotebookLayout {...{ div1, div2 }} />
+            <div id="main">
+                <NotebookLayout {...{ div1, div2 }} />
+            </div>
         </Main>
     )
+
+    useEffect(() => {
+        document.getElementById("currentArticlePlus").scrollIntoView()
+        document.getElementById("main").scrollIntoView()
+    }, [div2])
+
+    return main
 }
 
 export default PageLayout

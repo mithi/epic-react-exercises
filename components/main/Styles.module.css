@@ -104,12 +104,13 @@
         height: auto;
     }
 
-    .div2 {
+    .div1 {
         composes: div0;
     }
 
-    .div1 {
+    .div2 {
         composes: div0;
+        margin-top: -10px;
     }
 
     .navButtonsContainer {
