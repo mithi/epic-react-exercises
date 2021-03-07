@@ -1,5 +1,5 @@
 {
-    "name": "epic-react-notes",
+    "name": "epic-react-exercises",
     "version": "0.1.0",
     "private": true,
     "scripts": {
@@ -7,7 +7,8 @@
         "build": "next build",
         "start": "next start",
         "stage": "next build && next start",
-        "check-lint": "eslint ."
+        "check-lint": "eslint .",
+        "test": "jest"
     },
     "dependencies": {
         "@bigheads/core": "^0.3.1",
@@ -27,9 +28,15 @@
         "warning": "^4.0.3"
     },
     "devDependencies": {
+        "@testing-library/dom": "^7.30.0",
+        "@testing-library/jest-dom": "^5.11.9",
+        "@testing-library/react": "^11.2.5",
         "babel-eslint": "^10.1.0",
+        "babel-jest": "^26.6.3",
         "eslint": "^7.19.0",
         "eslint-plugin-react": "^7.22.0",
-        "eslint-plugin-react-hooks": "^4.2.0"
+        "eslint-plugin-react-hooks": "^4.2.0",
+        "identity-obj-proxy": "^3.0.0",
+        "jest": "^26.6.3"
     }
 }

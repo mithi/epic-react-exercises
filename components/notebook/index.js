@@ -148,7 +148,7 @@ const PageLayout = ({
 
     const div1 = (
         <>
-            <PrettyHeader Component="h1" style={{ margin: "5px" }}>
+            <PrettyHeader id="sectionTitle" Component="h1" style={{ margin: "5px" }}>
                 {title}
             </PrettyHeader>
             <Pagination
@@ -178,6 +178,7 @@ const PageLayout = ({
 
     useEffect(() => {
         document.getElementById("currentArticlePlus").scrollIntoView()
+        document.getElementById("sectionTitle").scrollIntoView()
         document.getElementById("main").scrollIntoView()
     }, [div2])
 
