@@ -10,21 +10,10 @@ describe("Nav", () => {
             </ThemeProvider>
         )
 
-        const themeMenuButton = screen.getByRole("button", {
-            name: /theme/i,
-        })
-
-        const reactMenuButton = screen.getByRole("button", {
-            name: /react/i,
-        })
-
-        const githubButton = screen.getByRole("button", {
-            name: /github/i,
-        })
-
-        const kofiButton = screen.getByRole("button", {
-            name: /coffee/i,
-        })
+        const themeMenuButton = screen.getByRole("button", { name: /theme/i })
+        const reactMenuButton = screen.getByRole("button", { name: /react/i })
+        const githubButton = screen.getByRole("button", { name: /github/i })
+        const kofiButton = screen.getByRole("button", { name: /coffee/i })
 
         expect(themeMenuButton).toBeInTheDocument()
         expect(reactMenuButton).toBeInTheDocument()
