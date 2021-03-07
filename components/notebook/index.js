@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic"
-import { useMemo, useState } from "react"
+import { useMemo, useState, useEffect } from "react"
 import {
     FiGithub,
     BiRocket,
@@ -126,8 +126,9 @@ const PageLayout = ({
             <SquareButton href={KOFI_URL} {...bp.kofi} />
         </div>
     )
+
     const articlePlus = (
-        <>
+        <div id='currentArticlePlus'>
             {hasApp && callToActionBox}
             {hasApp && notebookPageButtons}
             <article>
@@ -142,7 +143,7 @@ const PageLayout = ({
             <div style={{ display: "flex", justifyContent: "center", margin: "20px" }}>
                 {notebookPageButtons}
             </div>
-        </>
+        </div>
     )
 
     const div1 = (
@@ -166,6 +167,10 @@ const PageLayout = ({
     )
 
     const div2 = hasApp && articlePlus
+
+    useEffect(() => {
+      document.getElementById('currentArticlePlus').scrollIntoView()
+    }, [div2])
 
     return (
         <Main>
