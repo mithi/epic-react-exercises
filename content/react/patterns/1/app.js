@@ -14,7 +14,7 @@ import { AvatarHead } from "./components/big-head"
 
 const LabeledInputField = ({ labelName, id, ...otherProps }) => {
     return (
-        <div style={{ margin: "5px" }}>
+        <div style={{ margin: "5px", width: "50%" }}>
             <label htmlFor={`${id}`}>
                 <SmallSpan>{labelName}</SmallSpan>{" "}
             </label>
@@ -67,11 +67,11 @@ function UserUpdateForm() {
 
     return (
         <BorderedDiv style={{ borderStyle: "dashed" }}>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} style={{ width: "100%" }}>
                 <PrettyHeader style={{ textAlign: "center" }}>
                     (User Update Form)
                 </PrettyHeader>
-                <div style={{ display: "flex" }}>
+                <div style={{ display: "flex", width: "100%" }}>
                     <LabeledInputField
                         id="userId"
                         value={formState.userId}
