@@ -21,22 +21,22 @@
 }
 
 .common::-webkit-scrollbar {
-  width: 20px;
+    width: 20px;
 }
 
 .common::-webkit-scrollbar-track {
-  background-color: transparent;
+    background-color: transparent;
 }
 
 .common::-webkit-scrollbar-thumb {
-  background-color: #d6dee1;
-  border-radius: 20px;
-  border: 6px solid transparent;
-  background-clip: content-box;
+    background-color: rgba(214, 222, 225, 0.4);
+    border-radius: 20px;
+    border: 8px solid transparent;
+    background-clip: content-box;
 }
 
 .common::-webkit-scrollbar-thumb:hover {
-  background-color: #a8bbbf;
+    background-color: rgba(214, 222, 225, 0.4);
 }
 
 .div1 {
@@ -111,22 +111,22 @@
     }
 
     .main::-webkit-scrollbar {
-      width: 20px;
+        width: 20px;
     }
-    
+
     .main::-webkit-scrollbar-track {
-      background-color: transparent;
+        background-color: transparent;
     }
-    
+
     .main::-webkit-scrollbar-thumb {
-      background-color: #d6dee1;
-      border-radius: 20px;
-      border: 6px solid transparent;
-      background-clip: content-box;
+        background-color: rgba(214, 222, 225, 0.4);
+        border-radius: 20px;
+        border: 8px solid transparent;
+        background-clip: content-box;
     }
-    
+
     .main::-webkit-scrollbar-thumb:hover {
-      background-color: #a8bbbf;
+        background-color: rgba(214, 222, 225, 0.4);
     }
 
     .twoSectionsLayout {
