@@ -19,46 +19,42 @@ const Dialog = ({ onDismiss, isOpen, label, children }) => (
     </DialogOverlay>
 )
 
+const labelProps = name => {
+    return { "aria-label": name, "title": name, name }
+}
+
 const NavInner = () => {
     const { changeMenuState, menuState } = useMenuState()
-
+    const iProps = { style: { margin: "5px 10px" }, side: "large" }
     return (
         <>
             <DivBg2 Component="nav" style={{ padding: "0" }} className={styles.nav}>
                 <div className={styles.navButtonsContainer}>
                     <SquareButton
-                        side="large"
                         onClick={() => changeMenuState("react")}
-                        aria-label="react menu"
-                        title="react menu"
-                        name="react menu"
+                        {...labelProps("react menu")}
+                        {...iProps}
                     >
                         <FaReact />
                     </SquareButton>
                     <SquareButton
-                        side="large"
                         onClick={() => changeMenuState("theme")}
-                        aria-label="theme menu"
-                        title="theme menu"
-                        name="theme menu"
+                        {...labelProps("theme menu")}
+                        {...iProps}
                     >
                         <MdSettings />
                     </SquareButton>
                     <SquareButton
-                        side="large"
                         href="https://github.com/mithi"
-                        aria-label="follow me on github"
-                        title="follow me on github"
-                        name="follow me on github"
+                        {...labelProps("follow me on github")}
+                        {...iProps}
                     >
                         <GoOctoface />
                     </SquareButton>
                     <SquareButton
-                        side="large"
                         href="https://ko-fi.com/minimithi"
-                        aria-label="buy me a coffee"
-                        title="buy me a coffee"
-                        name="buy me a coffee"
+                        {...labelProps("buy me a coffee")}
+                        {...iProps}
                     >
                         <BiCoffeeTogo />
                     </SquareButton>
