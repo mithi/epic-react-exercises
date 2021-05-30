@@ -18,13 +18,13 @@ A few practical React exercises with detailed solutions for real-world use cases
 12. [The State Reducer Pattern](/react/patterns/5) to modify an accordion component's default behavior
 13. Understanding [control props](/react/patterns/6) with a simple button component
 14. Creating a controllable [`Rating`](/react/patterns/7) component
+15. [Optimized rendering of large lists of items with React-Virtual](/react/performance/1)
 
 ## References
 
 1. Books
 
     - [Kyle Simpson: You Don't Know JS](https://github.com/getify/You-Dont-Know-JS)
-    - [Basarat Ali Syed: Typescript Deep Dive](https://basarat.gitbook.io/typescript/)
     - [Sandi Metz: Practical Object-Oriented Design Using Ruby](https://www.poodr.com/)
 
 2. Paid Courses (For review)
@@ -32,12 +32,11 @@ A few practical React exercises with detailed solutions for real-world use cases
     - [Kent C Dodds: Epic React.dev](https://epicreact.dev/) and [Testing Javascript](https://testingjavascript.com/)
     - [Josh W Comeau: CSS for JS Devs](https://css-for-js.dev/)
     - [AlgoExpert](https://www.algoexpert.io/)
+    - [Tanner Linsley's React Query Essentials](https://learn.tanstack.com/)
 
 3. Paid Subscriptions (Try one month)
 
     - [ui.dev](https://ui.dev/)
-    - [educative.io](https://www.educative.io/)
-    - [egghead.io](https://egghead.io/)
     - [frontendmasters.com](https://frontendmasters.com/)
 
 4. Interview Prep Repos
