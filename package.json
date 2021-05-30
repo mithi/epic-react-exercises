@@ -15,6 +15,7 @@
         "@reach/dialog": "^0.12.1",
         "axios": "^0.21.1",
         "dequal": "^2.0.2",
+        "faker": "^5.5.3",
         "framer-motion": "^3.6.2",
         "next": "10.0.3",
         "raw-loader": "^4.0.2",
@@ -23,6 +24,7 @@
         "react-icons": "^4.1.0",
         "react-markdown": "^5.0.3",
         "react-syntax-highlighter": "^15.4.3",
+        "react-virtual": "^2.7.1",
         "sharp": "^0.26.2",
         "vanilla-tilt": "^1.7.0",
         "warning": "^4.0.3"
