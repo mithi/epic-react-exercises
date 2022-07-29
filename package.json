@@ -8,7 +8,7 @@
         "start": "next start",
         "stage": "next build && next start",
         "check-lint": "eslint .",
-        "test": "jest --passWithNoTests"
+        "test": "jest"
     },
     "dependencies": {
         "@bigheads/core": "^0.3.1",
@@ -26,6 +26,7 @@
         "react-syntax-highlighter": "^15.4.3",
         "react-virtual": "^2.7.1",
         "sharp": "^0.26.2",
+        "styled-jsx": "^5.0.2",
         "vanilla-tilt": "^1.7.0",
         "warning": "^4.0.3"
     },
