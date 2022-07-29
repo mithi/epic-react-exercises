@@ -8,7 +8,7 @@
         "start": "next start",
         "stage": "next build && next start",
         "check-lint": "eslint .",
-        "test": "jest"
+        "test": "jest --passWithNoTests"
     },
     "dependencies": {
         "@bigheads/core": "^0.3.1",
