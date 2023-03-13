@@ -5,7 +5,7 @@
 3. [`useTypescript` — A Complete Guide to React Hooks and TypeScript](https://levelup.gitconnected.com/usetypescript-a-complete-guide-to-react-hooks-and-typescript-db1858d1fb9c) by Trey Huffine
 4. [Kent's When to `useMemo` and `useCallback`](https://kentcdodds.com/blog/usememo-and-usecallback)
 5. [Memoization and React](https://epicreact.dev/memoization-and-react/)
-6. [What the Fork is Closure](https://whatthefork.is/closure)
+6. [WTF is Closure](https://whatthefuck.is/closure)
 7. [Lifting state up](https://reactjs.org/docs/lifting-state-up.html)
 8. [Michael Jackson Tweet: Composition](https://twitter.com/mjackson/status/1195495535483817984)
 9. [Kent's `useEffect` vs `useLayoutEffect`](https://kentcdodds.com/blog/useeffect-vs-uselayouteffect)
