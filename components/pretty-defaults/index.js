@@ -1,6 +1,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { useTheme } from "providers"
+import _JSXStyle from "styled-jsx/style"
 
 const MainGrid = ({ children, className, style }) => {
     const { bg1ClassName, bodyFont } = useTheme()
@@ -198,7 +199,7 @@ const RoundedImage = ({ src, width, height, alt, borderType, style }) => {
                 width={width}
                 quality={100}
             />
-            <style jsx global>{`
+            <_JSXStyle>{`
                 .border20percent {
                     border-radius: 20%;
                 }
@@ -208,7 +209,7 @@ const RoundedImage = ({ src, width, height, alt, borderType, style }) => {
                 .border25percent {
                     border-radius: 25%;
                 }
-            `}</style>
+            `}</_JSXStyle>
         </div>
     )
 }
