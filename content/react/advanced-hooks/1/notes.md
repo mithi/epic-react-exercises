@@ -1,6 +1,6 @@
 ## Safely handling async operations
 
-> Summary: Create a reusable async hook to fetch a unique character from the Rick and Morty API. Don't perform state updates to unmounted components. Avoid unneccessary network calls.
+> Summary: Create a reusable async hook to fetch a unique character from the Rick and Morty API. Don't perform state updates to unmounted components. Avoid unnecessary network calls.
 
 -   This is a variation of [KCD's exercise 2.3](https://advanced-react-hooks.netlify.app/2) of his Advanced React Hooks workshop. See his solution [here](https://github.com/kentcdodds/advanced-react-hooks/blob/main/src/final/02.extra-3.js).
 -   Write a component that fetches a unique character from the [Rick and Morty API](https://rickandmortyapi.com/) given a user-supplied number (the character ID).
@@ -8,7 +8,7 @@
 -   If the submitted number does not correspond to a character, show the error.
 -   While fetching data, the input field, random button, and submit button should be disabled.
 -   When the number currently in the input field has been submitted has been either `resolved` or `rejected`, disable the submit button unless the input the user changes it to a new value.
--   The user shoudn't be able to click the submit button if the character corresponding to the number in the input field is currently loaded (ie profile info shown on the screen).
+-   The user shouldn't be able to click the submit button if the character corresponding to the number in the input field is currently loaded (ie profile info shown on the screen).
 -   Enable the user to mount and unmount this component (via a checkbox).
 -   [KCD's Implementation](https://github.com/kentcdodds/advanced-react-hooks/blob/main/src/final/02.extra-3.js).
 
