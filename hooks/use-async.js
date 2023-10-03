@@ -33,7 +33,7 @@ import { useRef, useEffect, useLayoutEffect, useCallback, useReducer } from "rea
         a safeDispatchFunction
 
         The unsafeDispatchFunction is unsafe because it will run regardless
-        of whether or not the component is mouted
+        of whether or not the component is mounted
  */
 const useSafeDispatch = unsafeDispatchFunction => {
     const isMountedRef = useRef(false)
